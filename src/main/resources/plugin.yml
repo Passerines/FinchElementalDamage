@@ -1,18 +1,18 @@
-name: DerpTemplate
+name: FinchElementalDamage
 version: 1.0
 api-version: 1.18
-author: AnonymousBluejay
+authors: [AnonymousBluejay,Soup,Samyed]
 website: passerines.dev
-main: net.passerines.derp.Derp
-description: Template plugin
+main: net.passerines.finch.FinchElementalDamage
+description: A class project
 depend: []
 
 commands:
-  derp:
-    description: derp
-    permission: derp.user
+  finch:
+    description: finch
+    permission: finch.user
 
 permissions:
-  derp.user:
-    description: Permission to use /derp
+  finch.user:
+    description: Permission to use /finch
     default: true
