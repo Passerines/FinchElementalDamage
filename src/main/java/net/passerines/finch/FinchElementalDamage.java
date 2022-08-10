@@ -7,7 +7,7 @@ public class FinchElementalDamage extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        Util.log("&bFinchElementalDamage is loading!");
+        Util.log("&bFinchElementalDamage is now loading!");
         super.onLoad();
     }
 
