@@ -42,6 +42,12 @@ public class Chat {
     public static void sendSubtitle(Player player, String subtitle) {
         player.sendTitlePart(TitlePart.SUBTITLE, Chat.formatC(subtitle));
     }
+    public static void sendJson(Player player, String json) {
+        ProtocolLibIntegration.sendJson(player, json);
+    }
+    public static void sendActionBar(Player player, String message) {
+        ProtocolLibIntegration.sendActionBar(player, message);
+    }
 
     public static String asPlainText(Component component) {
         return PlainTextComponentSerializer.plainText().serialize(component);
