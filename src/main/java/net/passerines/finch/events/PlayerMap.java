@@ -1,5 +1,6 @@
-package net.passerines.finch;
+package net.passerines.finch.events;
 
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.data.PlayerData;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
