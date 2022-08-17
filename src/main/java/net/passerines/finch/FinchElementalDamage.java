@@ -1,5 +1,6 @@
 package net.passerines.finch;
 
+import net.passerines.finch.events.DamageHandler;
 import net.passerines.finch.events.PlayerMap;
 import net.passerines.finch.util.Util;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +23,7 @@ public class FinchElementalDamage extends JavaPlugin {
         super.onEnable();
         new PlayerMap();
         new GetPlayersCmd();
+        new DamageHandler();
     }
 
     public static FinchElementalDamage inst() {
