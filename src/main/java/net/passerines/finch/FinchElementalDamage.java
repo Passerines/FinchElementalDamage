@@ -1,5 +1,6 @@
 package net.passerines.finch;
 
+import net.passerines.finch.events.PlayerMap;
 import net.passerines.finch.util.Util;
 import org.bukkit.plugin.java.JavaPlugin;
 

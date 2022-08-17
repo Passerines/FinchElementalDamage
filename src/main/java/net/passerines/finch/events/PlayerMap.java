@@ -1,5 +1,6 @@
-package net.passerines.finch;
+package net.passerines.finch.events;
 
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.data.PlayerData;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -28,5 +29,12 @@ public class PlayerMap implements Listener {
         event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getMana() + "Mana" );
         event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getHealth() + "Health" );
     }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event){
+        PLAYERS.remove(event.getPlayer());
+        Util.log("&7Player Left: " + event.getPlayer().getName());
+    }
+
 }
 
