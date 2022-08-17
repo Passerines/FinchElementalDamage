@@ -17,8 +17,10 @@ public class PlayerData {
 
     public PlayerData(){
         setHealthMax(100);
+        setHealth(100);
         setDefense(10);
         setManaMax(100);
+        setMana(100);
         setDamage(15);
         setFireProf(0);
         setWaterProf(0);
