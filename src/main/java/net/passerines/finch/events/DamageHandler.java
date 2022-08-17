@@ -2,16 +2,18 @@ package net.passerines.finch.events;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.data.PlayerData;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.HashMap;
 
-public class DamageHandler {
+public class DamageHandler implements Listener {
     public DamageHandler(){
-        FinchElementalDamage.inst();
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
     @EventHandler
