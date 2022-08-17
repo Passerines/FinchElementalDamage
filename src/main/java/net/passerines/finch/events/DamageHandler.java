@@ -10,8 +10,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import java.util.HashMap;
 
 public class DamageHandler {
-    public static final HashMap<Player, PlayerData> DAMAGE = new HashMap<>();
-
     public DamageHandler(){
         FinchElementalDamage.inst();
     }
