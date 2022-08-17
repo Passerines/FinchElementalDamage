@@ -24,10 +24,9 @@ public class GetPlayersCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
-            for(player : PLAYERS.keySet()){
-                player.sendMessage(PLAYERS.get(player) + "HP: " + PLAYERS.get(player).getHealth());
-            }
+        for(Player player : PLAYERS.keySet()){
+            sender.sendMessage(PLAYERS.get(player) + "HP: " + PLAYERS.get(player).getHealth());
+        }
         return false;
     }
 }
