@@ -28,5 +28,12 @@ public class PlayerMap implements Listener {
         event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getMana() + "Mana" );
         event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getHealth() + "Health" );
     }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event){
+        PLAYERS.remove(event.getPlayer());
+        Util.log("&7Player Left: " + event.getPlayer().getName());
+    }
+
 }
 
