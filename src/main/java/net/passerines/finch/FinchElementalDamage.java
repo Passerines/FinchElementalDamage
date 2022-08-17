@@ -21,6 +21,7 @@ public class FinchElementalDamage extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         new PlayerMap();
+        new GetPlayersCmd();
     }
 
     public static FinchElementalDamage inst() {

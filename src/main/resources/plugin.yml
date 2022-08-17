@@ -12,6 +12,10 @@ commands:
     description: finch
     permission: finch.user
 
+  getplayers:
+    description: gets players list
+    permission: finch.user
+
 permissions:
   finch.user:
     description: Permission to use /finch
