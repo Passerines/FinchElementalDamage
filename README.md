@@ -1,2 +1,2 @@
-# DerpTemplate
- Starting Template for Minecraft Plugins
+# FinchElementalDamage
+ Elemental damage!
