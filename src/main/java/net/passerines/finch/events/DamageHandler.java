@@ -18,14 +18,15 @@ public class DamageHandler implements Listener {
 
     @EventHandler
     public void takeDamage(EntityDamageByEntityEvent hit){
-        Entity vEntity = hit.getEntity();
+        Entity victim = hit.getEntity();
         Entity attacker = hit.getDamager();
-        if(vEntity instanceof Player){
+        if(victim instanceof Player){
             PlayerData vPlayerData = PlayerMap.PLAYERS.get(((Player) hit.getEntity()));
             int finalDamage = (int) hit.getDamage();
             vPlayerData.setHealth(vPlayerData.getHealth()  - (finalDamage - finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500))));
             int damageTaken = finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500));
-            attacker.sendMessage("Damage Taken: " + damageTaken);
+            attacker.sendMessage("Damage Dealt: " + damageTaken);
+            victim.sendMessage("Damage Taken: " + damageTaken);
         }
     }
 }
