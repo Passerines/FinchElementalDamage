@@ -1,7 +1,7 @@
 package net.passerines.finch;
 
-import net.passerines.finch.events.DamageHandler;
-import net.passerines.finch.events.PlayerMap;
+import net.passerines.finch.events.handler.DamageHandler;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Util;
 import org.bukkit.plugin.java.JavaPlugin;
 

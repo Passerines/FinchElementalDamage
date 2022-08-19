@@ -1,4 +1,4 @@
-package net.passerines.finch.data;
+package net.passerines.finch.players;
 
 public class PlayerData {
     private int health;

@@ -1,18 +1,11 @@
 package net.passerines.finch;
 
-import com.comphenix.protocol.utility.Util;
-import net.passerines.finch.data.PlayerData;
-import net.passerines.finch.events.PlayerMap;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.List;
-
-import static net.passerines.finch.events.PlayerMap.PLAYERS;
+import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 
 public class GetPlayersCmd implements CommandExecutor {

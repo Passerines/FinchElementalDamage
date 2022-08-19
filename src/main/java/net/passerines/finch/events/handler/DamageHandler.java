@@ -1,22 +1,31 @@
-package net.passerines.finch.events;
+package net.passerines.finch.events.handler;
 
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.data.PlayerData;
+import net.passerines.finch.events.ElementalDamageEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.util.HashMap;
-
 public class DamageHandler implements Listener {
+
     public DamageHandler(){
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
     @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
+        //Converts entity damage by entity to elemental damage
+        ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
+        elementalDamage.apply();
+        event.setCancelled(true);
+    }
+    @EventHandler
+    public void onElementalDamage(ElementalDamageEvent event) {
+        //Handle elemental damage here
+    }
+
+    /*@EventHandler
     public void takeDamage(EntityDamageByEntityEvent hit){
         Entity victim = hit.getEntity();
         Entity attacker = hit.getDamager();
@@ -28,5 +37,5 @@ public class DamageHandler implements Listener {
             attacker.sendMessage("Damage Dealt: " + damageTaken);
             victim.sendMessage("Damage Taken: " + damageTaken);
         }
-    }
+    }*/
 }
