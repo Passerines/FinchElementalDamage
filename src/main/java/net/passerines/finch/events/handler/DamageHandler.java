@@ -2,7 +2,11 @@ package net.passerines.finch.events.handler;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -22,7 +26,17 @@ public class DamageHandler implements Listener {
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
-        //Handle elemental damage here
+        Entity attacker = event.getAttacker();
+        Entity victim = event.getVictim();
+        if(victim instanceof Player){
+            PlayerData vPlayerData = PlayerMap.PLAYERS.get(((Player) event.getVictim()));
+            int finalDamage = (int) event.getDamage();
+            vPlayerData.setHealth(vPlayerData.getHealth()  - (finalDamage - finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500))));
+            int damageTaken = (int) ((finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500))) * event.getElement().getElementalMultiplier());
+            attacker.sendMessage("Damage Dealt: " + damageTaken + "Element: " + event.getElement());
+            victim.sendMessage("Damage Taken: " + damageTaken + "Element: " + event.getElement());
+
+        }
     }
 
     /*@EventHandler
