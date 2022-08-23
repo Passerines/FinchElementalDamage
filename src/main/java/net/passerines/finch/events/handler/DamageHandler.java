@@ -1,15 +1,19 @@
 package net.passerines.finch.events.handler;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.events.CustomPlayerDeathEvent;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
+import net.passerines.finch.util.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 public class DamageHandler implements Listener {
 
@@ -35,8 +39,18 @@ public class DamageHandler implements Listener {
             int damageTaken = (int) ((finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500))) * event.getElement().getElementalMultiplier());
             attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
             victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
-
+            if(vPlayerData.getHealth() <= 0){
+                CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
+                deathEvent.apply();
+            }
         }
+    }
+
+    @EventHandler
+    public void onCustomPlayerDeath(CustomPlayerDeathEvent event){
+        Entity victim = event.getDeadVictim();
+        victim.sendMessage(Chat.format("&4U died!"));
+        victim.teleport(victim.getWorld().getSpawnLocation());
     }
 
     /*@EventHandler
