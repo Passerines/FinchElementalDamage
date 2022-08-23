@@ -22,7 +22,7 @@ public class DamageHandler implements Listener {
         //Converts entity damage by entity to elemental damage
         ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
         elementalDamage.apply();
-        event.setCancelled(true);
+        event.setDamage(0); //Set damage to 0 to keep knockback
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
