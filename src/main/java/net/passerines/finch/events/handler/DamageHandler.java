@@ -25,16 +25,18 @@ public class DamageHandler implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
         //Converts entity damage by entity to elemental damage
-        ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
-        elementalDamage.apply();
-        event.setDamage(0); //Set damage to 0 to keep knockback
+        if(event.getEntity() instanceof Player) {
+            ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
+            elementalDamage.apply();
+            event.setDamage(0);
+        }
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
         Entity attacker = event.getAttacker();
         Entity victim = event.getVictim();
-        if(victim instanceof Player){
-            PlayerData vPlayerData = PlayerMap.PLAYERS.get(((Player) event.getVictim()));
+        if(victim instanceof Player targetPlayer){
+            PlayerData vPlayerData = PlayerMap.PLAYERS.get((targetPlayer));
             int finalDamage = (int) event.getDamage();
             vPlayerData.setHealth(vPlayerData.getHealth()  - (finalDamage - finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500))));
             int damageTaken = (int) ((finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500))) * event.getElement().getElementalMultiplier());
@@ -45,11 +47,11 @@ public class DamageHandler implements Listener {
                 deathEvent.apply();
             }
         }
-        else if(victim instanceof LivingEntity){
+        /*else if(victim instanceof LivingEntity targetEntity){
             int mobFinalDamage = event.getDamage();
             int mobDamageTaken = (int) ((mobFinalDamage - mobFinalDamage * event.getElement().getElementalMultiplier()));
-            ((LivingEntity) victim).damage(mobDamageTaken, attacker);
-        }
+            targetEntity.damage(mobDamageTaken, attacker);
+        }*/
     }
 
     @EventHandler
