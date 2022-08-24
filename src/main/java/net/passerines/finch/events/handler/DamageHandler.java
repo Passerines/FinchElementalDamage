@@ -8,6 +8,7 @@ import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,7 +27,7 @@ public class DamageHandler implements Listener {
         //Converts entity damage by entity to elemental damage
         ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
         elementalDamage.apply();
-        event.setDamage(1); //Set damage to 0 to keep knockback
+        event.setDamage(0); //Set damage to 0 to keep knockback
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
@@ -43,6 +44,11 @@ public class DamageHandler implements Listener {
                 CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
                 deathEvent.apply();
             }
+        }
+        else if(victim instanceof LivingEntity){
+            int mobFinalDamage = event.getDamage();
+            int mobDamageTaken = (int) ((mobFinalDamage - mobFinalDamage * event.getElement().getElementalMultiplier()));
+            ((LivingEntity) victim).damage(mobDamageTaken, attacker);
         }
     }
 
