@@ -26,7 +26,7 @@ public class DamageHandler implements Listener {
         //Converts entity damage by entity to elemental damage
         ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
         elementalDamage.apply();
-        event.setDamage(0); //Set damage to 0 to keep knockback
+        event.setDamage(1); //Set damage to 0 to keep knockback
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
@@ -49,8 +49,10 @@ public class DamageHandler implements Listener {
     @EventHandler
     public void onCustomPlayerDeath(CustomPlayerDeathEvent event){
         Entity victim = event.getDeadVictim();
+        PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
         victim.sendMessage(Chat.format("&4U died!"));
         victim.teleport(victim.getWorld().getSpawnLocation());
+        vPlayerData.setHealth(vPlayerData.getHealthMax());
     }
 
     /*@EventHandler
