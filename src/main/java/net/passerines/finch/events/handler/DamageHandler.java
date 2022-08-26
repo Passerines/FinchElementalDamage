@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.plugin.Plugin;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
@@ -21,6 +22,7 @@ public class DamageHandler implements Listener {
 
     public DamageHandler(){
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
+
     }
 
     @EventHandler
@@ -85,10 +87,13 @@ public class DamageHandler implements Listener {
     public void onCustomPlayerDeath(CustomPlayerDeathEvent event){
         Player victim = event.getDeadVictim();
         PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
+        victim.setInvulnerable(true);
         victim.sendMessage(Chat.format("&4You Died!"));
         Chat.sendTitle(victim, "&4You Died!");
         victim.teleport(victim.getWorld().getSpawnLocation());
         vPlayerData.setHealth(vPlayerData.getHealthMax());
+        Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()-> victim.setInvulnerable(false), 60);
+
     }
 
     /*@EventHandler
