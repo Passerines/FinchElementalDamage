@@ -37,7 +37,7 @@ public class DamageHandler implements Listener {
         Entity victim = event.getVictim();
         if(victim instanceof Player targetPlayer){
             PlayerData vPlayerData = PlayerMap.PLAYERS.get((targetPlayer));
-            int finalDamage = (int) event.getDamage();
+            int finalDamage = event.getDamage();
             vPlayerData.setHealth(vPlayerData.getHealth()  - (finalDamage - finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500))));
             int damageTaken = (int) ((finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500))) * event.getElement().getElementalMultiplier());
             attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
@@ -56,9 +56,10 @@ public class DamageHandler implements Listener {
 
     @EventHandler
     public void onCustomPlayerDeath(CustomPlayerDeathEvent event){
-        Entity victim = event.getDeadVictim();
+        Player victim = event.getDeadVictim();
         PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
-        victim.sendMessage(Chat.format("&4U died!"));
+        victim.sendMessage(Chat.format("&4You Died!"));
+        Chat.sendTitle(victim, "&4You Died!");
         victim.teleport(victim.getWorld().getSpawnLocation());
         vPlayerData.setHealth(vPlayerData.getHealthMax());
     }
