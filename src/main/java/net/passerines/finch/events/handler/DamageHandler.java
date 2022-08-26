@@ -65,7 +65,9 @@ public class DamageHandler implements Listener {
             int finalDamage = event.getDamage();
             vPlayerData.setHealth(vPlayerData.getHealth()  - (finalDamage - finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500))));
             int damageTaken = (int) ((finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500))) * event.getElement().getElementalMultiplier());
-            attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
+            if(attacker instanceof Player) {
+                attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
+            }
             victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
             if(vPlayerData.getHealth() <= 0){
                 CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
