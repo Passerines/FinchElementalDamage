@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
@@ -29,6 +30,30 @@ public class DamageHandler implements Listener {
             ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
             elementalDamage.apply();
             event.setDamage(0);
+        }
+    }
+    @EventHandler
+    public void onDamageEvent(EntityDamageEvent event){
+        switch (event.getCause()){
+            case VOID, DRAGON_BREATH, WITHER -> {
+                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage()).apply();
+                event.setDamage(0);
+            }
+            case FALL, FALLING_BLOCK, POISON, STARVATION, SUFFOCATION, THORNS, CRAMMING, FLY_INTO_WALL -> {
+                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.EARTH, (int) event.getDamage()).apply();
+                event.setDamage(0);
+            }
+            case FIRE, LAVA, HOT_FLOOR, FIRE_TICK -> {
+                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage()).apply();
+                event.setDamage(0);
+            }
+            case DROWNING, FREEZE -> {
+                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.WATER, (int) event.getDamage()).apply();
+                event.setDamage(0);
+            }
+            case LIGHTNING -> {
+                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.ELECTRO, (int) event.getDamage()).apply();
+                event.setDamage(0);}
         }
     }
     @EventHandler

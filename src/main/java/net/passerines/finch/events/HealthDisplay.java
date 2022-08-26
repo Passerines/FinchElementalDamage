@@ -20,7 +20,7 @@ public class HealthDisplay implements Listener {
             for(Player player : Bukkit.getOnlinePlayers()) {
                 displayHealth(player);
             }
-        }, 0, 100);
+        }, 0, 30);
     }
 
     @EventHandler
@@ -38,7 +38,7 @@ public class HealthDisplay implements Listener {
         int currentHealth = vPlayerData.getHealth();
         int maxMana = vPlayerData.getManaMax();
         int currentMana = vPlayerData.getMana();
-        String bar = Chat.format("&cHealth: " + maxHealth + "/" + currentHealth + "               &bMana: " + maxMana + "/" + currentMana);
+        String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth + "               &bMana: " + currentMana + "/" + maxMana);
         Chat.sendActionBar(player, bar);
     }
 }
