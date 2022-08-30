@@ -16,7 +16,14 @@ commands:
     description: gets players list
     permission: finch.user
 
+  finchattributes:
+    description: sets max health
+    permission: finch.user
+
 permissions:
+  finch.admin:
+    description: Permission to do everything
+    default: op
   finch.user:
     description: Permission to use /finch
     default: true

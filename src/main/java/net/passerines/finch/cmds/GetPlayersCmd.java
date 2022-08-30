@@ -1,5 +1,6 @@
-package net.passerines.finch;
+package net.passerines.finch.cmds;
 
+import net.passerines.finch.FinchElementalDamage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
