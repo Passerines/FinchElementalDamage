@@ -39,7 +39,7 @@ public class HealthDisplay implements Listener {
         int currentHealth = vPlayerData.getHealth();
         int maxMana = vPlayerData.getManaMax();
         int currentMana = vPlayerData.getMana();
-        String bar = Chat.format("&cHealth: " + currentHealth + "        &aDefense: " + defense + "/" + maxHealth + "        &bMana: " + currentMana + "/" + maxMana);
+        String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth +  "    &aDefense: " + defense + "    &bMana: " + currentMana + "/" + maxMana);
         Chat.sendActionBar(player, bar);
     }
 }
