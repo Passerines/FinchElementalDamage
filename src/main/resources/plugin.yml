@@ -19,6 +19,9 @@ commands:
   finchattributes:
     description: sets max health
     permission: finch.user
+  itemgive:
+    description: gives and item
+    permission: finch.admin
 
 permissions:
   finch.admin:

@@ -2,6 +2,7 @@ package net.passerines.finch;
 
 import net.passerines.finch.cmds.FinchAttributesCmd;
 import net.passerines.finch.cmds.GetPlayersCmd;
+import net.passerines.finch.cmds.ItemGiveCommand;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
 import net.passerines.finch.events.handler.DamageHandler;
@@ -31,6 +32,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new NaturalHealthRegen();
         new HealthDisplay();
         new FinchAttributesCmd();
+        new ItemGiveCommand();
     }
 
     public static FinchElementalDamage inst() {
