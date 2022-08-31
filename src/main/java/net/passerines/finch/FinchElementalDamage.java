@@ -6,6 +6,7 @@ import net.passerines.finch.cmds.ItemGiveCommand;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
 import net.passerines.finch.events.handler.DamageHandler;
+import net.passerines.finch.items.ItemManager;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Util;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +34,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new HealthDisplay();
         new FinchAttributesCmd();
         new ItemGiveCommand();
+        new ItemManager();
     }
 
     public static FinchElementalDamage inst() {

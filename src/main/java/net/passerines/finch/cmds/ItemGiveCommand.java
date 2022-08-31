@@ -15,7 +15,7 @@ public class ItemGiveCommand implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender.hasPermission("finelementaldamage.cmd.itemgive")){
+        if(sender.hasPermission("finchelementaldamage.cmd.itemgive")){
             if(sender instanceof Player player) {
                 if(args.length > 0){
                     if(ItemManager.ITEM_HASH_MAP.containsKey(args[0])){
