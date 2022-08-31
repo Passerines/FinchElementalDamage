@@ -1,13 +1,19 @@
 package net.passerines.finch.cmds;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.players.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+
+import static net.passerines.finch.players.PlayerMap.PLAYERS;
+
 import static net.passerines.finch.util.Util.log;
+import static net.passerines.finch.util.Util.matchPlayer;
+
 
 public class FinchAttributesCmd implements CommandExecutor {
 
@@ -20,17 +26,27 @@ public class FinchAttributesCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if(args.length > 0){
+            Player targetPlayer = matchPlayer(args[1]);
+            PlayerData targetPlayerData = PLAYERS.get(targetPlayer);
             switch(args[0]) {
                 case "setMaxHealth" -> {
-                    sender.sendMessage("Havent added this yet, TODO: FINISH THIS ");
+                    targetPlayerData.setHealthMax(Integer.parseInt(args[2]));
+                    sender.sendMessage("set" + targetPlayer + " health to : " + args[1]);
                 }
 
                 case "setMaxDefense" -> {
-                    sender.sendMessage("Havent added this yet, TODO: FINISH THIS pls ");
+                    targetPlayerData.setDefense(Integer.parseInt(args[2]));
+                    sender.sendMessage("set" + targetPlayer + " defense to : " + args[1]);
                 }
 
                 case "setMaxMana" -> {
-                    sender.sendMessage("Havent added this yet, TODO: FINISH THIS davaid");
+                    targetPlayerData.setManaMax(Integer.parseInt(args[2]));
+                    sender.sendMessage("set" + targetPlayer + " mana to : " + args[1]);
+                }
+
+                case "heal" -> {
+                    targetPlayerData.setHealth(targetPlayerData.getHealthMax());
+                    sender.sendMessage("You have been healed!");
                 }
 
                 default -> {
@@ -38,10 +54,21 @@ public class FinchAttributesCmd implements CommandExecutor {
                 }
             }
         }else{
-            sender.sendMessage("big blob of help code; dont want to write. get gud");
+            sender.sendMessage("Commands: setMaxHealth (player) (int), setMaxDefense (player) (int), setMaxMana (player) (int), heal (player) (player)");
         }
         return true;
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
