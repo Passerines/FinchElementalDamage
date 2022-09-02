@@ -1,5 +1,6 @@
 package net.passerines.finch.players;
 
+import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.ItemManager;
@@ -25,6 +26,7 @@ public class PlayerData {
     private double darknessProf;
 
     public PlayerData(Player player){
+        this.player = player;
         reset();
         calculate();
     }
@@ -34,6 +36,9 @@ public class PlayerData {
         //Calculate the helmet
         ItemStack helmet = player.getInventory().getHelmet();
         calculate(helmet);
+
+        //Update player hotbar after updating their data
+        HealthDisplay.displayHealth(player);
     }
 
     //Calculate individual armor/trinket pieces

@@ -34,7 +34,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new HealthDisplay();
         new FinchAttributesCmd();
         new ItemGiveCommand();
-        new ItemManager();
+        ItemManager.reload();
 
         new DamageHandler();
         new EquipmentChangeHandler();
