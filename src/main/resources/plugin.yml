@@ -1,6 +1,6 @@
 name: FinchElementalDamage
 version: 1.0
-api-version: 1.18
+api-version: 1.19
 authors: [AnonymousBluejay,Soup,Samyed]
 website: passerines.dev
 main: net.passerines.finch.FinchElementalDamage
