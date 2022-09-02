@@ -6,19 +6,19 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class BloodHelmet extends FinchArmor {
+public class BloodLeggings extends FinchArmor {
 
-    public BloodHelmet() {
-        super("BloodHelmet");
-        this.defense = 130;
+    public BloodLeggings() {
+        super("BloodLeggings");
+        this.defense = 150;
         this.health = -10;
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_HELMET);
+        ItemStack item = new ItemStack(Material.IRON_LEGGINGS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cBlood Helmet"));
+        itemMeta.displayName(Chat.formatC("&cBlood Leggings"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
