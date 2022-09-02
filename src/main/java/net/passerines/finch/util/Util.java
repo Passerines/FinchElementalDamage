@@ -1,6 +1,7 @@
 package net.passerines.finch.util;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.items.FinchItem;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -70,6 +72,13 @@ public class Util {
     //Get a namespaced key of this plugin with the given name
     public static NamespacedKey getNamespacedKey(String name) {
         return new NamespacedKey(FinchElementalDamage.getPlugin(FinchElementalDamage.class), name);
+    }
+    public static String getId(ItemStack item) {
+        if(isSafe(item) && item.getItemMeta().getPersistentDataContainer().has(FinchItem.ID_KEY)) {
+            return item.getItemMeta().getPersistentDataContainer().get(FinchItem.ID_KEY, PersistentDataType.STRING);
+        } else {
+            return null;
+        }
     }
 
     //Log a message in console
@@ -135,4 +144,5 @@ public class Util {
     public static Color randomColorRainbow() {
         return Color.fromRGB(Util.rand(0, 255), Util.rand(0, 255), Util.rand(0, 255));
     }
+
 }

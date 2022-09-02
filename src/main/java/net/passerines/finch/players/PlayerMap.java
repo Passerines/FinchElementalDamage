@@ -17,13 +17,11 @@ public class PlayerMap implements Listener {
 
     public PlayerMap(){
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-
-
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
-        PLAYERS.put(event.getPlayer(), new PlayerData());
+        PLAYERS.put(event.getPlayer(), new PlayerData(event.getPlayer()));
         Util.log("&7Player Joined: " + event.getPlayer().getName());
         event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getMana() + "Mana" );
         event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getHealth() + "Health" );

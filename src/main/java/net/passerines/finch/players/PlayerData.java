@@ -1,6 +1,15 @@
 package net.passerines.finch.players;
 
+import net.passerines.finch.items.FinchArmor;
+import net.passerines.finch.items.FinchItem;
+import net.passerines.finch.items.ItemManager;
+import net.passerines.finch.util.Util;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 public class PlayerData {
+
+    private Player player;
     private int health;
     private int healthMax;
     private int defense;
@@ -15,12 +24,34 @@ public class PlayerData {
     private double lightProf;
     private double darknessProf;
 
-    public PlayerData(){
+    public PlayerData(Player player){
+        reset();
+        calculate();
+    }
+
+    public void calculate() {
+        reset();
+        //Calculate the helmet
+        ItemStack helmet = player.getInventory().getHelmet();
+        calculate(helmet);
+    }
+
+    //Calculate individual armor/trinket pieces
+    private void calculate(ItemStack item) {
+        String id = Util.getId(item);
+        if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
+            FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
+            if(finchItem instanceof FinchArmor finchArmor) {
+                setDefense(health + finchArmor.getDefense());
+                setHealthMax(healthMax + finchArmor.getHealth());
+            }
+        }
+    }
+
+    public void reset() {
         setHealthMax(100);
-        setHealth(100);
         setDefense(10);
         setManaMax(100);
-        setMana(100);
         setDamage(15);
         setFireProf(0);
         setWaterProf(0);
@@ -45,6 +76,7 @@ public class PlayerData {
 
     public void setHealthMax(int healthMax) {
         this.healthMax = healthMax;
+        this.health = Math.min(healthMax, health);
     }
 
     public int getDefense() {
