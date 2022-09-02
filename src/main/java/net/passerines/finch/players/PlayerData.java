@@ -39,6 +39,12 @@ public class PlayerData {
         //Calculate the helmet
         ItemStack helmet = player.getInventory().getHelmet();
         calculate(helmet);
+        ItemStack chestplate = player.getInventory().getChestplate();
+        calculate(chestplate);
+        ItemStack leggings = player.getInventory().getLeggings();
+        calculate(leggings);
+        ItemStack boots = player.getInventory().getBoots();
+        calculate(boots);
 
         //Update player hotbar after updating their data
         HealthDisplay.displayHealth(player);

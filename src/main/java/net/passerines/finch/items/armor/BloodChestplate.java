@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class BloodChestplate extends FinchArmor {
 
     public BloodChestplate() {
-        super("BloodChesetplate");
+        super("BloodChestplate");
         this.defense = 150;
         this.health = -10;
     }
