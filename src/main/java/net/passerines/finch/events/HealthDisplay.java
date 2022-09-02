@@ -34,12 +34,14 @@ public class HealthDisplay implements Listener {
 
     public static void displayHealth(Player player){
         PlayerData vPlayerData = PlayerMap.PLAYERS.get((player));
-        int defense = vPlayerData.getDefense();
-        int maxHealth = vPlayerData.getHealthMax();
-        int currentHealth = vPlayerData.getHealth();
-        int maxMana = vPlayerData.getManaMax();
-        int currentMana = vPlayerData.getMana();
-        String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth +  "    &aDefense: " + defense + "    &bMana: " + currentMana + "/" + maxMana);
-        Chat.sendActionBar(player, bar);
+        if(vPlayerData!=null) {
+            int defense = vPlayerData.getDefense();
+            int maxHealth = vPlayerData.getHealthMax();
+            int currentHealth = vPlayerData.getHealth();
+            int maxMana = vPlayerData.getManaMax();
+            int currentMana = vPlayerData.getMana();
+            String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth + "    &aDefense: " + defense + "    &bMana: " + currentMana + "/" + maxMana);
+            Chat.sendActionBar(player, bar);
+        }
     }
 }

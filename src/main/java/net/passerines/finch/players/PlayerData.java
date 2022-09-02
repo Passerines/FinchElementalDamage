@@ -27,7 +27,6 @@ public class PlayerData {
 
     public PlayerData(Player player){
         this.player = player;
-        reset();
         calculate();
     }
 
