@@ -27,6 +27,10 @@ public class PlayerData {
 
     public PlayerData(Player player){
         this.player = player;
+        health = 100;
+        defense = 10;
+        mana = 100;
+
         calculate();
     }
 
@@ -46,7 +50,7 @@ public class PlayerData {
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
             if(finchItem instanceof FinchArmor finchArmor) {
-                setDefense(health + finchArmor.getDefense());
+                setDefense(defense + finchArmor.getDefense());
                 setHealthMax(healthMax + finchArmor.getHealth());
             }
         }
