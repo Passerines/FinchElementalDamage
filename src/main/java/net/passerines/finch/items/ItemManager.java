@@ -2,7 +2,10 @@ package net.passerines.finch.items;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.items.armor.BloodBoots;
+import net.passerines.finch.items.armor.BloodChestplate;
 import net.passerines.finch.items.armor.BloodHelmet;
+import net.passerines.finch.items.armor.BloodLeggings;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -28,6 +31,9 @@ public class ItemManager {
 
     private static void registerAll() {
         new BloodHelmet();
+        new BloodChestplate();
+        new BloodLeggings();
+        new BloodBoots();
     }
 
 }
