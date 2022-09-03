@@ -12,7 +12,7 @@ public class StrongLeggings extends FinchArmor {
         super("StrongLeggings");
         this.defense = 150;
         this.health = 500;
-        this.damage = 5000;
+        this.damage = 50;
     }
 
     @Override
