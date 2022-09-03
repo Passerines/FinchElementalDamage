@@ -63,11 +63,11 @@ public class DamageHandler implements Listener {
     public void onElementalDamage(ElementalDamageEvent event) {
         Entity attacker = event.getAttacker();
         Entity victim = event.getVictim();
-        if(victim instanceof Player targetPlayer){
-            PlayerData vPlayerData = PlayerMap.PLAYERS.get((targetPlayer));
+        if(victim instanceof Player){
+            PlayerData vPlayerData = PlayerMap.PLAYERS.get((attacker));
             int finalDamage = event.getDamage();
-            int damageTaken = (int) ((finalDamage - finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier());
-            vPlayerData.setHealth(vPlayerData.getHealth() - (damageTaken + vPlayerData.getDamage()));
+            int damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier() + vPlayerData.getDamage()));
+            vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
             if(attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
             }
