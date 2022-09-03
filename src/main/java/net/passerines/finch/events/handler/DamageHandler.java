@@ -7,6 +7,7 @@ import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -69,6 +70,11 @@ public class DamageHandler implements Listener {
             int damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
             if(attacker instanceof Player){
                 damageTaken = damageTaken + PLAYERS.get(attacker).getDamage();
+            }
+            else if(attacker instanceof Arrow arrow){
+                if(arrow.getShooter() instanceof Player player){
+                    damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
+                }
             }
             vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
             if(attacker instanceof Player) {
