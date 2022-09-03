@@ -1,17 +1,12 @@
 package net.passerines.finch.items;
 
-import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
-import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.weapons.mana.FireBallWand;
 import net.passerines.finch.items.weapons.mana.PooLauncher;
+import net.passerines.finch.items.weapons.mana.Teleporter;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
 import net.passerines.finch.items.weapons.ranged.MachineGunBow;
-import net.passerines.finch.items.weapons.ranged.Terminor;
-import net.passerines.finch.util.Util;
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.event.EventHandler;
+import net.passerines.finch.items.weapons.ranged.ShotGunBow;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
@@ -41,7 +36,10 @@ public class ItemManager {
         new SharpStabber();
         new MachineGunBow();
         new PooLauncher();
-        new Terminor();
+        new ShotGunBow();
+        new StronkBoots();
+        new Teleporter();
+        new StrongLeggings();
     }
 
 }

@@ -17,5 +17,4 @@ public class EquipmentChangeHandler implements Listener {
     public void onArmorChange(PlayerArmorChangeEvent event) {
         PlayerMap.PLAYERS.get(event.getPlayer()).calculate();
     }
-
 }

@@ -3,6 +3,7 @@ package net.passerines.finch.players;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.items.FinchItem;
+import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.items.ItemManager;
 import net.passerines.finch.util.Util;
 import org.bukkit.entity.Player;
@@ -56,6 +57,12 @@ public class PlayerData {
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
             if(finchItem instanceof FinchArmor finchArmor) {
+                setDefense(defense + finchArmor.getDefense());
+                setHealthMax(healthMax + finchArmor.getHealth());
+                setDamage(damage + finchArmor.getDamage());
+                setManaMax(manaMax + finchArmor.getMana());
+            }
+            else if(finchItem instanceof FinchWeapon finchArmor) {
                 setDefense(defense + finchArmor.getDefense());
                 setHealthMax(healthMax + finchArmor.getHealth());
                 setDamage(damage + finchArmor.getDamage());

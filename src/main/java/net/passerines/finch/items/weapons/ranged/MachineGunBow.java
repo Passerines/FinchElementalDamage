@@ -43,7 +43,7 @@ public class MachineGunBow extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.CROSSBOW);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cMachineGunBow"));
+        itemMeta.displayName(Chat.formatC("&cMachineGun Bow"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

@@ -37,7 +37,7 @@ public class FireBallWand extends FinchWeapon implements Listener {
             fireball.setYield(8);
             fireball.setShooter(player);
             vPlayer.setMana(vPlayer.getMana() - 50);
-            String bar = Chat.format("&c-50 &bMana " + vPlayer.getMana());
+            String bar = Chat.format("&c-50 &bMana");
             Chat.sendActionBar(player, bar);
         }
     }
@@ -46,7 +46,7 @@ public class FireBallWand extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.BLAZE_ROD);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cFireBallWand"));
+        itemMeta.displayName(Chat.formatC("&cFireBall Wand"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

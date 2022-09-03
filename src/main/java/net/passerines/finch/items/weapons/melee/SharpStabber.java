@@ -14,14 +14,14 @@ public class SharpStabber extends FinchWeapon {
 
     public SharpStabber() {
         super("SharpStabber");
+        this.damage = 25;
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.STONE_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cSharpStabber"));
-        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attack_damage", 25.0, AttributeModifier.Operation.ADD_NUMBER));
+        itemMeta.displayName(Chat.formatC("&cSharp Stabber"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

@@ -34,7 +34,7 @@ public class PooLauncher extends FinchWeapon implements Listener {
         if(event.getAction().isRightClick() && id.equals( Util.getId(item))){
             Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(2)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
             Fireball fireball = player.getWorld().spawn(loc, Fireball.class);
-            fireball.setYield(690);
+            fireball.setYield(100);
             fireball.setShooter(player);
             String bar = Chat.format("You asked for this.");
             Chat.sendActionBar(player, bar);
