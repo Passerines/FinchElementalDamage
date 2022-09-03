@@ -27,7 +27,7 @@ public class Util {
 
     public static void ShootArrow(Player player, Sound sound, int rotation, int damage){
         Location loc = player.getEyeLocation();
-        Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
+        Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setVelocity(arrow.getVelocity().rotateAroundY(Math.toRadians(rotation)));
         player.getWorld().playSound(player.getLocation(), sound, 1, 1);
         arrow.setShooter(player);
