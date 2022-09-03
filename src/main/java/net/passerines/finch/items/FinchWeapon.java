@@ -2,14 +2,14 @@ package net.passerines.finch.items;
 
 import org.bukkit.inventory.ItemStack;
 
-public abstract class FinchArmor extends FinchItem {
+public abstract class FinchWeapon extends FinchItem {
 
     protected double health;
     protected int defense;
     protected int damage;
     protected int mana;
 
-    public FinchArmor(String id) {
+    public FinchWeapon(String id) {
         super(id);
         this.health = 0;
         this.defense = 0;

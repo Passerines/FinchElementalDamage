@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
@@ -93,7 +94,6 @@ public class DamageHandler implements Listener {
         victim.teleport(victim.getWorld().getSpawnLocation());
         vPlayerData.setHealth(vPlayerData.getHealthMax());
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()-> victim.setInvulnerable(false), 60);
-
     }
 
     /*@EventHandler

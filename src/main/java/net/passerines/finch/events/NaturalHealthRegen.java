@@ -14,6 +14,8 @@ public class NaturalHealthRegen {
             for(Player player : Bukkit.getOnlinePlayers()) {
                 PlayerData playerData = PLAYERS.get(player);
                 int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * 0.01);
+                int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * 0.05);
+                playerData.setMana(newMana);
                 playerData.setHealth(newHealth);
             }
         }, 0, 100);

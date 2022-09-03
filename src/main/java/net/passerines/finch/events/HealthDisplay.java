@@ -9,16 +9,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 public class HealthDisplay implements Listener {
     public HealthDisplay(){
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
         Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
             for(Player player : Bukkit.getOnlinePlayers()) {
-                displayHealth(player);
+                updateActionBar(player);
             }
         }, 0, 30);
     }
@@ -27,17 +24,17 @@ public class HealthDisplay implements Listener {
     public void sendBarOnDamage(ElementalDamageEvent event){
         Entity victim = event.getVictim();
         if(victim instanceof Player){
-            displayHealth((Player) victim);
+            updateActionBar((Player) victim);
         }
     }
 
 
-    public static void displayHealth(Player player){
+    public static void updateActionBar(Player player){
         PlayerData vPlayerData = PlayerMap.PLAYERS.get((player));
         if(vPlayerData!=null) {
             int defense = vPlayerData.getDefense();
-            int maxHealth = vPlayerData.getHealthMax();
-            int currentHealth = vPlayerData.getHealth();
+            double maxHealth = vPlayerData.getHealthMax();
+            double currentHealth = vPlayerData.getHealth();
             int maxMana = vPlayerData.getManaMax();
             int currentMana = vPlayerData.getMana();
             String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth + "    &aDefense: " + defense + "    &bMana: " + currentMana + "/" + maxMana);

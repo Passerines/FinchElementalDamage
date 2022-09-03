@@ -47,7 +47,7 @@ public class PlayerData {
         calculate(boots);
 
         //Update player hotbar after updating their data
-        HealthDisplay.displayHealth(player);
+        HealthDisplay.updateActionBar(player);
     }
 
     //Calculate individual armor/trinket pieces
@@ -81,7 +81,7 @@ public class PlayerData {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 
