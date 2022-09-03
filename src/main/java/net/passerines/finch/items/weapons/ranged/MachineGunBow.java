@@ -35,6 +35,7 @@ public class MachineGunBow extends FinchWeapon implements Listener {
         if(event.getAction().isRightClick() && id.equals(Util.getId(item))) {
             Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(0.7)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
             Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
+            arrow.setShooter(player);
             arrow.setVelocity(loc.getDirection().normalize().multiply(7));
         }
     }
