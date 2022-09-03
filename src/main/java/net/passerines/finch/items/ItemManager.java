@@ -32,6 +32,10 @@ public class ItemManager {
         new BloodChestplate();
         new BloodLeggings();
         new BloodBoots();
+        new CarbonFiberBoots();
+        new CarbonFiberChestplate();
+        new CarbonFiberHelmet();
+        new CarbonFiberLeggings();
         new FireBallWand();
         new SharpStabber();
         new MachineGunBow();

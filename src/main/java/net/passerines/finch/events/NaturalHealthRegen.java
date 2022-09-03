@@ -13,11 +13,11 @@ public class NaturalHealthRegen {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
             for(Player player : Bukkit.getOnlinePlayers()) {
                 PlayerData playerData = PLAYERS.get(player);
-                int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * 0.01);
-                int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * 0.05);
+                int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * 0.005);
+                int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * 0.02);
                 playerData.setMana(newMana);
                 playerData.setHealth(newHealth);
             }
-        }, 0, 100);
+        }, 0, 15);
     }
 }

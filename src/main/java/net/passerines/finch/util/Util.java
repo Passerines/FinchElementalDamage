@@ -3,13 +3,9 @@ package net.passerines.finch.util;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.items.FinchItem;
 import org.apache.commons.lang.Validate;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +23,15 @@ public class Util {
             names.add(player.getName());
         }
         return names;
+    }
+
+    public static void ShootArrow(Player player, Sound sound, int rotation, int damage){
+        Location loc = player.getEyeLocation();
+        Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
+        arrow.setVelocity(arrow.getVelocity().rotateAroundY(Math.toRadians(rotation)));
+        player.getWorld().playSound(player.getLocation(), sound, 1, 1);
+        arrow.setShooter(player);
+        arrow.setDamage(damage);
     }
 
     /*
