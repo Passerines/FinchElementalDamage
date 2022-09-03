@@ -35,6 +35,7 @@ public class ShotGunBow extends FinchWeapon implements Listener {
                 Arrow arrow = player.launchProjectile(Arrow.class);
                 Arrow arrow1 = player.getWorld().spawn(player.getEyeLocation(), Arrow.class);
                 Arrow arrow2 = player.getWorld().spawn(player.getEyeLocation(), Arrow.class);
+                arrow.setShooter(player);
                 arrow1.setShooter(player);
                 arrow2.setShooter(player);
                 arrow1.setVelocity(arrow.getVelocity().rotateAroundY(Math.toRadians(8)));

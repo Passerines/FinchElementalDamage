@@ -75,7 +75,7 @@ public class PlayerData {
         setHealthMax(100);
         setDefense(10);
         setManaMax(100);
-        setDamage(15);
+        setDamage(3);
         setFireProf(0);
         setWaterProf(0);
         setEarthProf(0);
