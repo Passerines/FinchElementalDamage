@@ -15,7 +15,7 @@ public class CarbonFiberLeggings extends FinchArmor {
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_BOOTS);
+        ItemStack item = new ItemStack(Material.IRON_LEGGINGS);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&fCarbon Fiber Leggings"));
         item.setItemMeta(itemMeta);
