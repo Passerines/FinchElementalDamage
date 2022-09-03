@@ -59,6 +59,7 @@ public class PlayerData {
                 setDefense(defense + finchArmor.getDefense());
                 setHealthMax(healthMax + finchArmor.getHealth());
                 setDamage(damage + finchArmor.getDamage());
+                setManaMax(manaMax + finchArmor.getMana());
             }
         }
     }
