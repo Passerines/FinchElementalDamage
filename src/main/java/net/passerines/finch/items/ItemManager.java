@@ -4,8 +4,10 @@ import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.weapons.mana.FireBallWand;
+import net.passerines.finch.items.weapons.mana.PooLauncher;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
 import net.passerines.finch.items.weapons.ranged.MachineGunBow;
+import net.passerines.finch.items.weapons.ranged.Terminor;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -38,6 +40,8 @@ public class ItemManager {
         new FireBallWand();
         new SharpStabber();
         new MachineGunBow();
+        new PooLauncher();
+        new Terminor();
     }
 
 }
