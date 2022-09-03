@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerData {
 
     private Player player;
-    private int health;
-    private int healthMax;
+    private double health;
+    private double healthMax;
     private int defense;
     private int mana;
     private int manaMax;
@@ -58,6 +58,7 @@ public class PlayerData {
             if(finchItem instanceof FinchArmor finchArmor) {
                 setDefense(defense + finchArmor.getDefense());
                 setHealthMax(healthMax + finchArmor.getHealth());
+                setDamage(damage + finchArmor.getDamage());
             }
         }
     }
@@ -76,7 +77,7 @@ public class PlayerData {
         setDarknessProf(0);
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
@@ -84,11 +85,11 @@ public class PlayerData {
         this.health = health;
     }
 
-    public int getHealthMax() {
+    public double getHealthMax() {
         return healthMax;
     }
 
-    public void setHealthMax(int healthMax) {
+    public void setHealthMax(double healthMax) {
         this.healthMax = healthMax;
         this.health = Math.min(healthMax, health);
     }

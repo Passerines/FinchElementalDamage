@@ -12,6 +12,7 @@ public class BloodBoots extends FinchArmor {
         super("BloodBoots");
         this.defense = 90;
         this.health = -10;
+        this.damage = 5;
     }
 
     @Override
