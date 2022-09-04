@@ -7,7 +7,6 @@ import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.items.ItemManager;
 import net.passerines.finch.util.Util;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class EntityData {
@@ -28,7 +27,7 @@ public class EntityData {
     public void reset() {
         setHealthMax(100);
         setDefense(10);
-        setDamage(5);
+        setDamage(15);
     }
 
     public double getHealth() {
