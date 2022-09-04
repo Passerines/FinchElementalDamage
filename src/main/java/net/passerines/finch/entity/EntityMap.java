@@ -1,5 +1,7 @@
 package net.passerines.finch.entity;
 
+import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
+import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.util.Util;
@@ -24,12 +26,12 @@ public class EntityMap implements Listener {
     }
 
     @EventHandler
-    public void onSpawn(EntitySpawnEvent event){
+    public void onSpawn(MythicMobSpawnEvent event){
         ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
     }
 
     @EventHandler
-    public void onDeath(EntityDeathEvent event){
+    public void onDeath(MythicMobDeathEvent event){
         ENTITIES.remove(event.getEntity());
     }
 }

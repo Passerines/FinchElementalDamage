@@ -17,45 +17,18 @@ public class EntityData {
     private double healthMax;
     private int defense;
     private int damage;
-    private double fireProf;
-    private double waterProf;
-    private double earthProf;
-    private double windProf;
-    private double electroProf;
-    private double lightProf;
-    private double darknessProf;
 
     public EntityData(Entity entity){
         this.entity = entity;
         health = 100;
         defense = 10;
         damage = 15;
-
-        calculate();
-    }
-
-    public void calculate() {
-        reset();
-    }
-
-    //Calculate individual armor/trinket pieces
-    private void calculate(ItemStack item) {
-        setDefense(defense + 25);
-        setHealthMax(healthMax + 25);
-        setDamage(damage + 10);
     }
 
     public void reset() {
         setHealthMax(100);
         setDefense(10);
-        setDamage(1500);
-        setFireProf(0);
-        setWaterProf(0);
-        setEarthProf(0);
-        setWindProf(0);
-        setElectroProf(0);
-        setLightProf(0);
-        setDarknessProf(0);
+        setDamage(5);
     }
 
     public double getHealth() {
@@ -89,61 +62,5 @@ public class EntityData {
 
     public void setDamage(int damage) {
         this.damage = damage;
-    }
-
-    public double getFireProf() {
-        return fireProf;
-    }
-
-    public void setFireProf(double fireProf) {
-        this.fireProf = fireProf;
-    }
-
-    public double getWaterProf() {
-        return waterProf;
-    }
-
-    public void setWaterProf(double waterProf) {
-        this.waterProf = waterProf;
-    }
-
-    public double getEarthProf() {
-        return earthProf;
-    }
-
-    public void setEarthProf(double earthProf) {
-        this.earthProf = earthProf;
-    }
-
-    public double getWindProf() {
-        return windProf;
-    }
-
-    public void setWindProf(double windProf) {
-        this.windProf = windProf;
-    }
-
-    public double getElectroProf() {
-        return electroProf;
-    }
-
-    public void setElectroProf(double electroProf) {
-        this.electroProf = electroProf;
-    }
-
-    public double getLightProf() {
-        return lightProf;
-    }
-
-    public void setLightProf(double lightProf) {
-        this.lightProf = lightProf;
-    }
-
-    public double getDarknessProf() {
-        return darknessProf;
-    }
-
-    public void setDarknessProf(double darknessProf) {
-        this.darknessProf = darknessProf;
     }
 }
