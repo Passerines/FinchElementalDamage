@@ -1,6 +1,7 @@
 package net.passerines.finch.util;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchItem;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
@@ -26,7 +27,6 @@ public class Util {
     }
 
     public static void ShootArrow(Player player, Sound sound, int rotation, int damage){
-        Location loc = player.getEyeLocation();
         Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setVelocity(arrow.getVelocity().rotateAroundY(Math.toRadians(rotation)));
         player.getWorld().playSound(player.getLocation(), sound, 1, 1);
