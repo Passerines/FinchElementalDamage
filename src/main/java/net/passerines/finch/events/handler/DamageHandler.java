@@ -76,7 +76,7 @@ public class DamageHandler implements Listener {
                 if (arrow.getShooter() instanceof Player player) {
                     damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
                 }else{
-                damageTaken = damageTaken + EntityMap.ENTITIES.get().getDamage();
+                damageTaken = damageTaken + EntityMap.ENTITIES.get(attacker).getDamage();
             }
                 vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
                 victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
@@ -105,7 +105,6 @@ public class DamageHandler implements Listener {
                 }
             }
         }
-    }
 
     @EventHandler
     public void onCustomEntityDeath(CustomEntityDeathEvent event){
@@ -125,7 +124,7 @@ public class DamageHandler implements Listener {
         vPlayerData.setHealth(vPlayerData.getHealthMax());
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()-> victim.setInvulnerable(false), 60);
     }
-
+}
     /*@EventHandler
     public void takeDamage(EntityDamageByEntityEvent hit){
         Entity victim = hit.getEntity();
@@ -139,4 +138,3 @@ public class DamageHandler implements Listener {
             victim.sendMessage("Damage Taken: " + damageTaken);
         }
     }*/
-}
