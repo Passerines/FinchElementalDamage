@@ -13,7 +13,6 @@ public class EntityData {
 
     private Entity entity;
     private double health;
-    private double healthMax;
     private int defense;
     private int damage;
 
@@ -25,7 +24,7 @@ public class EntityData {
     }
 
     public void reset() {
-        setHealthMax(100);
+        setHealth(100);
         setDefense(10);
         setDamage(15);
     }
@@ -36,15 +35,6 @@ public class EntityData {
 
     public void setHealth(double health) {
         this.health = health;
-    }
-
-    public double getHealthMax() {
-        return healthMax;
-    }
-
-    public void setHealthMax(double healthMax) {
-        this.healthMax = healthMax;
-        this.health = Math.min(healthMax, health);
     }
 
     public int getDefense() {

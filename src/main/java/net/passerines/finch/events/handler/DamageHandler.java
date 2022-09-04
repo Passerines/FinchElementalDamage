@@ -77,9 +77,8 @@ public class DamageHandler implements Listener {
                 if(arrow.getShooter() instanceof Player player){
                     damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
                 }
-            }
-            else if(attacker instanceof Entity entity){
-                
+            }else{
+                damageTaken = damageTaken + EntityMap.ENTITIES.get().getDamage();
             }
             vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
             if(attacker instanceof Player) {
