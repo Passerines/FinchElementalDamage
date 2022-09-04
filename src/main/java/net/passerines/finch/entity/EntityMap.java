@@ -27,6 +27,7 @@ public class EntityMap implements Listener {
 
     @EventHandler
     public void onSpawn(MythicMobSpawnEvent event){
+        Util.log("Entity added to map");
         ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
     }
 
