@@ -27,21 +27,22 @@ import static net.passerines.finch.entity.EntityMap.ENTITIES;
 
 public class DamageHandler implements Listener {
 
-    public DamageHandler(){
+    public DamageHandler() {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
 
     }
 
     @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         //Converts entity damage by entity to elemental damage
-            ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
-            elementalDamage.apply();
-            event.setDamage(0);
+        ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
+        elementalDamage.apply();
+        event.setDamage(0);
     }
+
     @EventHandler
-    public void onDamageEvent(EntityDamageEvent event){
-        switch (event.getCause()){
+    public void onDamageEvent(EntityDamageEvent event) {
+        switch (event.getCause()) {
             case VOID, DRAGON_BREATH, WITHER -> {
                 new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage()).apply();
                 event.setDamage(0);
@@ -60,9 +61,11 @@ public class DamageHandler implements Listener {
             }
             case LIGHTNING -> {
                 new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.ELECTRO, (int) event.getDamage()).apply();
-                event.setDamage(0);}
+                event.setDamage(0);
+            }
         }
     }
+
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
         Entity attacker = event.getAttacker();
@@ -77,20 +80,22 @@ public class DamageHandler implements Listener {
                 if (arrow.getShooter() instanceof Player player) {
                     damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
                 }
-                vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
-                victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
-                if (vPlayerData.getHealth() <= 0) {
-                    CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
-                    deathEvent.apply();
-                }
+            } else {
+                damageTaken = damageTaken + EntityMap.ENTITIES.get(attacker).getDamage();
+            }
+            vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
+            victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
+            if (vPlayerData.getHealth() <= 0) {
+                CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
+                deathEvent.apply();
             }
 //            else if (attacker instanceof LivingEntity) {
-  //              damageTaken = damageTaken + EntityMap.ENTITIES.get(entity).getDamage();
-    //        }
-            if (attacker instanceof Player) {
-                attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
-            }
+        //              damageTaken = damageTaken + EntityMap.ENTITIES.get(entity).getDamage();
+        //        }
+        if (attacker instanceof Player) {
+            attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
         }
+    }
         else if (victim instanceof LivingEntity targetEntity) {
                 EntityData vEntityData = EntityMap.ENTITIES.get(victim);
                 int mobDamage = event.getDamage();
@@ -125,7 +130,7 @@ public class DamageHandler implements Listener {
         vPlayerData.setHealth(vPlayerData.getHealthMax());
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()-> victim.setInvulnerable(false), 60);
     }
-
+}
     /*@EventHandler
     public void takeDamage(EntityDamageByEntityEvent hit){
         Entity victim = hit.getEntity();
@@ -139,4 +144,3 @@ public class DamageHandler implements Listener {
             victim.sendMessage("Damage Taken: " + damageTaken);
         }
     }*/
-}
