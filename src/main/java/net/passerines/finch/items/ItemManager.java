@@ -5,8 +5,9 @@ import net.passerines.finch.items.weapons.mana.FireBallWand;
 import net.passerines.finch.items.weapons.mana.PooLauncher;
 import net.passerines.finch.items.weapons.mana.Teleporter;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
-import net.passerines.finch.items.weapons.ranged.MachineGunBow;
-import net.passerines.finch.items.weapons.ranged.ShotGunBow;
+import net.passerines.finch.items.weapons.ranged.HellfireCrossbow;
+import net.passerines.finch.items.weapons.ranged.IntergalaticSniper;
+import net.passerines.finch.items.weapons.ranged.Tsunami;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
@@ -38,12 +39,13 @@ public class ItemManager {
         new CarbonFiberLeggings();
         new FireBallWand();
         new SharpStabber();
-        new MachineGunBow();
+        new HellfireCrossbow();
         new PooLauncher();
-        new ShotGunBow();
+        new Tsunami();
         new StronkBoots();
         new Teleporter();
         new StrongLeggings();
+        new IntergalaticSniper();
     }
 
 }
