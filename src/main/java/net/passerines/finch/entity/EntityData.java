@@ -19,14 +19,14 @@ public class EntityData {
 
     public EntityData(Entity entity){
         this.entity = entity;
-        health = 100;
-        defense = 10;
-        damage = 15;
+        health = 10;
+        defense = 50;
+        damage = 5;
     }
 
     public void reset() {
-        setHealth(100);
-        setDefense(10);
+        setHealth(10);
+        setDefense(50);
         setDamage(5);
     }
 
