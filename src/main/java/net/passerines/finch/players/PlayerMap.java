@@ -23,8 +23,8 @@ public class PlayerMap implements Listener {
     public void onJoin(PlayerJoinEvent event){
         PLAYERS.put(event.getPlayer(), new PlayerData(event.getPlayer()));
         Util.log("&7Player Joined: " + event.getPlayer().getName());
-        event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getMana() + "Mana" );
-        event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getHealth() + "Health" );
+        event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getMana() + " Mana" );
+        event.getPlayer().sendMessage("You Have: " + PLAYERS.get(event.getPlayer()).getHealth() + " Health" );
     }
 
     @EventHandler
