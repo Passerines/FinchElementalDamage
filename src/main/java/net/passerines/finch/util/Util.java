@@ -1,9 +1,9 @@
 package net.passerines.finch.util;
 
-import org.apache.commons.lang.Validate;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.items.FinchItem;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
@@ -26,7 +26,7 @@ public class Util {
         return names;
     }
 
-    public static void ShootArrow(Player player, Sound sound, int rotation, int damage){
+    public static void shootArrow(Player player, Sound sound, int rotation, int damage){
         Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setVelocity(arrow.getVelocity().rotateAroundY(Math.toRadians(rotation)));
         player.getWorld().playSound(player.getLocation(), sound, 1, 1);

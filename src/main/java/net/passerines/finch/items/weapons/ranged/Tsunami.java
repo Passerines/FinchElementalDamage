@@ -33,9 +33,9 @@ public class Tsunami extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if(id.equals(Util.getId(item))) {
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, -2, 5);
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 2, 5);
-             cd.add(player);
+             Util.shootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, -2, 5);
+             Util.shootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 2, 5);
+             cd.add(player, 30);
             }
         }
     }

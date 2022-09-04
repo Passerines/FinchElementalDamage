@@ -36,10 +36,10 @@ public class HellfireCrossbow extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
-            Util.ShootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            Util.ShootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            Util.ShootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            Util.ShootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
+            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
+            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
+            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
+            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
             cd.add(player);
         }
     }
