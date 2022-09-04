@@ -3,7 +3,6 @@ package net.passerines.finch.events.handler;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.entities.EntityData;
 import net.passerines.finch.entities.EntityMap;
-import net.passerines.finch.events.CustomEntityDeathEvent;
 import net.passerines.finch.events.CustomPlayerDeathEvent;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.players.PlayerData;
@@ -16,12 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.plugin.Plugin;
-
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 public class DamageHandler implements Listener {
@@ -88,11 +83,11 @@ public class DamageHandler implements Listener {
                 deathEvent.apply();
             }
         }
-        else if(victim instanceof LivingEntity targetEntity){
+        else if(victim instanceof LivingEntity){
             EntityData vEntityData = EntityMap.ENTITIES.get(victim);
             int mobDamage = event.getDamage();
             int mobDamageTaken = (int) ((mobDamage - (mobDamage * (vEntityData.getDefense()/ (vEntityData.getDefense() + 500.0)))));
-            targetEntity.setHealth(vEntityData.getHealth() - mobDamageTaken);
+            vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);
             if(attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
             }
