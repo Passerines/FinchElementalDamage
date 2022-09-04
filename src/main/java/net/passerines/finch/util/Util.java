@@ -1,11 +1,9 @@
 package net.passerines.finch.util;
 
-import io.lumine.mythic.bukkit.utils.lib.lang3.Validate;
+import org.apache.commons.lang.Validate;
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchItem;
 
-import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
