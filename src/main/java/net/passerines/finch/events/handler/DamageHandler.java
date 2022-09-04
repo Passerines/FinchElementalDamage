@@ -78,6 +78,9 @@ public class DamageHandler implements Listener {
                     damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
                 }
             }
+            else if(attacker instanceof Entity entity){
+                
+            }
             vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
             if(attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
@@ -95,6 +98,11 @@ public class DamageHandler implements Listener {
             targetEntity.setHealth(vEntityData.getHealth() - mobDamageTaken);
             if(attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
+            }
+            else if(attacker instanceof Arrow arrow){
+                if(arrow.getShooter() instanceof Player player){
+                    mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
+                }
             }
         }
     }
