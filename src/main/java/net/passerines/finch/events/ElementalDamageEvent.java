@@ -25,6 +25,8 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         WIND(Chat.format("&fWind"), 1f),
         ELECTRO(Chat.format("&dElectro"), 1f),
         LIGHT(Chat.format("&eLight"), 1f),
+        NEUTRAL(Chat.format("Neutral"), 1f),
+        UNDEAD(Chat.format("&4Undead"), 1f),
         DARK(Chat.format("&8Dark"), 1f);
         private final String displayName;
         private final float elementalMultiplier;

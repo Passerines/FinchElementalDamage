@@ -8,6 +8,13 @@ public abstract class FinchWeapon extends FinchItem {
     protected int defense;
     protected int damage;
     protected int mana;
+    protected int fire;
+    protected int water;
+    protected int earth;
+    protected int wind;
+    protected int electro;
+    protected int light;
+    protected int dark;
 
     public FinchWeapon(String id) {
         super(id);
@@ -15,6 +22,13 @@ public abstract class FinchWeapon extends FinchItem {
         this.defense = 0;
         this.damage = 0;
         this.mana = 0;
+        this.fire = 0;
+        this.water = 0;
+        this.earth = 0;
+        this.wind = 0;
+        this.electro = 0;
+        this.light = 0;
+        this.dark = 0;
     }
 
     public double getHealth() {
@@ -28,5 +42,26 @@ public abstract class FinchWeapon extends FinchItem {
     }
     public int getMana(){
         return mana;
+    }
+    public int getFire(){
+        return fire;
+    }
+    public int getWater(){
+        return water;
+    }
+    public int getEarth(){
+        return earth;
+    }
+    public int getWind(){
+        return wind;
+    }
+    public int getElectro(){
+        return electro;
+    }
+    public int getLight(){
+        return light;
+    }
+    public int getDark(){
+        return dark;
     }
 }

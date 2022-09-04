@@ -1,6 +1,7 @@
-package net.passerines.finch.items.weapons.mana;
+package net.passerines.finch.items.weapons.ranged;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
@@ -9,51 +10,45 @@ import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Fireball;
+import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Set;
 
+public class IntergalaticSniper extends FinchWeapon implements Listener {
 
-public class Teleporter extends FinchWeapon implements Listener {
-
-    public Teleporter() {
-        super("Teleporter");
+    public IntergalaticSniper() {
+        super("IntergalaticSniper");
+        this.electro = 2;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-
+    private Cooldown cd = new Cooldown(60);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(vPlayer.getMana() >= 75 && id.equals(Util.getId(item)) && event.getAction().isRightClick()) {
-                int length = 7;
-                World world = player.getWorld();
-                Location loc1 = player.getLocation();
-                Block b = player.getTargetBlock((Set<Material>)null, 12);
-                Location loc = new Location(b.getWorld(), b.getX(), b.getY(), b.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
-                player.teleport(loc);
-                vPlayer.setMana(vPlayer.getMana() - 75);
-                String bar = Chat.format("&c-75 &bMana");
-                Chat.sendActionBar(player, bar);
+        if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
+            Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(0.7)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
+            Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
+            arrow.setVelocity(loc.getDirection().normalize().multiply(100));
+            arrow.setDamage(65);
+            cd.add(player);
         }
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.DIAMOND_HOE);
+        ItemStack item = new ItemStack(Material.CROSSBOW);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&bTeleporter"));
+        itemMeta.displayName(Chat.formatC("&bIntergalatic Sniper"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
