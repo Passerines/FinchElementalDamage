@@ -66,41 +66,39 @@ public class DamageHandler implements Listener {
     public void onElementalDamage(ElementalDamageEvent event) {
         Entity attacker = event.getAttacker();
         Entity victim = event.getVictim();
-        if(victim instanceof Player targetPlayer){
+        if (victim instanceof Player targetPlayer) {
             PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
             int finalDamage = event.getDamage();
-            int damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense()/ (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
-            if(attacker instanceof Player){
+            int damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
+            if (attacker instanceof Player) {
                 damageTaken = damageTaken + PLAYERS.get(attacker).getDamage();
-            }
-            else if(attacker instanceof Arrow arrow){
-                if(arrow.getShooter() instanceof Player player){
+            } else if (attacker instanceof Arrow arrow) {
+                if (arrow.getShooter() instanceof Player player) {
                     damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
                 }
-            }else{
-                damageTaken = damageTaken + EntityMap.ENTITIES.get().getDamage();
-            }
-            vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
-            if(attacker instanceof Player) {
-                attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
-            }
-            victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
-            if(vPlayerData.getHealth() <= 0){
-                CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
-                deathEvent.apply();
-            }
-        }
-        else if(victim instanceof LivingEntity targetEntity){
-            EntityData vEntityData = EntityMap.ENTITIES.get(victim);
-            int mobDamage = event.getDamage();
-            int mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense()/ (vEntityData.getDefense() + 500.0)));
-            targetEntity.setHealth(vEntityData.getHealth() - mobDamageTaken);
-            if(attacker instanceof Player) {
-                attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
-            }
-            else if(attacker instanceof Arrow arrow){
-                if(arrow.getShooter() instanceof Player player){
-                    mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
+                //     }else{
+                //         damageTaken = damageTaken + EntityMap.ENTITIES.get().getDamage();
+                //     }
+                vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
+                if (attacker instanceof Player) {
+                    attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
+                }
+                victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
+                if (vPlayerData.getHealth() <= 0) {
+                    CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
+                    deathEvent.apply();
+                }
+            } else if (victim instanceof LivingEntity targetEntity) {
+                EntityData vEntityData = EntityMap.ENTITIES.get(victim);
+                int mobDamage = event.getDamage();
+                int mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+                targetEntity.setHealth(vEntityData.getHealth() - mobDamageTaken);
+                if (attacker instanceof Player) {
+                    attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
+                } else if (attacker instanceof Arrow arrow) {
+                    if (arrow.getShooter() instanceof Player player) {
+                        mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
+                    }
                 }
             }
         }
