@@ -1,6 +1,9 @@
 package net.passerines.finch.events.handler;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.entity.EntityData;
+import net.passerines.finch.entity.EntityMap;
+import net.passerines.finch.events.CustomEntityDeathEvent;
 import net.passerines.finch.events.CustomPlayerDeathEvent;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.players.PlayerData;
@@ -13,6 +16,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -30,11 +34,9 @@ public class DamageHandler implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
         //Converts entity damage by entity to elemental damage
-        if(event.getEntity() instanceof Player) {
-            ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage());
+            ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
             elementalDamage.apply();
             event.setDamage(0);
-        }
     }
     @EventHandler
     public void onDamageEvent(EntityDamageEvent event){
@@ -86,11 +88,22 @@ public class DamageHandler implements Listener {
                 deathEvent.apply();
             }
         }
-        /*else if(victim instanceof LivingEntity targetEntity){
-            int mobFinalDamage = event.getDamage();
-            int mobDamageTaken = (int) ((mobFinalDamage - mobFinalDamage * event.getElement().getElementalMultiplier()));
-            targetEntity.damage(mobDamageTaken, attacker);
-        }*/
+        else if(victim instanceof LivingEntity targetEntity){
+            EntityData vEntityData = EntityMap.ENTITIES.get(victim);
+            int mobDamage = event.getDamage();
+            int mobDamageTaken = (int) ((mobDamage - (mobDamage * (vEntityData.getDefense()/ (vEntityData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
+            targetEntity.setHealth(vEntityData.getHealth() - mobDamageTaken);
+            if(attacker instanceof Player) {
+                attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCustomEntityDeath(CustomEntityDeathEvent event){
+        Entity victim = event.getDeadVictim();
+        EntityData vEntityData = EntityMap.ENTITIES.get((victim));
+        victim.remove();
     }
 
     @EventHandler

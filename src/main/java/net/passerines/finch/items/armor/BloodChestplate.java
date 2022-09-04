@@ -10,8 +10,8 @@ public class BloodChestplate extends FinchArmor {
 
     public BloodChestplate() {
         super("BloodChestplate");
-        this.defense = 150;
-        this.health = -10;
+        this.defense = -5;
+        this.health = 10;
         this.damage = 5;
     }
 

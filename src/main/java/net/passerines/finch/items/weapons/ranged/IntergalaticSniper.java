@@ -25,17 +25,21 @@ public class IntergalaticSniper extends FinchWeapon implements Listener {
 
     public IntergalaticSniper() {
         super("IntergalaticSniper");
+        this.electro = 2;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-    private Cooldown cd = new Cooldown(40);
+    private Cooldown cd = new Cooldown(60);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
-            Util.ShootArrow(player, Sound.BLOCK_WOOD_BREAK, 0, 50);
+            Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(0.7)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
+            Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
+            arrow.setVelocity(loc.getDirection().normalize().multiply(100));
+            arrow.setDamage(65);
             cd.add(player);
         }
     }

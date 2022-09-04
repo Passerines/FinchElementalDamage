@@ -14,7 +14,7 @@ public class BigBrainHat extends FinchArmor {
     public BigBrainHat() {
         super("BigBrainHat");
         this.defense = 25;
-        this.health = 5;
+        this.health = 50;
         this.mana = 1000;
 
     }

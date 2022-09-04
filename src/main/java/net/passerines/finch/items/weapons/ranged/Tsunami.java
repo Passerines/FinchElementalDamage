@@ -21,10 +21,11 @@ public class Tsunami extends FinchWeapon implements Listener {
 
     public Tsunami() {
         super("Tsunami");
+        this.water = 2;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-    private Cooldown cd = new Cooldown(5);
+    private Cooldown cd = new Cooldown(10);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
@@ -32,11 +33,8 @@ public class Tsunami extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if(id.equals(Util.getId(item))) {
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 8, 5);
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 5, 5);
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 0, 5);
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, -8, 5);
-             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, -5, 5);
+             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, -2, 5);
+             Util.ShootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 2, 5);
              cd.add(player);
             }
         }
@@ -46,7 +44,7 @@ public class Tsunami extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.BOW);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("Tsunami"));
+        itemMeta.displayName(Chat.formatC("&bTsunami"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

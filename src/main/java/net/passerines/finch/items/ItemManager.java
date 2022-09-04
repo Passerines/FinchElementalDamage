@@ -2,6 +2,7 @@ package net.passerines.finch.items;
 
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.weapons.mana.FireBallWand;
+import net.passerines.finch.items.weapons.mana.LifeStone;
 import net.passerines.finch.items.weapons.mana.PooLauncher;
 import net.passerines.finch.items.weapons.mana.Teleporter;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
@@ -46,6 +47,8 @@ public class ItemManager {
         new Teleporter();
         new StrongLeggings();
         new IntergalaticSniper();
+        new SniperHelmet();
+        new LifeStone();
     }
 
 }
