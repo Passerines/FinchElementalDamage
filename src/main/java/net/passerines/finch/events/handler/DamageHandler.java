@@ -23,6 +23,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
+import static net.passerines.finch.entity.EntityMap.ENTITIES;
 
 public class DamageHandler implements Listener {
 
@@ -75,9 +76,7 @@ public class DamageHandler implements Listener {
             } else if (attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
                     damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
-                }else{
-                damageTaken = damageTaken + EntityMap.ENTITIES.get().getDamage();
-            }
+                }
                 vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
                 victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
                 if (vPlayerData.getHealth() <= 0) {
@@ -85,12 +84,14 @@ public class DamageHandler implements Listener {
                     deathEvent.apply();
                 }
             }
+//            else if (attacker instanceof LivingEntity) {
+  //              damageTaken = damageTaken + EntityMap.ENTITIES.get(entity).getDamage();
+    //        }
             if (attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
             }
         }
-
-            else if (victim instanceof LivingEntity targetEntity) {
+        else if (victim instanceof LivingEntity targetEntity) {
                 EntityData vEntityData = EntityMap.ENTITIES.get(victim);
                 int mobDamage = event.getDamage();
                 int mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
@@ -105,7 +106,6 @@ public class DamageHandler implements Listener {
                 }
             }
         }
-    }
 
     @EventHandler
     public void onCustomEntityDeath(CustomEntityDeathEvent event){

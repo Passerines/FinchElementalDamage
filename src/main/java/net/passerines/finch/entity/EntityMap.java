@@ -28,11 +28,13 @@ public class EntityMap implements Listener {
     @EventHandler
     public void onSpawn(MythicMobSpawnEvent event){
         ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
+        Util.log("Registered Mob: " + event.getMobType());
     }
 
     @EventHandler
     public void onDeath(MythicMobDeathEvent event){
         ENTITIES.remove(event.getEntity());
+        Util.log("Registered Mob Died: " + event.getMobType());
     }
 }
 
