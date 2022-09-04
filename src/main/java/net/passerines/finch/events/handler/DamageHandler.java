@@ -1,8 +1,8 @@
 package net.passerines.finch.events.handler;
 
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.entity.EntityData;
-import net.passerines.finch.entity.EntityMap;
+import net.passerines.finch.entities.EntityData;
+import net.passerines.finch.entities.EntityMap;
 import net.passerines.finch.events.CustomEntityDeathEvent;
 import net.passerines.finch.events.CustomPlayerDeathEvent;
 import net.passerines.finch.events.ElementalDamageEvent;
@@ -91,20 +91,18 @@ public class DamageHandler implements Listener {
         else if(victim instanceof LivingEntity targetEntity){
             EntityData vEntityData = EntityMap.ENTITIES.get(victim);
             int mobDamage = event.getDamage();
-            int mobDamageTaken = (int) ((mobDamage - (mobDamage * (vEntityData.getDefense()/ (vEntityData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
+            int mobDamageTaken = (int) ((mobDamage - (mobDamage * (vEntityData.getDefense()/ (vEntityData.getDefense() + 500.0)))));
             targetEntity.setHealth(vEntityData.getHealth() - mobDamageTaken);
             if(attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
             }
+            if(vEntityData.getHealth() <= 0){
+                CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
+                deathEvent.apply();
+            }
         }
     }
 
-    @EventHandler
-    public void onCustomEntityDeath(CustomEntityDeathEvent event){
-        Entity victim = event.getDeadVictim();
-        EntityData vEntityData = EntityMap.ENTITIES.get((victim));
-        victim.remove();
-    }
 
     @EventHandler
     public void onCustomPlayerDeath(CustomPlayerDeathEvent event){
