@@ -116,7 +116,7 @@ public class DamageHandler implements Listener {
 
             vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);
 
-            if(vEntityData.getHealth() >= 0){
+            if(vEntityData.getHealth() <= 0){
                 CustomEntityDeathEvent deathEvent = new CustomEntityDeathEvent(victim);
                 deathEvent.apply();
             }
