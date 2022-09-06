@@ -6,7 +6,9 @@ import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.items.ItemManager;
 import net.passerines.finch.util.Util;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,15 +21,15 @@ public class EntityData {
 
     public EntityData(Entity entity){
         this.entity = entity;
-        health = 10;
-        defense = 50;
-        damage = 5;
-    }
-
-    public void reset() {
-        setHealth(10);
-        setDefense(50);
-        setDamage(5);
+        LivingEntity livingEntity = (LivingEntity) entity;
+        health = 10 * Util.getMaxHealth(livingEntity);
+        defense = 0;
+        if(livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
+            damage = (int) (2 * livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
+        }
+        else{
+            damage = 1;
+        }
     }
 
     public double getHealth() {

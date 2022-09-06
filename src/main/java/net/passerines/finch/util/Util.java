@@ -73,6 +73,9 @@ public class Util {
             ((Player)entity).setHealthScale(20);
         }
     }
+    public static double getMaxHealth(LivingEntity entity){
+        return entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+    }
 
     //Get a namespaced key of this plugin with the given name
     public static NamespacedKey getNamespacedKey(String name) {

@@ -7,8 +7,10 @@ import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntitySpawnEvent;
 
 import java.util.HashMap;
 
@@ -26,7 +28,14 @@ public class EntityMap implements Listener {
         ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
         Util.log("Registered Mob: " + event.getMobType());
     }
-
+    @EventHandler
+    public void onVanillaSpawn(EntitySpawnEvent event){
+        if(event.getEntity() instanceof LivingEntity){
+            Util.log("Entity added to map");
+            ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
+            Util.log("Registered Mob: " + event.getEntityType());
+        }
+    }
     @EventHandler
     public void onDeath(MythicMobDeathEvent event){
         ENTITIES.remove(event.getEntity());

@@ -126,7 +126,7 @@ public class DamageHandler implements Listener {
     @EventHandler
     public void onCustomEntityDeath(CustomEntityDeathEvent event){
         Entity victim = event.getDeadVictim();
-        victim.remove();
+        ENTITIES.remove(event.getDeadVictim());
     }
 
     @EventHandler
