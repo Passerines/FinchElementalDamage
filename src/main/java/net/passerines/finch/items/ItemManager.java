@@ -1,6 +1,18 @@
 package net.passerines.finch.items;
 
 import net.passerines.finch.items.armor.*;
+import net.passerines.finch.items.armor.bloodItems.mage.BloodMageBoots;
+import net.passerines.finch.items.armor.bloodItems.mage.BloodMageChestplate;
+import net.passerines.finch.items.armor.bloodItems.mage.BloodMageHelmet;
+import net.passerines.finch.items.armor.bloodItems.mage.BloodMageLeggings;
+import net.passerines.finch.items.armor.bloodItems.warrior.BloodBoots;
+import net.passerines.finch.items.armor.bloodItems.warrior.BloodChestplate;
+import net.passerines.finch.items.armor.bloodItems.warrior.BloodHelmet;
+import net.passerines.finch.items.armor.bloodItems.warrior.BloodLeggings;
+import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberBoots;
+import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberChestplate;
+import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberHelmet;
+import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberLeggings;
 import net.passerines.finch.items.weapons.mana.FireBallWand;
 import net.passerines.finch.items.weapons.mana.LifeStone;
 import net.passerines.finch.items.weapons.mana.PooLauncher;
@@ -34,6 +46,10 @@ public class ItemManager {
         new BloodChestplate();
         new BloodLeggings();
         new BloodBoots();
+        new BloodMageBoots();
+        new BloodMageChestplate();
+        new BloodMageLeggings();
+        new BloodMageHelmet();
         new CarbonFiberBoots();
         new CarbonFiberChestplate();
         new CarbonFiberHelmet();
