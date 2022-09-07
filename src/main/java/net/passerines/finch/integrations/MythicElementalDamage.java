@@ -30,6 +30,7 @@ public class MythicElementalDamage extends SkillMechanic implements ITargetedEnt
         Entity caster = BukkitAdapter.adapt(data.getCaster().getEntity());
         if (bukkitTarget != null) {
             new ElementalDamageEvent(caster, bukkitTarget, type, amount).apply();
+            bukkitTarget.damage(0, caster);
         }
         return SkillResult.SUCCESS;
     }
