@@ -34,8 +34,10 @@ public class Sintari extends FinchWeapon implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.ASH, Particle.CRIT, 7,0,85,0);
-        slash.drawSlash();
+        if(id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.ASH, Particle.CRIT, 7,0,85,0);
+            slash.drawSlash();
+        }
     }
 
     @Override
