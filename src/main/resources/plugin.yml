@@ -16,6 +16,10 @@ commands:
     description: gets players list
     permission: finch.user
 
+  getehp:
+    description: gets player's ehp
+    permission: finch.user
+
   finchattributes:
     description: sets max health
     permission: finch.user

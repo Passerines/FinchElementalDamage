@@ -73,7 +73,7 @@ public class DamageHandler implements Listener {
         Entity victim = event.getVictim();
         if (victim instanceof Player) {
             PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
-            int finalDamage = event.getDamage();
+            double finalDamage = event.getDamage();
             int damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
 
             if (attacker instanceof Player) {
@@ -104,7 +104,7 @@ public class DamageHandler implements Listener {
         }
         else if (victim instanceof LivingEntity) {
             EntityData vEntityData = EntityMap.ENTITIES.get(victim);
-            int mobDamage = event.getDamage();
+            double mobDamage = event.getDamage();
             int mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
 
             if(attacker instanceof Player) {

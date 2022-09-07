@@ -77,6 +77,11 @@ public class Util {
         return entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
     }
 
+    public static int getEffectiveHealth(int playerHealth, int defense){
+        int finalDamage = playerHealth*defense/500 + playerHealth;
+        return finalDamage;
+    }
+
     //Get a namespaced key of this plugin with the given name
     public static NamespacedKey getNamespacedKey(String name) {
         return new NamespacedKey(FinchElementalDamage.getPlugin(FinchElementalDamage.class), name);

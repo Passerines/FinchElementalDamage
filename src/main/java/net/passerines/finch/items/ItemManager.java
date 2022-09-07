@@ -13,10 +13,8 @@ import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberBoots;
 import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberChestplate;
 import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberHelmet;
 import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberLeggings;
-import net.passerines.finch.items.weapons.mana.FireBallWand;
-import net.passerines.finch.items.weapons.mana.LifeStone;
-import net.passerines.finch.items.weapons.mana.PooLauncher;
-import net.passerines.finch.items.weapons.mana.Teleporter;
+import net.passerines.finch.items.weapons.mana.*;
+import net.passerines.finch.items.weapons.melee.RitualBlade;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
 import net.passerines.finch.items.weapons.ranged.HellfireCrossbow;
 import net.passerines.finch.items.weapons.ranged.IntergalaticSniper;
@@ -65,6 +63,8 @@ public class ItemManager {
         new IntergalaticSniper();
         new SniperHelmet();
         new LifeStone();
+        new Valkyre();
+        new RitualBlade();
     }
 
 }

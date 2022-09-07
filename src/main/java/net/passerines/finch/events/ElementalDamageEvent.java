@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ElementalDamageEvent extends Event implements Cancellable {
 
-    private int damage;
+    private double damage;
     private Entity attacker;
     private Entity victim;
     private Element element;
@@ -42,7 +42,7 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         }
     }
 
-    public ElementalDamageEvent(Entity attacker, Entity victim, Element element, int damage) {
+    public ElementalDamageEvent(Entity attacker, Entity victim, Element element, double damage) {
         this.attacker = attacker;
         this.victim = victim;
         this.element = element;
@@ -53,11 +53,11 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         Bukkit.getPluginManager().callEvent(this);
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
+    public void setDamage(double damage) {
         this.damage = damage;
     }
 

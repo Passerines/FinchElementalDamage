@@ -1,6 +1,8 @@
 package net.passerines.finch.items.weapons.mana;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.data.Cooldown;
+import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
@@ -16,29 +18,41 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+
 
 
 public class FireBallWand extends FinchWeapon implements Listener {
+
 
     public FireBallWand() {
         super("FireBallWand");
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-
+    private Cooldown cd = new Cooldown(10);
     @EventHandler
     public void onClick(PlayerInteractEvent event){
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(event.getAction().isRightClick() && vPlayer.getMana() >= 50 && id.equals( Util.getId(item))){
-            Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(2)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
-            Fireball fireball = player.getWorld().spawn(loc, Fireball.class);
-            fireball.setYield(8);
-            fireball.setShooter(player);
+        if(event.getAction().isRightClick() && vPlayer.getMana() >= 50 && id.equals( Util.getId(item)) && cd.isOffCooldown(player)){
+            Fireball fireball = player.launchProjectile(Fireball.class);
+            fireball.getPersistentDataContainer().set(Util.getNamespacedKey("weapon"), PersistentDataType.STRING, id);
+            fireball.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, (1 + vPlayer.getManaMax() / 100 + 0.0)*10);
             vPlayer.setMana(vPlayer.getMana() - 50);
             String bar = Chat.format("&c-50 &bMana");
             Chat.sendActionBar(player, bar);
+            cd.add(player, 60);
+        }
+    }
+
+    @EventHandler
+    public void onDamage(ElementalDamageEvent event){
+        if(event.getAttacker() instanceof Fireball){
+            if(id.equals(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("weapon"), PersistentDataType.STRING))){
+                event.setDamage(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE));
+            }
         }
     }
 
