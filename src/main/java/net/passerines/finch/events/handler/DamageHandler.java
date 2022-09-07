@@ -10,6 +10,7 @@ import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -88,6 +89,7 @@ public class DamageHandler implements Listener {
             }
 
             vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
+            victim.playEffect(EntityEffect.HURT);
 
             victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
 
@@ -115,6 +117,7 @@ public class DamageHandler implements Listener {
             }
 
             vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);
+            victim.playEffect(EntityEffect.HURT);
 
             if(vEntityData.getHealth() <= 0){
                 CustomEntityDeathEvent deathEvent = new CustomEntityDeathEvent(victim);
