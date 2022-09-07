@@ -9,6 +9,7 @@ import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.skills.SkillMechanic;
 import net.passerines.finch.events.ElementalDamageEvent;
+import org.bukkit.EntityEffect;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
@@ -30,7 +31,7 @@ public class MythicElementalDamage extends SkillMechanic implements ITargetedEnt
         Entity caster = BukkitAdapter.adapt(data.getCaster().getEntity());
         if (bukkitTarget != null) {
             new ElementalDamageEvent(caster, bukkitTarget, type, amount).apply();
-            bukkitTarget.damage(0, caster);
+            bukkitTarget.playEffect(EntityEffect.HURT);
         }
         return SkillResult.SUCCESS;
     }
