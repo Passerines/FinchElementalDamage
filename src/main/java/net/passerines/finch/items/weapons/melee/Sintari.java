@@ -2,6 +2,7 @@ package net.passerines.finch.items.weapons.melee;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
+import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -17,8 +18,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Sintari extends FinchWeapon implements Listener {
+    private Cooldown cd = new Cooldown(10);
     public Sintari() {
         super("Sintari");
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
         this.damage = 30;
         this.health = -10;
         this.defense = -10;
@@ -34,9 +37,10 @@ public class Sintari extends FinchWeapon implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        if(id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
+        if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && click.getAction().isLeftClick() && cd.isOffCooldown(player)){
             Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.ASH, Particle.CRIT, 7,0,85,0);
             slash.drawSlash();
+            cd.add(player, 7);
         }
     }
 
