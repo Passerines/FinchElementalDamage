@@ -62,12 +62,6 @@ public class PlayerData {
                 setDamage(damage + finchArmor.getDamage());
                 setManaMax(manaMax + finchArmor.getMana());
             }
-            else if(finchItem instanceof FinchWeapon finchArmor) {
-                setDefense(defense + finchArmor.getDefense());
-                setHealthMax(healthMax + finchArmor.getHealth());
-                setDamage(damage + finchArmor.getDamage());
-                setManaMax(manaMax + finchArmor.getMana());
-            }
         }
     }
 

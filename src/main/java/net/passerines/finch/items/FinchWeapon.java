@@ -1,5 +1,6 @@
 package net.passerines.finch.items;
 
+import net.passerines.finch.events.ElementalDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class FinchWeapon extends FinchItem {
@@ -15,9 +16,11 @@ public abstract class FinchWeapon extends FinchItem {
     protected int electro;
     protected int light;
     protected int dark;
+    protected ElementalDamageEvent.Element element;
 
     public FinchWeapon(String id) {
         super(id);
+        this.element = ElementalDamageEvent.Element.FIRE;
         this.health = 0;
         this.defense = 0;
         this.damage = 0;
@@ -42,6 +45,9 @@ public abstract class FinchWeapon extends FinchItem {
     }
     public int getMana(){
         return mana;
+    }
+    public ElementalDamageEvent.Element getElement(){
+        return element;
     }
     public int getFire(){
         return fire;
