@@ -132,7 +132,7 @@ public class DamageHandler implements Listener {
         LivingEntity victim = (LivingEntity) event.getDeadVictim();
         ENTITIES.remove(event.getDeadVictim());
         Util.log("Registered Mob Died: " + event.getDeadVictim());
-        victim.remove();
+        victim.damage(99999);
     }
 
     @EventHandler
