@@ -40,10 +40,13 @@ public class RitualBlade extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if (id.equals(Util.getId(item)) && vPlayer.getMana() >= 50 && vPlayer.getHealth() >= 51 && event.getAction().isRightClick()) {
-            vPlayer.setMana(vPlayer.getMana() - 50);
-            vPlayer.setHealth(vPlayer.getHealth() - 50);
-            String bar = Chat.format("&c-50 &bMana and Health");
-            Chat.sendActionBar(player, bar);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
+                vPlayer.setMana(vPlayer.getMana() - 50);
+                vPlayer.setHealth(vPlayer.getHealth() - 50);
+                vPlayer.setDamage(vPlayer.getDamage() + 100);
+                String bar = Chat.format("&c-50 &bMana and Health");
+                Chat.sendActionBar(player, bar);
+            }, 100);
         }
     }
 
