@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -39,14 +40,18 @@ public class RitualBlade extends FinchWeapon implements Listener {
         PlayerData vPlayer = PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (id.equals(Util.getId(item)) && vPlayer.getMana() >= 50 && vPlayer.getHealth() >= 51 && event.getAction().isRightClick()) {
-                Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
+        if (id.equals(Util.getId(item)) && event.getAction().isRightClick()) {
+            if (vPlayer.getMana() >= 50 && vPlayer.getHealth() >= 51) {
                 vPlayer.setMana(vPlayer.getMana() - 50);
                 vPlayer.setHealth(vPlayer.getHealth() - 50);
                 vPlayer.setDamage(vPlayer.getDamage() + 100);
                 String bar = Chat.format("&c-50 &bMana and Health");
                 Chat.sendActionBar(player, bar);
-            }, 100);
+
+                Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
+                    vPlayer.setDamage(vPlayer.getDamage() - 100);
+                }, 100);
+            }
         }
     }
 

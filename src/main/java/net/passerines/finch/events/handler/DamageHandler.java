@@ -9,6 +9,7 @@ import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
+import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.entity.Arrow;
@@ -130,7 +131,8 @@ public class DamageHandler implements Listener {
     public void onCustomEntityDeath(CustomEntityDeathEvent event){
         LivingEntity victim = (LivingEntity) event.getDeadVictim();
         ENTITIES.remove(event.getDeadVictim());
-        victim.damage(9999);
+        Util.log("Registered Mob Died: " + event.getDeadVictim());
+        victim.remove();
     }
 
     @EventHandler

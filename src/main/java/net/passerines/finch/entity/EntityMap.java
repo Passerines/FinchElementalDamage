@@ -36,10 +36,5 @@ public class EntityMap implements Listener {
             Util.log("Registered Mob: " + event.getEntityType());
         }
     }
-    @EventHandler
-    public void onDeath(MythicMobDeathEvent event){
-        ENTITIES.remove(event.getEntity());
-        Util.log("Registered Mob Died: " + event.getMobType());
-    }
 }
 
