@@ -50,6 +50,7 @@ public class Sintari extends FinchWeapon implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&6Sintari"));
         item.setItemMeta(itemMeta);
+        itemMeta.setUnbreakable(true);
         return writeId(item);
     }
 }

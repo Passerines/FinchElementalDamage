@@ -3,6 +3,7 @@ package net.passerines.finch.entity;
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.events.CustomEntityDeathEvent;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public class EntityMap implements Listener {
         ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
         Util.log("Registered Mob: " + event.getMobType());
     }
+
     @EventHandler
     public void onVanillaSpawn(EntitySpawnEvent event){
         if(event.getEntity() instanceof LivingEntity){
@@ -35,6 +37,12 @@ public class EntityMap implements Listener {
             ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
             Util.log("Registered Mob: " + event.getEntityType());
         }
+    }
+
+    @EventHandler
+    public void onDeath(CustomEntityDeathEvent event){
+        ENTITIES.remove(event.getDeadVictim());
+        Util.log("Registered Mob Died: " + event.getDeadVictim());
     }
 }
 

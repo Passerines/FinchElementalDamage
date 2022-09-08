@@ -12,6 +12,7 @@ import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
+import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -130,9 +131,9 @@ public class DamageHandler implements Listener {
     @EventHandler
     public void onCustomEntityDeath(CustomEntityDeathEvent event){
         LivingEntity victim = (LivingEntity) event.getDeadVictim();
-        ENTITIES.remove(event.getDeadVictim());
+        victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         Util.log("Registered Mob Died: " + event.getDeadVictim());
-        victim.damage(99999);
+        victim.remove();
     }
 
     @EventHandler
@@ -144,6 +145,7 @@ public class DamageHandler implements Listener {
         Chat.sendTitle(victim, "&4You Died!");
         victim.teleport(victim.getWorld().getSpawnLocation());
         vPlayerData.setHealth(vPlayerData.getHealthMax());
+        victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()-> victim.setInvulnerable(false), 60);
     }
 }

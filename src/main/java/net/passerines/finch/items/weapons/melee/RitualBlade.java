@@ -61,6 +61,7 @@ public class RitualBlade extends FinchWeapon implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&4Ritual Blade"));
         item.setItemMeta(itemMeta);
+        itemMeta.setUnbreakable(true);
         return writeId(item);
     }
 }

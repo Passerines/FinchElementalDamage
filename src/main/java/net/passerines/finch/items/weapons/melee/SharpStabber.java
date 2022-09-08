@@ -23,6 +23,7 @@ public class SharpStabber extends FinchWeapon {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cSharp Stabber"));
         item.setItemMeta(itemMeta);
+        itemMeta.setUnbreakable(true);
         return writeId(item);
     }
 }

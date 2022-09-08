@@ -50,6 +50,7 @@ public class HellfireCrossbow extends FinchWeapon implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cHellfire Crossbow"));
         item.setItemMeta(itemMeta);
+        itemMeta.setUnbreakable(true);
         return writeId(item);
     }
 }

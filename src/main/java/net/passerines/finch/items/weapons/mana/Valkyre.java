@@ -1,5 +1,6 @@
 package net.passerines.finch.items.weapons.mana;
 
+import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.entity.EntityData;
 import net.passerines.finch.events.ElementalDamageEvent;
@@ -14,10 +15,12 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -55,13 +58,29 @@ public class Valkyre extends FinchWeapon implements Listener {
         }
     }
 
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event){
+        if(event.getEntity() instanceof Player){
+            Player player = (Player) event.getDamager();
+            ItemStack item = player.getInventory().getItemInMainHand();
+            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, 0.2f, 0.7f);
+            player.getWorld().playSound(player.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 0.3f, 0.5f);
+        }
+    }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cValkyre"));
+        ArrayList<Component> lore = new ArrayList<>();
+        lore.add(Component.text(Chat.format(" ")));
+        lore.add(Component.text(Chat.format("&f +50 &cDamage")));
+        lore.add(Component.text(Chat.format("&f +500 &bMana " )));
+        lore.add(Component.text(Chat.format(" ")));;
+        itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
+        itemMeta.setUnbreakable(true);
         return writeId(item);
     }
 }
