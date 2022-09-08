@@ -1,9 +1,10 @@
-package net.passerines.finch.items.weapons.melee;
+package net.passerines.finch.items.weapons.mana;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.items.FinchWeapon;
+import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -17,12 +18,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Sintari extends FinchWeapon implements Listener {
+import static net.passerines.finch.players.PlayerMap.PLAYERS;
+
+public class ManaKatana extends FinchWeapon implements Listener {
     private Cooldown cd = new Cooldown(10);
-    public Sintari() {
-        super("Sintari");
+    public ManaKatana() {
+        super("ManaKatana");
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-        this.damage = 30;
         this.health = -10;
         this.defense = -10;
     }
@@ -36,9 +38,10 @@ public class Sintari extends FinchWeapon implements Listener {
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
+        PlayerData vPlayer = PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && click.getAction().isLeftClick() && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.ASH, Particle.CRIT, 7,0,85,0);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.ASH, Particle.CRIT, 7,(1 + vPlayer.getManaMax()*0.01),85,0);
             slash.drawSlash();
             cd.add(player, 7);
         }
@@ -46,9 +49,9 @@ public class Sintari extends FinchWeapon implements Listener {
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.STONE_SWORD);
+        ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&6Sintari"));
+        itemMeta.displayName(Chat.formatC("&6Mana Katana"));
         item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
         return writeId(item);

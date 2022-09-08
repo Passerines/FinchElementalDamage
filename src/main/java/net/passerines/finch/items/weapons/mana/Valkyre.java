@@ -61,10 +61,9 @@ public class Valkyre extends FinchWeapon implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event){
         if(event.getEntity() instanceof Player){
-            Player player = (Player) event.getDamager();
-            ItemStack item = player.getInventory().getItemInMainHand();
-            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, 0.2f, 0.7f);
-            player.getWorld().playSound(player.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 0.3f, 0.5f);
+            Entity entity =  event.getDamager();
+            entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, 0.2f, 0.7f);
+            entity.getWorld().playSound(entity.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 0.3f, 0.5f);
         }
     }
 
