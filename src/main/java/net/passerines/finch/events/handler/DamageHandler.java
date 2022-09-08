@@ -90,8 +90,6 @@ public class DamageHandler implements Listener {
             }
 
             vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
-            double newVHealth = Math.max(((Player) victim).getHealth() * 5, vPlayerData.getHealth()/5);
-            ((Player) victim).setHealth(newVHealth);
             victim.playEffect(EntityEffect.HURT);
 
             victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
@@ -118,9 +116,8 @@ public class DamageHandler implements Listener {
                     mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
                 }
             }
-            double newVHealth = Math.max(((LivingEntity) victim).getHealth() * 3, vEntityData.getHealth()/3);
             vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);
-            ((LivingEntity) victim).setHealth(newVHealth);
+            ((LivingEntity) victim).setHealth(vEntityData.getHealth()/3);
             victim.playEffect(EntityEffect.HURT);
 
             if(vEntityData.getHealth() <= 0){
