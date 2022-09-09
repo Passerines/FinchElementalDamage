@@ -43,20 +43,8 @@ public class Vescwrith extends FinchWeapon implements Listener {
     public void onDamage(ElementalDamageEvent event){
         Entity victim = event.getVictim();
         Entity attacker = event.getAttacker();
-        if(attacker instanceof Player){
+        if(attacker instanceof Player ){
             PlayerData vPlayerData = PLAYERS.get(event.getAttacker());
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
-            new ElementalDamageEvent(attacker, victim, DARK, vPlayerData.getHealth()*0.01).apply();
         }
     }
 

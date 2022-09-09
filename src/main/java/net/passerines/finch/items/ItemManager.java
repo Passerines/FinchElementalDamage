@@ -66,7 +66,6 @@ public class ItemManager {
         new SniperHelmet();
         new LifeStone();
         new Valkyre();
-        new Vescwrith();
         new RitualBlade();
         new ManaKatana();
     }
