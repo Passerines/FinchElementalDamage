@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Slash {
@@ -59,6 +60,7 @@ public class Slash {
         return new Vector(xPrime, yPrime, zPrime);
     }
     private void drawLine(Location location) {
+        ArrayList<Entity> hitEntities = new ArrayList<>();
         for(double i = 0.9; i <= range; i += 0.3){
             Location loc = location.clone();
             Vector direction = loc.getDirection().multiply(i);
@@ -79,9 +81,10 @@ public class Slash {
                     if (!(entity.equals(player))) {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
-                        if(finchItem instanceof FinchWeapon finchWeapon) {
-                            ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, finchWeapon.getElement(), finchWeapon.getDamage());
+                        if(finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
+                            ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, finchWeapon.getElement(), damage);
                             elementalDamageEvent.apply();
+                            hitEntities.add((Entity) entity);
                         }
                     }
                 }

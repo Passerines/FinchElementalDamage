@@ -34,7 +34,7 @@ public class FinchAttributesCmd implements CommandExecutor {
                     sender.sendMessage("set" + targetPlayer + " health to : " + args[1]);
                 }
 
-                case "setMaxDefense" -> {
+                case "setDefense" -> {
                     targetPlayerData.setDefense(Integer.parseInt(args[2]));
                     sender.sendMessage("set" + targetPlayer + " defense to : " + args[1]);
                 }

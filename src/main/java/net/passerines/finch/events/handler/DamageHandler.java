@@ -118,7 +118,8 @@ public class DamageHandler implements Listener {
                 }
             }
             vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);
-            ((LivingEntity) victim).setHealth(vEntityData.getHealth()/3);
+            double health = Math.max(0, vEntityData.getHealth()/3);
+            ((LivingEntity) victim).setHealth(health);
             victim.playEffect(EntityEffect.HURT);
 
             if(vEntityData.getHealth() <= 0){
@@ -133,7 +134,9 @@ public class DamageHandler implements Listener {
         LivingEntity victim = (LivingEntity) event.getDeadVictim();
         victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         Util.log("Registered Mob Died: " + event.getDeadVictim());
-        victim.remove();
+        ENTITIES.remove(victim);
+        victim.damage(99999);
+
     }
 
     @EventHandler
