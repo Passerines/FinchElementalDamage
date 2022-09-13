@@ -2,6 +2,7 @@ package net.passerines.finch.entity;
 
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.CustomEntityDeathEvent;
 import net.passerines.finch.players.PlayerData;
@@ -25,14 +26,15 @@ public class EntityMap implements Listener {
 
     @EventHandler
     public void onSpawn(MythicMobSpawnEvent event){
+        ActiveMob eventEntity = event.getMob();
         Util.log("Entity added to map");
-        ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
+        ENTITIES.put(event.getEntity(), new EntityData(eventEntity, event.getMobType()));
         Util.log("Registered Mob: " + event.getMobType());
     }
 
     @EventHandler
     public void onVanillaSpawn(EntitySpawnEvent event){
-        if(event.getEntity() instanceof LivingEntity){
+        if(!ENTITIES.containsKey(event.getEntity()) && event.getEntity() instanceof LivingEntity){
             Util.log("Entity added to map");
             ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
             Util.log("Registered Mob: " + event.getEntityType());

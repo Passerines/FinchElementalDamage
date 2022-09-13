@@ -1,5 +1,10 @@
 package net.passerines.finch.entity;
 
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
+import io.lumine.mythic.core.mobs.ActiveMob;
+import net.bytebuddy.dynamic.TypeResolutionStrategy;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.items.FinchItem;
@@ -22,13 +27,26 @@ public class EntityData {
     public EntityData(Entity entity){
         this.entity = entity;
         LivingEntity livingEntity = (LivingEntity) entity;
-        health = Util.getMaxHealth(livingEntity) * 3;
+        health = ((LivingEntity) entity).getHealth() * 3;
         defense = 5;
         if(livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
             damage = (int) (2 * livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
         }
         else{
             damage = 1;
+        }
+    }
+
+    public EntityData(ActiveMob entity, MythicMob mythicMob){
+        this.entity = BukkitAdapter.adapt(entity.getEntity());
+        health = mythicMob.getHealth(entity) * 3;
+        String s = "Defense";
+        defense = mythicMob.getConfig().getInt(s, 5);
+        if(mythicMob.getDamage(entity) != 0) {
+            damage = (int) (2 * mythicMob.getDamage(entity));
+        }
+        else{
+            damage = 10;
         }
     }
 
