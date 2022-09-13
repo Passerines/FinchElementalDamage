@@ -78,8 +78,8 @@ public class Valkyre extends FinchWeapon implements Listener {
         lore.add(Component.text(Chat.format("&f +500 &bMana " )));
         lore.add(Component.text(Chat.format(" ")));;
         itemMeta.lore(lore);
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }

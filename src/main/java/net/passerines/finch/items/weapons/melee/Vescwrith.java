@@ -40,11 +40,18 @@ public class Vescwrith extends FinchWeapon implements Listener {
     }
 
     @EventHandler
-    public void onDamage(ElementalDamageEvent event){
-        Entity victim = event.getVictim();
-        Entity attacker = event.getAttacker();
-        if(attacker instanceof Player ){
-            PlayerData vPlayerData = PLAYERS.get(event.getAttacker());
+    public void onHit(EntityDamageByEntityEvent event){
+        if (event.getDamager() instanceof Player) {
+            PlayerData vPlayerData = PLAYERS.get(event.getDamager());
+            Player player = (Player) event.getDamager();
+            ItemStack item = player.getInventory().getItemInMainHand();
+            if(id.equals(Util.getId(item))){
+                for(int i = 0; i < 15; i+=5){
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () ->{
+                        new ElementalDamageEvent(player, event.getEntity(), DARK, vPlayerData.getDamage()-1).apply();
+                    }, i);
+                }
+            }
         }
     }
 
@@ -53,8 +60,8 @@ public class Vescwrith extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.IRON_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&4Vescwrith"));
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }

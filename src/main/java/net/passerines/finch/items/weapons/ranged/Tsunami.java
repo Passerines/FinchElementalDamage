@@ -45,8 +45,8 @@ public class Tsunami extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.BOW);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&bTsunami"));
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }

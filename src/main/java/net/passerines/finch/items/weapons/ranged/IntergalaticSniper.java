@@ -49,8 +49,8 @@ public class IntergalaticSniper extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.CROSSBOW);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&bIntergalatic Sniper"));
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }

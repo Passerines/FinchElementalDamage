@@ -37,19 +37,19 @@ public class RitualBlade extends FinchWeapon implements Listener {
 
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
-        PlayerData vPlayer = PLAYERS.get(event.getPlayer());
+        PlayerData vPlayerData = PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if (id.equals(Util.getId(item)) && event.getAction().isRightClick()) {
-            if (vPlayer.getMana() >= 50 && vPlayer.getHealth() >= 51) {
-                vPlayer.setMana(vPlayer.getMana() - 50);
-                vPlayer.setHealth(vPlayer.getHealth() - 50);
-                vPlayer.setDamage(vPlayer.getDamage() + 100);
+            if (vPlayerData.getMana() >= 50 && vPlayerData.getHealth() >= 51) {
+                vPlayerData.setMana(vPlayerData.getMana() - 50);
+                vPlayerData.setHealth(vPlayerData.getHealth() - 50);
+                vPlayerData.setDamage(vPlayerData.getDamage() + 20);
                 String bar = Chat.format("&c-50 &bMana and Health");
                 Chat.sendActionBar(player, bar);
 
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
-                    vPlayer.setDamage(vPlayer.getDamage() - 100);
+                    vPlayerData.setDamage(vPlayerData.getDamage() - 20);
                 }, 100);
             }
         }
@@ -60,8 +60,8 @@ public class RitualBlade extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.STONE_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&4Ritual Blade"));
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }

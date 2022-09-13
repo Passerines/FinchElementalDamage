@@ -22,8 +22,8 @@ public class SharpStabber extends FinchWeapon {
         ItemStack item = new ItemStack(Material.STONE_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cSharp Stabber"));
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }

@@ -52,8 +52,8 @@ public class ManaKatana extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&6Mana Katana"));
-        item.setItemMeta(itemMeta);
         itemMeta.setUnbreakable(true);
+        item.setItemMeta(itemMeta);
         return writeId(item);
     }
 }
