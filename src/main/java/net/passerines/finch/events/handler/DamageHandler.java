@@ -76,14 +76,14 @@ public class DamageHandler implements Listener {
         if (victim instanceof Player) {
             PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
             double finalDamage = event.getDamage();
-            int damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
+            double damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
 
             if (attacker instanceof Player) {
-                damageTaken = damageTaken + PLAYERS.get(attacker).getDamage();
+                damageTaken = (damageTaken + (PLAYERS.get(attacker).getDamage()*((Player) attacker).getPlayer().getAttackCooldown()));
             }
             else if (attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
-                    damageTaken = damageTaken + PlayerMap.PLAYERS.get(player).getDamage();
+                    damageTaken = damageTaken + (PlayerMap.PLAYERS.get(player).getDamage()*(player).getPlayer().getAttackCooldown());
                 }
             }
             else if (attacker instanceof LivingEntity entity) {
@@ -107,15 +107,15 @@ public class DamageHandler implements Listener {
         else if (victim instanceof LivingEntity) {
             EntityData vEntityData = EntityMap.ENTITIES.get(victim);
             double mobDamage = event.getDamage();
-            int mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+            double mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
 
             if(attacker instanceof Player player) {
+                mobDamageTaken = mobDamageTaken + (PlayerMap.PLAYERS.get(player).getDamage()*((Player) attacker).getPlayer().getAttackCooldown());
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
-                mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
             }
             else if(attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
-                    mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
+                    mobDamageTaken = mobDamageTaken + (PlayerMap.PLAYERS.get(player).getDamage()*(player).getPlayer().getAttackCooldown());
                 }
             }
             vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);
