@@ -6,24 +6,33 @@ import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static net.passerines.finch.events.ElementalDamageEvent.Element.DARK;
-import static net.passerines.finch.players.PlayerMap.PLAYERS;
-
 public class ThrowBlade {
-    @EventHandler
-    public void Throw(String id, Player player, Particle particle, ElementalDamageEvent.Element element, int fireVelocity, int damage) {
+    private String id;
+    private Player player;
+    private ElementalDamageEvent.Element element;
+    private Particle particle;
+    private int fireVelocity;
+    private int damage;
+
+    public ThrowBlade(String id, Player player, Particle particle, ElementalDamageEvent.Element element, int fireVelocity, int damage){
+        this.id = id;
+        this.player = player;
+        this.particle = particle;
+        this.element = element;
+        this.fireVelocity = fireVelocity;
+        this.damage = damage;
+    }
+    public void throwItem() {
         Plugin plugin = FinchElementalDamage.inst();
         ArrayList<Entity> hitEntities = new ArrayList<>();
         Location loc = player.getLocation();
