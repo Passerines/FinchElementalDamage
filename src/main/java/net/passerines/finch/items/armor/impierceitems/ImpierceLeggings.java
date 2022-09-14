@@ -29,6 +29,7 @@ public class ImpierceLeggings extends FinchArmor {
         lore.add(Component.text(Chat.format("&aDefense: &f+550 ")));
         lore.add(Component.text(Chat.format("&4Damage: &f+15" )));
         lore.add(Component.text(Chat.format(" ")));
+        itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

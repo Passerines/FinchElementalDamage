@@ -29,6 +29,7 @@ public class ImpierceGaloshes extends FinchArmor {
         lore.add(Component.text(Chat.format("&aDefense: &f+315")));
         lore.add(Component.text(Chat.format("&4Damage: &f+10" )));
         lore.add(Component.text(Chat.format(" ")));
+        itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

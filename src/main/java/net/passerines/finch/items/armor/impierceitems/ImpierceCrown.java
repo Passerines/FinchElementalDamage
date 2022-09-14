@@ -29,6 +29,7 @@ public class ImpierceCrown extends FinchArmor {
         lore.add(Component.text(Chat.format("&aDefense: &f+180")));
         lore.add(Component.text(Chat.format("&4Damage: &f+35")));
         lore.add(Component.text(Chat.format(" ")));
+        itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

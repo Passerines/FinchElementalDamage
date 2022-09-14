@@ -29,6 +29,7 @@ public class ImpierceAegis extends FinchArmor {
         lore.add(Component.text(Chat.format("&aDefense: &f+650")));
         lore.add(Component.text(Chat.format("&4Damage: &f+15")));
         lore.add(Component.text(Chat.format(" ")));
+        itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         itemMeta.lore(lore);
         return writeId(item);
