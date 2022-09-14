@@ -12,6 +12,7 @@ import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -79,7 +80,10 @@ public class DamageHandler implements Listener {
             double damageTaken = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
 
             if (attacker instanceof Player) {
-                damageTaken = (damageTaken + (PLAYERS.get(attacker).getDamage()*((Player) attacker).getPlayer().getAttackCooldown()));
+                if(Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null){
+                    damageTaken = (damageTaken + (PLAYERS.get(attacker).getDamage()*((Player) attacker).getPlayer().getAttackCooldown()));
+                }
+                else{damageTaken = 5;}
             }
             else if (attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
@@ -109,8 +113,11 @@ public class DamageHandler implements Listener {
             double mobDamage = event.getDamage();
             double mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
 
-            if(attacker instanceof Player player) {
-                mobDamageTaken = mobDamageTaken + (PlayerMap.PLAYERS.get(player).getDamage()*((Player) attacker).getPlayer().getAttackCooldown());
+            if(attacker instanceof Player) {
+                if(Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null){
+                    mobDamageTaken = (mobDamageTaken + (PLAYERS.get(attacker).getDamage()*((Player) attacker).getPlayer().getAttackCooldown()));
+                }
+                else{mobDamageTaken = 5;}
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
             }
             else if(attacker instanceof Arrow arrow) {
