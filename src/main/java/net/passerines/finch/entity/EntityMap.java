@@ -13,7 +13,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.world.EntitiesLoadEvent;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class EntityMap implements Listener {
@@ -38,6 +40,18 @@ public class EntityMap implements Listener {
             Util.log("Entity added to map");
             ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
             Util.log("Registered Mob: " + event.getEntityType());
+        }
+    }
+    @EventHandler
+    public void onLoadEvent(EntitiesLoadEvent event){
+        Collection<Entity> entitylist = event.getEntities();
+        Object[] entities = entitylist.toArray();
+        for(Object entity : entities) {
+            if(!ENTITIES.containsKey(entity) && entity instanceof LivingEntity){
+                Util.log("Entity added to map");
+                ENTITIES.put((Entity) entity, new EntityData((Entity) entity));
+                Util.log("Registered Mob: " + ((LivingEntity) entity).getType());
+            }
         }
     }
 
