@@ -109,8 +109,9 @@ public class DamageHandler implements Listener {
             double mobDamage = event.getDamage();
             int mobDamageTaken = (int) (mobDamage - mobDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
 
-            if(attacker instanceof Player) {
+            if(attacker instanceof Player player) {
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
+                mobDamageTaken = mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage();
             }
             else if(attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
@@ -136,6 +137,7 @@ public class DamageHandler implements Listener {
         Util.log("Registered Mob Died: " + event.getDeadVictim());
         ENTITIES.remove(victim);
         victim.damage(99999);
+        victim.remove();
 
     }
 
