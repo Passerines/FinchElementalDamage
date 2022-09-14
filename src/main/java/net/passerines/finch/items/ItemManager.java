@@ -13,6 +13,10 @@ import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberBoots;
 import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberChestplate;
 import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberHelmet;
 import net.passerines.finch.items.armor.carbonfiberItems.CarbonFiberLeggings;
+import net.passerines.finch.items.armor.impierceitems.ImpierceAegis;
+import net.passerines.finch.items.armor.impierceitems.ImpierceCrown;
+import net.passerines.finch.items.armor.impierceitems.ImpierceGaloshes;
+import net.passerines.finch.items.armor.impierceitems.ImpierceLeggings;
 import net.passerines.finch.items.weapons.mana.*;
 import net.passerines.finch.items.weapons.melee.RitualBlade;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
@@ -69,6 +73,9 @@ public class ItemManager {
         new Vescwrith();
         new RitualBlade();
         new ManaKatana();
+        new ImpierceCrown();
+        new ImpierceAegis();
+        new ImpierceGaloshes();
+        new ImpierceLeggings();
     }
-
 }
