@@ -25,7 +25,7 @@ import net.passerines.finch.items.weapons.mana.ManaKatana;
 import net.passerines.finch.items.weapons.melee.Vescwrith;
 import net.passerines.finch.items.weapons.ranged.CrescentKnives;
 import net.passerines.finch.items.weapons.ranged.HellfireCrossbow;
-import net.passerines.finch.items.weapons.ranged.IntergalaticSniper;
+import net.passerines.finch.items.weapons.ranged.IntergalacticSniper;
 import net.passerines.finch.items.weapons.ranged.Tsunami;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -69,7 +69,7 @@ public class ItemManager {
         new StronkBoots();
         new Teleporter();
         new StrongLeggings();
-        new IntergalaticSniper();
+        new IntergalacticSniper();
         new SniperHelmet();
         new LifeStone();
         new Valkyre();
