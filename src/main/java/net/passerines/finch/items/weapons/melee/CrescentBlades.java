@@ -4,6 +4,7 @@ import jdk.jfr.Label;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.attacks.ThrowBlade;
+import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
@@ -21,7 +22,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.net.http.WebSocket;
 
 public class CrescentBlades extends FinchWeapon implements Listener {
-
+    Cooldown cd = new Cooldown<>(25);
+    Cooldown cd0 = new Cooldown<>(3);
     public CrescentBlades() {
         super("CresentBlades");
         this.damage = 45;
@@ -31,13 +33,15 @@ public class CrescentBlades extends FinchWeapon implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
+        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd0.isOffCooldown(player)){
             Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ASH, Particle.CRIT, 7, damage,85,0);
             slash.drawSlash();
+            cd0.add(player);
         }
-        if(click.getAction().isRightClick()){
+        if(click.getAction().isRightClick() && cd.isOffCooldown(player)){
             ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.ASH, ElementalDamageEvent.Element.DARK, 1, damage);
             throwBlade.throwItem();
+            cd.add(player);
         }
     }
 
