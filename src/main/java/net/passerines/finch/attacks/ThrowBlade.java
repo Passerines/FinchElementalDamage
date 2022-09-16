@@ -64,7 +64,7 @@ public class ThrowBlade {
                 armorStand.remove();
                 Bukkit.getScheduler().cancelTask(sSRT);
 
-            }, 40);
+            }, 25);
         }
     }
 }
