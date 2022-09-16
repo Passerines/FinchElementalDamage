@@ -38,8 +38,6 @@ public class CrescentKnives extends FinchWeapon implements Listener {
         if(event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if(id.equals(Util.getId(item))) {
                 new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 2, vPlayer.getDamage());
-                new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 2, vPlayer.getDamage());
-                new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 2, vPlayer.getDamage());
                 cd.add(player, 20);
                 Util.log("Thrown Crescent Knives");
             }

@@ -22,6 +22,7 @@ import net.passerines.finch.items.weapons.melee.RitualBlade;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
 import net.passerines.finch.items.weapons.mana.ManaKatana;
 import net.passerines.finch.items.weapons.melee.Vescwrith;
+import net.passerines.finch.items.weapons.ranged.CrescentKnives;
 import net.passerines.finch.items.weapons.ranged.HellfireCrossbow;
 import net.passerines.finch.items.weapons.ranged.IntergalaticSniper;
 import net.passerines.finch.items.weapons.ranged.Tsunami;
@@ -58,6 +59,7 @@ public class ItemManager {
         new CarbonFiberChestplate();
         new CarbonFiberHelmet();
         new CarbonFiberLeggings();
+        new CrescentKnives();
         new FireBallWand();
         new SharpStabber();
         new HellfireCrossbow();
