@@ -35,8 +35,9 @@ public class CrescentKnives extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         PlayerData vPlayer = PlayerMap.PLAYERS.get(player);
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 1, vPlayer.getDamage());
+        if((event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && cd.isOnCooldown(player)){
+                ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 1, vPlayer.getDamage());
+                throwBlade.throwItem();
                 cd.add(player, 20);
                 Util.log("Thrown Crescent Knives");
         }

@@ -18,6 +18,7 @@ import net.passerines.finch.items.armor.impierceitems.ImpierceCrown;
 import net.passerines.finch.items.armor.impierceitems.ImpierceGaloshes;
 import net.passerines.finch.items.armor.impierceitems.ImpierceLeggings;
 import net.passerines.finch.items.weapons.mana.*;
+import net.passerines.finch.items.weapons.melee.CrescentBlades;
 import net.passerines.finch.items.weapons.melee.RitualBlade;
 import net.passerines.finch.items.weapons.melee.SharpStabber;
 import net.passerines.finch.items.weapons.mana.ManaKatana;
@@ -79,5 +80,6 @@ public class ItemManager {
         new ImpierceAegis();
         new ImpierceGaloshes();
         new ImpierceLeggings();
+        new CrescentBlades();
     }
 }
