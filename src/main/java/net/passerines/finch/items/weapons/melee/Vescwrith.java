@@ -46,9 +46,9 @@ public class Vescwrith extends FinchWeapon implements Listener {
             Player player = (Player) event.getDamager();
             ItemStack item = player.getInventory().getItemInMainHand();
             if(id.equals(Util.getId(item))){
-                for(int i = 0; i < 15; i+=5){
+                for(int i = 0; i < 50; i+=10){
                     Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () ->{
-                        new ElementalDamageEvent(player, event.getEntity(), DARK, vPlayerData.getDamage()-1).apply();
+                        new ElementalDamageEvent(player, event.getEntity(), DARK, vPlayerData.getDamage()-3).apply();
                     }, i);
                 }
             }
