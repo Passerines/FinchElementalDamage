@@ -46,7 +46,7 @@ public class CrescentBlades extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_HOE);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4CrescentBlades"));
+        itemMeta.displayName(Chat.formatC("&4Crescent Blades"));
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         return writeId(item);
