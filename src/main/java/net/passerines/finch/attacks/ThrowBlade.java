@@ -4,12 +4,10 @@ import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.Plugin;
 
@@ -56,6 +54,7 @@ public class ThrowBlade {
                         if (!(entity.equals(player) || entity.equals(armorStand)) && !hitEntities.contains(entity)) {
                             new ElementalDamageEvent(player, (Entity) entity, element, damage).apply();
                             hitEntities.add((Entity) entity);
+                            ((Entity) entity).playEffect(EntityEffect.HURT);
                         }
                     }
                 }
@@ -63,7 +62,6 @@ public class ThrowBlade {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 armorStand.remove();
                 Bukkit.getScheduler().cancelTask(sSRT);
-
             }, 25);
         }
     }

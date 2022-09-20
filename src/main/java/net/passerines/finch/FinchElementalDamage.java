@@ -4,11 +4,11 @@ import net.passerines.finch.cmds.FinchAttributesCmd;
 import net.passerines.finch.cmds.GetEffectiveHealthCmd;
 import net.passerines.finch.cmds.GetPlayersCmd;
 import net.passerines.finch.cmds.ItemGiveCommand;
-import net.passerines.finch.entity.EntityData;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
-import net.passerines.finch.events.handler.DamageHandler;
+import net.passerines.finch.events.handler.EntityDamageHandler;
+import net.passerines.finch.events.handler.PlayerDamageHandler;
 import net.passerines.finch.events.handler.EquipmentChangeHandler;
 import net.passerines.finch.integrations.MythicMobsBridge;
 import net.passerines.finch.items.ItemManager;
@@ -41,8 +41,8 @@ public class FinchElementalDamage extends JavaPlugin {
         new FinchAttributesCmd();
         new ItemGiveCommand();
         ItemManager.reload();
-
-        new DamageHandler();
+        new EntityDamageHandler();
+        new PlayerDamageHandler();
         new EquipmentChangeHandler();
         new MythicMobsBridge();
     }

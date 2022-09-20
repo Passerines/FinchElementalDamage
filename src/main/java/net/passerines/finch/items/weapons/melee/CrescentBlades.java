@@ -15,6 +15,7 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,6 +30,14 @@ public class CrescentBlades extends FinchWeapon implements Listener {
         this.damage = 45;
         this.defense = 45;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
+    }
+    @EventHandler
+    public void cancelHit(EntityDamageByEntityEvent hit){
+        if(hit.getDamager() instanceof Player player){
+            if(id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
+                hit.setCancelled(true);
+            }
+        }
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
