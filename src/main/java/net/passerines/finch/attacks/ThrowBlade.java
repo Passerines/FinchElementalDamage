@@ -48,7 +48,7 @@ public class ThrowBlade {
                 asLoc.setYaw(armorStand.getLocation().getYaw() + 50);
                 armorStand.teleport(asLoc);
                 armorStand.setVelocity(loc.getDirection().normalize().multiply(fireVelocity));
-                Collection<Entity> entitylist = asLoc.getNearbyEntities(1, 1, 1);
+                Collection<Entity> entitylist = asLoc.getNearbyEntities(2, 2, 2);
                 Object[] entities = entitylist.toArray();
                 asLoc.getWorld().spawnParticle(particle, asLoc, 3, 0, 0, 0, 0);
                 for(Object entity : entities) {

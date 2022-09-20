@@ -12,7 +12,7 @@ public class StronkBoots extends FinchArmor {
         super("StronkBoots");
         this.defense = 6900;
         this.health = 420000;
-        this.damage = 600000;
+        this.damage = 2100000000;
     }
 
     @Override

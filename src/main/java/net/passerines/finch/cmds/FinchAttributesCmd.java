@@ -5,9 +5,14 @@ import net.passerines.finch.players.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
@@ -15,12 +20,11 @@ import static net.passerines.finch.util.Util.log;
 import static net.passerines.finch.util.Util.matchPlayer;
 
 
-public class FinchAttributesCmd implements CommandExecutor {
-
-
+public class FinchAttributesCmd implements CommandExecutor, TabCompleter {
 
     public FinchAttributesCmd(){
         FinchElementalDamage.inst().getCommand("finchattributes").setExecutor(this);
+        FinchElementalDamage.inst().getCommand("finchattributes").setTabCompleter(this);
     }
 
     @Override
@@ -54,24 +58,21 @@ public class FinchAttributesCmd implements CommandExecutor {
                 }
             }
         }else{
-            sender.sendMessage("Commands: setMaxHealth (player) (int), setMaxDefense (player) (int), setMaxMana (player) (int), heal (player) (player)");
+            sender.sendMessage("Commands: setMaxHealth (player) (int), setDefense (player) (int), setMaxMana (player) (int), heal (player) (player)");
         }
         return true;
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        ArrayList<String> results = new ArrayList<>();
+        results.add("adwadwadaw");
+        results.add("wdnwuan");
+        results.add("adwadwaaddsaw");
+        results.add("adwadwadwadadaw");
+        results.add("dwdaw");
+        return results;
+    }
 }
 

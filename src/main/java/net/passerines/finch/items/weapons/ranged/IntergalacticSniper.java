@@ -38,7 +38,6 @@ public class IntergalacticSniper extends FinchWeapon implements Listener {
             Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(0.7)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
             Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
             arrow.setVelocity(loc.getDirection().normalize().multiply(100));
-            arrow.setDamage(65);
             cd.add(player);
         }
     }

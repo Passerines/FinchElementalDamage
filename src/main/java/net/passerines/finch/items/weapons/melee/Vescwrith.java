@@ -27,7 +27,7 @@ public class Vescwrith extends FinchWeapon implements Listener {
     public Vescwrith() {
         super("Vescwrith");
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-        this.damage = 1;
+        this.damage = 10;
         this.health = -10;
         this.defense = -10;
     }
