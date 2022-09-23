@@ -41,7 +41,7 @@ public class Comet extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         PlayerData vPlayer = PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
-        if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && click.getAction().isLeftClick() && cd.isOffCooldown(player)){
+        if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && click.getAction().isRightClick() && cd.isOffCooldown(player)){
             new DrawLine(player, player.getEyeLocation(), getItem() ,Particle.ENCHANTMENT_TABLE, Particle.SOUL, 50,(1 + vPlayer.getManaMax()*0.1)).draw();
             cd.add(player, 7);
         }
