@@ -1,6 +1,8 @@
 package net.passerines.finch.items.armor.bloodItems.mage;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchCraftableItem;
+import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
@@ -9,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class BloodMageHelmet extends FinchArmor {
+public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem {
 
     public BloodMageHelmet() {
         super("BloodMageHelmet");
@@ -32,5 +34,12 @@ public class BloodMageHelmet extends FinchArmor {
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);
+    }
+
+    @Override
+    public void registerRecipe() {
+        ItemStack iron = new ItemStack(Material.IRON_INGOT);
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, iron, iron, iron, iron);
+        finchRecipe.addRecipe();
     }
 }
