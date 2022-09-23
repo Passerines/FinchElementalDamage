@@ -39,7 +39,7 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem {
     @Override
     public void registerRecipe() {
         ItemStack iron = new ItemStack(Material.IRON_INGOT);
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, iron, iron, iron, iron);
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A  ", "   " , iron);
         finchRecipe.addRecipe();
     }
 }
