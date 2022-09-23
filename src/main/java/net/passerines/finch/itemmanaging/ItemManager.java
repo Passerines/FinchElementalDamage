@@ -55,6 +55,7 @@ public class ItemManager {
         new CarbonFiberChestplate();
         new CarbonFiberHelmet();
         new CarbonFiberLeggings();
+        new Comet();
         new DevourScythe();
         new CrescentKnives();
         new FireBallWand();
