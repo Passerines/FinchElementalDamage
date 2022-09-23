@@ -25,9 +25,9 @@ public class BloodLeggings extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&cBlood Leggings"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&f -10 &cHealth")));
-        lore.add(Component.text(Chat.format("&f +20 &aDefense")));
-        lore.add(Component.text(Chat.format("&f +7 &4Damage" )));
+        lore.add(Component.text(Chat.format("&cHealth: &f-10")));
+        lore.add(Component.text(Chat.format("&aDefense: &f+20")));
+        lore.add(Component.text(Chat.format("&4Damage: &f+7" )));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);

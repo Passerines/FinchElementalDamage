@@ -1,7 +1,7 @@
 package net.passerines.finch.cmds;
 
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.items.ItemManager;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.command.Command;
@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ItemGiveCommand implements CommandExecutor, TabCompleter {

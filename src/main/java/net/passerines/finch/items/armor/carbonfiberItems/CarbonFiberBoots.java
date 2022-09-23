@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CarbonFiberBoots extends FinchArmor {
     public CarbonFiberBoots() {
         super("CarbonFiberBoots");
-        this.defense = 140;
+        this.defense = 100;
         this.health = 15;
     }
 
@@ -23,8 +23,8 @@ public class CarbonFiberBoots extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&fCarbon Fiber Boots"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&f +15 &cHealth")));
-        lore.add(Component.text(Chat.format("&f +140 &aDefense")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+15")));
+        lore.add(Component.text(Chat.format("&aDefense: &f+100")));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);

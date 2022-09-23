@@ -23,8 +23,8 @@ public class CarbonFiberLeggings extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&fCarbon Fiber Leggings"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&f +15 &cHealth")));
-        lore.add(Component.text(Chat.format("&f +140 &aDefense")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+15")));
+        lore.add(Component.text(Chat.format("&aDefense: &f+140")));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);

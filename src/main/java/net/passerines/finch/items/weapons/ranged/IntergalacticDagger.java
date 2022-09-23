@@ -35,7 +35,7 @@ public class IntergalacticDagger extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         PlayerData vPlayer = PlayerMap.PLAYERS.get(player);
         ItemStack item = player.getInventory().getItemInMainHand();
-        if((event.getAction().isRightClick() && cd.isOffCooldown(player))){
+        if((id.equals(Util.getId(item)) && event.getAction().isRightClick() && cd.isOffCooldown(player))){
             ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.SONIC_BOOM, ELECTRO, 5, vPlayer.getDamage()*500);
             throwBlade.throwItem();
             cd.add(player, 20);

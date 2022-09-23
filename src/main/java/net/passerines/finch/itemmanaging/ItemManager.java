@@ -1,5 +1,6 @@
-package net.passerines.finch.items;
+package net.passerines.finch.itemmanaging;
 
+import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.armor.bloodItems.mage.BloodMageBoots;
 import net.passerines.finch.items.armor.bloodItems.mage.BloodMageChestplate;

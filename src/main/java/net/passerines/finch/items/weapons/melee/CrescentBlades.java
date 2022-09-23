@@ -47,7 +47,7 @@ public class CrescentBlades extends FinchWeapon implements Listener {
             slash.drawSlash();
             cd0.add(player);
         }
-        if(click.getAction().isRightClick() && cd.isOffCooldown(player)){
+        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.ASH, ElementalDamageEvent.Element.DARK, 1, damage);
             throwBlade.throwItem();
             cd.add(player);

@@ -34,35 +34,33 @@ public class ThrowBlade {
         Plugin plugin = FinchElementalDamage.inst();
         ArrayList<Entity> hitEntities = new ArrayList<>();
         Location loc = player.getLocation();
-        if (id.equals(Util.getId(player.getInventory().getItemInMainHand()))) {
-            ArmorStand armorStand = loc.getWorld().spawn(loc, ArmorStand.class, false, (ArmorStand armorStand1) -> {
-                armorStand1.setInvisible(true);
-                armorStand1.setInvulnerable(true);
-                armorStand1.addEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.REMOVING_OR_CHANGING);
-                armorStand1.getEquipment().setItemInOffHand(player.getEquipment().getItemInMainHand());
-            });
-            int sSRT = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-                Location asLoc = armorStand.getLocation();
-                asLoc.setYaw(armorStand.getLocation().getYaw() + 50);
-                armorStand.teleport(asLoc);
-                armorStand.setVelocity(loc.getDirection().normalize().multiply(fireVelocity));
-                Collection<Entity> entitylist = asLoc.getNearbyEntities(2, 2, 2);
-                Object[] entities = entitylist.toArray();
-                asLoc.getWorld().spawnParticle(particle, asLoc, 3, 0, 0, 0, 0);
-                for(Object entity : entities) {
-                    if (entity instanceof Damageable) {
-                        if (!(entity.equals(player) || entity.equals(armorStand)) && !hitEntities.contains(entity)) {
-                            new ElementalDamageEvent(player, (Entity) entity, element, damage).apply();
-                            hitEntities.add((Entity) entity);
-                            ((Entity) entity).playEffect(EntityEffect.HURT);
-                        }
+        ArmorStand armorStand = loc.getWorld().spawn(loc, ArmorStand.class, false, (ArmorStand armorStand1) -> {
+            armorStand1.setInvisible(true);
+            armorStand1.setInvulnerable(true);
+            armorStand1.addEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.REMOVING_OR_CHANGING);
+            armorStand1.getEquipment().setItemInOffHand(player.getEquipment().getItemInMainHand());
+        });
+        int sSRT = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+            Location asLoc = armorStand.getLocation();
+            asLoc.setYaw(armorStand.getLocation().getYaw() + 50);
+            armorStand.teleport(asLoc);
+            armorStand.setVelocity(loc.getDirection().normalize().multiply(fireVelocity));
+            Collection<Entity> entitylist = asLoc.getNearbyEntities(1, 1, 1);
+            Object[] entities = entitylist.toArray();
+            asLoc.getWorld().spawnParticle(particle, asLoc, 3, 0, 0, 0, 0);
+            for(Object entity : entities) {
+                if (entity instanceof Damageable) {
+                    if (!(entity.equals(player) || entity.equals(armorStand)) && !hitEntities.contains(entity)) {
+                        new ElementalDamageEvent(player, (Entity) entity, element, damage).apply();
+                        hitEntities.add((Entity) entity);
+                        ((Entity) entity).playEffect(EntityEffect.HURT);
                     }
                 }
-            }, 0, 2);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                armorStand.remove();
-                Bukkit.getScheduler().cancelTask(sSRT);
-            }, 25);
-        }
+            }
+        }, 0, 2);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            armorStand.remove();
+            Bukkit.getScheduler().cancelTask(sSRT);
+        }, 25);
     }
 }

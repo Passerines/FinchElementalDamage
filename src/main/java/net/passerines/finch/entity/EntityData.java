@@ -2,20 +2,10 @@ package net.passerines.finch.entity;
 
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAdapter;
-import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import net.bytebuddy.dynamic.TypeResolutionStrategy;
-import net.passerines.finch.events.HealthDisplay;
-import net.passerines.finch.items.FinchArmor;
-import net.passerines.finch.items.FinchItem;
-import net.passerines.finch.items.FinchWeapon;
-import net.passerines.finch.items.ItemManager;
-import net.passerines.finch.util.Util;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class EntityData {
 

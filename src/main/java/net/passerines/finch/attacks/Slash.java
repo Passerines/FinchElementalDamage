@@ -1,13 +1,9 @@
 package net.passerines.finch.attacks;
 
-import net.passerines.finch.entity.EntityData;
-import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
-import net.passerines.finch.items.ItemManager;
-import net.passerines.finch.players.PlayerData;
-import net.passerines.finch.players.PlayerMap;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Util;
 import org.bukkit.Location;
 import org.bukkit.Particle;

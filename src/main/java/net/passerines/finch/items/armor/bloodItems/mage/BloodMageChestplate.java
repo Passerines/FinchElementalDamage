@@ -25,9 +25,9 @@ public class BloodMageChestplate extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&cBloodMage Chestplate"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&f -10 &cHealth")));
-        lore.add(Component.text(Chat.format("&f +25 &aDefense")));
-        lore.add(Component.text(Chat.format("&f +75 &bMana" )));
+        lore.add(Component.text(Chat.format("&cHealth: &f-10")));
+        lore.add(Component.text(Chat.format("&aDefense: &f+25")));
+        lore.add(Component.text(Chat.format("&bMana: &f+70")));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
