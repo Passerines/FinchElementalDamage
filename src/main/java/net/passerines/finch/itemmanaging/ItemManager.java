@@ -1,5 +1,6 @@
 package net.passerines.finch.itemmanaging;
 
+import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.armor.bloodItems.mage.BloodMageBoots;
@@ -39,6 +40,7 @@ public class ItemManager {
         }
         ITEM_HASH_MAP.clear();
         registerAll();
+        registerRecipe();
     }
 
     private static void registerAll() {
@@ -79,5 +81,13 @@ public class ItemManager {
         new ImpierceGaloshes();
         new ImpierceLeggings();
         new CrescentBlades();
+        new Comet();
+    }
+    public static void registerRecipe(){
+        for(FinchItem finchItem : ITEM_HASH_MAP.values()){
+            if(finchItem instanceof FinchCraftableItem finchCraftableItem){
+                finchCraftableItem.registerRecipe();
+            }
+        }
     }
 }

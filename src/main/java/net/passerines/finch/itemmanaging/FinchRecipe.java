@@ -23,12 +23,8 @@ public class FinchRecipe {
     }
     public void addRecipe(){
         ShapedRecipe asRecipe = new ShapedRecipe(NamespacedKey.minecraft(namespacedKey), itemResult);
-        asRecipe.shape(
-                "ABC",
-                "DEF",
-                "GHI"
-        );
-        for(int i = 0; i < 9; i++){
+        asRecipe.shape("ABC", "DEF", "GHI");
+        for(int i = 0; i < itemStacks.size(); i++){
             asRecipe.setIngredient((char) ('A'+ i), new RecipeChoice.ExactChoice(itemStacks.get(i)));
         }
         Bukkit.addRecipe(asRecipe);
