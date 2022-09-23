@@ -6,20 +6,20 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class StrongLeggings extends FinchArmor {
+public class StronkLeggings extends FinchArmor {
 
-    public StrongLeggings() {
-        super("StrongLeggings");
-        this.defense = 150;
-        this.health = 100;
-        this.damage = 30;
+    public StronkLeggings() {
+        super("StronkLeggings");
+        this.defense = 1500;
+        this.health = 1000;
+        this.damage = 300;
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_LEGGINGS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cStrong Leggings"));
+        itemMeta.displayName(Chat.formatC("&cStronk Leggings"));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

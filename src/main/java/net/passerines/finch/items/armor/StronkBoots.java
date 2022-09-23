@@ -12,12 +12,12 @@ public class StronkBoots extends FinchArmor {
         super("StronkBoots");
         this.defense = 6900;
         this.health = 420000;
-        this.damage = 2100000000;
+        this.damage = 2100;
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_BOOTS);
+        ItemStack item = new ItemStack(Material.DIAMOND_BOOTS);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cStronk Boots"));
         item.setItemMeta(itemMeta);

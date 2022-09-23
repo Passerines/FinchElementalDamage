@@ -64,7 +64,7 @@ public class ItemManager {
         new Tsunami();
         new StronkBoots();
         new Teleporter();
-        new StrongLeggings();
+        new StronkLeggings();
         new IntergalacticDagger();
         new IntergalacticSniper();
         new SniperHelmet();

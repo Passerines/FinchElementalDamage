@@ -65,7 +65,7 @@ public class DamageHandler implements Listener {
         event.setDamage(0);
     }
     @EventHandler
-    public void onEntityElementalDamage(ElementalDamageEvent event) {
+    public void onElementalDamage(ElementalDamageEvent event) {
         Entity attacker = event.getAttacker();
         Entity victim = event.getVictim();
         if (victim instanceof Player) {
@@ -131,12 +131,6 @@ public class DamageHandler implements Listener {
                 deathEvent.apply();
             }
         }
-    }
-    @EventHandler
-    public void onPlayerElementalDamage(ElementalDamageEvent event) {
-        Entity attacker = event.getAttacker();
-        Entity victim = event.getVictim();
-
     }
 
     @EventHandler

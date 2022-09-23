@@ -27,7 +27,6 @@ public class DevourScythe extends FinchWeapon implements Listener {
     public DevourScythe() {
         super("DevourScythe");
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-        this.damage = 100;
     }
 
     @EventHandler
