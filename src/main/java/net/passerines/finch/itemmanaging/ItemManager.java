@@ -1,6 +1,8 @@
 package net.passerines.finch.itemmanaging;
 
 import net.passerines.finch.FinchCraftableItem;
+import net.passerines.finch.itemmanaging.recipeitems.BloodIron;
+import net.passerines.finch.itemmanaging.recipeitems.MagicBloodIron;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.armor.bloodItems.mage.BloodMageBoots;
@@ -23,6 +25,8 @@ import net.passerines.finch.items.weapons.mana.*;
 import net.passerines.finch.items.weapons.melee.*;
 import net.passerines.finch.items.weapons.mana.ManaKatana;
 import net.passerines.finch.items.weapons.ranged.*;
+import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
@@ -82,6 +86,8 @@ public class ItemManager {
         new ImpierceLeggings();
         new CrescentBlades();
         new Comet();
+        new BloodIron();
+        new MagicBloodIron();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
@@ -89,5 +95,9 @@ public class ItemManager {
                 finchCraftableItem.registerRecipe();
             }
         }
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_boots"));
     }
 }

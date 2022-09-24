@@ -1,6 +1,8 @@
 package net.passerines.finch.items.armor.bloodItems.mage;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.itemmanaging.FinchRecipe;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
@@ -32,5 +34,10 @@ public class BloodMageLeggings extends FinchArmor {
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);
+    }
+    public void registerRecipe() {
+        ItemStack iron = ItemManager.ITEM_HASH_MAP.get("MagicBloodIron").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "A A" , iron);
+        finchRecipe.addRecipe();
     }
 }
