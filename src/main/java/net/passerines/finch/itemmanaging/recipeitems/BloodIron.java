@@ -22,7 +22,7 @@ public class BloodIron extends FinchItem implements FinchCraftableItem {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cBlood-Iron"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&7Iron infused with blood")));
+        lore.add(Chat.formatC("&7Iron infused with blood"));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

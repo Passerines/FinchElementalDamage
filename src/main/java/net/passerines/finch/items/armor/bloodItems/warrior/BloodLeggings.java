@@ -39,7 +39,7 @@ public class BloodLeggings extends FinchArmor implements FinchCraftableItem {
     @Override
     public void registerRecipe() {
         ItemStack iron = ItemManager.ITEM_HASH_MAP.get("BloodIron").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , iron);
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "A A" , iron);
         finchRecipe.addRecipe();
     }
 }
