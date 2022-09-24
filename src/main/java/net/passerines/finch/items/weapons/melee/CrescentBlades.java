@@ -29,6 +29,7 @@ public class CrescentBlades extends FinchWeapon implements Listener {
         super("CresentBlades");
         this.damage = 45;
         this.defense = 45;
+        this.element = ElementalDamageEvent.Element.DARK;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler

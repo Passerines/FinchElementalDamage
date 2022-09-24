@@ -1,4 +1,4 @@
-package net.passerines.finch.items.armor.bloodItems.mage;
+package net.passerines.finch.items.armor.vanillareplacements;
 
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
@@ -12,25 +12,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem{
-
-    public BloodMageHelmet() {
-        super("BloodMageHelmet");
-        this.defense = 15;
-        this.health = -5;
-        this.mana = 45;
+public class ReinforcedLeatherLeggings extends FinchArmor implements FinchCraftableItem {
+    public ReinforcedLeatherLeggings() {
+        super("ReinforcedLeatherLeggings");
+        this.defense = 80;
+        this.health = 35;
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_HELMET);
+        ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cBloodMage Helmet"));
+        itemMeta.displayName(Chat.formatC("&fReinforced Leather Leggings"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f-5")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+15")));
-        lore.add(Component.text(Chat.format("&bMana: &f+45")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+35")));
+        lore.add(Component.text(Chat.format("&aDefense: &f+80")));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
@@ -39,8 +36,8 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem{
 
     @Override
     public void registerRecipe() {
-        ItemStack iron = ItemManager.ITEM_HASH_MAP.get("MagicBloodIron").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , iron);
+        ItemStack leather = ItemManager.ITEM_HASH_MAP.get("ReinforcedLeather").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "A A" , leather);
         finchRecipe.addRecipe();
     }
 }

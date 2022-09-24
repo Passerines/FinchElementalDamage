@@ -16,10 +16,12 @@ public abstract class FinchWeapon extends FinchItem {
     protected int electro;
     protected int light;
     protected int dark;
+    protected int durability;
     protected ElementalDamageEvent.Element element;
 
     public FinchWeapon(String id) {
         super(id);
+        this.durability = 0;
         this.element = ElementalDamageEvent.Element.FIRE;
         this.health = 0;
         this.defense = 0;
@@ -70,4 +72,5 @@ public abstract class FinchWeapon extends FinchItem {
     public int getDark(){
         return dark;
     }
+    public int getDurability(){return durability;}
 }

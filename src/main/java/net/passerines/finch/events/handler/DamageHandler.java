@@ -101,6 +101,11 @@ public class DamageHandler implements Listener {
                 deathEvent.apply();
             }
         }
+        //                  ^ Players
+        //
+        //
+        //
+        //                  v Entities
         else if (victim instanceof LivingEntity) {
             EntityData vEntityData = EntityMap.ENTITIES.get(victim);
             double mobDamage = event.getDamage();

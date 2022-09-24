@@ -18,11 +18,11 @@ public class ReinforcedLeather extends FinchItem implements FinchCraftableItem {
     }
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_BOOTS);
+        ItemStack item = new ItemStack(Material.RABBIT_HIDE);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&fReinforced Leather"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("Leather that has been reinforced with iron")));
+        lore.add(Chat.formatC("Leather that has been reinforced with iron"));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);
@@ -32,7 +32,7 @@ public class ReinforcedLeather extends FinchItem implements FinchCraftableItem {
     public void registerRecipe() {
         ItemStack iron = new ItemStack(Material.IRON_INGOT);
         ItemStack leather = new ItemStack(Material.LEATHER);
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AB", "  ", "   " , iron, leather);
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AB ", "   ", "   " , iron, leather);
         finchRecipe.addRecipe();
     }
 }

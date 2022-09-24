@@ -3,6 +3,7 @@ package net.passerines.finch.itemmanaging;
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.itemmanaging.recipeitems.BloodIron;
 import net.passerines.finch.itemmanaging.recipeitems.MagicBloodIron;
+import net.passerines.finch.itemmanaging.recipeitems.ReinforcedLeather;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.armor.bloodItems.mage.BloodMageBoots;
@@ -21,6 +22,10 @@ import net.passerines.finch.items.armor.impierceitems.ImpierceAegis;
 import net.passerines.finch.items.armor.impierceitems.ImpierceCrown;
 import net.passerines.finch.items.armor.impierceitems.ImpierceGaloshes;
 import net.passerines.finch.items.armor.impierceitems.ImpierceLeggings;
+import net.passerines.finch.items.armor.vanillareplacements.ReinforcedLeatherBoots;
+import net.passerines.finch.items.armor.vanillareplacements.ReinforcedLeatherCap;
+import net.passerines.finch.items.armor.vanillareplacements.ReinforcedLeatherLeggings;
+import net.passerines.finch.items.armor.vanillareplacements.ReinforcedLeatherTunic;
 import net.passerines.finch.items.weapons.mana.*;
 import net.passerines.finch.items.weapons.melee.*;
 import net.passerines.finch.items.weapons.mana.ManaKatana;
@@ -88,6 +93,11 @@ public class ItemManager {
         new Comet();
         new BloodIron();
         new MagicBloodIron();
+        new ReinforcedLeather();
+        new ReinforcedLeatherBoots();
+        new ReinforcedLeatherCap();
+        new ReinforcedLeatherLeggings();
+        new ReinforcedLeatherTunic();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
@@ -99,5 +109,9 @@ public class ItemManager {
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_chestplate"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_leggings"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_boots"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("leather_boots"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("leather_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("leather_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("leather_helmet"));
     }
 }

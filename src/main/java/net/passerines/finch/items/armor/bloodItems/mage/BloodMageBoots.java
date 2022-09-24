@@ -1,6 +1,7 @@
 package net.passerines.finch.items.armor.bloodItems.mage;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
@@ -11,7 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class BloodMageBoots extends FinchArmor {
+public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
 
     public BloodMageBoots() {
         super("BloodMageBoots");
