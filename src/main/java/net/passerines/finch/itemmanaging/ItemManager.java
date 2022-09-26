@@ -29,7 +29,10 @@ import net.passerines.finch.items.armor.vanillareplacements.ReinforcedLeatherTun
 import net.passerines.finch.items.weapons.mana.*;
 import net.passerines.finch.items.weapons.melee.*;
 import net.passerines.finch.items.weapons.mana.ManaKatana;
+import net.passerines.finch.items.weapons.melee.katanas.DiamondKatana;
+import net.passerines.finch.items.weapons.melee.katanas.GoldenKatana;
 import net.passerines.finch.items.weapons.melee.katanas.SteelKatana;
+import net.passerines.finch.items.weapons.melee.spears.EngulfingLightning;
 import net.passerines.finch.items.weapons.melee.spears.SpearOfTheDarkQueen;
 import net.passerines.finch.items.weapons.ranged.*;
 import org.bukkit.Bukkit;
@@ -101,7 +104,11 @@ public class ItemManager {
         new ReinforcedLeatherLeggings();
         new ReinforcedLeatherTunic();
         new SteelKatana();
+        new GoldenKatana();
+        new DiamondKatana();
         new SpearOfTheDarkQueen();
+        new EngulfingLightning();
+
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

@@ -60,9 +60,12 @@ public class DamageHandler implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         //Converts entity damage by entity to elemental damage
-        ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
-        elementalDamage.apply();
-        event.setDamage(0);
+
+        if(!event.isCancelled()) {
+            ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
+            elementalDamage.apply();
+            event.setDamage(0);
+        }
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
@@ -113,14 +116,14 @@ public class DamageHandler implements Listener {
 
             if (attacker instanceof Player) {
                 if (Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null) {
-                    mobDamageTaken = (mobDamageTaken + (PLAYERS.get(attacker).getDamage() * ((Player) attacker).getPlayer().getAttackCooldown()));
+                    mobDamageTaken = ((mobDamageTaken + PLAYERS.get(attacker).getDamage()) * ((Player) attacker).getPlayer().getAttackCooldown());
                 } else {
                     mobDamageTaken = 5;
                 }
                 attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
             } else if (attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
-                    mobDamageTaken = mobDamageTaken + (PlayerMap.PLAYERS.get(player).getDamage() * (player).getPlayer().getAttackCooldown());
+                    mobDamageTaken =(mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage()) * player.getAttackCooldown();
                 }
             }
             vEntityData.setHealth(vEntityData.getHealth() - mobDamageTaken);

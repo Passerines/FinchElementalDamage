@@ -22,7 +22,7 @@ public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
     public SpearOfTheDarkQueen() {
         super("SpearOfTheDarkQueen");
-        this.damage = 50;
+        this.damage = 45;
         this.element = ElementalDamageEvent.Element.DARK;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -31,7 +31,6 @@ public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
         if(hit.getDamager() instanceof Player player){
             if(id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
                 hit.setCancelled(true);
-                Util.log("cancelled ur attack");
             }
         }
     }

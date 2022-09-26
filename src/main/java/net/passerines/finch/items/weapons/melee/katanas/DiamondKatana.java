@@ -2,7 +2,6 @@ package net.passerines.finch.items.weapons.melee.katanas;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
-import net.passerines.finch.attacks.ThrowBlade;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
@@ -24,11 +23,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.UUID;
 
-public class SteelKatana extends FinchWeapon implements Listener {
+public class DiamondKatana extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
-    public SteelKatana() {
-        super("SteelKatana");
-        this.damage = 30;
+    public DiamondKatana() {
+        super("DiamondKatana");
+        this.damage = 40;
         this.element = ElementalDamageEvent.Element.NEUTRAL;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -55,10 +54,10 @@ public class SteelKatana extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&fGolden Katana"));
+        itemMeta.displayName(Chat.formatC("&fDiamond Katana"));
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(4);
-        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+        itemMeta.setCustomModelData(6);
+        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
