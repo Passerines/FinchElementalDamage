@@ -1,16 +1,21 @@
 package net.passerines.finch.items.weapons.melee.spears;
 
+import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
+import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,9 +23,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.UUID;
 
 public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
@@ -40,15 +51,27 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         }
     }
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent event) {
-        if(event.getCause().){
+    public void onEntityDamage(ElementalDamageEvent event) {
+        if(event.getAttacker() instanceof Player player){
             if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)) {
-                Location loc = event.getEntity().getLocation();
+                /*
+                Location loc = event.getVictim().getLocation()l;
                 LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
                 lightningStrike.setCausingPlayer(player);
                 lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("weapon"), PersistentDataType.STRING, id);
-                lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0);
-                loc.getWorld().str
+                ightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0);
+                 */
+                PlayerData playerData = new PlayerData(player);
+                if(playerData.getManaMax() >= playerData.getMana()){
+                    if(playerData.getManaMax() * 0.02 + playerData.getMana() < playerData.getManaMax()){
+                        playerData.setMana((int) (playerData.getManaMax() * 0.02));
+                        String bar = Chat.format("&bRestored " + (playerData.getManaMax() * 0.02) + " &bMana");
+                        Chat.sendActionBar(player, bar);
+                    }
+                    else{
+                        playerData.setManaMax(playerData.getManaMax());
+                    }
+                }
             }
         }
     }
@@ -60,6 +83,13 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             slash.drawSlash();
             cd.add(player);
         }
+        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)){
+            HashSet<Material> transparent = new HashSet<Material>();
+            transparent.add(Material.AIR);
+            Block block = player.getTargetBlock(transparent, 120);
+            player.getWorld().strikeLightning(block.getLocation());
+            cd1.add(player);
+        }
     }
 
 
@@ -70,6 +100,13 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         itemMeta.displayName(Chat.formatC("&dEngulfing Lightning"));
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(7);
+        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<Component> lore = new ArrayList<>();
+        lore.add(Component.text(Chat.format(" ")));
+        lore.add(Component.text(Chat.format("&4Damage: &f+85")));
+        lore.add(Component.text(Chat.format(" ")));
+        itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
