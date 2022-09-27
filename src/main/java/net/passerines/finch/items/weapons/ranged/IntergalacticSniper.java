@@ -1,6 +1,7 @@
 package net.passerines.finch.items.weapons.ranged;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.attacks.DrawLine;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
@@ -10,6 +11,7 @@ import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -28,17 +30,15 @@ public class IntergalacticSniper extends FinchWeapon implements Listener {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-    private Cooldown cd = new Cooldown(60);
+    Cooldown<Player> cd = new Cooldown(60);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
-            Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(0.7)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
-            Arrow arrow = (Arrow) loc.getWorld().spawnEntity(loc, EntityType.ARROW);
-            arrow.setVelocity(loc.getDirection().normalize().multiply(100));
-            cd.add(player);
+        if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && event.getAction().isRightClick() && cd.isOffCooldown(player)){
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SONIC_BOOM, Particle.EXPLOSION_HUGE, 50,(1 + vPlayer.getManaMax()*50)).draw();
+            cd.add(player, 20);
         }
     }
 

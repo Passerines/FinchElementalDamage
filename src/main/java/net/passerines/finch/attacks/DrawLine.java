@@ -49,7 +49,7 @@ public class DrawLine {
             } else {
                 loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0);
             }
-            Collection<Entity> entitylist = loc.getNearbyEntities(3, 3, 3);
+            Collection<Entity> entitylist = loc.getNearbyEntities(2, 2, 2);
             Object[] entities = entitylist.toArray();
             for (Object entity : entities) {
                 if (entity instanceof Damageable) {
@@ -57,9 +57,9 @@ public class DrawLine {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if (finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
+                            hitEntities.add((Entity) entity);
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, finchWeapon.getElement(), damage);
                             elementalDamageEvent.apply();
-                            hitEntities.add((Entity) entity);
                         }
                     }
                 }

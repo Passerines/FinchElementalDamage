@@ -7,6 +7,7 @@ import net.passerines.finch.cmds.ItemGiveCommand;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
+import net.passerines.finch.events.handler.DamageDisplayer;
 import net.passerines.finch.events.handler.DamageHandler;
 import net.passerines.finch.events.handler.EquipmentChangeHandler;
 import net.passerines.finch.integrations.MythicMobsBridge;
@@ -32,6 +33,7 @@ public class FinchElementalDamage extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+        new DamageDisplayer();
         new EntityMap();
         new PlayerMap();
         new GetPlayersCmd();

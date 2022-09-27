@@ -93,12 +93,12 @@ public class DamageHandler implements Listener {
             vPlayerData.setHealth(vPlayerData.getHealth() - damageTaken);
             victim.playEffect(EntityEffect.HURT);
 
-            victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
-
+            //victim.sendMessage("Damage Taken: " + damageTaken + " Element: " + event.getElement());
+        /*
             if (attacker instanceof Player) {
                 attacker.sendMessage("Damage Dealt: " + damageTaken + " Element: " + event.getElement());
             }
-
+        */
             if (vPlayerData.getHealth() <= 0) {
                 CustomPlayerDeathEvent deathEvent = new CustomPlayerDeathEvent((Player) victim);
                 deathEvent.apply();
@@ -120,7 +120,6 @@ public class DamageHandler implements Listener {
                 } else {
                     mobDamageTaken = 5;
                 }
-                attacker.sendMessage("Damage Dealt: " + mobDamageTaken + " Element: " + event.getElement());
             } else if (attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
                     mobDamageTaken =(mobDamageTaken + PlayerMap.PLAYERS.get(player).getDamage()) * player.getAttackCooldown();

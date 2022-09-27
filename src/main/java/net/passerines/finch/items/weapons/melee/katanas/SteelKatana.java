@@ -26,7 +26,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.UUID;
 
 public class SteelKatana extends FinchWeapon implements Listener {
-    Cooldown cd = new Cooldown<>(3);
+    Cooldown<Player> cd = new Cooldown<>(3);
     public SteelKatana() {
         super("SteelKatana");
         this.damage = 30;
@@ -45,7 +45,7 @@ public class SteelKatana extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ASH, Particle.CRIT, 4, damage,85,0);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.VILLAGER_ANGRY, Particle.CRIT, 4, damage,85,0);
             slash.drawSlash();
             cd.add(player);
         }
