@@ -21,14 +21,16 @@ public class DamageDisplayer implements Listener {
     @EventHandler
     public void onDamage(ElementalDamageEvent event){
         Entity victim = event.getVictim();
-        Location loc = victim.getLocation().add(Util.rand(-1.0 , 1.0), Util.rand(-1.0 , 1.0), Util.rand(-1.0 , 1.0));
-        int damage = (int) event.getDamage();
-        ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class);
-        damageDisplay.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
-        damageDisplay.setInvisible(true);
-        damageDisplay.setMarker(true);
-        damageDisplay.customName(Chat.formatC(event.getElement().getColor() + "☆" + damage + "☆"));
-        damageDisplay.setCustomNameVisible(true);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), damageDisplay::remove, 50);
+        if(!(victim instanceof ArmorStand)) {
+            Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0));
+            int damage = (int) event.getDamage();
+            ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class);
+            damageDisplay.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
+            damageDisplay.setInvisible(true);
+            damageDisplay.setMarker(true);
+            damageDisplay.customName(Chat.formatC(event.getElement().getColor() + "☆" + damage + "☆"));
+            damageDisplay.setCustomNameVisible(true);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), damageDisplay::remove, 50);
+        }
     }
 }
