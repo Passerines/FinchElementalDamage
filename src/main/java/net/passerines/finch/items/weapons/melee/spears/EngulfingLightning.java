@@ -39,9 +39,10 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             }
         }
     }
+    /*
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if(event.getCause().){
+        if(event.getCause()){
             if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)) {
                 Location loc = event.getEntity().getLocation();
                 LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
@@ -52,6 +53,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             }
         }
     }
+    */
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();

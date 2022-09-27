@@ -19,24 +19,27 @@ public class ElementalDamageEvent extends Event implements Cancellable {
     private static final HandlerList HANDLER_LIST = new HandlerList();
 
     public enum Element {
-        FIRE(Chat.format("&6Fire"), 1f),
-        WATER(Chat.format("&bWater"), 1f),
-        EARTH(Chat.format("&2Earth"), 1f),
-        WIND(Chat.format("&fWind"), 1f),
-        ELECTRO(Chat.format("&dElectro"), 1f),
-        LIGHT(Chat.format("&eLight"), 1f),
-        NEUTRAL(Chat.format("Neutral"), 1f),
-        UNDEAD(Chat.format("&4Undead"), 1f),
-        DARK(Chat.format("&8Dark"), 1f);
+        FIRE(Chat.format("&6Fire"), "&6",1f),
+        WATER(Chat.format("&bWater"), "&b",1f),
+        EARTH(Chat.format("&2Earth"), "&2",1f),
+        WIND(Chat.format("&fWind"), "&f",1f),
+        ELECTRO(Chat.format("&dElectro"), "&d",1f),
+        LIGHT(Chat.format("&eLight"), "&e",1f),
+        NEUTRAL(Chat.format("&7Neutral"), "&7",1f),
+        UNDEAD(Chat.format("&4Undead"), "&4",1f),
+        DARK(Chat.format("&8Dark"), "&8",1f);
         private final String displayName;
+        private final String color;
         private final float elementalMultiplier;
-        Element(String displayName, float elementalMultiplier) {
+        Element(String displayName, String color, float elementalMultiplier) {
             this.displayName = displayName;
+            this.color = color;
             this.elementalMultiplier = elementalMultiplier;
         }
         public String getDisplayName() {
             return displayName;
         }
+        public String getColor(){return color;}
         public float getElementalMultiplier() {
             return elementalMultiplier;
         }

@@ -22,7 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 public class Comet extends FinchWeapon implements Listener {
-    private Cooldown cd = new Cooldown(10);
+    Cooldown<Player> cd = new Cooldown(10);
     public Comet() {
         super("Comet");
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
@@ -42,8 +42,8 @@ public class Comet extends FinchWeapon implements Listener {
         PlayerData vPlayer = PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && click.getAction().isRightClick() && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() ,Particle.ENCHANTMENT_TABLE, Particle.SOUL, 50,(1 + vPlayer.getManaMax()*0.1)).draw();
-            cd.add(player, 7);
+            new DrawLine(player, player.getEyeLocation(), getItem() ,Particle.ENCHANTMENT_TABLE, Particle.SOUL, 25,(1 + vPlayer.getManaMax()*0.05)).draw();
+            cd.add(player, 30);
         }
     }
 

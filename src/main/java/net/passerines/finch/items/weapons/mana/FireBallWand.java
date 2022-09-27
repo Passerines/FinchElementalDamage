@@ -30,7 +30,7 @@ public class FireBallWand extends FinchWeapon implements Listener {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-    private Cooldown cd = new Cooldown(10);
+    private Cooldown<Player> cd = new Cooldown<>(10);
     @EventHandler
     public void onClick(PlayerInteractEvent event){
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
