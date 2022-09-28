@@ -7,16 +7,20 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PlayerConfig {
 
-    private Player player;
+    private final Player player;
+    private final PlayerData playerData;
     private File file;
     private YamlConfiguration config;
 
     //A simple system for saving player data
     public PlayerConfig(Player player) {
         this.player = player;
+        playerData = PlayerMap.PLAYERS.get(player);
         initialize();
         load();
     }
@@ -32,10 +36,18 @@ public class PlayerConfig {
         config = YamlConfiguration.loadConfiguration(file);
     }
     private void load() {
+        Util.log("&bLoading data for &7" + player.getName());
         config.set("User.Username", player.getName());
         config.set("User.UUID", player.getUniqueId().toString());
+        config.set("User.LastLogin", "CURRENTLY ONLINE");
     }
     public void save() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy HH:mm");
+        Date date = new Date(System.currentTimeMillis());
+        config.set("User.LastLogin", simpleDateFormat.format(date));
+        config.set("Player.Health", playerData.getHealth());
+        config.set("Player.Mana", playerData.getMana());
+        Util.log("&bSaving data for &7" + player.getName());
         try {
             config.save(file);
         } catch (IOException e) {

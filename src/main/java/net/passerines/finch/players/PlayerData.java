@@ -29,12 +29,12 @@ public class PlayerData {
 
     public PlayerData(Player player){
         this.player = player;
-        health = 100;
         defense = 10;
-        mana = 100;
-
         calculate();
+
         playerConfig = new PlayerConfig(player);
+        health = playerConfig.getConfig().getDouble("Player.Health", 100);
+        mana = playerConfig.getConfig().getInt("Player.Mana", 100);
     }
 
     public void calculate() {
