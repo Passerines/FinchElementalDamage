@@ -29,7 +29,7 @@ public class EntityData {
 
     public EntityData(ActiveMob entity, MythicMob mythicMob){
         this.entity = BukkitAdapter.adapt(entity.getEntity());
-        health = mythicMob.getHealth(entity) * 3;
+        health = mythicMob.getHealth(entity);
         String s = "Defense";
         defense = mythicMob.getConfig().getInt(s, 5);
         if(mythicMob.getDamage(entity) != 0) {
