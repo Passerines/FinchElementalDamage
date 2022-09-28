@@ -11,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerData {
 
     private Player player;
+    private PlayerConfig playerConfig;
+
     private double health;
     private double healthMax;
     private int defense;
@@ -32,6 +34,7 @@ public class PlayerData {
         mana = 100;
 
         calculate();
+        playerConfig = new PlayerConfig(player);
     }
 
     public void calculate() {
@@ -186,5 +189,10 @@ public class PlayerData {
 
     public void setDarknessProf(double darknessProf) {
         this.darknessProf = darknessProf;
+    }
+
+    //Called before the player is removed from the PLAYERS hash map for quitting
+    public void dispose() {
+        playerConfig.save();
     }
 }

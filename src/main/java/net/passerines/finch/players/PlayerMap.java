@@ -29,6 +29,7 @@ public class PlayerMap implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event){
+        PLAYERS.get(event.getPlayer()).dispose();
         PLAYERS.remove(event.getPlayer());
         Util.log("&7Player Left: " + event.getPlayer().getName());
     }
