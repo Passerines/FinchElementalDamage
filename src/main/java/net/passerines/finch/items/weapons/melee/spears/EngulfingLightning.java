@@ -76,6 +76,14 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         }
     }
     @EventHandler
+    public void onLightning(ElementalDamageEvent event){
+        if(event.getAttacker() instanceof LightningStrike){
+            if(id.equals(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING))){
+                event.setDamage(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE));
+            }
+        }
+    }
+    @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
@@ -90,8 +98,8 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             Location loc = block.getLocation();
             LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
             lightningStrike.setCausingPlayer(player);
-            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("weapon"), PersistentDataType.STRING, id);
-            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0);
+            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING, id);
+            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0 + (new PlayerData(player).getManaMax() / 100 + 0.0)*10);
             cd1.add(player);
         }
     }
