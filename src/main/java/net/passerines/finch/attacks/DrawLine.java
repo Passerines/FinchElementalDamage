@@ -7,6 +7,7 @@ import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Util;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -55,7 +56,7 @@ public class DrawLine {
             Object[] entities = entitylist.toArray();
             for (Object entity : entities) {
                 if (entity instanceof Damageable) {
-                    if (!(entity.equals(player))) {
+                    if (!(entity.equals(player)) && !(entity.equals(ArmorStand.class))) {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if (finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
