@@ -18,9 +18,9 @@ public class PlayerConfig {
     private YamlConfiguration config;
 
     //A simple system for saving player data
-    public PlayerConfig(Player player) {
-        this.player = player;
-        playerData = PlayerMap.PLAYERS.get(player);
+    public PlayerConfig(PlayerData playerData) {
+        player = playerData.getPlayer();
+        this.playerData = playerData;
         initialize();
         load();
     }

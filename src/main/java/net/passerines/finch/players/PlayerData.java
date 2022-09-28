@@ -32,7 +32,7 @@ public class PlayerData {
         defense = 10;
         calculate();
 
-        playerConfig = new PlayerConfig(player);
+        playerConfig = new PlayerConfig(this);
         health = playerConfig.getConfig().getDouble("Player.Health", 100);
         mana = playerConfig.getConfig().getInt("Player.Mana", 100);
     }
@@ -189,6 +189,10 @@ public class PlayerData {
 
     public void setDarknessProf(double darknessProf) {
         this.darknessProf = darknessProf;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public PlayerConfig getPlayerConfig() {
