@@ -21,6 +21,8 @@ public class PlayerConfig {
         load();
     }
     public void initialize() {
+        File folder = new File(FinchElementalDamage.inst().getDataFolder().getPath() + File.separator + "players");
+        if (!folder.exists() || !folder.isDirectory()) folder.mkdirs();
         file = new File(FinchElementalDamage.inst().getDataFolder().getPath() + File.separator + "players" + File.separator + player.getUniqueId() + ".yml");
         try {
             if (!file.exists()) file.createNewFile();
