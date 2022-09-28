@@ -1,5 +1,6 @@
 package net.passerines.finch.entity;
 
+import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
@@ -52,9 +53,6 @@ public class EntityMap implements Listener {
         for(Object entity : entities) {
             if(entity instanceof LivingEntity livingEntity && !ENTITIES.containsKey(entity)){
                 Util.log("Entity added to map");
-                if(!MythicBukkit.inst().getMobManager().isActiveMob((livingEntity).getUniqueId())) {
-                    livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3);
-                }
                 ENTITIES.put(livingEntity, new EntityData(livingEntity));
                 Util.log("Registered Mob: " + (livingEntity).getType());
             }
