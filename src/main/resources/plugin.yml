@@ -14,7 +14,7 @@ commands:
 
   getplayers:
     description: gets players list
-    permission: finch.user
+    permission: finch.admin
 
   getehp:
     description: gets player's ehp
@@ -22,15 +22,18 @@ commands:
 
   finchattributes:
     description: sets max health
-    permission: finch.user
+    permission: finch.admin
   itemgive:
     description: gives and item
     permission: finch.admin
+  trinketmenu:
+    description: opens the trinkets menu
+    permission: finch.user
 
 permissions:
   finch.admin:
     description: Permission to do everything
     default: op
   finch.user:
-    description: Permission to use /finch
+    description: Permission to use cosmetic commands
     default: true
