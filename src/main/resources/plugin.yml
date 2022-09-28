@@ -28,7 +28,7 @@ commands:
     permission: finch.admin
   trinketmenu:
     description: opens the trinkets menu
-    permission: finch.user
+    permission: finch.admin
 
 permissions:
   finch.admin:

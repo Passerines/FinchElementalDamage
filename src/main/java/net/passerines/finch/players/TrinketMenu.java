@@ -19,7 +19,7 @@ public class TrinketMenu implements Listener {
 
     private final int cooldownTimeMilliseconds = 6000;
     public TrinketMenu() {
-        egui = Bukkit.createInventory(null, 9, Component.text("Trinket Menu"));
+        egui = Bukkit.createInventory(null, 27, Component.text("TrinketMenu"));
         Bukkit.getPluginManager().registerEvents(this, plugin);
         initialize();
     }
@@ -28,5 +28,16 @@ public class TrinketMenu implements Listener {
     }
     public void initialize() {
 
+        ItemStack placeholder = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        egui.setItem(0, placeholder);
+        egui.setItem(1, placeholder);
+        egui.setItem(2, placeholder);
+        egui.setItem(3, placeholder);
+        egui.setItem(4, placeholder);
+        egui.setItem(5, placeholder);
+        egui.setItem(6, placeholder);
+        egui.setItem(7, placeholder);
+        egui.setItem(8, placeholder);
+        egui.setItem(9, placeholder);
     }
 }
