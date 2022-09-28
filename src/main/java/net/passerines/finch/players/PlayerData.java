@@ -191,6 +191,10 @@ public class PlayerData {
         this.darknessProf = darknessProf;
     }
 
+    public PlayerConfig getPlayerConfig() {
+        return playerConfig;
+    }
+
     //Called before the player is removed from the PLAYERS hash map for quitting
     public void dispose() {
         playerConfig.save();
