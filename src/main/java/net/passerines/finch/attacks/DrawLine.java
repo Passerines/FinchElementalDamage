@@ -34,7 +34,7 @@ public class DrawLine {
         this.range = range;
         this.itemStack = itemStack;
         this.damage = damage;
-        this.range = area;
+        this.area = area;
     }
 
     public ArrayList<Entity> draw() {
