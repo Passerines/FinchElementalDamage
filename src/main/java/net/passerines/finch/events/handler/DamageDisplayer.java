@@ -36,7 +36,7 @@ public class DamageDisplayer implements Listener {
             }
             else if(victim instanceof LivingEntity){
                 EntityData vEntityData = EntityMap.ENTITIES.get(victim);
-                damage = (finalDamage - finalDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+                damage = (int) (finalDamage - finalDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
             }
             Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0));
             ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class);
