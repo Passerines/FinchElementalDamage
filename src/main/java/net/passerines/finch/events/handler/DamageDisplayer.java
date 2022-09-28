@@ -15,8 +15,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.world.EntitiesLoadEvent;
 import org.bukkit.persistence.PersistentDataType;
 
 public class DamageDisplayer implements Listener {
@@ -24,28 +26,28 @@ public class DamageDisplayer implements Listener {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onDamage(ElementalDamageEvent event){
         Entity victim = event.getVictim();
-        double finalDamage = event.getDamage();
-        double damage = 0;
-        if(!(victim instanceof ArmorStand)) {
-            if(victim instanceof Player){
-                PlayerData vPlayerData = PlayerMap.PLAYERS.get(victim);
-                damage = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
+        int damage = (int) event.getFinalDamage();
+        Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0));
+        ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class, (armorStand) -> {
+            armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
+            armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("invulnerable"), PersistentDataType.BYTE, (byte) 1);
+            armorStand.setInvisible(true);
+            armorStand.setMarker(true);
+            armorStand.customName(Chat.formatC(event.getElement().getColor() + "☆" + damage + "☆"));
+            armorStand.setCustomNameVisible(true);
+        });
+        Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), damageDisplay::remove, 50);
+    }
+
+    @EventHandler
+    public void onEntityLoad(EntitiesLoadEvent event) {
+        for(Entity entity : event.getEntities()) {
+            if(entity.getPersistentDataContainer().has(Util.getNamespacedKey("remove")) && entity.getTicksLived()>0) {
+                entity.remove();
             }
-            else if(victim instanceof LivingEntity){
-                EntityData vEntityData = EntityMap.ENTITIES.get(victim);
-                damage = (int) (finalDamage - finalDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
-            }
-            Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0));
-            ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class);
-            damageDisplay.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
-            damageDisplay.setInvisible(true);
-            damageDisplay.setMarker(true);
-            damageDisplay.customName(Chat.formatC(event.getElement().getColor() + "☆" + damage + "☆"));
-            damageDisplay.setCustomNameVisible(true);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), damageDisplay::remove, 50);
         }
     }
 }

@@ -17,7 +17,7 @@ public class EntityData {
     public EntityData(Entity entity){
         this.entity = entity;
         LivingEntity livingEntity = (LivingEntity) entity;
-        health = ((LivingEntity) entity).getHealth() * 3;
+        health = ((LivingEntity) entity).getHealth();
         defense = 5;
         if(livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
             damage = (int) (2 * livingEntity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());

@@ -1,16 +1,27 @@
 package net.passerines.finch.events;
 
+import net.passerines.finch.entity.EntityData;
+import net.passerines.finch.entity.EntityMap;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
+import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+import static net.passerines.finch.players.PlayerMap.PLAYERS;
+
 public class ElementalDamageEvent extends Event implements Cancellable {
 
     private double damage;
+    private double finalDamage;
     private Entity attacker;
     private Entity victim;
     private Element element;
@@ -50,10 +61,42 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         this.victim = victim;
         this.element = element;
         this.damage = damage;
+        calculate();
+    }
+
+    public void calculate() {
+        double attackDamage = damage;
+        if (attacker instanceof Player) {
+            if(Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null){
+                attackDamage = (attackDamage + (PLAYERS.get(attacker).getDamage()*((Player) attacker).getPlayer().getAttackCooldown()));
+            }
+            else{attackDamage = 5;}
+        }
+        else if (attacker instanceof Arrow arrow) {
+            if (arrow.getShooter() instanceof Player player) {
+                attackDamage = attackDamage + (PlayerMap.PLAYERS.get(player).getDamage()*(player).getPlayer().getAttackCooldown());
+            }
+        }
+        else if (attacker instanceof LivingEntity entity) {
+            attackDamage = attackDamage + EntityMap.ENTITIES.get(entity).getDamage();
+        }
+        if(victim instanceof Player){
+            PlayerData vPlayerData = PlayerMap.PLAYERS.get(victim);
+            attackDamage = (int) ((attackDamage - (attackDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * element.getElementalMultiplier()));
+        }
+        else if(victim instanceof LivingEntity){
+            EntityData vEntityData = EntityMap.ENTITIES.get(victim);
+            attackDamage = (int) (attackDamage - attackDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+        } else {
+            attackDamage = damage;
+        }
+        this.finalDamage = attackDamage;
     }
 
     public void apply() {
-        Bukkit.getPluginManager().callEvent(this);
+        if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable"))) {
+            Bukkit.getPluginManager().callEvent(this);
+        }
     }
 
     public double getDamage() {
@@ -97,4 +140,9 @@ public class ElementalDamageEvent extends Event implements Cancellable {
     public static HandlerList getHandlerList() {
         return HANDLER_LIST;
     }
+
+    public double getFinalDamage() {
+        return finalDamage;
+    }
+
 }

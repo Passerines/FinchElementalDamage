@@ -1,13 +1,16 @@
 package net.passerines.finch.entity;
 
+import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.CustomEntityDeathEvent;
+import net.passerines.finch.integrations.MythicMobsBridge;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -47,10 +50,13 @@ public class EntityMap implements Listener {
         Collection<Entity> entitylist = event.getEntities();
         Object[] entities = entitylist.toArray();
         for(Object entity : entities) {
-            if(!ENTITIES.containsKey(entity) && entity instanceof LivingEntity){
+            if(entity instanceof LivingEntity livingEntity && !ENTITIES.containsKey(entity)){
                 Util.log("Entity added to map");
-                ENTITIES.put((Entity) entity, new EntityData((Entity) entity));
-                Util.log("Registered Mob: " + ((LivingEntity) entity).getType());
+                if(!MythicBukkit.inst().getMobManager().isActiveMob((livingEntity).getUniqueId())) {
+                    livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3);
+                }
+                ENTITIES.put(livingEntity, new EntityData(livingEntity));
+                Util.log("Registered Mob: " + (livingEntity).getType());
             }
         }
     }
