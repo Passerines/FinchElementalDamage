@@ -84,10 +84,14 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             cd.add(player);
         }
         if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)){
-            HashSet<Material> transparent = new HashSet<Material>();
+            HashSet<Material> transparent = new HashSet<>();
             transparent.add(Material.AIR);
             Block block = player.getTargetBlock(transparent, 120);
-            player.getWorld().strikeLightning(block.getLocation());
+            Location loc = block.getLocation();
+            LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
+            lightningStrike.setCausingPlayer(player);
+            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("weapon"), PersistentDataType.STRING, id);
+            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0);
             cd1.add(player);
         }
     }

@@ -25,7 +25,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import static net.passerines.finch.entity.EntityMap.ENTITIES;
-import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 public class DamageHandler implements Listener {
     public DamageHandler() {
@@ -69,7 +68,6 @@ public class DamageHandler implements Listener {
     }
     @EventHandler
     public void onElementalDamage(ElementalDamageEvent event) {
-        Entity attacker = event.getAttacker();
         Entity victim = event.getVictim();
         if (victim instanceof Player) {
             PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));

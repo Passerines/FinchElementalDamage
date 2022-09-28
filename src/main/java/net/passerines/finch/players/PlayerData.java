@@ -49,8 +49,13 @@ public class PlayerData {
         //Update player hotbar after updating their data
         HealthDisplay.updateActionBar(player);
     }
+    public void calculateHand(){
+        reset();
+        ItemStack mainHandItem = player.getInventory().getItemInMainHand();
+        calculate(mainHandItem);
+    }
 
-    //Calculate individual armor/trinket pieces
+    //Calculate individual armor/trinket piecesd
     private void calculate(ItemStack item) {
         String id = Util.getId(item);
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
