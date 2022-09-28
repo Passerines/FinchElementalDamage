@@ -34,7 +34,6 @@ public class IntergalacticSniper extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(id.equals(Util.getId(item)) && event.getAction().isRightClick() && cd.isOffCooldown(player)){
-            Util.shootArrow(player, Sound.ENTITY_WARDEN_ATTACK_IMPACT, 0, vPlayer.getDamage()*100);
             new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SONIC_BOOM, Particle.EXPLOSION_HUGE, 50,(1 + vPlayer.getManaMax()*50), 3).draw();
             cd.add(player, 20);
         }
