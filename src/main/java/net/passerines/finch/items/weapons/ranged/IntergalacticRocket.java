@@ -41,7 +41,7 @@ public class IntergalacticRocket extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&Intergalactic Rocket"));
+        itemMeta.displayName(Chat.formatC("&bIntergalactic Rocket"));
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         return writeId(item);
