@@ -33,7 +33,7 @@ public class PlayerConfig {
     }
     private void load() {
         config.set("User.Username", player.getName());
-        config.set("User.UUID", player.getUniqueId());
+        config.set("User.UUID", player.getUniqueId().toString());
     }
     public void save() {
         try {
