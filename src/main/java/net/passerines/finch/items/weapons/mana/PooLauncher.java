@@ -1,6 +1,8 @@
 package net.passerines.finch.items.weapons.mana;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.data.Cooldown;
+import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
@@ -16,6 +18,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.Vector;
 
 
 public class PooLauncher extends FinchWeapon implements Listener {
@@ -25,19 +29,30 @@ public class PooLauncher extends FinchWeapon implements Listener {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-
     @EventHandler
     public void onClick(PlayerInteractEvent event){
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals( Util.getId(item))){
-            Location loc = player.getEyeLocation().toVector().add(player.getLocation().getDirection().multiply(2)).toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
-            Fireball fireball = player.getWorld().spawn(loc, Fireball.class);
-            fireball.setYield(100);
-            fireball.setShooter(player);
-            String bar = Chat.format("You asked for this.");
-            Chat.sendActionBar(player, bar);
+            Fireball fireball = player.launchProjectile(Fireball.class);
+            fireball.getPersistentDataContainer().set(Util.getNamespacedKey("weapon"), PersistentDataType.STRING, id);
+            fireball.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100000.0);
+            fireball.setYield(50);
+        }
+    }
+
+    @EventHandler
+    public void onDamage(ElementalDamageEvent event){
+        if(event.getAttacker() instanceof Fireball){
+            if(id.equals(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("weapon"), PersistentDataType.STRING))){
+                Vector victimPosition = event.getVictim().getLocation().toVector();
+                Vector fireBallPosition = event.getAttacker().getLocation().toVector();
+                Vector offset = victimPosition.subtract(fireBallPosition);
+                double magnitude = offset.length();
+                Vector unitDirection = offset.clone().normalize();
+                event.setDamage(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE));
+            }
         }
     }
 

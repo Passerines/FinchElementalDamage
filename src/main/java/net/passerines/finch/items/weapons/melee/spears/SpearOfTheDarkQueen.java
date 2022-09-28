@@ -1,10 +1,13 @@
 package net.passerines.finch.items.weapons.melee.spears;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.attacks.DrawLine;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -42,10 +45,10 @@ public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
+        PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.DRAGON_BREATH, Particle.DRAGON_BREATH, 5, damage,2,0);
-            slash.drawSlash();
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.DRAGON_BREATH, Particle.DRAGON_BREATH, 50, damage + vPlayer.getDamage()*0.5, 3).draw();
             cd.add(player);
         }
     }

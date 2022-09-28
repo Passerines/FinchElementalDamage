@@ -41,7 +41,7 @@ public class ManaKatana extends FinchWeapon implements Listener {
         PlayerData vPlayer = PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && click.getAction().isLeftClick() && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.ASH, Particle.CRIT, 7,(1 + vPlayer.getManaMax()*0.01),85,0);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() ,Particle.NOTE, Particle.BUBBLE_POP, 7,(1 + vPlayer.getManaMax()*0.01),85,0);
             slash.drawSlash();
             cd.add(player, 7);
         }

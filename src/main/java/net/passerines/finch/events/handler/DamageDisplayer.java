@@ -2,6 +2,8 @@ package net.passerines.finch.events.handler;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -23,7 +25,9 @@ public class DamageDisplayer implements Listener {
         Entity victim = event.getVictim();
         if(!(victim instanceof ArmorStand)) {
             Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0), Util.rand(-1.0, 1.0));
-            int damage = (int) event.getDamage();
+            PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
+            double finalDamage = event.getDamage();
+            double damage = (int) ((finalDamage - (finalDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * event.getElement().getElementalMultiplier()));
             ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class);
             damageDisplay.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
             damageDisplay.setInvisible(true);

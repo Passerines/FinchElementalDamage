@@ -84,6 +84,7 @@ public class ItemManager {
         new StronkLeggings();
         new IntergalacticDagger();
         new IntergalacticSniper();
+        new IntergalacticRocket();
         new SniperHelmet();
         new LifeStone();
         new Valkyre();

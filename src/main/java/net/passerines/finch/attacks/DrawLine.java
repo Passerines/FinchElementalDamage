@@ -24,8 +24,9 @@ public class DrawLine {
     private double range;
     private ItemStack itemStack;
     private double damage;
+    private int area;
 
-    public DrawLine(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage) {
+    public DrawLine(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, int area) {
         this.player = player;
         this.location = location;
         this.particle = particle;
@@ -33,6 +34,7 @@ public class DrawLine {
         this.range = range;
         this.itemStack = itemStack;
         this.damage = damage;
+        this.range = area;
     }
 
     public ArrayList<Entity> draw() {
@@ -49,7 +51,7 @@ public class DrawLine {
             } else {
                 loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0);
             }
-            Collection<Entity> entitylist = loc.getNearbyEntities(2, 2, 2);
+            Collection<Entity> entitylist = loc.getNearbyEntities(area, area, area);
             Object[] entities = entitylist.toArray();
             for (Object entity : entities) {
                 if (entity instanceof Damageable) {
