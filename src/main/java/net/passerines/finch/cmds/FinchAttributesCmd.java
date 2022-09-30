@@ -70,8 +70,11 @@ public class FinchAttributesCmd implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         ArrayList<String> results = new ArrayList<>();
-        if(args.length <= 3){
+        if(args.length == 1){
             Util.copyPartialContains(args[0], Arrays.asList("setMaxHealth", "SetDefense", "setMaxMana", "heal"), results);
+        }
+        if(args.length == 2){
+
             Util.copyPartialContains(args[1], Util.getOnlinePlayerNames(), results);
         }
         return results;

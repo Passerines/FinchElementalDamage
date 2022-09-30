@@ -9,10 +9,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class ImpierceLeggings extends FinchArmor {
+public class ImpierceKneeplates extends FinchArmor {
 
-    public ImpierceLeggings() {
-        super("ImpierceLeggings");
+    public ImpierceKneeplates() {
+        super("ImpierceKneeplates");
         this.defense = 550;
         this.health = 95;
         this.damage = 15;
@@ -22,7 +22,7 @@ public class ImpierceLeggings extends FinchArmor {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_LEGGINGS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&6Impierce &fLeggings"));
+        itemMeta.displayName(Chat.formatC("&6Impierce &fKnee Plates"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f+95 ")));

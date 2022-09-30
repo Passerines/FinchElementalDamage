@@ -22,7 +22,7 @@ public class ImpierceShoes extends FinchArmor {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_BOOTS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&6Impierce &fGaloshes"));
+        itemMeta.displayName(Chat.formatC("&6Impierce &fBoots"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f+25 ")));
