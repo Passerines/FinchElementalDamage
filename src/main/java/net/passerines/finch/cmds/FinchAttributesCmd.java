@@ -1,7 +1,9 @@
 package net.passerines.finch.cmds;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.util.Util;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
@@ -65,13 +68,12 @@ public class FinchAttributesCmd implements CommandExecutor, TabCompleter {
 
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         ArrayList<String> results = new ArrayList<>();
-        results.add("adwadwadaw");
-        results.add("wdnwuan");
-        results.add("adwadwaaddsaw");
-        results.add("adwadwadwadadaw");
-        results.add("dwdaw");
+        if(args.length <= 3){
+            Util.copyPartialContains(args[0], Arrays.asList("setMaxHealth", "SetDefense", "setMaxMana", "heal"), results);
+            Util.copyPartialContains(args[1], Util.getOnlinePlayerNames(), results);
+        }
         return results;
     }
 }
