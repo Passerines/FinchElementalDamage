@@ -48,7 +48,7 @@ public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.DRAGON_BREATH, Particle.DRAGON_BREATH, 50, damage + vPlayer.getDamage()*0.5, 3).draw();
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.DRAGON_BREATH, Particle.DRAGON_BREATH, 5, damage + vPlayer.getDamage()*0.5, 2).draw();
             cd.add(player);
         }
     }
