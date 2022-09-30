@@ -19,7 +19,7 @@ public class TrinketMenu implements Listener {
 
     private final int cooldownTimeMilliseconds = 6000;
     public TrinketMenu() {
-        egui = Bukkit.createInventory(null, 27, Component.text("TrinketMenu"));
+        egui = Bukkit.createInventory(null, 9, Component.text("TrinketMenu"));
         Bukkit.getPluginManager().registerEvents(this, plugin);
         initialize();
     }

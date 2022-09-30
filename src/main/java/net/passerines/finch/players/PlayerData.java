@@ -49,7 +49,6 @@ public class PlayerData {
         calculate(leggings);
         ItemStack boots = player.getInventory().getBoots();
         calculate(boots);
-
         //Update player hotbar after updating their data
         HealthDisplay.updateActionBar(player);
     }
@@ -58,8 +57,23 @@ public class PlayerData {
         ItemStack mainHandItem = player.getInventory().getItemInMainHand();
         calculate(mainHandItem);
     }
+    public void calculateTrinket(){
+
+    }
 
     //Calculate individual armor/trinket piecesd
+    private void uncalculate(ItemStack item){
+        String id = Util.getId(item);
+        if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
+            FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
+            if(finchItem instanceof FinchArmor finchArmor) {
+                setDefense(defense - finchArmor.getDefense());
+                setHealthMax(healthMax - finchArmor.getHealth());
+                setDamage(damage - finchArmor.getDamage());
+                setManaMax(manaMax - finchArmor.getMana());
+            }
+        }
+    }
     private void calculate(ItemStack item) {
         String id = Util.getId(item);
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
