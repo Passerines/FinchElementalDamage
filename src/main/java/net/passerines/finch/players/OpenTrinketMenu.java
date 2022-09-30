@@ -11,15 +11,14 @@ public class OpenTrinketMenu implements CommandExecutor {
     private FinchElementalDamage plugin = FinchElementalDamage.inst();
 
     public OpenTrinketMenu() {
-        plugin.getCommand("TrinketMenu").setExecutor(plugin);
+        plugin.getCommand("trinketmenu").setExecutor(this);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
-            TrinketMenu trinketMenu = new TrinketMenu();
-            trinketMenu.open(player);
-            player.sendMessage(Chat.formatC("Sent"));
+            PlayerData vPlayerData = PlayerMap.PLAYERS.get(player);
+            vPlayerData.getTrinketMenu().open(player);
         }
         return false;
     }
