@@ -12,6 +12,7 @@ public class PlayerData {
 
     private Player player;
     private PlayerConfig playerConfig;
+    private TrinketMenu trinketMenu;
 
     private double health;
     private double healthMax;
@@ -31,7 +32,7 @@ public class PlayerData {
         this.player = player;
         defense = 10;
         calculate();
-
+        trinketMenu = new TrinketMenu();
         playerConfig = new PlayerConfig(this);
         health = playerConfig.getConfig().getDouble("Player.Health", 100);
         mana = playerConfig.getConfig().getInt("Player.Mana", 100);
@@ -194,6 +195,7 @@ public class PlayerData {
     public Player getPlayer() {
         return player;
     }
+    public TrinketMenu getTrinketMenu(){return trinketMenu;}
 
     public PlayerConfig getPlayerConfig() {
         return playerConfig;

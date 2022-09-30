@@ -7,6 +7,7 @@ import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -99,7 +100,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
             lightningStrike.setCausingPlayer(player);
             lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING, id);
-            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0 + (new PlayerData(player).getManaMax() / 100 + 0.0)*10);
+            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0 + (PlayerMap.PLAYERS.get(player).getManaMax() / 100 + 0.0)*10);
             cd1.add(player);
         }
     }
