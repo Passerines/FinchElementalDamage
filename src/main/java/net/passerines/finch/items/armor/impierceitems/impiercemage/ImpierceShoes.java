@@ -1,4 +1,4 @@
-package net.passerines.finch.items.armor.impierceitems;
+package net.passerines.finch.items.armor.impierceitems.impiercemage;
 
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.items.FinchArmor;
@@ -9,25 +9,25 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class ImpierceLeggings extends FinchArmor {
+public class ImpierceShoes extends FinchArmor {
 
-    public ImpierceLeggings() {
-        super("ImpierceLeggings");
-        this.defense = 550;
-        this.health = 95;
-        this.damage = 15;
+    public ImpierceShoes() {
+        super("ImpierceShoes");
+        this.defense = 175;
+        this.health = 25;
+        this.mana = 450;
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.GOLDEN_LEGGINGS);
+        ItemStack item = new ItemStack(Material.GOLDEN_BOOTS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&6Impierce &fLeggings"));
+        itemMeta.displayName(Chat.formatC("&6Impierce &fGaloshes"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f+95 ")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+550 ")));
-        lore.add(Component.text(Chat.format("&4Damage: &f+15" )));
+        lore.add(Component.text(Chat.format("&cHealth: &f+25 ")));
+        lore.add(Component.text(Chat.format("&aDefense: &f+175")));
+        lore.add(Component.text(Chat.format("&4Mana: &f+450" )));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
