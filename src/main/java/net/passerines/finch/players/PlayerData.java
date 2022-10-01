@@ -4,6 +4,8 @@ import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.items.FinchTrinkets;
+import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,17 +33,8 @@ public class PlayerData {
     public PlayerData(Player player){
         this.player = player;
         defense = 10;
-        calculate();
-        trinketMenu = new TrinketMenu();
-        playerConfig = new PlayerConfig(this);
-        health = playerConfig.getConfig().getDouble("Player.Health", 100);
-        mana = playerConfig.getConfig().getInt("Player.Mana", 100);
-    }
-
-    public void calculate() {
         reset();
-        //Calculate the helmet
-        ItemStack helmet = player.getInventory().getHelmet();
+        /*ItemStack helmet = player.getInventory().getHelmet();
         calculate(helmet);
         ItemStack chestplate = player.getInventory().getChestplate();
         calculate(chestplate);
@@ -49,19 +42,31 @@ public class PlayerData {
         calculate(leggings);
         ItemStack boots = player.getInventory().getBoots();
         calculate(boots);
-        //Update player hotbar after updating their data
+        */
+        ItemStack mainhand = player.getInventory().getItemInMainHand();
+        calculate(mainhand);
+        trinketMenu = new TrinketMenu();
+        playerConfig = new PlayerConfig(this);
+        health = playerConfig.getConfig().getDouble("Player.Health", 100);
+        mana = playerConfig.getConfig().getInt("Player.Mana", 100);
+    }
+
+    public void calculatePiece(ItemStack oldHelmet, ItemStack newHelmet) {
+        uncalculate(oldHelmet);
+        calculate(newHelmet);
         HealthDisplay.updateActionBar(player);
     }
-    public void calculateHand(){
-        reset();
-        ItemStack mainHandItem = player.getInventory().getItemInMainHand();
-        calculate(mainHandItem);
+
+    public void calculateHand(ItemStack oldItem, ItemStack newItem){
+        uncalculate(oldItem);
+        calculate(newItem);
+        HealthDisplay.updateActionBar(player);
     }
     public void calculateTrinket(){
 
     }
 
-    //Calculate individual armor/trinket piecesd
+    //Calculate individual armor/trinket pieces
     private void uncalculate(ItemStack item){
         String id = Util.getId(item);
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
@@ -71,6 +76,25 @@ public class PlayerData {
                 setHealthMax(healthMax - finchArmor.getHealth());
                 setDamage(damage - finchArmor.getDamage());
                 setManaMax(manaMax - finchArmor.getMana());
+            }
+            else if(finchItem instanceof FinchWeapon finchWeapon) {
+                setDefense(defense - finchWeapon.getDefense());
+                setHealthMax(healthMax - finchWeapon.getHealth());
+                setDamage(damage - finchWeapon.getDamage());
+                setManaMax(manaMax - finchWeapon.getMana());
+            }
+            else if(finchItem instanceof FinchTrinkets finchTrinkets){
+                setDefense(defense - finchTrinkets.getDefense());
+                setHealthMax(healthMax - finchTrinkets.getHealth());
+                setDamage(damage - finchTrinkets.getDamage());
+                setManaMax(manaMax - finchTrinkets.getMana());
+                setElectroProf(electroProf - finchTrinkets.getElectro());
+                setFireProf(fireProf - finchTrinkets.getFire());
+                setWaterProf(waterProf - finchTrinkets.getWater());
+                setEarthProf(earthProf - finchTrinkets.getEarth());
+                setDarknessProf(darknessProf - finchTrinkets.getDark());
+                setLightProf(lightProf - finchTrinkets.getLight());
+                setWindProf(windProf - finchTrinkets.getWind());
             }
         }
     }
@@ -83,6 +107,25 @@ public class PlayerData {
                 setHealthMax(healthMax + finchArmor.getHealth());
                 setDamage(damage + finchArmor.getDamage());
                 setManaMax(manaMax + finchArmor.getMana());
+            }
+            else if (finchItem instanceof FinchWeapon finchWeapon) {
+                setDefense(defense + finchWeapon.getDefense());
+                setHealthMax(healthMax + finchWeapon.getHealth());
+                setDamage(damage + finchWeapon.getDamage());
+                setManaMax(manaMax + finchWeapon.getMana());
+            }
+            else if(finchItem instanceof FinchTrinkets finchTrinkets){
+                setDefense(defense + finchTrinkets.getDefense());
+                setHealthMax(healthMax + finchTrinkets.getHealth());
+                setDamage(damage + finchTrinkets.getDamage());
+                setManaMax(manaMax + finchTrinkets.getMana());
+                setElectroProf(electroProf + finchTrinkets.getElectro());
+                setFireProf(fireProf + finchTrinkets.getFire());
+                setWaterProf(waterProf + finchTrinkets.getWater());
+                setEarthProf(earthProf + finchTrinkets.getEarth());
+                setDarknessProf(darknessProf + finchTrinkets.getDark());
+                setLightProf(lightProf + finchTrinkets.getLight());
+                setWindProf(windProf + finchTrinkets.getWind());
             }
         }
     }

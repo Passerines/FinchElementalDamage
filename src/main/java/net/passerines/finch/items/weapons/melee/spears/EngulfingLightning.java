@@ -36,10 +36,11 @@ import java.util.UUID;
 
 public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
-    Cooldown cd1 = new Cooldown<>(20);
+    Cooldown cd1 = new Cooldown<>(50);
     public EngulfingLightning() {
         super("EngulfingLightning");
         this.damage = 85;
+        this.mana = 500;
         this.element = ElementalDamageEvent.Element.ELECTRO;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -62,7 +63,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
                 lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("weapon"), PersistentDataType.STRING, id);
                 ightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0);
                  */
-                PlayerData playerData = new PlayerData(player);
+                PlayerData playerData = PlayerMap.PLAYERS.get(player);
                 if(playerData.getManaMax() >= playerData.getMana()){
                     if(playerData.getManaMax() * 0.02 + playerData.getMana() < playerData.getManaMax()){
                         playerData.setMana((int) (playerData.getManaMax() * 0.02));
@@ -116,9 +117,12 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&4Damage: &f+85")));
+        lore.add(Component.text(Chat.format("&bMana: &f+500")));
         lore.add(Component.text(Chat.format(" ")));
+        lore.add(Component.text(Chat.format("&6Ability: &dDivine Punishment")));
+        lore.add(Component.text(Chat.format("&7Summon a bolt of &dlightning in the direction")));
+        lore.add(Component.text(Chat.format("&7you are facing dealing damage based on your &bMana")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

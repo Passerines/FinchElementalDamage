@@ -9,10 +9,10 @@ public abstract class FinchTrinkets extends FinchItem {
     protected int defense;
     protected int damage;
     protected int mana;
-    protected int fire;
-    protected int water;
-    protected int earth;
-    protected int wind;
+    protected double fire;
+    protected double water;
+    protected double earth;
+    protected double wind;
     protected int electro;
     protected int light;
     protected int dark;
@@ -51,16 +51,16 @@ public abstract class FinchTrinkets extends FinchItem {
     public ElementalDamageEvent.Element getElement(){
         return element;
     }
-    public int getFire(){
+    public double getFire(){
         return fire;
     }
-    public int getWater(){
+    public double getWater(){
         return water;
     }
-    public int getEarth(){
+    public double getEarth(){
         return earth;
     }
-    public int getWind(){
+    public double getWind(){
         return wind;
     }
     public int getElectro(){

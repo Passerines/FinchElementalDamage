@@ -38,6 +38,5 @@ public class TrinketMenu implements Listener {
         egui.setItem(6, placeholder);
         egui.setItem(7, placeholder);
         egui.setItem(8, placeholder);
-        egui.setItem(9, placeholder);
     }
 }
