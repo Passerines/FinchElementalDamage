@@ -51,19 +51,32 @@ public class PlayerData {
         mana = playerConfig.getConfig().getInt("Player.Mana", 100);
     }
 
-    public void calculatePiece(ItemStack oldHelmet, ItemStack newHelmet) {
-        uncalculate(oldHelmet);
-        calculate(newHelmet);
-        HealthDisplay.updateActionBar(player);
-    }
-
-    public void calculateHand(ItemStack oldItem, ItemStack newItem){
+    public void calculatePiece(ItemStack oldItem, ItemStack newItem) {
         uncalculate(oldItem);
         calculate(newItem);
         HealthDisplay.updateActionBar(player);
     }
-    public void calculateTrinket(){
 
+    public void calculateHand(ItemStack oldItem, ItemStack newItem) {
+        if (ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
+            uncalculate(oldItem);
+            HealthDisplay.updateActionBar(player);
+            if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon) {
+                calculate(newItem);
+                HealthDisplay.updateActionBar(player);
+            }
+        }
+        else if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon) {
+            calculate(newItem);
+            HealthDisplay.updateActionBar(player);
+        }
+    }
+    public void calculateAccessory(ItemStack oldItem, ItemStack newItem){
+        if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchTrinkets && ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchTrinkets) {
+            uncalculate(oldItem);
+            calculate(newItem);
+            HealthDisplay.updateActionBar(player);
+        }
     }
 
     //Calculate individual armor/trinket pieces
@@ -76,6 +89,13 @@ public class PlayerData {
                 setHealthMax(healthMax - finchArmor.getHealth());
                 setDamage(damage - finchArmor.getDamage());
                 setManaMax(manaMax - finchArmor.getMana());
+                setElectroProf(electroProf - finchArmor.getElectro());
+                setFireProf(fireProf - finchArmor.getFire());
+                setWaterProf(waterProf - finchArmor.getWater());
+                setEarthProf(earthProf - finchArmor.getEarth());
+                setDarknessProf(darknessProf - finchArmor.getDark());
+                setLightProf(lightProf - finchArmor.getLight());
+                setWindProf(windProf - finchArmor.getWind());
             }
             else if(finchItem instanceof FinchWeapon finchWeapon) {
                 setDefense(defense - finchWeapon.getDefense());

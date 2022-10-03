@@ -11,16 +11,21 @@ import net.passerines.finch.players.TrinketMenu;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
+import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class EquipmentChangeHandler implements Listener {
 
@@ -31,6 +36,20 @@ public class EquipmentChangeHandler implements Listener {
     @EventHandler
     public void onArmorChange(PlayerArmorChangeEvent event) {
         PlayerMap.PLAYERS.get(event.getPlayer()).calculatePiece(event.getOldItem(), event.getNewItem());
+    }
+    @EventHandler
+    public void onPickup(PlayerAttemptPickupItemEvent event){
+        Util.log("Event ONPICKUP Called");
+        Player player = event.getPlayer();
+        player.sendMessage(Chat.formatC("Changed hand (Pickup)"));
+        PlayerMap.PLAYERS.get(player).calculateHand(new ItemStack(Material.AIR), player.getInventory().getItemInMainHand());
+    }
+    @EventHandler
+    public void onWeaponInventoryChange(InventoryClickEvent event){
+        Util.log("Event ONWEAPONINVENTORYCHANGE Called");
+        Player player = (Player) event.getWhoClicked();
+        player.sendMessage(Chat.formatC("Changed hand (Inventory)"));
+        PlayerMap.PLAYERS.get(player).calculateHand(player.getItemOnCursor(), player.getInventory().getItemInMainHand());
     }
     @EventHandler
     public void onWeaponChange(PlayerItemHeldEvent event){
