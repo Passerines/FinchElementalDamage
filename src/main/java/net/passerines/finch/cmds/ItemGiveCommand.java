@@ -1,5 +1,6 @@
 package net.passerines.finch.cmds;
 
+import net.kyori.adventure.title.TitlePart;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Chat;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,14 +23,57 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
         plugin.getCommand("itemgive").setExecutor(this);
         plugin.getCommand("itemgive").setTabCompleter(this);
     }
+
+    //        not included    0         1       2  (index)
+    // Length in array is 3   1         2       3
+    //if args is /itemgive "itemname" , give 1 item to commandSender
+    //if args is /itemgive "itemname" player amount , give amount item to player
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender.hasPermission("finch.admin")){
             if(sender instanceof Player player) {
+                ItemStack itemStack;
+                int amount = 1;
                 if(args.length > 0){
                     if(ItemManager.ITEM_HASH_MAP.containsKey(args[0])){
-                        player.getInventory().addItem(ItemManager.ITEM_HASH_MAP.get(args[0]).getItem());
-                        sender.sendMessage(Chat.format("&cYou have received: "+ Chat.asLegacy(ItemManager.ITEM_HASH_MAP.get(args[0]).getItem().getItemMeta().displayName())));
+                        itemStack = ItemManager.ITEM_HASH_MAP.get(args[0]).getItem();
+                        if(args.length > 1){
+                            try {
+                                //if args is /itemgive "itemname" amount , give amount item to commandSender
+                                amount = Integer.parseInt(args[1]);
+                                if(player.getInventory().firstEmpty() < 0){
+                                    Chat.sendTitle(player, "&cInventory Full");
+                                }
+                                else{
+                                    itemStack.setAmount(amount);
+                                    player.getInventory().addItem(itemStack);
+                                }
+                            }
+                            catch(NumberFormatException e){
+                                Player targetPlayer = Util.matchPlayer(args[1]);
+                                if(targetPlayer != null){
+                                    //if args is /itemgive "itemname" player , give 1 item to player
+                                    if(targetPlayer.getInventory().firstEmpty() < 0){
+                                        Chat.sendTitle(player, "&cInventory Full");
+                                    }
+                                    else{
+                                        targetPlayer.getInventory().addItem(itemStack);
+                                    }
+                                }
+                                else{
+                                    sender.sendMessage(Chat.format("&cThere is no such player as: " + args[1]));
+                                    ((Player) sender).banPlayer("player is not existing or online so you get banned, git gud");
+                                }
+                            }
+                        }
+                        else{
+                            if(player.getInventory().firstEmpty() < 0){
+                                Chat.sendTitle(player, "&cInventory Full");
+                            }
+                            else{
+                                player.getInventory().addItem(itemStack);
+                            }
+                        }
                     }
                     else{
                         sender.sendMessage(Chat.format("&cThere is no such item as: " + args[0]));
@@ -37,7 +82,6 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                 else{
                     sender.sendMessage(Chat.format("&cAnother argument is required for this command!"));
                 }
-                return true;
             }
         }
         else{
