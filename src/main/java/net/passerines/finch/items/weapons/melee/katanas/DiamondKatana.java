@@ -1,5 +1,6 @@
 package net.passerines.finch.items.weapons.melee.katanas;
 
+import io.lumine.mythic.bukkit.utils.particles.ParticleData;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
@@ -8,6 +9,7 @@ import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
@@ -44,7 +46,8 @@ public class DiamondKatana extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.BUBBLE_POP, Particle.CRIT, 4, damage,85,0);
+            Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(80, 190, 212), 1.0F);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.CRIT, 4, damage,85,0, dust);
             slash.drawSlash();
             cd.add(player);
         }

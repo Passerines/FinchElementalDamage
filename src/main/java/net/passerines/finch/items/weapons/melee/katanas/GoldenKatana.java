@@ -8,6 +8,7 @@ import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
@@ -44,7 +45,8 @@ public class GoldenKatana extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.BLOCK_DUST, Particle.CRIT, 4, damage,85,0);
+            Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 215, 84), 1.0F);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.BLOCK_DUST, Particle.CRIT, 4, damage,85,0, dust);
             slash.drawSlash();
             cd.add(player);
         }

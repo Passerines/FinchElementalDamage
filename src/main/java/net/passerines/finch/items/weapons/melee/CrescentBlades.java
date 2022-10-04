@@ -44,7 +44,7 @@ public class CrescentBlades extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd0.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ASH, Particle.CRIT, 7, damage,85,0);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ASH, Particle.CRIT, 7, damage,85,0, null);
             slash.drawSlash();
             cd0.add(player);
         }

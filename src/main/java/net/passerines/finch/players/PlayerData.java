@@ -58,15 +58,11 @@ public class PlayerData {
     }
 
     public void calculateHand(ItemStack oldItem, ItemStack newItem) {
-        if (ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
+        if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
             uncalculate(oldItem);
             HealthDisplay.updateActionBar(player);
-            if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon) {
-                calculate(newItem);
-                HealthDisplay.updateActionBar(player);
-            }
         }
-        else if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon) {
+        if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon) {
             calculate(newItem);
             HealthDisplay.updateActionBar(player);
         }

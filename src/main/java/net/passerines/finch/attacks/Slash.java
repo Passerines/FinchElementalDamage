@@ -1,10 +1,12 @@
 package net.passerines.finch.attacks;
 
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Damageable;
@@ -26,8 +28,9 @@ public class Slash {
     private double rotation;
     private ItemStack itemStack;
     private double damage;
+    private Object dust;
 
-    public Slash(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, double angle, double rotation) {
+    public Slash(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, double angle, double rotation, Object dust) {
         this.player = player;
         this.location = location;
         this.particle = particle;
@@ -57,18 +60,18 @@ public class Slash {
     }
     private void drawLine(Location location) {
         ArrayList<Entity> hitEntities = new ArrayList<>();
-        for(double i = 0.9; i <= range; i += 0.3){
+        for(double i = range/2; i <= range; i += 0.3){
             Location loc = location.clone();
             Vector direction = loc.getDirection().multiply(i);
             loc.add(direction);
             if(loc.getBlock().isCollidable()) {
                 break;
             }
-            if(i + 0.6 >= range){
-                loc.getWorld().spawnParticle(particleEnd, loc, 1, 0, 0, 0, 0);
+            if(i + 0.9 >= range){
+                loc.getWorld().spawnParticle(particleEnd, loc, 1, 0, 0, 0, 0, dust);
             }
             else {
-                loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0);
+                loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0, dust);
             }
             Collection<Entity> entitylist = loc.getNearbyEntities(1, 1, 1);
             Object[] entities = entitylist.toArray();
@@ -88,6 +91,10 @@ public class Slash {
         }
     }
     public void drawSlash(){
+
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), () -> {
+
+        }, 0, 100);
         for(int i = 0; i <= angle; i+=3){
             Vector direction = new Vector(1,0,0);
             Vector y = new Vector(0, 1, 0);
@@ -100,7 +107,6 @@ public class Slash {
             direction = rotateVectorCC(direction, y, Math.toRadians(-loc.getYaw() - 90));
             loc.setDirection(direction);
             drawLine(loc);
-
         }
     }
 }

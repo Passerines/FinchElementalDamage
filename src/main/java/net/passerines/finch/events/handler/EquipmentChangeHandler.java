@@ -5,6 +5,7 @@ import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchTrinkets;
+import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.players.TrinketMenu;
@@ -20,10 +21,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
-import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
-import org.bukkit.event.player.PlayerChangedMainHandEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -45,10 +43,17 @@ public class EquipmentChangeHandler implements Listener {
         PlayerMap.PLAYERS.get(player).calculateHand(new ItemStack(Material.AIR), player.getInventory().getItemInMainHand());
     }
     @EventHandler
+    public void onDrop(PlayerDropItemEvent event){
+        Util.log("Event ONDROP Called");
+        Player player = event.getPlayer();
+        player.sendMessage(Chat.formatC("Changed hand (Drop)"));
+        PlayerMap.PLAYERS.get(player).calculateHand(event.getItemDrop().getItemStack(), new ItemStack(Material.AIR));
+    }
+    @EventHandler
     public void onWeaponInventoryChange(InventoryClickEvent event){
         Util.log("Event ONWEAPONINVENTORYCHANGE Called");
         Player player = (Player) event.getWhoClicked();
-        player.sendMessage(Chat.formatC("Changed hand (Inventory)"));
+        player.sendMessage(Chat.formatC("Changed Inventory"));
         PlayerMap.PLAYERS.get(player).calculateHand(player.getItemOnCursor(), player.getInventory().getItemInMainHand());
     }
     @EventHandler

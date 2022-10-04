@@ -89,7 +89,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ELECTRIC_SPARK, Particle.DRAGON_BREATH, 5, damage,2,0);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 5, damage,2,0, null);
             slash.drawSlash();
             cd.add(player);
         }
