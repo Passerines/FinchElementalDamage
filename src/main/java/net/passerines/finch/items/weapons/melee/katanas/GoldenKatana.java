@@ -46,7 +46,7 @@ public class GoldenKatana extends FinchWeapon implements Listener {
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 215, 84), 1.0F);
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.BLOCK_DUST, Particle.CRIT, 4, damage,85,0, dust);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.CRIT, 4, damage,85,0, dust);
             slash.drawSlash();
             cd.add(player);
         }

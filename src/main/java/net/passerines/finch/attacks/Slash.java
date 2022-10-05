@@ -29,6 +29,8 @@ public class Slash {
     private ItemStack itemStack;
     private double damage;
     private Object dust;
+    private ArrayList<Entity> hitEntities = new ArrayList<>();
+
 
     public Slash(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, double angle, double rotation, Object dust) {
         this.player = player;
@@ -40,6 +42,7 @@ public class Slash {
         this.rotation = rotation;
         this.itemStack = itemStack;
         this.damage = damage;
+        this.dust = dust;
     }
     public static Vector rotateVectorCC(Vector vec, Vector axis, double theta){
         double x, y, z;
@@ -59,7 +62,6 @@ public class Slash {
         return new Vector(xPrime, yPrime, zPrime);
     }
     private void drawLine(Location location) {
-        ArrayList<Entity> hitEntities = new ArrayList<>();
         for(double i = range/2; i <= range; i += 0.3){
             Location loc = location.clone();
             Vector direction = loc.getDirection().multiply(i);
@@ -68,7 +70,7 @@ public class Slash {
                 break;
             }
             if(i + 0.9 >= range){
-                loc.getWorld().spawnParticle(particleEnd, loc, 1, 0, 0, 0, 0, dust);
+                loc.getWorld().spawnParticle(particleEnd, loc, 1, 0, 0, 0, 0);
             }
             else {
                 loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0, dust);

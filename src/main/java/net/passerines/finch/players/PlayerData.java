@@ -29,6 +29,7 @@ public class PlayerData {
     private double electroProf;
     private double lightProf;
     private double darknessProf;
+    private ItemStack oldItem;
 
     public PlayerData(Player player){
         this.player = player;
@@ -43,8 +44,8 @@ public class PlayerData {
         ItemStack boots = player.getInventory().getBoots();
         calculate(boots);
         */
-        ItemStack mainhand = player.getInventory().getItemInMainHand();
-        calculate(mainhand);
+        oldItem = player.getInventory().getItemInMainHand();
+        calculate(oldItem);
         trinketMenu = new TrinketMenu();
         playerConfig = new PlayerConfig(this);
         health = playerConfig.getConfig().getDouble("Player.Health", 100);
@@ -57,15 +58,14 @@ public class PlayerData {
         HealthDisplay.updateActionBar(player);
     }
 
-    public void calculateHand(ItemStack oldItem, ItemStack newItem) {
-        if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
+    public void calculateHand(ItemStack newItem) {
+        if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon){
             uncalculate(oldItem);
-            HealthDisplay.updateActionBar(player);
         }
-        if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon) {
+        if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon){
             calculate(newItem);
-            HealthDisplay.updateActionBar(player);
         }
+        oldItem = newItem;
     }
     public void calculateAccessory(ItemStack oldItem, ItemStack newItem){
         if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchTrinkets && ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchTrinkets) {
@@ -144,6 +144,7 @@ public class PlayerData {
                 setWindProf(windProf + finchTrinkets.getWind());
             }
         }
+        HealthDisplay.updateActionBar(player);
     }
 
     public void reset() {
@@ -267,6 +268,9 @@ public class PlayerData {
 
     public Player getPlayer() {
         return player;
+    }
+    public ItemStack getOldItem(){
+        return oldItem;
     }
     public TrinketMenu getTrinketMenu(){return trinketMenu;}
 

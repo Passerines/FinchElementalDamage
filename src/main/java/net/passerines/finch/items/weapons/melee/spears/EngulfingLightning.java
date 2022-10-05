@@ -79,21 +79,23 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     }
     @EventHandler
     public void onLightning(ElementalDamageEvent event){
-        if(event.getAttacker() instanceof LightningStrike){
-            if(id.equals(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING))){
-                event.setDamage(event.getAttacker().getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE));
+        if(event.getAttacker() instanceof LightningStrike lightningStrike){
+            if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("ELightning"))){
+                event.setDamage(lightningStrike.getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE));
             }
         }
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
+        PlayerData playerData = PlayerMap.PLAYERS.get(player);
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 5, damage,2,0, null);
             slash.drawSlash();
             cd.add(player);
         }
-        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)){
+        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player) && PlayerMap.PLAYERS.get(player).getMana() >= 100){
+            playerData.setMana(playerData.getMana()-100);
             HashSet<Material> transparent = new HashSet<>();
             transparent.add(Material.AIR);
             Block block = player.getTargetBlock(transparent, 120);
@@ -102,6 +104,8 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             lightningStrike.setCausingPlayer(player);
             lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING, id);
             lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0 + (PlayerMap.PLAYERS.get(player).getManaMax() / 100 + 0.0)*10);
+            String bar = Chat.format("&c-100 &bMana");
+            Chat.sendActionBar(player, bar);
             cd1.add(player);
         }
     }
