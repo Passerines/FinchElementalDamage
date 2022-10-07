@@ -1,3 +1,4 @@
+
 package net.passerines.finch.reforge;
 
 import net.kyori.adventure.text.Component;
@@ -23,8 +24,6 @@ public class ReforgeMenu implements Listener {
     private final int cooldownTimeMilliseconds = 6000;
     public ReforgeMenu() {
         egui = Bukkit.createInventory(null, 9, Component.text("reforgeMenu"));
-        Bukkit.getPluginManager().registerEvents(this, plugin);
-        initialize();
     }
 
     public void open(Player player){
