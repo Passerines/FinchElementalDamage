@@ -3,28 +3,22 @@ package net.passerines.finch.events.handler;
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.ItemManager;
-import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchTrinkets;
-import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
-import net.passerines.finch.players.TrinketMenu;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.data.type.Switch;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class EquipmentChangeHandler implements Listener {
 
@@ -112,19 +106,29 @@ public class EquipmentChangeHandler implements Listener {
             });
         }
     }
-    /*@EventHandler
+    @EventHandler
     public void clickEvent(InventoryClickEvent click) {
         Player player = (Player) click.getWhoClicked();
-        if(click.getClickedInventory() != null && click.getClickedInventory().equals(PlayerMap.PLAYERS.get(player))) {
-            ItemStack[] items = click.getInventory().getContents();
-            for(ItemStack item : items) {
-                if (ItemManager.ITEM_HASH_MAP.containsKey(Util.getId(item))){
-                    FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get((Util.getId(item)));
-                    if(finchItem instanceof FinchTrinkets finchTrinkets){
-
-                    }
+        PlayerData playerData = PlayerMap.PLAYERS.get(player);
+        Inventory trinketMenu = playerData.getTrinketMenu().getMenu();
+        if(click.getClickedInventory() != null && click.getClickedInventory().equals(trinketMenu)){
+            if(ItemManager.ITEM_HASH_MAP.get(Util.getId(trinketMenu.getItem(click.getSlot()))) instanceof FinchTrinkets finchTrinkets){
+                if(click.getSlot() == 1 && finchTrinkets.getType() == 1){
+                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
+                }
+                else if(click.getSlot() == 2 && finchTrinkets.getType() == 2){
+                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
+                }
+                else if(click.getSlot() == 3 && finchTrinkets.getType() == 3){
+                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
+                }
+                else{
+                    click.setCancelled(true);
                 }
             }
+            else{
+                click.setCancelled(true);
+            }
         }
-    }*/
+    }
 }

@@ -16,8 +16,8 @@ public abstract class FinchArmor extends FinchItem {
     protected double light;
     protected double dark;
 
-    public FinchArmor(String id) {
-        super(id);
+    public FinchArmor(String id, int rarity) {
+        super(id, rarity);
         this.health = 0;
         this.defense = 0;
         this.damage = 0;
@@ -29,6 +29,9 @@ public abstract class FinchArmor extends FinchItem {
         this.electro = 0;
         this.light = 0;
         this.dark = 0;
+    }
+    public FinchArmor(String id) {
+        this(id, 0);
     }
 
     public double getHealth() {

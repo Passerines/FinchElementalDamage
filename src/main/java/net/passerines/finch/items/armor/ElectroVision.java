@@ -1,12 +1,12 @@
 package net.passerines.finch.items.armor;
 
-import net.passerines.finch.items.FinchArmor;
+import net.passerines.finch.items.FinchTrinkets;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ElectroVision extends FinchArmor {
+public class ElectroVision extends FinchTrinkets {
     public ElectroVision() {
         super("ElectroVision");
         this.health = 300;

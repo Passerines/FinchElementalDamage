@@ -11,11 +11,10 @@ import net.passerines.finch.events.handler.DamageDisplayer;
 import net.passerines.finch.events.handler.DamageHandler;
 import net.passerines.finch.events.handler.EquipmentChangeHandler;
 import net.passerines.finch.integrations.MythicMobsBridge;
-import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
-import net.passerines.finch.players.OpenTrinketMenu;
+import net.passerines.finch.reforge.OpenReforgeMenu;
+import net.passerines.finch.trinkets.OpenTrinketMenu;
 import net.passerines.finch.players.PlayerMap;
-import net.passerines.finch.players.TrinketMenu;
 import net.passerines.finch.util.Util;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -49,6 +48,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new EquipmentChangeHandler();
         new MythicMobsBridge();
         new OpenTrinketMenu();
+        new OpenReforgeMenu();
     }
 
     public static FinchElementalDamage inst() {

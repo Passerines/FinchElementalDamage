@@ -20,7 +20,10 @@ public abstract class FinchWeapon extends FinchItem {
     protected ElementalDamageEvent.Element element;
 
     public FinchWeapon(String id) {
-        super(id);
+        this(id, 0);
+    }
+    public FinchWeapon(String id, int rarity) {
+        super(id, rarity);
         this.durability = 0;
         this.element = ElementalDamageEvent.Element.FIRE;
         this.health = 0;

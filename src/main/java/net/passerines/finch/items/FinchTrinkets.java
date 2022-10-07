@@ -13,15 +13,19 @@ public abstract class FinchTrinkets extends FinchItem {
     protected double water;
     protected double earth;
     protected double wind;
-    protected int electro;
-    protected int light;
-    protected int dark;
-    protected int durability;
+    protected double electro;
+    protected double light;
+    protected double dark;
+    protected int rarity;
+    protected int type;
     protected ElementalDamageEvent.Element element;
 
     public FinchTrinkets(String id) {
-        super(id);
-        this.durability = 0;
+        this(id, 0);
+    }
+    public FinchTrinkets(String id, int rarity) {
+        super(id, rarity);
+        this.rarity = 0;
         this.element = ElementalDamageEvent.Element.FIRE;
         this.health = 0;
         this.defense = 0;
@@ -34,6 +38,7 @@ public abstract class FinchTrinkets extends FinchItem {
         this.electro = 0;
         this.light = 0;
         this.dark = 0;
+        this.type = 1;
     }
 
     public double getHealth() {
@@ -63,14 +68,15 @@ public abstract class FinchTrinkets extends FinchItem {
     public double getWind(){
         return wind;
     }
-    public int getElectro(){
+    public double getElectro(){
         return electro;
     }
-    public int getLight(){
+    public double getLight(){
         return light;
     }
-    public int getDark(){
+    public double getDark(){
         return dark;
     }
-    public int getDurability(){return durability;}
+    public int getRarity(){return rarity;}
+    public int getType(){return type;}
 }

@@ -6,6 +6,8 @@ import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchTrinkets;
 import net.passerines.finch.items.FinchWeapon;
+import net.passerines.finch.reforge.ReforgeMenu;
+import net.passerines.finch.trinkets.TrinketMenu;
 import net.passerines.finch.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -273,7 +275,6 @@ public class PlayerData {
         return oldItem;
     }
     public TrinketMenu getTrinketMenu(){return trinketMenu;}
-
     public PlayerConfig getPlayerConfig() {
         return playerConfig;
     }
