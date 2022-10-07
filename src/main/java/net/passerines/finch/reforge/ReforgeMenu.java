@@ -1,4 +1,4 @@
-package net.passerines.finch.players;
+package net.passerines.finch.reforge;
 
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
@@ -15,19 +15,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.net.http.WebSocket;
 
-public class TrinketMenu implements Listener {
+public class ReforgeMenu implements Listener {
     private FinchElementalDamage plugin = FinchElementalDamage.inst();
     private Inventory egui;
+    Player player;
 
     private final int cooldownTimeMilliseconds = 6000;
-    public TrinketMenu() {
-        egui = Bukkit.createInventory(null, 9, Component.text("TrinketMenu"));
+    public ReforgeMenu() {
+        egui = Bukkit.createInventory(null, 9, Component.text("reforgeMenu"));
         Bukkit.getPluginManager().registerEvents(this, plugin);
         initialize();
     }
+
     public void open(Player player){
         player.openInventory(egui);
     }
+
     public void initialize() {
 
         ItemStack placeholder = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);

@@ -2,21 +2,12 @@ package net.passerines.finch.events.handler;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.itemmanaging.ItemManager;
-import net.passerines.finch.items.FinchItem;
-import net.passerines.finch.items.FinchTrinkets;
-import net.passerines.finch.items.FinchWeapon;
-import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
-import net.passerines.finch.players.TrinketMenu;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.data.type.Switch;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +15,6 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class EquipmentChangeHandler implements Listener {
 

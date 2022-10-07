@@ -1,6 +1,8 @@
-package net.passerines.finch.players;
+package net.passerines.finch.trinkets;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
