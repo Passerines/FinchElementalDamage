@@ -1,5 +1,6 @@
 package net.passerines.finch.aItems.weapons.melee.katanas.t1;
 
+import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
@@ -23,6 +24,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class SteelKatana extends FinchWeapon implements Listener {
@@ -57,7 +59,12 @@ public class SteelKatana extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&fGolden Katana"));
+        itemMeta.displayName(Chat.formatC("&fSteel Katana"));
+        ArrayList<Component> lore = new ArrayList<>();
+        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
+        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
+        lore.add(Component.text(Chat.format(" ")));
+        itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(4);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));

@@ -26,8 +26,8 @@ public class ReinforcedLeatherCap extends FinchArmor implements FinchCraftableIt
         itemMeta.displayName(Chat.formatC("&fReinforced Leather Cap"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f+10")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+45")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int)this.health)));
+        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);

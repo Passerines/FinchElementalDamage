@@ -126,6 +126,9 @@ public class EquipmentChangeHandler implements Listener {
                     click.setCancelled(true);
                 }
             }
+            else if(trinketMenu.getItem(click.getSlot()).getType().isAir()){
+                playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
+            }
             else{
                 click.setCancelled(true);
             }

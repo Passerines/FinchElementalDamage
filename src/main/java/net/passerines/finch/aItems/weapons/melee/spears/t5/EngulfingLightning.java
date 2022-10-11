@@ -120,13 +120,14 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Damage: &f+85")));
-        lore.add(Component.text(Chat.format("&bMana: &f+500")));
+        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage)));
+        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
         lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&6Ability: &dDivine Punishment")));
         lore.add(Component.text(Chat.format("&7Summon a bolt of &dlightning in the direction")));
         lore.add(Component.text(Chat.format("&7you are facing dealing damage based on your &bMana")));
         itemMeta.lore(lore);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -25,12 +26,13 @@ public class ImpierceLeggings extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&6Impierce &fLeggings"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f+45 ")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+400 ")));
-        lore.add(Component.text(Chat.format("&4Mana: &f+750" )));
+        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
+        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.health)));
+        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

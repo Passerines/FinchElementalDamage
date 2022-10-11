@@ -27,8 +27,8 @@ public class ReinforcedLeatherBoots extends FinchArmor implements FinchCraftable
         itemMeta.displayName(Chat.formatC("&fReinforced Leather Boots"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f+15")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+45")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int)this.health)));
+        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

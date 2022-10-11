@@ -26,8 +26,8 @@ public class ReinforcedLeatherLeggings extends FinchArmor implements FinchCrafta
         itemMeta.displayName(Chat.formatC("&fReinforced Leather Leggings"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f+35")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+80")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int)this.health)));
+        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);

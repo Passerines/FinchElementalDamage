@@ -3,6 +3,7 @@ package net.passerines.finch.itemmanaging;
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.aItems.armor.dracoanian.*;
 import net.passerines.finch.itemmanaging.recipeitems.BloodIron;
+import net.passerines.finch.itemmanaging.recipeitems.CarbonFiber;
 import net.passerines.finch.itemmanaging.recipeitems.MagicBloodIron;
 import net.passerines.finch.itemmanaging.recipeitems.ReinforcedLeather;
 import net.passerines.finch.items.FinchItem;
@@ -125,6 +126,7 @@ public class ItemManager {
         new DraconianHeadgear();
         new DraconianLeggings();
         new ElectroVision();
+        new CarbonFiber();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

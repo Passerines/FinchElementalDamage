@@ -1,15 +1,19 @@
 package net.passerines.finch.aItems.armor.carbonfiberItems;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchCraftableItem;
+import net.passerines.finch.itemmanaging.FinchRecipe;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class CarbonFiberHelmet extends FinchArmor {
+public class CarbonFiberHelmet extends FinchArmor implements FinchCraftableItem {
     public CarbonFiberHelmet() {
         super("CarbonFiberHelmet");
         this.defense = 100;
@@ -23,11 +27,19 @@ public class CarbonFiberHelmet extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&fCarbon Fiber Helmet"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&cHealth: &f+10")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+100")));
+        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
+        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         return writeId(item);
+    }
+
+    @Override
+    public void registerRecipe() {
+        ItemStack leather = ItemManager.ITEM_HASH_MAP.get("CarbonFiber").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , leather);
+        finchRecipe.addRecipe();
     }
 }
