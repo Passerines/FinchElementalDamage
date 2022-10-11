@@ -41,7 +41,7 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                         if(args.length > 1){
                             try {
                                 //if args is /itemgive "itemname" amount , give amount item to commandSender
-                                amount = Integer.parseInt(args[1]);
+                                amount = Integer.parseInt(args[3]);
                                 if(player.getInventory().firstEmpty() < 0){
                                     Chat.sendTitle(player, "&cInventory Full");
                                 }
