@@ -1,5 +1,8 @@
 package net.passerines.finch.cmds;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.TitlePart;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.ItemManager;
@@ -83,6 +86,10 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                             }
                             else{
                                 player.getInventory().addItem(itemStack);
+                                Component msg = Component.text("Received item ");
+                                msg = msg.style(msg.style().color(TextColor.color(120, 120, 255)));
+                                msg = msg.append(itemStack.displayName().hoverEvent(itemStack.asHoverEvent()).clickEvent(ClickEvent.runCommand("/itemgive " + args[0])));
+                                player.sendMessage(msg);
                             }
                         }
                     }
