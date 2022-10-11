@@ -59,7 +59,7 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                                     }
                                     else if(args.length > 2){
                                         try{
-                                            amount = Integer.parseInt(args[3]);
+                                            amount = Integer.parseInt(args[2]);
                                             itemStack.setAmount(amount);
                                             targetPlayer.getInventory().addItem(itemStack);
                                         }
