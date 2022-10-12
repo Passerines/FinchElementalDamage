@@ -12,6 +12,9 @@ import net.passerines.finch.util.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 public class PlayerData {
 
     private Player player;
@@ -33,6 +36,9 @@ public class PlayerData {
     private double darknessProf;
     private ItemStack oldItem;
 
+    private ItemStack[] oldTrinkets = new ItemStack[3];
+
+
     public PlayerData(Player player){
         this.player = player;
         defense = 10;
@@ -47,9 +53,14 @@ public class PlayerData {
         calculate(boots);
         */
         oldItem = player.getInventory().getItemInMainHand();
-        calculate(oldItem);
+        if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
+            calculate(oldItem);
+        }
         trinketMenu = new TrinketMenu();
         playerConfig = new PlayerConfig(this);
+        oldTrinkets[0] = trinketMenu.getMenu().getItem(3);
+        oldTrinkets[1] = trinketMenu.getMenu().getItem(4);
+        oldTrinkets[2] = trinketMenu.getMenu().getItem(5);
         health = playerConfig.getConfig().getDouble("Player.Health", 100);
         mana = playerConfig.getConfig().getInt("Player.Mana", 100);
     }
@@ -69,12 +80,15 @@ public class PlayerData {
         }
         oldItem = newItem;
     }
-    public void calculateAccessory(ItemStack oldItem, ItemStack newItem){
-        if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchTrinkets && ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchTrinkets) {
+    public void calculateAccessory(ItemStack oldItem, ItemStack newItem, int index){
+        if(oldItem != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchTrinkets) {
             uncalculate(oldItem);
-            calculate(newItem);
-            HealthDisplay.updateActionBar(player);
         }
+        if(newItem != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchTrinkets) {
+            calculate(newItem);
+        }
+        HealthDisplay.updateActionBar(player);
+        oldTrinkets[index] = newItem;
     }
 
     //Calculate individual armor/trinket pieces
@@ -274,6 +288,10 @@ public class PlayerData {
     public ItemStack getOldItem(){
         return oldItem;
     }
+    public ItemStack[] getOldTrinkets(){
+        return oldTrinkets;
+    }
+
     public TrinketMenu getTrinketMenu(){return trinketMenu;}
     public PlayerConfig getPlayerConfig() {
         return playerConfig;

@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -44,26 +45,15 @@ public class TrinketMenu implements Listener{
         }
     }
     @EventHandler
-    public void statAdder(InventoryClickEvent click) {
-        Player player = (Player) click.getWhoClicked();
+    public void statAdder(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
-        if(click.getClickedInventory() != null && click.getClickedInventory().equals(egui)){
-            if(ItemManager.ITEM_HASH_MAP.get(Util.getId(egui.getItem(click.getSlot()))) instanceof FinchTrinkets finchTrinkets){
-                if(click.getSlot() == 1 && finchTrinkets.getType() == 1){
-                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-                }
-                else if(click.getSlot() == 2 && finchTrinkets.getType() == 2){
-                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-                }
-                else if(click.getSlot() == 3 && finchTrinkets.getType() == 3){
-                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-                }
-                else{
-                    click.setCancelled(true);
-                }
-            }
-            else if(egui.getItem(click.getSlot()).getType().isAir()){
-                playerData.calculateAccessory(click.getCursor(), egui.getItem(click.getSlot()));
+        Inventory inventory = event.getInventory();
+        if(inventory.equals(egui)) {
+            for (int i = 0; i < 3; i++) {
+                ItemStack item = egui.getItem(i + 3);
+                ItemStack[] trinket = playerData.getOldTrinkets();
+                playerData.calculateAccessory(trinket[i], item, i);
             }
         }
     }
