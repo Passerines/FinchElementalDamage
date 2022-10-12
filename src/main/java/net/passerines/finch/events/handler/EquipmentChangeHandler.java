@@ -106,32 +106,4 @@ public class EquipmentChangeHandler implements Listener {
             });
         }
     }
-    @EventHandler
-    public void clickEvent(InventoryClickEvent click) {
-        Player player = (Player) click.getWhoClicked();
-        PlayerData playerData = PlayerMap.PLAYERS.get(player);
-        Inventory trinketMenu = playerData.getTrinketMenu().getMenu();
-        if(click.getClickedInventory() != null && click.getClickedInventory().equals(trinketMenu)){
-            if(ItemManager.ITEM_HASH_MAP.get(Util.getId(trinketMenu.getItem(click.getSlot()))) instanceof FinchTrinkets finchTrinkets){
-                if(click.getSlot() == 1 && finchTrinkets.getType() == 1){
-                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-                }
-                else if(click.getSlot() == 2 && finchTrinkets.getType() == 2){
-                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-                }
-                else if(click.getSlot() == 3 && finchTrinkets.getType() == 3){
-                    playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-                }
-                else{
-                    click.setCancelled(true);
-                }
-            }
-            else if(trinketMenu.getItem(click.getSlot()).getType().isAir()){
-                playerData.calculateAccessory(click.getCurrentItem(), click.getCursor());
-            }
-            else{
-                click.setCancelled(true);
-            }
-        }
-    }
 }
