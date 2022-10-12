@@ -25,10 +25,8 @@ public class ReinforcedLeatherTunic extends FinchArmor implements FinchCraftable
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&fReinforced Leather Tunic"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f+" + (int)this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

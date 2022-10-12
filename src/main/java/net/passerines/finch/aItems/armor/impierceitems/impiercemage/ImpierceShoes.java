@@ -28,7 +28,6 @@ public class ImpierceShoes extends FinchArmor {
         lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+" + this.health)));
         lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

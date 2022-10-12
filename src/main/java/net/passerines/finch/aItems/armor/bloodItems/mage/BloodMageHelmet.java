@@ -7,6 +7,7 @@ import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -27,11 +28,10 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem{
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cBloodMage Helmet"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f-5")));
         lore.add(Component.text(Chat.format("&aDefense: &f+15")));
         lore.add(Component.text(Chat.format("&bMana: &f+45")));
-        lore.add(Component.text(Chat.format(" ")));
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
         return writeId(item);

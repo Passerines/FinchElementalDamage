@@ -25,11 +25,9 @@ public class DraconianBoots extends FinchArmor {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&4Draconian Boots"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f+"+ (int) this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
         lore.add(Component.text(Chat.format("&4Damage: &f+"+this.damage)));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

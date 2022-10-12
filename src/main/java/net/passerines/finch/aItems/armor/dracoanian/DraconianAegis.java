@@ -26,11 +26,9 @@ public class DraconianAegis extends FinchArmor {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&4Draconian Aegis"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f+"+(int) this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
         lore.add(Component.text(Chat.format("&4Damage: &f+"+this.damage)));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.setUnbreakable(true);
         itemMeta.removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
         itemMeta.lore(lore);

@@ -80,7 +80,6 @@ public class DiamondKatana extends FinchWeapon implements Listener {
         itemMeta.displayName(Chat.formatC("&fDiamond Katana"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(6);

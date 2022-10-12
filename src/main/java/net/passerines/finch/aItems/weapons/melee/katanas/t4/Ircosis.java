@@ -75,7 +75,6 @@ public class Ircosis extends FinchWeapon implements Listener {
         itemMeta.displayName(Chat.formatC("&3Ircosis"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(6);

@@ -26,10 +26,8 @@ public class CarbonFiberChestplate extends FinchArmor implements FinchCraftableI
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&fCarbon Fiber Chestplate"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
-        lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
