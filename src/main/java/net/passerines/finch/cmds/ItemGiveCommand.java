@@ -1,5 +1,8 @@
 package net.passerines.finch.cmds;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.TitlePart;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.ItemManager;
@@ -14,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.geom.QuadCurve2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,13 +60,23 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                                     if(targetPlayer.getInventory().firstEmpty() < 0){
                                         Chat.sendTitle(player, "&cInventory Full");
                                     }
+                                    else if(args.length > 2){
+                                        try{
+                                            amount = Integer.parseInt(args[2]);
+                                            itemStack.setAmount(amount);
+                                            targetPlayer.getInventory().addItem(itemStack);
+                                        }
+                                        catch(NumberFormatException ev){
+                                            player.sendMessage("Amount null");
+                                        }
+                                    }
                                     else{
                                         targetPlayer.getInventory().addItem(itemStack);
                                     }
                                 }
                                 else{
                                     sender.sendMessage(Chat.format("&cThere is no such player as: " + args[1]));
-                                    ((Player) sender).banPlayer("player is not existing or online so you get banned, git gud");
+                                    return true;
                                 }
                             }
                         }
@@ -72,6 +86,10 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                             }
                             else{
                                 player.getInventory().addItem(itemStack);
+                                Component msg = Component.text("Received item ");
+                                msg = msg.style(msg.style().color(TextColor.color(120, 120, 255)));
+                                msg = msg.append(itemStack.displayName().hoverEvent(itemStack.asHoverEvent()).clickEvent(ClickEvent.runCommand("/itemgive " + args[0])));
+                                player.sendMessage(msg);
                             }
                         }
                     }
