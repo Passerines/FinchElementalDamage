@@ -47,6 +47,10 @@ public class PlayerConfig {
         config.set("User.LastLogin", simpleDateFormat.format(date));
         config.set("Player.Health", playerData.getHealth());
         config.set("Player.Mana", playerData.getMana());
+        for(int i = 0; i < 3; i++){
+            String path = "Player.Menu.Trinket" + i;
+            config.set(path, playerData.getTrinketMenu().getMenu().getItem(i+3));
+        }
         Util.log("&bSaving data for &7" + player.getName());
         try {
             config.save(file);

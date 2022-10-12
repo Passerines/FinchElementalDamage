@@ -52,8 +52,7 @@ public class TrinketMenu implements Listener{
         if(inventory.equals(egui)) {
             for (int i = 0; i < 3; i++) {
                 ItemStack item = egui.getItem(i + 3);
-                ItemStack[] trinket = playerData.getOldTrinkets();
-                playerData.calculateAccessory(trinket[i], item, i);
+                playerData.calculateAccessory(item, i);
             }
         }
     }

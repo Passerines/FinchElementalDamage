@@ -41,6 +41,7 @@ public class PlayerData {
 
     public PlayerData(Player player){
         this.player = player;
+        playerConfig = new PlayerConfig(this);
         defense = 10;
         reset();
         /*ItemStack helmet = player.getInventory().getHelmet();
@@ -52,12 +53,17 @@ public class PlayerData {
         ItemStack boots = player.getInventory().getBoots();
         calculate(boots);
         */
+        trinketMenu = new TrinketMenu();
+        for(int i = 0; i < 3; i++) {
+            String path = "Player.Menu.Trinket" + i;
+            trinketMenu.getMenu().setItem(i + 3, playerConfig.getConfig().getItemStack(path));
+            calculateAccessory(trinketMenu.getMenu().getItem(i+3), i);
+        }
+
         oldItem = player.getInventory().getItemInMainHand();
         if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
             calculate(oldItem);
         }
-        trinketMenu = new TrinketMenu();
-        playerConfig = new PlayerConfig(this);
         oldTrinkets[0] = trinketMenu.getMenu().getItem(3);
         oldTrinkets[1] = trinketMenu.getMenu().getItem(4);
         oldTrinkets[2] = trinketMenu.getMenu().getItem(5);
@@ -80,8 +86,8 @@ public class PlayerData {
         }
         oldItem = newItem;
     }
-    public void calculateAccessory(ItemStack oldItem, ItemStack newItem, int index){
-        if(oldItem != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchTrinkets) {
+    public void calculateAccessory(ItemStack newItem, int index){
+        if(oldTrinkets[index] != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(oldTrinkets[index])) instanceof FinchTrinkets) {
             uncalculate(oldItem);
         }
         if(newItem != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchTrinkets) {

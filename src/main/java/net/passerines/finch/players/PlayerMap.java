@@ -33,6 +33,5 @@ public class PlayerMap implements Listener {
         PLAYERS.remove(event.getPlayer());
         Util.log("&7Player Left: " + event.getPlayer().getName());
     }
-
 }
 
