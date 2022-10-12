@@ -35,7 +35,7 @@ public class DiamondKatana extends FinchWeapon implements Listener {
 
     public DiamondKatana() {
         super("DiamondKatana", 2);
-        this.damage = 35;
+        this.damage = 30;
         this.element = ElementalDamageEvent.Element.NEUTRAL;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -54,15 +54,11 @@ public class DiamondKatana extends FinchWeapon implements Listener {
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(80, 190, 212), 1.0F);
             if(comboMap.getOrDefault(player, 1) == 1){
-                Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.CRIT, 4, damage,85,0, dust);
+                Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.CRIT, 4, damage,85,135, dust);
                 slash.drawSlash();
             }
             else if(comboMap.getOrDefault(player, 2) == 2) {
                 Slash slash = new Slash(player, player.getEyeLocation(), getItem(), Particle.REDSTONE, Particle.CRIT, 4, damage, 85, 45, dust);
-                slash.drawSlash();
-            }
-            else if(comboMap.getOrDefault(player, 3) == 3) {
-                Slash slash = new Slash(player, player.getEyeLocation(), getItem(), Particle.REDSTONE, Particle.CRIT, 4, damage, 85, 135, dust);
                 slash.drawSlash();
             }
             cd.add(player);
@@ -70,12 +66,8 @@ public class DiamondKatana extends FinchWeapon implements Listener {
                 comboMap.put(player, 2);
             }
             else if(comboMap.getOrDefault(player, 2) == 2) {
-                comboMap.put(player, 3);
-            }
-            else if(comboMap.getOrDefault(player, 3) == 3) {
                 comboMap.put(player, 1);
             }
-
             cdMode.add(player);
         }
     }
@@ -88,7 +80,6 @@ public class DiamondKatana extends FinchWeapon implements Listener {
         itemMeta.displayName(Chat.formatC("&fDiamond Katana"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
-        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);

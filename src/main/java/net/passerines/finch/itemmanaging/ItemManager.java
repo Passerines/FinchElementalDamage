@@ -2,6 +2,8 @@ package net.passerines.finch.itemmanaging;
 
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.aItems.armor.dracoanian.*;
+import net.passerines.finch.aItems.trinkets.TotemOfStrength;
+import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
 import net.passerines.finch.itemmanaging.recipeitems.BloodIron;
 import net.passerines.finch.itemmanaging.recipeitems.CarbonFiber;
 import net.passerines.finch.itemmanaging.recipeitems.MagicBloodIron;
@@ -127,6 +129,8 @@ public class ItemManager {
         new DraconianLeggings();
         new ElectroVision();
         new CarbonFiber();
+        new Ircosis();
+        new TotemOfStrength();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

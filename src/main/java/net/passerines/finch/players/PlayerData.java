@@ -88,7 +88,7 @@ public class PlayerData {
     }
     public void calculateAccessory(ItemStack newItem, int index){
         if(oldTrinkets[index] != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(oldTrinkets[index])) instanceof FinchTrinkets) {
-            uncalculate(oldItem);
+            uncalculate(oldTrinkets[index]);
         }
         if(newItem != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchTrinkets) {
             calculate(newItem);
