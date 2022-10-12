@@ -18,6 +18,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.world.EntitiesLoadEvent;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class EntityMap implements Listener {
     public void onVanillaSpawn(EntitySpawnEvent event){
         if(!ENTITIES.containsKey(event.getEntity()) && event.getEntity() instanceof LivingEntity livingEntity){
             Util.log("Entity added to map");
+            if(event.getEntity().getPersistentDataContainer().has(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE)) return;
             double maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3;
             livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
             livingEntity.setHealth(maxHealth);

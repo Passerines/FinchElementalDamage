@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import static net.passerines.finch.players.PlayerMap.PLAYERS;
@@ -94,7 +95,8 @@ public class ElementalDamageEvent extends Event implements Cancellable {
     }
 
     public void apply() {
-        if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable"))) {
+        if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable")) &&
+                !victim.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) {
             Bukkit.getPluginManager().callEvent(this);
         }
     }

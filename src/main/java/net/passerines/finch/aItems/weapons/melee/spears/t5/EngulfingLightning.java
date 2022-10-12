@@ -20,6 +20,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -74,13 +75,11 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
                     }
                 }
             }
-        }
-    }
-    @EventHandler
-    public void onLightning(ElementalDamageEvent event){
-        if(event.getAttacker() instanceof LightningStrike lightningStrike){
+        } else if(event.getAttacker() instanceof LightningStrike lightningStrike){
             if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("ELightning"))){
-                event.setDamage(lightningStrike.getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE));
+                double damage = lightningStrike.getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE);
+                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getVictim(), ElementalDamageEvent.Element.ELECTRO, damage).apply();
+                event.setCancelled(true);
             }
         }
     }

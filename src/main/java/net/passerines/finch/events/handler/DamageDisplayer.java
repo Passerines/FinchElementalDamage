@@ -34,6 +34,7 @@ public class DamageDisplayer implements Listener {
         ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class, (armorStand) -> {
             armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
             armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("invulnerable"), PersistentDataType.BYTE, (byte) 1);
+            armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE, (byte) 1);
             armorStand.setInvisible(true);
             armorStand.setInvulnerable(true);
             armorStand.setMarker(true);
