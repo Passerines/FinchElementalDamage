@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Ircosis extends FinchWeapon implements Listener {
-    Cooldown<Player> cd = new Cooldown<>(20);
+    Cooldown<Player> cd = new Cooldown<>(50);
 
     public Ircosis() {
         super("Ircosis", 4);
@@ -48,22 +48,24 @@ public class Ircosis extends FinchWeapon implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
+        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && !cd.isOnCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(94, 59, 255), 1.0F);
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 5, damage,85,30, dust);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,30, dust);
             slash.drawSlash();
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 5, damage,85,60, dust);
+                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,60, dust);
                 slash0.drawSlash();
             }, 4);
+
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 5, damage,85,120, dust);
+                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,120, dust);
                 slash0.drawSlash();
-            }, 4);
+            }, 8);
+
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 5, damage,85,150, dust);
+                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,150, dust);
                 slash0.drawSlash();
-            }, 4);
+            }, 12);
         }
     }
 

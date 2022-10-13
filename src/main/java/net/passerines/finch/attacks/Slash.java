@@ -66,9 +66,6 @@ public class Slash {
             Location loc = location.clone();
             Vector direction = loc.getDirection().multiply(i);
             loc.add(direction);
-            if(loc.getBlock().isCollidable()) {
-                break;
-            }
             if(i + 0.9 >= range){
                 loc.getWorld().spawnParticle(particleEnd, loc, 1, 0, 0, 0, 0);
             }

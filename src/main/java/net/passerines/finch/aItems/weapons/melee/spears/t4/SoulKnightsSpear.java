@@ -26,11 +26,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.UUID;
 
-public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
-    Cooldown cd = new Cooldown<>(3);
-    public SpearOfTheDarkQueen() {
-        super("SpearOfTheDarkQueen");
-        this.damage = 45;
+public class SoulKnightsSpear extends FinchWeapon implements Listener {
+    Cooldown cd = new Cooldown<>(4);
+    public SoulKnightsSpear() {
+        super("SoulKnightsSpear");
+        this.damage = 30;
         this.element = ElementalDamageEvent.Element.DARK;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -47,7 +47,7 @@ public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.DRAGON_BREATH, Particle.DRAGON_BREATH, 5, damage + vPlayer.getDamage()*0.5, 2).draw();
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 5, damage + vPlayer.getDamage()*0.5, 2).draw();
             cd.add(player);
         }
     }
@@ -57,10 +57,10 @@ public class SpearOfTheDarkQueen extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&dSpear of the Dark Queen"));
+        itemMeta.displayName(Chat.formatC("&3The Soul Knight's Spear"));
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(1);
-        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+        itemMeta.setCustomModelData(1001);
+        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -1.8, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         return writeId(item);

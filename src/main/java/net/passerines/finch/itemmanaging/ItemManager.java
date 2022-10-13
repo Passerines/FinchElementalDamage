@@ -41,7 +41,7 @@ import net.passerines.finch.aItems.weapons.melee.katanas.t2.DiamondKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.GoldenKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.SteelKatana;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.EngulfingLightning;
-import net.passerines.finch.aItems.weapons.melee.spears.t4.SpearOfTheDarkQueen;
+import net.passerines.finch.aItems.weapons.melee.spears.t4.SoulKnightsSpear;
 import net.passerines.finch.items.weapons.ranged.*;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -120,7 +120,7 @@ public class ItemManager {
         new SteelKatana();
         new GoldenKatana();
         new DiamondKatana();
-        new SpearOfTheDarkQueen();
+        new SoulKnightsSpear();
         new EngulfingLightning();
         new DraconianAegis();
         new DraconianBoots();
