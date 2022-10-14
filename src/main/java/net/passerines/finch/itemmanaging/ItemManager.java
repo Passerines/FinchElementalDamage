@@ -2,12 +2,9 @@ package net.passerines.finch.itemmanaging;
 
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.aItems.armor.dracoanian.*;
-import net.passerines.finch.aItems.trinkets.TotemOfStrength;
+import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
-import net.passerines.finch.itemmanaging.recipeitems.BloodIron;
-import net.passerines.finch.itemmanaging.recipeitems.CarbonFiber;
-import net.passerines.finch.itemmanaging.recipeitems.MagicBloodIron;
-import net.passerines.finch.itemmanaging.recipeitems.ReinforcedLeather;
+import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageBoots;
 import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageChestplate;
@@ -129,7 +126,14 @@ public class ItemManager {
         new DraconianLeggings();
         new ElectroVision();
         new CarbonFiber();
+        new CondensedEnergy();
+        new CondensedDiamond();
+        new GauntletOfSacrifice();
+        new TotemOfHealth();
+        new NecklaceOfGod();
         new Ircosis();
+        new TotemOfStrength();
+        new TotemOfMana();
         new TotemOfStrength();
     }
     public static void registerRecipe(){
