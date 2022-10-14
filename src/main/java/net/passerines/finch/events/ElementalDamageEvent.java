@@ -62,7 +62,6 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         this.victim = victim;
         this.element = element;
         this.damage = damage;
-        calculate();
     }
 
     public void calculate() {
@@ -97,6 +96,7 @@ public class ElementalDamageEvent extends Event implements Cancellable {
     public void apply() {
         if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable")) &&
                 !victim.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) {
+            calculate();
             Bukkit.getPluginManager().callEvent(this);
         }
     }
