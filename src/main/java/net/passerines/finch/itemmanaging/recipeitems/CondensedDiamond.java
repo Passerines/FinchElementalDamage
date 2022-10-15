@@ -34,7 +34,7 @@ public class CondensedDiamond extends FinchItem implements FinchCraftableItem {
     @Override
     public void registerRecipe() {
         ItemStack diamondBlock = new ItemStack(Material.DIAMOND_BLOCK);
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "BAB", "BAB", "BAB" , diamondBlock, new ItemStack(Material.GLOW_BERRIES), new CondensedEnergy().getItem());
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "CAC", "BCB", "CAC" , diamondBlock, new ItemStack(Material.GLOW_BERRIES), new CondensedEnergy().getItem());
         finchRecipe.addRecipe();
     }
 }
