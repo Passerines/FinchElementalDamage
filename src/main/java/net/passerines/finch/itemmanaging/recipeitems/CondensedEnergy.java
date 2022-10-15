@@ -24,14 +24,12 @@ public class CondensedEnergy extends FinchItem implements FinchCraftableItem {
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
-        ItemMeta itemMeta = item.getItemMeta();
         SkullMeta skullItemMeta = (SkullMeta) item.getItemMeta();
-        skullItemMeta.setOwningPlayer(Bukkit.getOfflinePlayer("mochhi"));
-        itemMeta.displayName(Chat.formatC("&bCondensed Energy"));
+        skullItemMeta.displayName(Chat.formatC("&bCondensed Energy"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Chat.formatC("&7Enough Energy To Make A Nuclear Bomb!"));
-        itemMeta.lore(lore);
-        item.setItemMeta(itemMeta);
+        skullItemMeta.lore(lore);
+        skullItemMeta.setOwningPlayer(Bukkit.getOfflinePlayer("mochhi"));
         item.setItemMeta(skullItemMeta);
         return writeId(item);
     }
