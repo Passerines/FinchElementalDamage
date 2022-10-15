@@ -144,6 +144,8 @@ public class ItemManager {
         new DiamondChestplate();
         new DiamondBoots();
         new DiamondHelmet();
+        new CondensedDiamond();
+        new CondensedEnergy();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
