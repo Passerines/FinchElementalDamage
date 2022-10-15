@@ -9,18 +9,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class TotemOfMana extends FinchTrinkets {
-    public TotemOfMana() {
-        super("Totem of Mana");
-        this.mana = 100;
+public class NecklaceOfGod extends FinchTrinkets {
+    public NecklaceOfGod() {
+        super("NecklaceOfGod");
+        this.mana = 3000;
+        this.damage = 15;
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&bTotem of Mana"));
+        itemMeta.displayName(Chat.formatC("&bNecklaceOfGod"));
         ArrayList<Component> lore = new ArrayList<>();
+        lore.add(Component.text(Chat.format("&cDamage: &f+" + this.damage )));
         lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana )));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
