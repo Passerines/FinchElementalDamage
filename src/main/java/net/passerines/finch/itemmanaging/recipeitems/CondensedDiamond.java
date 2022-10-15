@@ -3,6 +3,7 @@ package net.passerines.finch.itemmanaging.recipeitems;
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.itemmanaging.FinchRecipe;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Material;
@@ -34,7 +35,8 @@ public class CondensedDiamond extends FinchItem implements FinchCraftableItem {
     @Override
     public void registerRecipe() {
         ItemStack diamondBlock = new ItemStack(Material.DIAMOND_BLOCK);
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "CAC", "BCB", "CAC" , diamondBlock, new ItemStack(Material.GLOW_BERRIES), new CondensedEnergy().getItem());
+        ItemStack condensedEnergy = ItemManager.ITEM_HASH_MAP.get("CondensedEnergy").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "CAC", "BCB", "CAC" , diamondBlock, new ItemStack(Material.GLOW_BERRIES), condensedEnergy);
         finchRecipe.addRecipe();
     }
 }
