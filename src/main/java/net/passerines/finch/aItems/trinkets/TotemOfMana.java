@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class TotemOfMana extends FinchTrinkets {
     public TotemOfMana() {
-        super("Totem of Mana");
+        super("TotemofMana");
         this.mana = 100;
     }
 

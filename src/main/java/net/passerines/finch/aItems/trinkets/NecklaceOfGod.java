@@ -20,7 +20,7 @@ public class NecklaceOfGod extends FinchTrinkets {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&bNecklaceOfGod"));
+        itemMeta.displayName(Chat.formatC("&bNecklace Of God"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&cDamage: &f+" + this.damage )));
         lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana )));
