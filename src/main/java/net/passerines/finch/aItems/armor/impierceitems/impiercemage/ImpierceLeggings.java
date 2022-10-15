@@ -26,7 +26,7 @@ public class ImpierceLeggings extends FinchArmor {
         itemMeta.displayName(Chat.formatC("&6Impierce &fLeggings"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.health)));
+        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
         lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
