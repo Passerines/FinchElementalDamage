@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Ircosis extends FinchWeapon implements Listener {
-    Cooldown<Player> cd = new Cooldown<>(50);
+    Cooldown<Player> cd = new Cooldown<>(20);
 
     public Ircosis() {
         super("Ircosis", 4);
@@ -36,6 +36,8 @@ public class Ircosis extends FinchWeapon implements Listener {
         this.element = ElementalDamageEvent.Element.WATER;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
+
+
     @EventHandler
     public void cancelHit(EntityDamageByEntityEvent hit){
         if(hit.getDamager() instanceof Player player){
@@ -48,7 +50,7 @@ public class Ircosis extends FinchWeapon implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && !cd.isOnCooldown(player)){
+        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(94, 59, 255), 1.0F);
             Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,30, dust);
             slash.drawSlash();
@@ -66,6 +68,7 @@ public class Ircosis extends FinchWeapon implements Listener {
                 Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,150, dust);
                 slash0.drawSlash();
             }, 12);
+            cd.add(player);
         }
     }
 
@@ -77,6 +80,9 @@ public class Ircosis extends FinchWeapon implements Listener {
         itemMeta.displayName(Chat.formatC("&3Ircosis"));
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
+        lore.add(Component.text(Chat.format(" ")));
+        lore.add(Component.text(Chat.format("&6Ability: &3Snowflake")));
+        lore.add(Component.text(Chat.format("&7Create 3 extra slashes making a shape of a snowflake")));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(6);

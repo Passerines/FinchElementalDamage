@@ -90,10 +90,6 @@ public class Slash {
         }
     }
     public void drawSlash(){
-
-        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), () -> {
-
-        }, 0, 100);
         for(int i = 0; i <= angle; i+=3){
             Vector direction = new Vector(1,0,0);
             Vector y = new Vector(0, 1, 0);
