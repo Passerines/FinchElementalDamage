@@ -20,6 +20,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -31,7 +32,7 @@ public class DamageHandler implements Listener {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
 
     }
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onDamageEvent(EntityDamageEvent event) {
         switch (event.getCause()) {
             case VOID, DRAGON_BREATH, WITHER -> {
@@ -56,7 +57,7 @@ public class DamageHandler implements Listener {
             }
         }
     }
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         //Converts entity damage by entity to elemental damage
 
@@ -66,7 +67,7 @@ public class DamageHandler implements Listener {
             event.setDamage(0);
         }
     }
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onElementalDamage(ElementalDamageEvent event) {
         Entity victim = event.getVictim();
         if (victim instanceof Player) {
@@ -108,7 +109,7 @@ public class DamageHandler implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onCustomPlayerDeath(CustomPlayerDeathEvent event){
         Player victim = event.getDeadVictim();
         PlayerData vPlayerData = PlayerMap.PLAYERS.get((victim));
@@ -120,7 +121,7 @@ public class DamageHandler implements Listener {
         victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()-> victim.setInvulnerable(false), 60);
     }
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onCustomEntityDeath(CustomEntityDeathEvent event){
         LivingEntity victim = (LivingEntity) event.getDeadVictim();
         victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);

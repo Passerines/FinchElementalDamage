@@ -32,15 +32,12 @@ public class EquipmentChangeHandler implements Listener {
     }
     @EventHandler
     public void onPickup(EntityPickupItemEvent event){
-        Util.log("Event ONPICKUP Called");
         Entity entity = event.getEntity();
         if(entity instanceof Player player) {
-            player.sendMessage(Chat.formatC("(Pickup)"));
             if(player.getInventory().getItemInMainHand().getType().isAir()) {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                     if(!player.getInventory().getItemInMainHand().getType().isAir()){
                         PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                        player.sendMessage(Chat.formatC("(Calculated Picked Up Item)"));
                     }
                 });
             }
@@ -53,18 +50,14 @@ public class EquipmentChangeHandler implements Listener {
     }
     @EventHandler
     public void onDrop(PlayerDropItemEvent event){
-        Util.log("Event ONDROP Called");
         Player player = event.getPlayer();
-        player.sendMessage(Chat.formatC("Changed hand (Drop)"));
         if(player.getInventory().getItemInMainHand().getType().isAir()) {
             PlayerMap.PLAYERS.get(player).calculateHand(new ItemStack(Material.AIR));
         }
     }
     @EventHandler
     public void onWeaponInventoryChange(InventoryClickEvent event){
-        Util.log("Event ONWEAPONINVENTORYCHANGE Called");
         Player player = (Player) event.getWhoClicked();
-        player.sendMessage(Chat.formatC("Changed Inventory"));
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(),()->{
             if(!PlayerMap.PLAYERS.get(player).getOldItem().isSimilar(player.getInventory().getItemInMainHand())){
                 PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
@@ -90,9 +83,7 @@ public class EquipmentChangeHandler implements Listener {
     }
     @EventHandler
     public void onWeaponChange(PlayerItemHeldEvent event){
-        Player player = event.getPlayer();
-        player.sendMessage(Chat.formatC("Changed hand"));
-        PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItem(event.getNewSlot()));
+        Player player = event.getPlayer();PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItem(event.getNewSlot()));
     }
     @EventHandler
     public void dragEvent(InventoryDragEvent event){
@@ -101,7 +92,6 @@ public class EquipmentChangeHandler implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                 if(!player.getInventory().getItemInMainHand().getType().isAir()){
                     PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                    player.sendMessage(Chat.formatC("(Calculated Picked Up Item)"));
                 }
             });
         }

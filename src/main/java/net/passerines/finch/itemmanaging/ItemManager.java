@@ -2,12 +2,16 @@ package net.passerines.finch.itemmanaging;
 
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.aItems.armor.dracoanian.*;
+import net.passerines.finch.aItems.armor.vanillareplacements.DiamondBoots;
+import net.passerines.finch.aItems.armor.vanillareplacements.DiamondChestplate;
+import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
+import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
+import net.passerines.finch.aItems.trinkets.TotemOfDefence;
+import net.passerines.finch.aItems.trinkets.TotemOfMana;
 import net.passerines.finch.aItems.trinkets.TotemOfStrength;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
-import net.passerines.finch.itemmanaging.recipeitems.BloodIron;
-import net.passerines.finch.itemmanaging.recipeitems.CarbonFiber;
-import net.passerines.finch.itemmanaging.recipeitems.MagicBloodIron;
-import net.passerines.finch.itemmanaging.recipeitems.ReinforcedLeather;
+import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
+import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageBoots;
 import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageChestplate;
@@ -29,10 +33,10 @@ import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceA
 import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceCrown;
 import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceGaloshes;
 import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceKneeplates;
-import net.passerines.finch.aItems.armor.vanillareplacements.ReinforcedLeatherBoots;
-import net.passerines.finch.aItems.armor.vanillareplacements.ReinforcedLeatherCap;
-import net.passerines.finch.aItems.armor.vanillareplacements.ReinforcedLeatherLeggings;
-import net.passerines.finch.aItems.armor.vanillareplacements.ReinforcedLeatherTunic;
+import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherBoots;
+import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherCap;
+import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherLeggings;
+import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherTunic;
 import net.passerines.finch.items.armor.*;
 import net.passerines.finch.items.weapons.mana.*;
 import net.passerines.finch.items.weapons.melee.*;
@@ -131,6 +135,15 @@ public class ItemManager {
         new CarbonFiber();
         new Ircosis();
         new TotemOfStrength();
+        new TotemOfDefence();
+        new TotemOfMana();
+        new DragonScale();
+        new AngelicEssence();
+        new Shriex();
+        new DiamondLeggings();
+        new DiamondChestplate();
+        new DiamondBoots();
+        new DiamondHelmet();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
@@ -146,5 +159,9 @@ public class ItemManager {
         Bukkit.removeRecipe(NamespacedKey.minecraft("leather_chestplate"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("leather_leggings"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("leather_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_boots"));
     }
 }

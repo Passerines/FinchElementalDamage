@@ -21,7 +21,7 @@ public class DraconianCuirass extends FinchArmor {
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_CHESTPLATE);
+        ItemStack item = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&4Draconian Cuirass"));
         ArrayList<Component> lore = new ArrayList<>();
