@@ -146,6 +146,8 @@ public class ItemManager {
         new DiamondHelmet();
         new CondensedDiamond();
         new CondensedEnergy();
+        new NecklaceOfGod();
+        new GauntletOfSacrifice();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

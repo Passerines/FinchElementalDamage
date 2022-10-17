@@ -37,7 +37,8 @@ public class GauntletOfSacrifice extends FinchTrinkets implements FinchCraftable
     public void registerRecipe() {
         ItemStack condensedDiamond = ItemManager.ITEM_HASH_MAP.get("CondensedDiamond").getItem();
         ItemStack condensedEnergy = ItemManager.ITEM_HASH_MAP.get("CondensedEnergy").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "ABA", "AAA" , condensedDiamond, condensedEnergy);
+        ItemStack apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE);
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "ACA", "ABA" , condensedDiamond, condensedEnergy,apple);
         finchRecipe.addRecipe();
     }
 }
