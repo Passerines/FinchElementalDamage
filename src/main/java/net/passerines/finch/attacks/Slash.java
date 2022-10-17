@@ -90,7 +90,7 @@ public class Slash {
         }
     }
     public void drawSlash(){
-        for(int i = 0; i <= angle; i+=3){
+        for(int i = 0; i <= angle; i+=4){
             Vector direction = new Vector(1,0,0);
             Vector y = new Vector(0, 1, 0);
             Vector z = new Vector(0, 0, 1);

@@ -37,10 +37,7 @@ public class Teleporter extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(vPlayer.getMana() >= 75 && id.equals(Util.getId(item)) && event.getAction().isRightClick()) {
-                int length = 7;
-                World world = player.getWorld();
-                Location loc1 = player.getLocation();
-                Block b = player.getTargetBlock((Set<Material>)null, 12);
+                Block b = player.getTargetBlock(null, 12);
                 Location loc = new Location(b.getWorld(), b.getX(), b.getY(), b.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
                 player.teleport(loc);
                 vPlayer.setMana(vPlayer.getMana() - 75);

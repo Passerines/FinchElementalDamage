@@ -41,15 +41,10 @@ public class EntityMap implements Listener {
 
     @EventHandler
     public void onVanillaSpawn(EntitySpawnEvent event){
-        if(!ENTITIES.containsKey(event.getEntity()) && event.getEntity() instanceof LivingEntity livingEntity){
-            Util.log("Entity added to map");
-            if(event.getEntity().getPersistentDataContainer().has(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE)) return;
-            double maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3;
-            livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
-            livingEntity.setHealth(maxHealth);
-            ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
-            Util.log("Registered Mob: " + event.getEntityType());
-        }
+        Util.log("Entity added to map");
+        if(event.getEntity().getPersistentDataContainer().has(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE)) return;
+        ENTITIES.put(event.getEntity(), new EntityData(event.getEntity()));
+        Util.log("Registered Mob: " + event.getEntityType());
     }
     @EventHandler
     public void onLoadEvent(EntitiesLoadEvent event){
