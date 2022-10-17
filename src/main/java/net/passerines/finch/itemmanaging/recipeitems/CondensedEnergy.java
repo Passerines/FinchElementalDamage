@@ -29,7 +29,7 @@ public class CondensedEnergy extends FinchItem implements FinchCraftableItem {
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Chat.formatC("&7Enough Energy To Make A Nuclear Bomb!"));
         skullItemMeta.lore(lore);
-        skullItemMeta.setOwningPlayer(Bukkit.getOfflinePlayer("ianjezhua"));
+        skullItemMeta.setOwningPlayer(Bukkit.getOfflinePlayer("mochhi"));
         item.setItemMeta(skullItemMeta);
         return writeId(item);
     }
