@@ -1,9 +1,6 @@
 package net.passerines.finch;
 
-import net.passerines.finch.cmds.FinchAttributesCmd;
-import net.passerines.finch.cmds.GetEffectiveHealthCmd;
-import net.passerines.finch.cmds.GetPlayersCmd;
-import net.passerines.finch.cmds.ItemGiveCommand;
+import net.passerines.finch.cmds.*;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
@@ -38,6 +35,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new EntityMap();
         new PlayerMap();
         new GetPlayersCmd();
+        new ReforgeCommand();
         new GetEffectiveHealthCmd();
         new NaturalHealthRegen();
         new HealthDisplay();

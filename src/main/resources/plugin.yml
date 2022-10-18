@@ -12,6 +12,10 @@ commands:
     description: finch
     permission: finch.user
 
+  reforge:
+    description: reforges item in sender's hand
+    permission: finch.admin
+
   getplayers:
     description: gets players list
     permission: finch.admin
