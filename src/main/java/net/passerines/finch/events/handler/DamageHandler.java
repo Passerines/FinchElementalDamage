@@ -25,8 +25,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import static net.passerines.finch.entity.EntityMap.ENTITIES;
-
 public class DamageHandler implements Listener {
     public DamageHandler() {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
@@ -91,8 +89,8 @@ public class DamageHandler implements Listener {
         //
         //
         //                  v Entities
-        else if (victim instanceof LivingEntity) {
-            EntityData vEntityData = EntityMap.ENTITIES.get(victim);
+        else if (victim instanceof LivingEntity && EntityMap.has(victim)) {
+            EntityData vEntityData = EntityMap.get(victim);
             vEntityData.setHealth(vEntityData.getHealth() - event.getFinalDamage());
             double health = Math.max(0, vEntityData.getHealth());
             ((LivingEntity) victim).setHealth(health);
@@ -126,7 +124,7 @@ public class DamageHandler implements Listener {
         LivingEntity victim = (LivingEntity) event.getDeadVictim();
         victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         Util.log("Registered Mob Died: " + event.getDeadVictim());
-        ENTITIES.remove(victim);
+        EntityMap.remove(victim);
         victim.damage(99999);
         victim.remove();
 

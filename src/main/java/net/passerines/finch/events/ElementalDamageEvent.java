@@ -1,5 +1,6 @@
 package net.passerines.finch.events;
 
+import com.ticxo.modelengine.api.ModelEngineAPI;
 import net.passerines.finch.entity.EntityData;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.players.PlayerData;
@@ -78,15 +79,19 @@ public class ElementalDamageEvent extends Event implements Cancellable {
             }
         }
         else if (attacker instanceof LivingEntity entity) {
-            attackDamage = attackDamage + EntityMap.ENTITIES.get(entity).getDamage();
+            attackDamage = attackDamage + EntityMap.get(entity).getDamage();
         }
         if(victim instanceof Player){
             PlayerData vPlayerData = PlayerMap.PLAYERS.get(victim);
             attackDamage = (int) ((attackDamage - (attackDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * element.getElementalMultiplier()));
         }
         else if(victim instanceof LivingEntity){
-            EntityData vEntityData = EntityMap.ENTITIES.get(victim);
-            attackDamage = (int) (attackDamage - attackDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+            if(EntityMap.has(victim)) {
+                EntityData vEntityData = EntityMap.get(victim);
+                attackDamage = (int) (attackDamage - attackDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+            } else {
+                Util.log(Chat.format("&cELEMENTAL DAMAGE EVENT: &7Entity not found"));
+            }
         } else {
             attackDamage = damage;
         }
