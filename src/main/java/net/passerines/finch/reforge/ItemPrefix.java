@@ -29,6 +29,12 @@ public class ItemPrefix {
         item.setItemMeta(meta);
     }
 
+    public void removePrefix(ItemStack item){
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(meta.displayName());
+        item.setItemMeta(meta);
+    }
+
     public double getHealth() {
         return health;
     }

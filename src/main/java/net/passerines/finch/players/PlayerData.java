@@ -20,6 +20,7 @@ public class PlayerData {
     private Player player;
     private PlayerConfig playerConfig;
     private TrinketMenu trinketMenu;
+    private ReforgeMenu reforgeMenu;
 
     private double health;
     private double healthMax;
@@ -54,6 +55,7 @@ public class PlayerData {
         calculate(boots);
         */
         trinketMenu = new TrinketMenu();
+
         for(int i = 0; i < 3; i++) {
             String path = "Player.Menu.Trinket" + i;
             trinketMenu.getMenu().setItem(i + 3, playerConfig.getConfig().getItemStack(path));

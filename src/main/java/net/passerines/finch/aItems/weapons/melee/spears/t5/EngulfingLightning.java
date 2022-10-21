@@ -29,6 +29,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,12 +38,19 @@ import java.util.UUID;
 public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
     Cooldown cd1 = new Cooldown<>(50);
+    ArrayList<String> lore = new ArrayList<String>();
     public EngulfingLightning() {
         super("EngulfingLightning");
         this.damage = 85;
         this.mana = 500;
         this.element = ElementalDamageEvent.Element.ELECTRO;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
+        lore.add("&4Damage: &f+ <DAMAGE>");
+        lore.add("&bMana: &f+ <MANA>");
+        lore.add(" ");
+        lore.add("&6Ability: &dDivine Punishment");
+        lore.add("&7Summon a bolt of &dlightning in the direction");
+        lore.add("&7you are facing dealing damage based on your &bMana");
     }
     @EventHandler
     public void cancelHit(EntityDamageByEntityEvent hit){
@@ -117,14 +125,12 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(1);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage)));
-        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
-        lore.add(Component.text(Chat.format(" ")));
-        lore.add(Component.text(Chat.format("&6Ability: &dDivine Punishment")));
-        lore.add(Component.text(Chat.format("&7Summon a bolt of &dlightning in the direction")));
-        lore.add(Component.text(Chat.format("&7you are facing dealing damage based on your &bMana")));
+        for(int i = 0; i < this.lore.size(); i++){
+            String loreLine = this.lore.get(i);
+            loreLine.replace("<DAMAGE>", String.valueOf(this.damage));
+            lore.add(Chat.formatC(loreLine));
+        }
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
