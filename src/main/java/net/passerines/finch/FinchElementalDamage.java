@@ -47,6 +47,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new MythicMobsBridge();
         new OpenTrinketMenu();
         new OpenReforgeMenu();
+        new DebugMessages();
     }
 
     public static FinchElementalDamage inst() {
