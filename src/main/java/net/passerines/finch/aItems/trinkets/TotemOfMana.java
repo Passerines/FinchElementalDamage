@@ -26,6 +26,7 @@ public class TotemOfMana extends FinchTrinkets implements FinchCraftableItem {
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana )));
         itemMeta.lore(lore);
+        itemMeta.setCustomModelData(401);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
