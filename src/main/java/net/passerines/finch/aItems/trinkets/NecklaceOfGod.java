@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class NecklaceOfGod extends FinchTrinkets {
     public NecklaceOfGod() {
         super("NecklaceOfGod");
-        this.mana = 3000;
+        this.mana = 500;
         this.damage = 15;
     }
 

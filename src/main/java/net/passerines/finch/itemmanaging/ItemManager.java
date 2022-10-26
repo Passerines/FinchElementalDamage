@@ -148,6 +148,7 @@ public class ItemManager {
         new CondensedEnergy();
         new NecklaceOfGod();
         new GauntletOfSacrifice();
+        new RitualEssence();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

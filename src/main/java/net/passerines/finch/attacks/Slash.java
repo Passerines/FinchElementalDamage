@@ -5,6 +5,7 @@ import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -80,6 +81,8 @@ public class Slash {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if(finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
+                            player.sendMessage(Chat.formatC("You hit: A model engine mob " + ((Damageable) entity).getName() + " " + ((Damageable) entity).getUniqueId()) + " " + ((Damageable) entity).getType());
+
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, finchWeapon.getElement(), damage);
                             elementalDamageEvent.apply();
                             hitEntities.add((Entity) entity);
