@@ -9,6 +9,7 @@ import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
 import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
+import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageBoots;
@@ -149,6 +150,7 @@ public class ItemManager {
         new NecklaceOfGod();
         new GauntletOfSacrifice();
         new RitualEssence();
+        new Evelon();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
