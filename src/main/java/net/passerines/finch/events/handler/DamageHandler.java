@@ -14,6 +14,7 @@ import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -24,14 +25,40 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DamageHandler implements Listener {
     public DamageHandler() {
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
+    }
 
+    private static final ArrayList<EntityDamageEvent.DamageCause> modelEngineImmunityTicks = new ArrayList<>();
+    static {
+        modelEngineImmunityTicks.add(EntityDamageEvent.DamageCause.FIRE);
+        modelEngineImmunityTicks.add(EntityDamageEvent.DamageCause.FIRE_TICK);
+        modelEngineImmunityTicks.add(EntityDamageEvent.DamageCause.LAVA);
     }
     @EventHandler(priority = EventPriority.HIGH)
     public void onDamageEvent(EntityDamageEvent event) {
+        if(modelEngineImmunityTicks.contains(event.getCause())) {
+            if(ModelEngineAPI.isModeledEntity(event.getEntity().getUniqueId())) {
+                Entity entity = Bukkit.getEntity(ModelEngineAPI.getModeledEntity(event.getEntity().getUniqueId()).getBase().getUniqueId());
+                PersistentDataContainer data = entity.getPersistentDataContainer();
+                NamespacedKey key = Util.getNamespacedKey("lastFireTick");
+                if(data.has(key, PersistentDataType.INTEGER)) {
+                    int lastFireTick = data.get(key, PersistentDataType.INTEGER);
+                    if(Bukkit.getCurrentTick() - lastFireTick < 10) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+                data.set(key, PersistentDataType.INTEGER, Bukkit.getCurrentTick());
+            }
+        }
         switch (event.getCause()) {
             case VOID, DRAGON_BREATH, WITHER -> {
                 new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage()).apply();

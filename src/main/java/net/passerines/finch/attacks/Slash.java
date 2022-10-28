@@ -81,8 +81,6 @@ public class Slash {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if(finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
-                            player.sendMessage(Chat.formatC("You hit: A model engine mob " + ((Damageable) entity).getName() + " " + ((Damageable) entity).getUniqueId()) + " " + ((Damageable) entity).getType());
-
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, finchWeapon.getElement(), damage);
                             elementalDamageEvent.apply();
                             hitEntities.add((Entity) entity);
