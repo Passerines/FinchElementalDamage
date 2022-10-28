@@ -1,7 +1,9 @@
 package net.passerines.finch.items.weapons.ranged;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.attacks.FinchArrow;
 import net.passerines.finch.data.Cooldown;
+import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
@@ -21,7 +23,7 @@ public class Tsunami extends FinchWeapon implements Listener {
 
     public Tsunami() {
         super("Tsunami");
-        this.water = 2;
+        this.damage = 15;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
@@ -33,9 +35,9 @@ public class Tsunami extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-             Util.shootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, -2, 5);
-             Util.shootArrow(player, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 2, 5);
-             cd.add(player, 15);
+                FinchArrow finchArrow = new FinchArrow(player, 1, 0, this.damage);
+                finchArrow.shootWaterArrow();
+                cd.add(player, 15);
             }
         }
     }
