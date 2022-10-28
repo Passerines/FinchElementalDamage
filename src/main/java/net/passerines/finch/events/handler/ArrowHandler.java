@@ -26,13 +26,13 @@ public class ArrowHandler implements Listener {
     public void onContact(ProjectileHitEvent event) {
         if (event.getEntity() instanceof Arrow arrow) {
             if (!event.isCancelled() && arrow.getPersistentDataContainer().has(Util.getNamespacedKey("FinchArrow"))) {
+                int taskId = arrow.getPersistentDataContainer().get(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER);
+                Bukkit.getScheduler().cancelTask(taskId);
                 if (event.getHitEntity() != null) {
                     Entity entity = event.getHitEntity();
                     Location loc = arrow.getLocation();
                     int damage = arrow.getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER);
-                    int taskId = arrow.getPersistentDataContainer().get(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER);
                     String aElement = arrow.getPersistentDataContainer().get(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING);
-                    Bukkit.getScheduler().cancelTask(taskId);
                     ElementalDamageEvent elementalDamageEvent;
                     switch (aElement) {
                         default -> {

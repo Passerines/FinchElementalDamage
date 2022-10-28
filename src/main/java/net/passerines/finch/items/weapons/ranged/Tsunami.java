@@ -23,7 +23,7 @@ public class Tsunami extends FinchWeapon implements Listener {
 
     public Tsunami() {
         super("Tsunami");
-        this.damage = 15;
+        this.damage = 150;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
