@@ -30,7 +30,7 @@ import java.util.Collection;
 public class VortexSplash extends FinchBow implements Listener {
     public VortexSplash() {
         super("VortexSplash");
-        this.damage = 150;
+        this.bowDamage = 150;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     private final Cooldown cd = new Cooldown(10);
@@ -41,7 +41,7 @@ public class VortexSplash extends FinchBow implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isLeftClick() && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.damage);
+                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.bowDamage);
                 finchArrow.shootWaterArrow().getPersistentDataContainer().set(Util.getNamespacedKey("VortexSplash"), PersistentDataType.STRING, "VortexSplash");
                 cd.add(player);
             }
@@ -52,13 +52,13 @@ public class VortexSplash extends FinchBow implements Listener {
         if(event.getEntity() instanceof Arrow arrow){
             if(arrow.getPersistentDataContainer().has(Util.getNamespacedKey("VortexSplash"))){
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                    arrow.getLocation().getWorld().spawnParticle(Particle.WATER_SPLASH, arrow.getLocation(), 70,5,5,5);
+                    arrow.getLocation().getWorld().spawnParticle(Particle.WATER_SPLASH, arrow.getLocation(), 90,2,2,2);
                     Collection<Entity> entitylist = arrow.getLocation().getNearbyEntities(5,5,5);
                     Object[] entities = entitylist.toArray();
                     for (Object entity : entities) {
                         if (entity instanceof Damageable) {
                             if (!(entity.equals(arrow.getShooter())) && !(entity.equals(ArmorStand.class))) {
-                                ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(arrow, (Entity) entity, ElementalDamageEvent.Element.WATER, this.damage/2);
+                                ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(arrow, (Entity) entity, ElementalDamageEvent.Element.WATER, this.bowDamage/2);
                                 elementalDamageEvent.apply();
                             }
                         }

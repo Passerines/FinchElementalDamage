@@ -59,7 +59,11 @@ public class EquipmentChangeHandler implements Listener {
     public void onWeaponInventoryChange(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(),()->{
-            if(!PlayerMap.PLAYERS.get(player).getOldItem().isSimilar(player.getInventory().getItemInMainHand())){
+            //OldNull & NewNull = Not calculate
+            //OldNotNull & NewNull = Uncalculate
+            //OldNull & NewNotNull = Calculate
+            //OldNotNull & NewNotNull = Uncalculate & Calculate
+            if(PlayerMap.PLAYERS.get(player).getOldItem() == null || !PlayerMap.PLAYERS.get(player).getOldItem().isSimilar(player.getInventory().getItemInMainHand())) {
                 PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
             }
         });

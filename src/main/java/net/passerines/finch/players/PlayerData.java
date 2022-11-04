@@ -247,8 +247,8 @@ public class PlayerData {
         return damage;
     }
 
-    public void setDamage(int bowDamage) {
-        this.bowDamage = bowDamage;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
     public int getBowDamage() {
         return bowDamage;
