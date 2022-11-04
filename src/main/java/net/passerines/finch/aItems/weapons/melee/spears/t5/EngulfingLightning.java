@@ -41,7 +41,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     ArrayList<String> lore = new ArrayList<String>();
     public EngulfingLightning() {
         super("EngulfingLightning");
-        this.damage = 85;
+        this.damage = 115;
         this.mana = 500;
         this.element = ElementalDamageEvent.Element.ELECTRO;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());

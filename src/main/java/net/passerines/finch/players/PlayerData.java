@@ -28,6 +28,7 @@ public class PlayerData {
     private int mana;
     private int manaMax;
     private int damage;
+    private int bowDamage;
     private double fireProf;
     private double waterProf;
     private double earthProf;
@@ -146,18 +147,35 @@ public class PlayerData {
                 setDefense(defense + finchArmor.getDefense());
                 setHealthMax(healthMax + finchArmor.getHealth());
                 setDamage(damage + finchArmor.getDamage());
+                setBowDamage(bowDamage + finchArmor.getBowDamage());
                 setManaMax(manaMax + finchArmor.getMana());
+                setElectroProf(electroProf + finchArmor.getElectro());
+                setFireProf(fireProf + finchArmor.getFire());
+                setWaterProf(waterProf + finchArmor.getWater());
+                setEarthProf(earthProf + finchArmor.getEarth());
+                setDarknessProf(darknessProf + finchArmor.getDark());
+                setLightProf(lightProf + finchArmor.getLight());
+                setWindProf(windProf + finchArmor.getWind());
             }
             else if (finchItem instanceof FinchWeapon finchWeapon) {
                 setDefense(defense + finchWeapon.getDefense());
                 setHealthMax(healthMax + finchWeapon.getHealth());
                 setDamage(damage + finchWeapon.getDamage());
+                setBowDamage(bowDamage + finchWeapon.getBowDamage());
                 setManaMax(manaMax + finchWeapon.getMana());
+                setElectroProf(electroProf + finchWeapon.getElectro());
+                setFireProf(fireProf + finchWeapon.getFire());
+                setWaterProf(waterProf + finchWeapon.getWater());
+                setEarthProf(earthProf + finchWeapon.getEarth());
+                setDarknessProf(darknessProf + finchWeapon.getDark());
+                setLightProf(lightProf + finchWeapon.getLight());
+                setWindProf(windProf + finchWeapon.getWind());
             }
             else if(finchItem instanceof FinchTrinkets finchTrinkets){
                 setDefense(defense + finchTrinkets.getDefense());
                 setHealthMax(healthMax + finchTrinkets.getHealth());
                 setDamage(damage + finchTrinkets.getDamage());
+                setBowDamage(bowDamage + finchTrinkets.getBowDamage());
                 setManaMax(manaMax + finchTrinkets.getMana());
                 setElectroProf(electroProf + finchTrinkets.getElectro());
                 setFireProf(fireProf + finchTrinkets.getFire());
@@ -183,6 +201,7 @@ public class PlayerData {
         setElectroProf(0);
         setLightProf(0);
         setDarknessProf(0);
+
     }
 
     public double getHealth() {
@@ -230,8 +249,15 @@ public class PlayerData {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setDamage(int bowDamage) {
+        this.bowDamage = bowDamage;
+    }
+    public int getBowDamage() {
+        return bowDamage;
+    }
+
+    public void setBowDamage(int bowDamage) {
+        this.bowDamage = bowDamage;
     }
 
     public double getFireProf() {

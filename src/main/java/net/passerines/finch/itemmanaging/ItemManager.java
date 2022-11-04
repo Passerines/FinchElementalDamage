@@ -2,6 +2,10 @@ package net.passerines.finch.itemmanaging;
 
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.aItems.armor.dracoanian.*;
+import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanBoots;
+import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanHood;
+import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanLeggings;
+import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanVest;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondBoots;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondChestplate;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
@@ -10,6 +14,7 @@ import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
+import net.passerines.finch.aItems.weapons.ranged.t5.VortexSplash;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageBoots;
@@ -151,6 +156,11 @@ public class ItemManager {
         new GauntletOfSacrifice();
         new RitualEssence();
         new Evelon();
+        new VortexSplash();
+        new DraconianMarksmanBoots();
+        new DraconianMarksmanVest();
+        new DraconianMarksmanLeggings();
+        new DraconianMarksmanHood();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

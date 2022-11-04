@@ -4,6 +4,7 @@ import net.passerines.finch.cmds.*;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
+import net.passerines.finch.events.handler.ArrowHandler;
 import net.passerines.finch.events.handler.DamageDisplayer;
 import net.passerines.finch.events.handler.DamageHandler;
 import net.passerines.finch.events.handler.EquipmentChangeHandler;
@@ -13,6 +14,7 @@ import net.passerines.finch.reforge.OpenReforgeMenu;
 import net.passerines.finch.trinkets.OpenTrinketMenu;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Util;
+import org.bukkit.entity.Arrow;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FinchElementalDamage extends JavaPlugin {
@@ -48,6 +50,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new OpenTrinketMenu();
         new OpenReforgeMenu();
         new DebugMessages();
+        new ArrowHandler();
     }
 
     public static FinchElementalDamage inst() {

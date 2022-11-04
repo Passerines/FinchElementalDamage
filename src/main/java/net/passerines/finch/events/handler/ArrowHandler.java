@@ -24,9 +24,13 @@ public class ArrowHandler implements Listener {
     }
     @EventHandler
     public void onContact(ProjectileHitEvent event) {
+        Util.log("Projectile Hit");
         if (event.getEntity() instanceof Arrow arrow) {
+            Util.log("Arrow Hit");
             if (!event.isCancelled() && arrow.getPersistentDataContainer().has(Util.getNamespacedKey("FinchArrow"))) {
+                Util.log("FinchArrow Hit");
                 int taskId = arrow.getPersistentDataContainer().get(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER);
+                Util.log(taskId + "");
                 Bukkit.getScheduler().cancelTask(taskId);
                 if (event.getHitEntity() != null) {
                     Entity entity = event.getHitEntity();
@@ -54,7 +58,7 @@ public class ArrowHandler implements Listener {
                         }
                         case "earth" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20, 1, false, false, true));
-                            loc.getWorld().spawnParticle(Particle.WATER_SPLASH, loc, 6);
+                            loc.getWorld().spawnParticle(Particle.LEGACY_BLOCK_DUST, loc, 20);
                             elementalDamageEvent = new ElementalDamageEvent((Entity) arrow.getShooter(), entity, ElementalDamageEvent.Element.EARTH, damage);
                         }
                         case "wind" -> {
@@ -85,6 +89,7 @@ public class ArrowHandler implements Listener {
                         }
                     }
                     elementalDamageEvent.apply();
+                    event.getEntity().remove();
                 }
             }
         }

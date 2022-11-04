@@ -7,6 +7,7 @@ public abstract class FinchArmor extends FinchItem {
     protected double health;
     protected int defense;
     protected int damage;
+    protected int bowDamage;
     protected int mana;
     protected double fire;
     protected double water;
@@ -21,6 +22,7 @@ public abstract class FinchArmor extends FinchItem {
         this.health = 0;
         this.defense = 0;
         this.damage = 0;
+        this.bowDamage = 0;
         this.mana = 0;
         this.fire = 0;
         this.water = 0;
@@ -43,6 +45,7 @@ public abstract class FinchArmor extends FinchItem {
     public int getDamage(){
         return damage;
     }
+    public int getBowDamage(){return bowDamage;}
     public int getMana(){
         return mana;
     }

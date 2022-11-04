@@ -51,13 +51,13 @@ public class Evelon extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            AtomicInteger i = new AtomicInteger(2);
+            AtomicInteger i = new AtomicInteger(1);
             Location loc = player.getEyeLocation();
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 loc.add(loc.getDirection().multiply(i.get()));
                 Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, damage,35,0, null);
                 slash.drawSlash();
-            }, 1, 1);
+            }, 2, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);
             cd.add(player);
         }
