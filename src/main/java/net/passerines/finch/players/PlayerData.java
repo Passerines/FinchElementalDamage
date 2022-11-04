@@ -1,11 +1,8 @@
 package net.passerines.finch.players;
 
 import net.passerines.finch.events.HealthDisplay;
-import net.passerines.finch.items.FinchArmor;
-import net.passerines.finch.items.FinchItem;
+import net.passerines.finch.items.*;
 import net.passerines.finch.itemmanaging.ItemManager;
-import net.passerines.finch.items.FinchTrinkets;
-import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.reforge.ReforgeMenu;
 import net.passerines.finch.trinkets.TrinketMenu;
 import net.passerines.finch.util.Util;
@@ -109,6 +106,7 @@ public class PlayerData {
                 setDefense(defense - finchArmor.getDefense());
                 setHealthMax(healthMax - finchArmor.getHealth());
                 setDamage(damage - finchArmor.getDamage());
+                setBowDamage(bowDamage - finchArmor.getBowDamage());
                 setManaMax(manaMax - finchArmor.getMana());
                 setElectroProf(electroProf - finchArmor.getElectro());
                 setFireProf(fireProf - finchArmor.getFire());
@@ -128,6 +126,7 @@ public class PlayerData {
                 setDefense(defense - finchTrinkets.getDefense());
                 setHealthMax(healthMax - finchTrinkets.getHealth());
                 setDamage(damage - finchTrinkets.getDamage());
+                setBowDamage(bowDamage - finchTrinkets.getBowDamage());
                 setManaMax(manaMax - finchTrinkets.getMana());
                 setElectroProf(electroProf - finchTrinkets.getElectro());
                 setFireProf(fireProf - finchTrinkets.getFire());
@@ -161,7 +160,6 @@ public class PlayerData {
                 setDefense(defense + finchWeapon.getDefense());
                 setHealthMax(healthMax + finchWeapon.getHealth());
                 setDamage(damage + finchWeapon.getDamage());
-                setBowDamage(bowDamage + finchWeapon.getBowDamage());
                 setManaMax(manaMax + finchWeapon.getMana());
                 setElectroProf(electroProf + finchWeapon.getElectro());
                 setFireProf(fireProf + finchWeapon.getFire());

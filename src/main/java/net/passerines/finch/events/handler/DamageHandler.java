@@ -85,7 +85,6 @@ public class DamageHandler implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         //Converts entity damage by entity to elemental damage
-
         if(!event.isCancelled()) {
             ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
             elementalDamage.apply();

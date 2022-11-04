@@ -5,6 +5,7 @@ import net.passerines.finch.attacks.FinchArrow;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.items.FinchBow;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
@@ -26,10 +27,10 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Collection;
 
-public class VortexSplash extends FinchWeapon implements Listener {
+public class VortexSplash extends FinchBow implements Listener {
     public VortexSplash() {
         super("VortexSplash");
-        this.bowDamage = 150;
+        this.damage = 150;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     private final Cooldown cd = new Cooldown(10);
@@ -57,7 +58,7 @@ public class VortexSplash extends FinchWeapon implements Listener {
                     for (Object entity : entities) {
                         if (entity instanceof Damageable) {
                             if (!(entity.equals(arrow.getShooter())) && !(entity.equals(ArmorStand.class))) {
-                                ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent((Entity) arrow.getShooter(), (Entity) entity, ElementalDamageEvent.Element.WATER, damage);
+                                ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(arrow, (Entity) entity, ElementalDamageEvent.Element.WATER, this.damage/2);
                                 elementalDamageEvent.apply();
                             }
                         }
@@ -72,7 +73,7 @@ public class VortexSplash extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.BOW);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&bTsunami"));
+        itemMeta.displayName(Chat.formatC("&1Vortex Splash"));
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         return writeId(item);
