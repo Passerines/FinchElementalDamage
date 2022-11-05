@@ -3,11 +3,15 @@ package net.passerines.finch.players;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.*;
 import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.reforge.ItemPrefix;
+import net.passerines.finch.reforge.PrefixManager;
 import net.passerines.finch.reforge.ReforgeMenu;
 import net.passerines.finch.trinkets.TrinketMenu;
 import net.passerines.finch.util.Util;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.units.qual.Prefix;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -100,6 +104,14 @@ public class PlayerData {
     //Calculate individual armor/trinket pieces
     private void uncalculate(ItemStack item){
         String id = Util.getId(item);
+        String prefix = Util.getPrefix(item);
+        if(PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)){
+            ItemPrefix itemPrefix = PrefixManager.PREFIX_HASH_MAP.get(prefix);
+            setDefense(defense - itemPrefix.getDefense());
+            setHealthMax(healthMax - itemPrefix.getHealth());
+            setDamage(damage - itemPrefix.getDamage());
+            setManaMax(manaMax - itemPrefix.getMana());
+        }
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
             if(finchItem instanceof FinchArmor finchArmor) {
@@ -140,6 +152,14 @@ public class PlayerData {
     }
     private void calculate(ItemStack item) {
         String id = Util.getId(item);
+        String prefix = Util.getPrefix(item);
+        if(PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)){
+            ItemPrefix itemPrefix = PrefixManager.PREFIX_HASH_MAP.get(prefix);
+            setDefense(defense + itemPrefix.getDefense());
+            setHealthMax(healthMax + itemPrefix.getHealth());
+            setDamage(damage + itemPrefix.getDamage());
+            setManaMax(manaMax + itemPrefix.getMana());
+        }
         if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
             if(finchItem instanceof FinchArmor finchArmor) {

@@ -11,11 +11,13 @@ import net.passerines.finch.events.handler.EquipmentChangeHandler;
 import net.passerines.finch.integrations.MythicMobsBridge;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.reforge.OpenReforgeMenu;
+import net.passerines.finch.reforge.PrefixManager;
 import net.passerines.finch.trinkets.OpenTrinketMenu;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Util;
 import org.bukkit.entity.Arrow;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.checkerframework.checker.units.qual.Prefix;
 
 public class FinchElementalDamage extends JavaPlugin {
 
@@ -43,6 +45,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new HealthDisplay();
         new FinchAttributesCmd();
         new ItemGiveCommand();
+        new PrefixManager();
         ItemManager.reload();
         new DamageHandler();
         new EquipmentChangeHandler();

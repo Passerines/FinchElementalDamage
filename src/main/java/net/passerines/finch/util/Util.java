@@ -94,6 +94,14 @@ public class Util {
         }
     }
 
+    public static String getPrefix(ItemStack item) {
+        if(isSafe(item) && item.getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("prefix"))) {
+            return item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("prefix"), PersistentDataType.STRING);
+        } else {
+            return null;
+        }
+    }
+
     //Log a message in console
     public static void log(String message) {
         Bukkit.getConsoleSender().sendMessage(Chat.format("&7[&bFinchElementalDamage&7] &f" + message));
