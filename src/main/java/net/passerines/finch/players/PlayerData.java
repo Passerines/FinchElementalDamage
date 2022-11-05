@@ -64,7 +64,7 @@ public class PlayerData {
             calculateAccessory(trinketMenu.getMenu().getItem(i+3), i);
         }
 
-        oldItem = player.getInventory().getItemInMainHand();
+        oldItem = player.getInventory().getItemInMainHand().clone();
         if(ItemManager.ITEM_HASH_MAP.get(Util.getId(oldItem)) instanceof FinchWeapon) {
             calculate(oldItem);
         }
@@ -88,7 +88,7 @@ public class PlayerData {
         if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon){
             calculate(newItem);
         }
-        oldItem = newItem;
+        oldItem = newItem.clone();
     }
     public void calculateAccessory(ItemStack newItem, int index){
         if(oldTrinkets[index] != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(oldTrinkets[index])) instanceof FinchTrinkets) {
