@@ -1,7 +1,8 @@
 package net.passerines.finch.cmds;
 
+
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.players.PlayerData;
+
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.reforge.PrefixManager;
@@ -13,9 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 
 public class ReforgeCommand implements CommandExecutor {
@@ -36,6 +35,7 @@ public class ReforgeCommand implements CommandExecutor {
             else{
                 prefix.removePrefix(item);
             }
+            PlayerMap.PLAYERS.get(sender).calculateHand(item);
         }
         return true;
     }
