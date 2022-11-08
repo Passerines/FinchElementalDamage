@@ -19,7 +19,7 @@ public class ItemPrefix {
     private int defense;
     private int mana;
 
-    enum Type{
+    public enum Type{
         WEAPON,
         ARMOR,
         TRINKET
@@ -52,6 +52,13 @@ public class ItemPrefix {
         item.setItemMeta(meta);
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public Type getType(){
+        return type;
+    }
     public double getHealth() {
         return health;
     }
