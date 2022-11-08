@@ -12,14 +12,19 @@ import org.bukkit.persistence.PersistentDataType;
 public class ItemPrefix {
     private String id;
     private String displayName;
-    private String type;
+    private Type type;
     private int tier;
     private int health;
     private int damage;
     private int defense;
     private int mana;
 
-    public ItemPrefix(String id, String displayName, String type, int tier, int health, int damage, int defense, int mana){
+    enum Type{
+        WEAPON,
+        ARMOR,
+        TRINKET
+    }
+    public ItemPrefix(String id, String displayName, Type type, int tier, int health, int damage, int defense, int mana){
         this.id = id;
         this.displayName = displayName;
         this.type = type;

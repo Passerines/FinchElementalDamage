@@ -15,6 +15,9 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class ReforgeCommand implements CommandExecutor {
@@ -28,7 +31,9 @@ public class ReforgeCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
-            ItemPrefix prefix = PrefixManager.PREFIX_HASH_MAP.get("armorbrittle");
+            ArrayList<String> prefixList = new ArrayList<>(PrefixManager.PREFIX_HASH_MAP.keySet());
+            int random = Util.rand(0, prefixList.size()-1);
+            ItemPrefix prefix = PrefixManager.PREFIX_HASH_MAP.get(prefixList.get(random));
             if(Util.getPrefix(item) == null){
                 prefix.applyPrefix(item);
             }
