@@ -38,7 +38,7 @@ public class ReforgeCommand implements CommandExecutor {
             ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
             if(ItemManager.ITEM_HASH_MAP.containsKey(Util.getId(item))){
                 if(Util.getPrefix(item) == null){
-                    if(ItemManager.ITEM_HASH_MAP.get(Util.getId(item)) instanceof FinchWeapon){
+                    if(ItemManager.ITEM_HASH_MAP.get(Util.getId(item)) instanceof FinchItem){
                         ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item));
                         int random = Util.rand(0, typePrefixList.size()-1);
                         ItemPrefix prefix = typePrefixList.get(random);
