@@ -38,16 +38,11 @@ public class ReforgeCommand implements CommandExecutor {
             ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
             if(ItemManager.ITEM_HASH_MAP.containsKey(Util.getId(item))){
                 if(Util.getPrefix(item) == null){
-                    if(ItemManager.ITEM_HASH_MAP.get(Util.getId(item)) instanceof FinchItem){
-                        ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item));
-                        int random = Util.rand(0, typePrefixList.size()-1);
-                        ItemPrefix prefix = typePrefixList.get(random);
-                        prefix.applyPrefix(item);
-                        sender.sendMessage(Chat.format("&cSucessfully reforged your " + Chat.asLegacy(item.displayName()) +  " with " + prefix.getDisplayName() + "."));
-                    }
-                    else{
-                        sender.sendMessage(Chat.format("&cPlease hold an item in your main hand."));
-                    }
+                    ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item));
+                    int random = Util.rand(0, typePrefixList.size()-1);
+                    ItemPrefix prefix = typePrefixList.get(random);
+                    prefix.applyPrefix(item);
+                    sender.sendMessage(Chat.format("&cSucessfully reforged your " + Chat.asLegacy(item.displayName()) +  " with " + prefix.getDisplayName() + "."));
                 }
                 else{
                     ItemPrefix prefix = PrefixManager.PREFIX_HASH_MAP.get(Util.getPrefix(item));
