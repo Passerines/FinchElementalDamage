@@ -1,5 +1,7 @@
 package net.passerines.finch;
 
+import de.slikey.effectlib.Effect;
+import de.slikey.effectlib.EffectManager;
 import net.passerines.finch.cmds.*;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
@@ -25,6 +27,7 @@ public class FinchElementalDamage extends JavaPlugin {
     public void onLoad() {
         Util.log("&bFinchElementalDamage is now loading!");
         super.onLoad();
+
     }
 
     @Override
@@ -35,6 +38,7 @@ public class FinchElementalDamage extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+
         new DamageDisplayer();
         new EntityMap();
         new PlayerMap();

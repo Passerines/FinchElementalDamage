@@ -14,6 +14,7 @@ import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
+import net.passerines.finch.aItems.weapons.ranged.artifacts.BowOfTheElements;
 import net.passerines.finch.aItems.weapons.ranged.t5.VortexSplash;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
@@ -161,6 +162,7 @@ public class ItemManager {
         new DraconianMarksmanVest();
         new DraconianMarksmanLeggings();
         new DraconianMarksmanHood();
+        new BowOfTheElements();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

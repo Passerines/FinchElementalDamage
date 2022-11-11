@@ -52,8 +52,8 @@ public class VortexSplash extends FinchBow implements Listener {
         if(event.getEntity() instanceof Arrow arrow){
             if(arrow.getPersistentDataContainer().has(Util.getNamespacedKey("VortexSplash"))){
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                    arrow.getLocation().getWorld().spawnParticle(Particle.WATER_SPLASH, arrow.getLocation(), 90,2,2,2);
-                    Collection<Entity> entitylist = arrow.getLocation().getNearbyEntities(5,5,5);
+                    arrow.getLocation().getWorld().spawnParticle(Particle.WATER_SPLASH, arrow.getLocation(), 90,1,2,1);
+                    Collection<Entity> entitylist = arrow.getLocation().getNearbyEntities(1,2,1);
                     Object[] entities = entitylist.toArray();
                     for (Object entity : entities) {
                         if (entity instanceof Damageable) {

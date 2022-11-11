@@ -50,32 +50,94 @@ public class FinchArrow implements Listener {
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
         return arrow;
     }
-    public void shootEarthArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootEarthArrow(){
+        Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(67, 59, 0), 1.0F);
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "earth");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation(), 1,0 ,0 ,0 ,0, dust);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
-    public void shootWindArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootWindArrow(){
+        Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(227, 229, 255), 1.0F);
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "wind");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation(), 1,0 ,0 ,0 ,0, dust);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
-    public void shootElectroArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootElectroArrow(){
+        Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(227, 157, 254), 1.0F);
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "electro");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation(), 1,0 ,0 ,0 ,0, dust);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
-    public void shootLightArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootLightArrow(){
+        Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 249, 214), 1.0F);
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "electro");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation(), 1,0 ,0 ,0 ,0, dust);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
-    public void shootNeutralArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootNeutralArrow(){
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "neutral");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.CRIT, arrow.getLocation(), 1,0 ,0 ,0 ,0);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
-    public void shootUndeadArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootUndeadArrow(){
+        Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(148, 50, 99), 1.0F);
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "undead");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation(), 1,0 ,0 ,0 ,0, dust);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
-    public void shootDarkArrow(){
-        Location loc = player.getLocation();
+    public Arrow shootDarkArrow(){
+        Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(1, 1, 1), 1.0F);
+        Location loc = player.getEyeLocation();
         Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        arrow.setShooter(player);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "dark");
+        int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+            arrow.getLocation().getWorld().spawnParticle(Particle.REDSTONE, arrow.getLocation(), 1,0 ,0 ,0 ,0, dust);
+        }, 1,1);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
+        arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        return arrow;
     }
 }

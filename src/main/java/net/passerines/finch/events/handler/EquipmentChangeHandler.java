@@ -37,7 +37,8 @@ public class EquipmentChangeHandler implements Listener {
             if(player.getInventory().getItemInMainHand().getType().isAir()) {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                     if(!player.getInventory().getItemInMainHand().getType().isAir()){
-                        PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
+                        //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
+                        new ItemChangeEvent(player, player.getInventory().getItemInMainHand());
                     }
                 });
             }
@@ -46,48 +47,33 @@ public class EquipmentChangeHandler implements Listener {
     @EventHandler
     public void playerSwitchItem(PlayerSwapHandItemsEvent event){
         Player player = event.getPlayer();
-        PlayerMap.PLAYERS.get(player).calculateHand(event.getMainHandItem());
+        //PlayerMap.PLAYERS.get(player).calculateHand(event.getMainHandItem());
+        new ItemChangeEvent(player, event.getMainHandItem());
     }
     @EventHandler
     public void onDrop(PlayerDropItemEvent event){
         Player player = event.getPlayer();
         if(player.getInventory().getItemInMainHand().getType().isAir()) {
-            PlayerMap.PLAYERS.get(player).calculateHand(new ItemStack(Material.AIR));
+            //PlayerMap.PLAYERS.get(player).calculateHand(new ItemStack(Material.AIR));
+            new ItemChangeEvent(player, new ItemStack(Material.AIR));
         }
     }
     @EventHandler
     public void onWeaponInventoryChange(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(),()->{
-            //OldNull & NewNull = Not calculate
-            //OldNotNull & NewNull = Uncalculate
-            //OldNull & NewNotNull = Calculate
-            //OldNotNull & NewNotNull = Uncalculate & Calculate
             if(PlayerMap.PLAYERS.get(player).getOldItem() == null || !PlayerMap.PLAYERS.get(player).getOldItem().isSimilar(player.getInventory().getItemInMainHand())) {
-                PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
+                //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
+                new ItemChangeEvent(player, player.getInventory().getItemInMainHand());
             }
         });
-        /*switch (event.getAction()){
-            case PLACE_ALL, PLACE_ONE, PLACE_SOME ->{
-                if(event.getSlotType().equals(InventoryType.SlotType.QUICKBAR)){
-                    if(player.getInventory().getHeldItemSlot() == event.getSlot()){
-                        PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                    }
-                }
-            }
-            case HOTBAR_SWAP -> {
-                if(event.getSlotType().equals(InventoryType.SlotType.QUICKBAR)){
-                    if(player.getInventory().getHeldItemSlot() == event.getSlot()){
-                        PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                    }
-                }
-                if(event.get){}
-        }
-         */
     }
     @EventHandler
     public void onWeaponChange(PlayerItemHeldEvent event){
-        Player player = event.getPlayer();PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItem(event.getNewSlot()));
+        Player player = event.getPlayer();
+        //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItem(event.getNewSlot()));
+        new ItemChangeEvent(player, player.getInventory().getItem(event.getNewSlot()));
+
     }
     @EventHandler
     public void dragEvent(InventoryDragEvent event){
@@ -95,9 +81,17 @@ public class EquipmentChangeHandler implements Listener {
         if(player.getInventory().getItemInMainHand().getType().isAir()) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                 if(!player.getInventory().getItemInMainHand().getType().isAir()){
-                    PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
+                    //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
+                    new ItemChangeEvent(player, player.getInventory().getItemInMainHand());
                 }
             });
         }
+    }
+    @EventHandler
+    public void onItemChange(ItemChangeEvent itemChangeEvent){
+        Player player = itemChangeEvent.getPlayer();
+        ItemStack item = itemChangeEvent.getItemStack();
+        PlayerData playerData = PlayerMap.PLAYERS.get(player);
+        playerData.calculateHand(item);
     }
 }
