@@ -2,7 +2,9 @@ package net.passerines.finch.reforge;
 
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
+import org.bukkit.entity.Item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PrefixManager {
@@ -23,5 +25,16 @@ public class PrefixManager {
         new ItemPrefix("trinketancient", "&4Ancient", ItemPrefix.Type.TRINKET, 2, 0, 20, 0, 200);
         new ItemPrefix("trinketenhanced", "&bEnhanced", ItemPrefix.Type.TRINKET, 1, 0, 0, 0, 300);
         // ^trinket
+    }
+
+    public static ArrayList<ItemPrefix> getPrefixes(ItemPrefix.Type type){
+        ArrayList<ItemPrefix> prefixList = new ArrayList<>(PrefixManager.PREFIX_HASH_MAP.values());
+        ArrayList<ItemPrefix> itemPrefixList = new ArrayList<>();
+        for(int i = 0; i < prefixList.size(); i++){
+            if(prefixList.get(i).getType() == type){
+                itemPrefixList.add(prefixList.get(i));
+            }
+        }
+        return itemPrefixList;
     }
 }

@@ -22,7 +22,8 @@ public class ItemPrefix {
     public enum Type{
         WEAPON,
         ARMOR,
-        TRINKET
+        TRINKET,
+        NONE
     }
     public ItemPrefix(String id, String displayName, Type type, int tier, int health, int damage, int defense, int mana){
         this.id = id;

@@ -1,8 +1,13 @@
 package net.passerines.finch.util;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.items.FinchItem;
 
+import net.passerines.finch.items.FinchTrinkets;
+import net.passerines.finch.items.FinchWeapon;
+import net.passerines.finch.reforge.ItemPrefix;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -94,6 +99,25 @@ public class Util {
         }
     }
 
+    //Gets the item prefix enum type
+    public static ItemPrefix.Type getItemPrefixType(ItemStack item){
+        String Id = getId(item);
+        FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(Id);
+        if(finchItem instanceof FinchWeapon){
+            return ItemPrefix.Type.WEAPON;
+        }
+        else if(finchItem instanceof FinchTrinkets){
+            return ItemPrefix.Type.TRINKET;
+        }
+        else if(finchItem instanceof FinchArmor){
+            return ItemPrefix.Type.ARMOR;
+        }
+        else{
+            return ItemPrefix.Type.NONE;
+        }
+    }
+
+    //Gets the prefix that is currently on the item
     public static String getPrefix(ItemStack item) {
         if(isSafe(item) && item.getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("prefix"))) {
             return item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("prefix"), PersistentDataType.STRING);

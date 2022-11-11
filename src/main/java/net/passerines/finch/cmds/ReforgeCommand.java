@@ -38,19 +38,14 @@ public class ReforgeCommand implements CommandExecutor {
             ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
             if(ItemManager.ITEM_HASH_MAP.containsKey(Util.getId(item))){
                 if(Util.getPrefix(item) == null){
-                    ArrayList<ItemPrefix> prefixList = new ArrayList<>(PrefixManager.PREFIX_HASH_MAP.values());
                     if(ItemManager.ITEM_HASH_MAP.get(Util.getId(item)) instanceof FinchWeapon){
-                        ArrayList<ItemPrefix> weaponPrefixList = new ArrayList<>();
-                        for(int i = 0; i < prefixList.size(); i++){
-                            if(prefixList.get(i).getType() == ItemPrefix.Type.WEAPON){
-                                weaponPrefixList.add(prefixList.get(i));
-                            }
-                        }
-                        int random = Util.rand(0, weaponPrefixList.size()-1);
-                        ItemPrefix prefix = weaponPrefixList.get(random);
+                        ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item));
+                        int random = Util.rand(0, typePrefixList.size()-1);
+                        ItemPrefix prefix = typePrefixList.get(random);
                         prefix.applyPrefix(item);
-                        sender.sendMessage(Chat.format("&cSucessfully reforged weapon with " + prefix.getDisplayName() + "."));
-                    }else{
+                        sender.sendMessage(Chat.format("&cSucessfully reforged your " + Chat.asLegacy(item.displayName()) +  " with " + prefix.getDisplayName() + "."));
+                    }
+                    else{
                         sender.sendMessage(Chat.format("&cPlease hold an item in your main hand."));
                     }
                 }
