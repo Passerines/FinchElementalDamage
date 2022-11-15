@@ -47,7 +47,7 @@ public class ItemPrefix {
     public void applyPrefix(ItemStack item){
         ItemMeta meta = item.getItemMeta();
         meta.getPersistentDataContainer().set(Util.getNamespacedKey("prefix"), PersistentDataType.STRING, id);
-        meta.displayName(Chat.formatC(displayName + " ").append(meta.displayName()));
+        meta.displayName(displayName.append(Component.text(" ")).append(meta.displayName()));
         item.setItemMeta(meta);
     }
 
