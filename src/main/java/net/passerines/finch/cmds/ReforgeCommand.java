@@ -38,7 +38,15 @@ public class ReforgeCommand implements CommandExecutor {
             ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
             if(ItemManager.ITEM_HASH_MAP.containsKey(Util.getId(item))){
                 if(Util.getPrefix(item) == null){
-                    ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item));
+                    double percentage = Math.random();
+                    int randomTier = 1;
+                    if(percentage <= 0.05){
+                        randomTier = 3;
+                    }
+                    else if(percentage >= 0.85){
+                        randomTier = 2;
+                    }
+                    ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item), randomTier);
                     int random = Util.rand(0, typePrefixList.size()-1);
                     ItemPrefix prefix = typePrefixList.get(random);
                     prefix.applyPrefix(item);

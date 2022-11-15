@@ -1,5 +1,6 @@
 package net.passerines.finch.reforge;
 
+import net.kyori.adventure.text.Component;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -11,7 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class ItemPrefix {
     private String id;
-    private String displayName;
+    private Component displayName;
     private Type type;
     private int tier;
     private int health;
@@ -25,7 +26,12 @@ public class ItemPrefix {
         TRINKET,
         NONE
     }
+
     public ItemPrefix(String id, String displayName, Type type, int tier, int health, int damage, int defense, int mana){
+        this(id, Chat.formatC(displayName), type, tier, health, damage, defense, mana);
+    }
+
+    public ItemPrefix(String id, Component displayName, Type type, int tier, int health, int damage, int defense, int mana){
         this.id = id;
         this.displayName = displayName;
         this.type = type;
@@ -36,6 +42,7 @@ public class ItemPrefix {
         this.mana = mana;
         PrefixManager.PREFIX_HASH_MAP.put(id, this);
     }
+
 
     public void applyPrefix(ItemStack item){
         ItemMeta meta = item.getItemMeta();
@@ -53,7 +60,7 @@ public class ItemPrefix {
         item.setItemMeta(meta);
     }
 
-    public String getDisplayName() {
+    public Component getDisplayName() {
         return displayName;
     }
 
@@ -71,6 +78,9 @@ public class ItemPrefix {
     }
     public int getMana(){
         return mana;
+    }
+    public int getTier(){
+        return tier;
     }
     /*
     6 tiers  5 ints
