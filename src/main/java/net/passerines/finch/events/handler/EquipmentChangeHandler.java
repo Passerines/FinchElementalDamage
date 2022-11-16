@@ -89,6 +89,11 @@ public class EquipmentChangeHandler implements Listener {
         }
     }
     @EventHandler
+    public void onJoin(PlayerJoinEvent event){
+        Player player = event.getPlayer();
+        Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, player.getInventory().getItemInMainHand()));
+    }
+    @EventHandler
     public void onItemChange(ItemChangeEvent itemChangeEvent){
         Player player = itemChangeEvent.getPlayer();
         ItemStack item = itemChangeEvent.getItemStack();
