@@ -38,7 +38,7 @@ public class EquipmentChangeHandler implements Listener {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                     if(!player.getInventory().getItemInMainHand().getType().isAir()){
                         //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                        new ItemChangeEvent(player, player.getInventory().getItemInMainHand());
+                        Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, player.getInventory().getItemInMainHand()));
                     }
                 });
             }
@@ -48,14 +48,15 @@ public class EquipmentChangeHandler implements Listener {
     public void playerSwitchItem(PlayerSwapHandItemsEvent event){
         Player player = event.getPlayer();
         //PlayerMap.PLAYERS.get(player).calculateHand(event.getMainHandItem());
-        new ItemChangeEvent(player, event.getMainHandItem());
+        Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, event.getMainHandItem()));
+
     }
     @EventHandler
     public void onDrop(PlayerDropItemEvent event){
         Player player = event.getPlayer();
         if(player.getInventory().getItemInMainHand().getType().isAir()) {
             //PlayerMap.PLAYERS.get(player).calculateHand(new ItemStack(Material.AIR));
-            new ItemChangeEvent(player, new ItemStack(Material.AIR));
+            Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, new ItemStack(Material.AIR)));
         }
     }
     @EventHandler
@@ -64,7 +65,7 @@ public class EquipmentChangeHandler implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(),()->{
             if(PlayerMap.PLAYERS.get(player).getOldItem() == null || !PlayerMap.PLAYERS.get(player).getOldItem().isSimilar(player.getInventory().getItemInMainHand())) {
                 //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                new ItemChangeEvent(player, player.getInventory().getItemInMainHand());
+                Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, player.getInventory().getItemInMainHand()));
             }
         });
     }
@@ -72,7 +73,7 @@ public class EquipmentChangeHandler implements Listener {
     public void onWeaponChange(PlayerItemHeldEvent event){
         Player player = event.getPlayer();
         //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItem(event.getNewSlot()));
-        new ItemChangeEvent(player, player.getInventory().getItem(event.getNewSlot()));
+        Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, player.getInventory().getItem(event.getNewSlot())));
 
     }
     @EventHandler
@@ -82,7 +83,7 @@ public class EquipmentChangeHandler implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                 if(!player.getInventory().getItemInMainHand().getType().isAir()){
                     //PlayerMap.PLAYERS.get(player).calculateHand(player.getInventory().getItemInMainHand());
-                    new ItemChangeEvent(player, player.getInventory().getItemInMainHand());
+                    Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, player.getInventory().getItemInMainHand()));
                 }
             });
         }
