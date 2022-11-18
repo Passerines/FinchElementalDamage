@@ -52,6 +52,24 @@ public class BowOfTheElements extends FinchBow implements Listener {
                 else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (1)){
                     finchArrow.shootFireArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralFire");
                 }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (2)){
+                    finchArrow.shootEarthArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralEarth");
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (3)){
+                    finchArrow.shootElectroArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralElectro");
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (4)){
+                    finchArrow.shootDarkArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralDark");
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (5)){
+                    finchArrow.shootLightArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralLight");
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (6)){
+                    finchArrow.shootUndeadArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralUndead");
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (7)){
+                    finchArrow.shootWindArrow().getPersistentDataContainer().set(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING, "SpiralWind");
+                }
                 item.setItemMeta(itemMeta);
             }
         }
@@ -64,10 +82,28 @@ public class BowOfTheElements extends FinchBow implements Listener {
                     Location loc = arrow.getLocation();
                     HelixEffect effect = new HelixEffect(FinchEffectManager.getEffectManager());
                     if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralFire")){
-                        effect.particle = Particle.SMALL_FLAME;
+                        effect.particle = Particle.FLAME;
                     }
                     else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralWater")){
                         effect.particle = Particle.GLOW;
+                    }
+                    else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralEarth")){
+                        effect.particle = Particle.CRIT;
+                    }
+                    else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralElectro")){
+                        effect.particle = Particle.ELECTRIC_SPARK;
+                    }
+                    else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralDark")){
+                        effect.particle = Particle.ASH;
+                    }
+                    else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralLight")){
+                        effect.particle = Particle.WHITE_ASH;
+                    }
+                    else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralUndead")){
+                        effect.particle = Particle.SOUL;
+                    }
+                    else if(arrow.getPersistentDataContainer().get(Util.getNamespacedKey("ElementalArrow"), PersistentDataType.STRING).equals("SpiralWind")){
+                        effect.particle = Particle.EXPLOSION_NORMAL;
                     }
                     effect.setLocation(loc.add(0, 0,0));
                     FinchEffectManager.getEffectManager().start(effect);
@@ -77,15 +113,88 @@ public class BowOfTheElements extends FinchBow implements Listener {
                     ItemMeta itemMeta = item.getItemMeta();
                     if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (0)){
                         itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 1);
-                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.FLAME;
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.BUBBLE_POP;
                     }
                     else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (1)){
+                        itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 2);
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.CRIT;
+                    }
+                    else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (2)){
+                        itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 3);
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.SPELL_WITCH;
+                    }
+                    else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (3)){
+                        itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 4);
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.ASH;
+                    }
+                    else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (4)){
+                        itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 5);
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.WHITE_ASH;
+                    }
+                    else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (5)){
+                        itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 6);
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.SOUL;
+                    }
+                    else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (6)){
+                        itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 7);
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.TOTEM;
+                    }
+                    else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (7)){
                         itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0);
-                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.BUBBLE_POP;
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.FLAME;
                     }
                     item.setItemMeta(itemMeta);
                 }, 6);
 
+            }
+        }
+    }
+    @EventHandler
+    public void blockingEffect(ElementalDamageEvent event){
+        if(event.getVictim() instanceof Player player){
+            if(Util.getId(player.getInventory().getItemInMainHand()).equals(id)){
+                ItemStack item = player.getInventory().getItemInMainHand();
+                ItemMeta itemMeta = item.getItemMeta();
+                if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (0)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.FIRE)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (1)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.WATER)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (2)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.EARTH)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (3)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.ELECTRO)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (4)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.DARK)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (5)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.LIGHT)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (6)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.UNDEAD)){
+                        event.setCancelled(true);
+                    }
+                }
+                else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (7)){
+                    if(event.getElement().equals(ElementalDamageEvent.Element.WIND)){
+                        event.setCancelled(true);
+                    }
+                }
             }
         }
     }
@@ -99,9 +208,11 @@ public class BowOfTheElements extends FinchBow implements Listener {
         if(id.equals(Util.getId(event.getItemStack()))){
             Location loc = player.getEyeLocation();
             DonutEffect effect =  new DonutEffect(FinchEffectManager.getEffectManager());
+            loc.setPitch(0);
             effect.setLocation(loc);
             effect.setEntity(player);
             effect.setTargetEntity(player);
+            effect.updateDirections = false;
             effect.iterations = -1;
             effect.disappearWithOriginEntity = true;
             effect.disappearWithTargetEntity = true;
