@@ -5,6 +5,7 @@ import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,6 +36,9 @@ public class HealthDisplay implements Listener {
             int defense = vPlayerData.getDefense();
             double maxHealth = vPlayerData.getHealthMax();
             double currentHealth = vPlayerData.getHealth();
+            double percentHealth = currentHealth/maxHealth;
+            double vanillaHealth = percentHealth*player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+            player.setHealth(vanillaHealth);
             int maxMana = vPlayerData.getManaMax();
             int currentMana = vPlayerData.getMana();
             String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth + "    &aDefense: " + defense + "    &bMana: " + currentMana + "/" + maxMana);
