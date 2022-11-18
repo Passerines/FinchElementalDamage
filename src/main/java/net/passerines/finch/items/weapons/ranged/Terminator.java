@@ -19,11 +19,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 
-public class Tsunami extends FinchWeapon implements Listener {
+public class Terminator extends FinchWeapon implements Listener {
 
-    public Tsunami() {
-        super("Tsunami");
-        this.damage = 150;
+    public Terminator() {
+        super("Terminator");
+        this.damage = 100;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
@@ -35,9 +35,13 @@ public class Tsunami extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.damage);
-                finchArrow.shootWaterArrow();
-                cd.add(player, 15);
+                FinchArrow finchArrow = new FinchArrow(player, 2, -1, this.damage);
+                FinchArrow finchArrow1 = new FinchArrow(player, 2, 0, this.damage);
+                FinchArrow finchArrow2 = new FinchArrow(player, 2, 1, this.damage);
+                finchArrow.shootElectroArrow();
+                finchArrow1.shootElectroArrow();
+                finchArrow2.shootElectroArrow();
+                cd.add(player, 3);
             }
         }
     }
@@ -46,7 +50,7 @@ public class Tsunami extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.BOW);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&bTsunami"));
+        itemMeta.displayName(Chat.formatC("&4Terminator"));
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         return writeId(item);
