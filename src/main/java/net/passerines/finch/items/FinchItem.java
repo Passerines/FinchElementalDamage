@@ -1,6 +1,7 @@
 package net.passerines.finch.items;
 
 
+import net.kyori.adventure.text.Component;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Util;
 import org.bukkit.NamespacedKey;
@@ -8,9 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.List;
+
 public abstract class FinchItem {
 
     public static final NamespacedKey ID_KEY = Util.getNamespacedKey("id");
+    protected Component displayName;
+    protected List<Component> lore;
     protected String id;
     protected int rarity;
 
@@ -34,4 +39,16 @@ public abstract class FinchItem {
     }
     public int getRarity(){return rarity;}
     public void setRarity(int rarities){rarity = rarities;}
+
+    public Component getDisplayName() {
+        return displayName;
+    }
+
+    public List<Component> getLore() {
+        return lore;
+    }
+
+    public ItemStack format(ItemStack item) {
+        return item;
+    }
 }

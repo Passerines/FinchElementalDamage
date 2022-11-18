@@ -1,6 +1,5 @@
 package net.passerines.finch.aItems.weapons.melee.spears.t5;
 
-import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
@@ -20,7 +19,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -29,7 +27,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,19 +35,27 @@ import java.util.UUID;
 public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
     Cooldown cd1 = new Cooldown<>(50);
-    ArrayList<String> lore = new ArrayList<String>();
     public EngulfingLightning() {
         super("EngulfingLightning");
         this.damage = 115;
         this.mana = 500;
         this.element = ElementalDamageEvent.Element.ELECTRO;
-        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-        lore.add("&4Damage: &f+ <DAMAGE>");
-        lore.add("&bMana: &f+ <MANA>");
+
+        // Set the displayname and lore
+        displayName = Chat.formatC("&dEngulfing Lightning");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("&bDamage: &7<DAMAGE>");
+        lore.add("&bMana: &7<MANA>");
+        lore.add("&bDefense: &7<DEFENSE>");
+        lore.add("&bHealth: &7<HEALTH>");
         lore.add(" ");
         lore.add("&6Ability: &dDivine Punishment");
         lore.add("&7Summon a bolt of &dlightning in the direction");
         lore.add("&7you are facing dealing damage based on your &bMana");
+        this.lore = Chat.formatC(lore);
+        //
+
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler
     public void cancelHit(EntityDamageByEntityEvent hit){
@@ -121,19 +126,14 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&dEngulfing Lightning"));
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(1);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
-        ArrayList<Component> lore = new ArrayList<>();
-        for(int i = 0; i < this.lore.size(); i++){
-            String loreLine = this.lore.get(i);
-            loreLine.replace("<DAMAGE>", String.valueOf(this.damage));
-            lore.add(Chat.formatC(loreLine));
-        }
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        // Format the item instead of setting displayname and lore
+        format(item);
+        //
         return writeId(item);
     }
 }

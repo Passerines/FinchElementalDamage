@@ -1,23 +1,18 @@
 package net.passerines.finch.items;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.reforge.ItemPrefix;
+import net.passerines.finch.util.Chat;
+import net.passerines.finch.util.Util;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-public abstract class FinchTrinkets extends FinchItem {
+import java.util.ArrayList;
 
-    protected double health;
-    protected int defense;
-    protected int damage;
-    protected int bowDamage;
-    protected int mana;
-    protected double fire;
-    protected double water;
-    protected double earth;
-    protected double wind;
-    protected double electro;
-    protected double light;
-    protected double dark;
-    protected int rarity;
+public abstract class FinchTrinkets extends FinchEquipment {
+
     protected int type;
     protected ElementalDamageEvent.Element element;
 
@@ -26,20 +21,7 @@ public abstract class FinchTrinkets extends FinchItem {
     }
     public FinchTrinkets(String id, int rarity) {
         super(id, rarity);
-        this.rarity = 0;
         this.element = ElementalDamageEvent.Element.FIRE;
-        this.health = 0;
-        this.defense = 0;
-        this.damage = 0;
-        this.bowDamage = 0;
-        this.mana = 0;
-        this.fire = 0;
-        this.water = 0;
-        this.earth = 0;
-        this.wind = 0;
-        this.electro = 0;
-        this.light = 0;
-        this.dark = 0;
         this.type = 1;
     }
 
@@ -85,4 +67,26 @@ public abstract class FinchTrinkets extends FinchItem {
     }
     public int getRarity(){return rarity;}
     public int getType(){return type;}
+
+    @Override
+    public ItemStack format(ItemStack item) {
+        ItemMeta itemMeta = item.getItemMeta();
+
+        ArrayList<Component> newLore = new ArrayList<>();
+        ItemPrefix prefix = Util.getItemPrefix(item);
+        itemMeta.displayName(prefix!=null?prefix.getDisplayName().append(Chat.formatC(" ")).append(displayName):displayName);
+        for(Component line : lore){
+            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DAMAGE).replacement(damage+(prefix!=null?"+"+prefix.getDamage():"")).build());
+            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(MANA).replacement(mana+(prefix!=null?"+"+prefix.getMana():"")).build());
+            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DEFENSE).replacement(defense+(prefix!=null?"+"+prefix.getDefense():"")).build());
+            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(HEALTH).replacement(health+(prefix!=null?"+"+prefix.getHealth():"")).build());
+            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+"").build());
+            //line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+(prefix!=null?"+"+prefix.getDamage():"")).build());
+            newLore.add(line);
+        }
+        itemMeta.lore(newLore);
+
+        item.setItemMeta(itemMeta);
+        return item;
+    }
 }

@@ -8,6 +8,7 @@ import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchTrinkets;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.reforge.ItemPrefix;
+import net.passerines.finch.reforge.PrefixManager;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -98,6 +99,10 @@ public class Util {
             return null;
         }
     }
+    //Return the FinchItem of an ItemStack
+    public static FinchItem getFinchItem(ItemStack item) {
+        return ItemManager.ITEM_HASH_MAP.getOrDefault(getId(item), null);
+    }
 
     //Gets the item prefix enum type
     public static ItemPrefix.Type getItemPrefixType(ItemStack item){
@@ -124,6 +129,11 @@ public class Util {
         } else {
             return null;
         }
+    }
+    //Gets the ItemPrefix that is currently on the item
+    public static ItemPrefix getItemPrefix(ItemStack item) {
+        String prefix = getPrefix(item);
+        return PrefixManager.PREFIX_HASH_MAP.getOrDefault(prefix, null);
     }
 
     //Log a message in console
