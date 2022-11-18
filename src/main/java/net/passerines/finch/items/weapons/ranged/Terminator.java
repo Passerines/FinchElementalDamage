@@ -35,9 +35,9 @@ public class Terminator extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 2, -1, this.damage);
-                FinchArrow finchArrow1 = new FinchArrow(player, 2, 0, this.damage);
-                FinchArrow finchArrow2 = new FinchArrow(player, 2, 1, this.damage);
+                FinchArrow finchArrow = new FinchArrow(player, 3, -1, this.damage);
+                FinchArrow finchArrow1 = new FinchArrow(player, 3, 0, this.damage);
+                FinchArrow finchArrow2 = new FinchArrow(player, 3, 1, this.damage);
                 finchArrow.shootElectroArrow();
                 finchArrow1.shootElectroArrow();
                 finchArrow2.shootElectroArrow();

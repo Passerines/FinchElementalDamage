@@ -92,6 +92,7 @@ public class ItemManager {
         new DevourScythe();
         new CrescentKnives();
         new FireBallWand();
+        new Terminator();
         new SharpStabber();
         new HellfireCrossbow();
         new PooLauncher();
