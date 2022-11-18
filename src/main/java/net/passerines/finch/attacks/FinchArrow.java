@@ -27,7 +27,7 @@ public class FinchArrow implements Listener {
     public Arrow shootFireArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(195, 58, 0), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "fire");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -40,7 +40,7 @@ public class FinchArrow implements Listener {
     public Arrow shootWaterArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(0, 105, 217), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "water");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -53,7 +53,7 @@ public class FinchArrow implements Listener {
     public Arrow shootEarthArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(67, 59, 0), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "earth");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -66,7 +66,7 @@ public class FinchArrow implements Listener {
     public Arrow shootWindArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(227, 229, 255), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "wind");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -79,7 +79,7 @@ public class FinchArrow implements Listener {
     public Arrow shootElectroArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(227, 157, 254), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "electro");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -92,7 +92,7 @@ public class FinchArrow implements Listener {
     public Arrow shootLightArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 249, 214), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "electro");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -104,7 +104,7 @@ public class FinchArrow implements Listener {
     }
     public Arrow shootNeutralArrow(){
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "neutral");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -117,7 +117,7 @@ public class FinchArrow implements Listener {
     public Arrow shootUndeadArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(148, 50, 99), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "undead");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
@@ -130,7 +130,7 @@ public class FinchArrow implements Listener {
     public Arrow shootDarkArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(1, 1, 1), 1.0F);
         Location loc = player.getEyeLocation();
-        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, 0);
+        Arrow arrow = loc.getWorld().spawnArrow(loc, player.getEyeLocation().getDirection(), fireVelocity, spread);
         arrow.setShooter(player);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("FinchArrow"), PersistentDataType.STRING, "dark");
         int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{

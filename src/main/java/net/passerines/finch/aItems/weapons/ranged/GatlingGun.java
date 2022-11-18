@@ -1,4 +1,4 @@
-package net.passerines.finch.items.weapons.ranged;
+package net.passerines.finch.aItems.weapons.ranged;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.FinchArrow;
@@ -19,11 +19,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 
-public class Terminator extends FinchWeapon implements Listener {
+public class GatlingGun extends FinchWeapon implements Listener {
 
-    public Terminator() {
-        super("Terminator");
-        this.damage = 100;
+    public GatlingGun() {
+        super("GatlingGun");
+        this.damage = 45;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
@@ -33,24 +33,22 @@ public class Terminator extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if((event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) || event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && cd.isOffCooldown(player)) {
+        if((event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && cd.isOffCooldown(player))) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 4, -3, this.damage);
-                FinchArrow finchArrow1 = new FinchArrow(player, 4, 0, this.damage);
-                FinchArrow finchArrow2 = new FinchArrow(player, 4, 3, this.damage);
-                finchArrow.shootElectroArrow();
-                finchArrow1.shootLightArrow();
-                finchArrow2.shootDarkArrow();
-                cd.add(player, 3);
+                for(int i = 3; i < 20; i++) {
+                    FinchArrow finchArrow = new FinchArrow(player, 4, Util.rand(0, i), this.damage);
+                    finchArrow.shootNeutralArrow();
+                }
+                cd.add(player, 1);
             }
         }
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.BOW);
+        ItemStack item = new ItemStack(Material.BREAD);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4Terminator"));
+        itemMeta.displayName(Chat.formatC("&bMachine Gun"));
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         return writeId(item);
