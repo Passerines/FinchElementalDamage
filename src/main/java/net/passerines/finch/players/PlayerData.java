@@ -8,6 +8,7 @@ import net.passerines.finch.reforge.PrefixManager;
 import net.passerines.finch.reforge.ReforgeMenu;
 import net.passerines.finch.trinkets.TrinketMenu;
 import net.passerines.finch.util.Util;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -204,6 +205,12 @@ public class PlayerData {
                 setWindProf(windProf + finchTrinkets.getWind());
             }
         }
+        int halfHearts = 20;
+        //21 vanilla health = 150 finch health
+        //double increment = 0.02; // 1/50
+        double finchHealth = healthMax;
+        double extraHealth = (finchHealth-100)/50;
+        player.setHealthScale(halfHearts + extraHealth);
         HealthDisplay.updateActionBar(player);
     }
 
