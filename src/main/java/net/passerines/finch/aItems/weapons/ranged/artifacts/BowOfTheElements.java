@@ -17,6 +17,7 @@ import net.passerines.finch.util.Util;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -28,6 +29,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 public class BowOfTheElements extends FinchBow implements Listener {
     public BowOfTheElements() {
@@ -149,7 +151,8 @@ public class BowOfTheElements extends FinchBow implements Listener {
             }
         }
     }
-    @EventHandler
+
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void blockingEffect(ElementalDamageEvent event){
         if(event.getVictim() instanceof Player player){
             if(Util.getId(player.getInventory().getItemInMainHand()).equals(id)){
