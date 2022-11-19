@@ -54,7 +54,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.7.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.bytebuddy:byte-buddy:1.11.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.lumine:Mythic-Dist:5.1.4-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.ticxo.modelengine:api:R3.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.elmakers.mine.bukkit:EffectLib:9.4" level="project" />
   </component>

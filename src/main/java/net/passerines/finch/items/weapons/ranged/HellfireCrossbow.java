@@ -1,6 +1,7 @@
 package net.passerines.finch.items.weapons.ranged;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.attacks.FinchArrow;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
@@ -36,11 +37,11 @@ public class HellfireCrossbow extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
-            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            Util.shootArrow(player, Sound.BLOCK_METAL_HIT, 0, 8);
-            cd.add(player);
+            FinchArrow arrow = new FinchArrow(event.getPlayer(),2,0,10);
+            arrow.shootFireArrow();
+            arrow.shootFireArrow();
+            arrow.shootFireArrow();
+            arrow.shootFireArrow();
         }
     }
 

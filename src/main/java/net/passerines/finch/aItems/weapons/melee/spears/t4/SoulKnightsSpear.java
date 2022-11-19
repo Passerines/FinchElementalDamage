@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class SoulKnightsSpear extends FinchWeapon implements Listener {
@@ -32,6 +33,14 @@ public class SoulKnightsSpear extends FinchWeapon implements Listener {
         super("SoulKnightsSpear");
         this.damage = 30;
         this.element = ElementalDamageEvent.Element.DARK;
+        displayName = Chat.formatC("&3ESoul Knight's Spear");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("&bDamage: &7<DAMAGE>");
+        lore.add("&bMana: &7<MANA>");
+        lore.add("&bDefense: &7<DEFENSE>");
+        lore.add("&bHealth: &7<HEALTH>");
+        lore.add(" ");
+        this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler
