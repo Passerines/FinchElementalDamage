@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Util {
@@ -129,6 +130,28 @@ public class Util {
         } else {
             return null;
         }
+    }
+
+    public HashMap<String, Integer> getEnchants(ItemStack item) {
+        HashMap<String, Integer> enchantList = new HashMap<>();
+        String list = item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("prefix"), PersistentDataType.STRING);
+        String[] arrayEnchants = list.split(",");
+        for(String enchant : arrayEnchants){
+            String[] level = enchant.split(":");
+            enchantList.put(level[0], Integer.parseInt(level[1]));
+        }
+        return enchantList;
+    }
+
+    public String getEnchantString(HashMap<String, Integer> map){
+        String enchantString = "";
+        for(String enchants : map.keySet()){
+            enchantString += enchants + ":" + map.get(enchants) + ",";
+        }
+        if(enchantString.length() > 0){
+            enchantString.substring(0, enchantString.length()-1);
+        }
+        return enchantString;
     }
     //Gets the ItemPrefix that is currently on the item
     public static ItemPrefix getItemPrefix(ItemStack item) {
