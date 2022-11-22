@@ -14,7 +14,7 @@ import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
-import net.passerines.finch.aItems.weapons.ranged.GatlingGun;
+import net.passerines.finch.aItems.weapons.ranged.t3.GatlingGun;
 import net.passerines.finch.aItems.weapons.ranged.artifacts.BowOfTheElements;
 import net.passerines.finch.aItems.weapons.ranged.t5.VortexSplash;
 import net.passerines.finch.itemmanaging.recipeitems.*;

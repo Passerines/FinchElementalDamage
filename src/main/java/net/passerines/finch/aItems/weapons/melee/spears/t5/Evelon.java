@@ -27,6 +27,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -36,6 +37,16 @@ public class Evelon extends FinchWeapon implements Listener {
         super("Evelon");
         this.damage = 65;
         this.element = ElementalDamageEvent.Element.LIGHT;
+        displayName = Chat.formatC("&dEvelon");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("&bDamage: &7<DAMAGE>");
+        lore.add("&bMana: &7<MANA>");
+        lore.add("&bDefense: &7<DEFENSE>");
+        lore.add("&bHealth: &7<HEALTH>");
+        lore.add(" ");
+        lore.add("&6Ability: &dGale Slice");
+        lore.add("&7Instead of a regular attack launch a speedy gale of electricity");
+        this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler
@@ -62,18 +73,18 @@ public class Evelon extends FinchWeapon implements Listener {
             cd.add(player);
         }
     }
-
-
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&6Evelon"));
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(1001);
-        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+        itemMeta.setCustomModelData(2);
+        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        // Format the item instead of setting displayname and lore
+        format(item);
+        //
         return writeId(item);
     }
 }

@@ -16,10 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -44,14 +41,14 @@ public class DamageHandler implements Listener {
     }
     @EventHandler(priority = EventPriority.HIGH)
     public void onDamageEvent(EntityDamageEvent event) {
-        if(modelEngineImmunityTicks.contains(event.getCause())) {
-            if(ModelEngineAPI.isModeledEntity(event.getEntity().getUniqueId())) {
+        if (modelEngineImmunityTicks.contains(event.getCause())) {
+            if (ModelEngineAPI.isModeledEntity(event.getEntity().getUniqueId())) {
                 Entity entity = Bukkit.getEntity(ModelEngineAPI.getModeledEntity(event.getEntity().getUniqueId()).getBase().getUniqueId());
                 PersistentDataContainer data = entity.getPersistentDataContainer();
                 NamespacedKey key = Util.getNamespacedKey("lastFireTick");
-                if(data.has(key, PersistentDataType.INTEGER)) {
+                if (data.has(key, PersistentDataType.INTEGER)) {
                     int lastFireTick = data.get(key, PersistentDataType.INTEGER);
-                    if(Bukkit.getCurrentTick() - lastFireTick < 10) {
+                    if (Bukkit.getCurrentTick() - lastFireTick < 10) {
                         event.setCancelled(true);
                         return;
                     }
@@ -59,26 +56,28 @@ public class DamageHandler implements Listener {
                 data.set(key, PersistentDataType.INTEGER, Bukkit.getCurrentTick());
             }
         }
-        switch (event.getCause()) {
-            case VOID, DRAGON_BREATH, WITHER -> {
-                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage()).apply();
-                event.setDamage(0);
-            }
-            case FALL, FALLING_BLOCK, POISON, STARVATION, SUFFOCATION, THORNS, CRAMMING, FLY_INTO_WALL -> {
-                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.EARTH, (int) event.getDamage()).apply();
-                event.setDamage(0);
-            }
-            case FIRE, LAVA, HOT_FLOOR, FIRE_TICK -> {
-                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage()).apply();
-                event.setDamage(0);
-            }
-            case DROWNING, FREEZE -> {
-                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.WATER, (int) event.getDamage()).apply();
-                event.setDamage(0);
-            }
-            case LIGHTNING -> {
-                new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.ELECTRO, (int) event.getDamage()).apply();
-                event.setDamage(0);
+        if (!(event.getEntity() instanceof Item)) {
+            switch (event.getCause()) {
+                case VOID, DRAGON_BREATH, WITHER -> {
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage() * 5).apply();
+                    event.setDamage(0);
+                }
+                case FALL, FALLING_BLOCK, POISON, STARVATION, SUFFOCATION, THORNS, CRAMMING, FLY_INTO_WALL -> {
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.EARTH, (int) event.getDamage() * 5).apply();
+                    event.setDamage(0);
+                }
+                case FIRE, LAVA, HOT_FLOOR, FIRE_TICK -> {
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage() * 5).apply();
+                    event.setDamage(0);
+                }
+                case DROWNING, FREEZE -> {
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.WATER, (int) event.getDamage() * 5).apply();
+                    event.setDamage(0);
+                }
+                case LIGHTNING -> {
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.ELECTRO, (int) event.getDamage() * 5).apply();
+                    event.setDamage(0);
+                }
             }
         }
     }

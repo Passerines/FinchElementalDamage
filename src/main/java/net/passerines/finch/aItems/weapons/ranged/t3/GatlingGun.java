@@ -1,4 +1,4 @@
-package net.passerines.finch.aItems.weapons.ranged;
+package net.passerines.finch.aItems.weapons.ranged.t3;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.FinchArrow;
@@ -23,14 +23,13 @@ public class GatlingGun extends FinchWeapon implements Listener {
 
     public GatlingGun() {
         super("GatlingGun");
-        this.damage = 45;
+        this.damage = 25;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
     private Cooldown cd = new Cooldown(10);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
-        PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && cd.isOffCooldown(player))) {

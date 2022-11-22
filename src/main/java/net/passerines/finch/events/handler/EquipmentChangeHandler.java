@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.HorseInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -93,6 +94,7 @@ public class EquipmentChangeHandler implements Listener {
         Player player = event.getPlayer();
         Bukkit.getPluginManager().callEvent(new ItemChangeEvent(player, player.getInventory().getItemInMainHand()));
     }
+
     @EventHandler
     public void onItemChange(ItemChangeEvent itemChangeEvent){
         Player player = itemChangeEvent.getPlayer();
