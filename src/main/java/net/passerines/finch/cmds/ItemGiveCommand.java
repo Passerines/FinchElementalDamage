@@ -37,7 +37,7 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
         if(sender.hasPermission("finch.admin")){
             if(sender instanceof Player player) {
                 ItemStack itemStack;
-                int amount = 1;
+                int amount;
                 if(args.length > 0){
                     if(ItemManager.ITEM_HASH_MAP.containsKey(args[0])){
                         itemStack = ItemManager.ITEM_HASH_MAP.get(args[0]).getItem();

@@ -143,7 +143,7 @@ public class BowOfTheElements extends FinchBow implements Listener {
                     }
                     else if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (7)){
                         itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0);
-                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.FLAME;
+                        SHIELDED_PLAYER_BOE.get(player).particle = Particle.SMALL_FLAME;
                     }
                     item.setItemMeta(itemMeta);
                 }, 6);

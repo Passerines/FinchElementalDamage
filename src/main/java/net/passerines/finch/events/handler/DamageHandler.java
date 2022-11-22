@@ -59,23 +59,23 @@ public class DamageHandler implements Listener {
         if (!(event.getEntity() instanceof Item)) {
             switch (event.getCause()) {
                 case VOID, DRAGON_BREATH, WITHER -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage() * 5).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.DARK, (int) event.getDamage() * 20).applyTrue();
                     event.setDamage(0);
                 }
                 case FALL, FALLING_BLOCK, POISON, STARVATION, SUFFOCATION, THORNS, CRAMMING, FLY_INTO_WALL -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.EARTH, (int) event.getDamage() * 5).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.EARTH, (int) event.getDamage() * 10).applyTrue();
                     event.setDamage(0);
                 }
                 case FIRE, LAVA, HOT_FLOOR, FIRE_TICK -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage() * 5).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage() * 20).applyTrue();
                     event.setDamage(0);
                 }
                 case DROWNING, FREEZE -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.WATER, (int) event.getDamage() * 5).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.WATER, (int) event.getDamage() * 30).applyTrue();
                     event.setDamage(0);
                 }
                 case LIGHTNING -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.ELECTRO, (int) event.getDamage() * 5).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.ELECTRO, (int) event.getDamage() * 30).apply();
                     event.setDamage(0);
                 }
             }

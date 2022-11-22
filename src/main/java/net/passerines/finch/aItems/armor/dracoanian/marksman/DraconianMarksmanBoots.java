@@ -1,6 +1,9 @@
 package net.passerines.finch.aItems.armor.dracoanian.marksman;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchCraftableItem;
+import net.passerines.finch.itemmanaging.FinchRecipe;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Color;
@@ -11,7 +14,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.ArrayList;
 
-public class DraconianMarksmanBoots extends FinchArmor {
+public class DraconianMarksmanBoots extends FinchArmor implements FinchCraftableItem {
 
     public DraconianMarksmanBoots() {
         super("DraconianMarksmanBoots");
@@ -35,5 +38,11 @@ public class DraconianMarksmanBoots extends FinchArmor {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         return writeId(item);
+    }
+    @Override
+    public void registerRecipe() {
+        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "   ", "A A", "A A" , item);
+        finchRecipe.addRecipe();
     }
 }

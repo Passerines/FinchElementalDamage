@@ -17,6 +17,7 @@ public class AngelicEssence extends FinchItem implements FinchCraftableItem {
         super("AngelicEssence");
     }
 
+
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.BLAZE_POWDER);

@@ -30,7 +30,6 @@ public class Tsunami extends FinchWeapon implements Listener {
     private Cooldown cd = new Cooldown(10);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
-        PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && cd.isOffCooldown(player)) {

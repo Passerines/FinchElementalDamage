@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FinchItem {
@@ -27,6 +28,7 @@ public abstract class FinchItem {
     public FinchItem(String id){
         this(id,0);
     }
+
     public abstract ItemStack getItem();
 
     protected ItemStack writeId(ItemStack item) {

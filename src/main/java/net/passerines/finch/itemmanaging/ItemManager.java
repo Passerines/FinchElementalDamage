@@ -166,6 +166,7 @@ public class ItemManager {
         new DraconianMarksmanLeggings();
         new DraconianMarksmanHood();
         new BowOfTheElements();
+        new DragonSkin();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
@@ -185,5 +186,13 @@ public class ItemManager {
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_chestplate"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_leggings"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_boots"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("golden_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("golden_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("golden_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("golden_boots"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("wooden_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("golden_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_sword"));
     }
 }

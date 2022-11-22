@@ -23,29 +23,29 @@ public class GatlingGun extends FinchWeapon implements Listener {
 
     public GatlingGun() {
         super("GatlingGun");
-        this.damage = 25;
+        this.damage = 15;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
-    private Cooldown cd = new Cooldown(10);
+    private Cooldown cd = new Cooldown(3);
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && cd.isOffCooldown(player))) {
             if(id.equals(Util.getId(item))) {
-                for(int i = 3; i < 20; i++) {
-                    FinchArrow finchArrow = new FinchArrow(player, 4, Util.rand(0, i), this.damage);
-                    finchArrow.shootNeutralArrow();
-                }
-                cd.add(player, 1);
+                FinchArrow finchArrow = new FinchArrow(player, 4, Util.rand(0, 35), this.damage);
+                finchArrow.shootNeutralArrow();
+                finchArrow.shootNeutralArrow();
+                finchArrow.shootNeutralArrow();
             }
+            cd.add(player);
         }
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.BREAD);
+        ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&bMachine Gun"));
         itemMeta.setUnbreakable(true);

@@ -21,6 +21,7 @@ public class OpenTrinketMenu implements CommandExecutor {
         if (sender instanceof Player player) {
             PlayerData vPlayerData = PlayerMap.PLAYERS.get(player);
             vPlayerData.getTrinketMenu().open(player);
+            vPlayerData.getTrinketMenu().initialize();
         }
         return false;
     }

@@ -37,15 +37,15 @@ public class Evelon extends FinchWeapon implements Listener {
         super("Evelon");
         this.damage = 65;
         this.element = ElementalDamageEvent.Element.LIGHT;
-        displayName = Chat.formatC("&dEvelon");
+        displayName = Chat.formatC("&6Evelon");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("&bDamage: &7<DAMAGE>");
         lore.add("&bMana: &7<MANA>");
         lore.add("&bDefense: &7<DEFENSE>");
         lore.add("&bHealth: &7<HEALTH>");
         lore.add(" ");
-        lore.add("&6Ability: &dGale Slice");
-        lore.add("&7Instead of a regular attack launch a speedy gale of electricity");
+        lore.add("&6Ability: &6Gale Slice");
+        lore.add("&7Instead of a regular attack launch a speedy gale of light");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }

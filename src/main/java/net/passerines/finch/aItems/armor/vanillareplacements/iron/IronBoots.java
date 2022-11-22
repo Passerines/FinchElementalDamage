@@ -1,4 +1,4 @@
-package net.passerines.finch.aItems.armor.carbonfiberItems;
+package net.passerines.finch.aItems.armor.vanillareplacements.iron;
 
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
@@ -13,33 +13,33 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class CarbonFiberHelmet extends FinchArmor implements FinchCraftableItem {
-    public CarbonFiberHelmet() {
-        super("CarbonFiberHelmet");
-        this.defense = 100;
+public class IronBoots extends FinchArmor implements FinchCraftableItem {
+    public IronBoots() {
+        super("IronBoots");
+        this.defense = 40;
         this.health = 10;
     }
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.IRON_HELMET);
+        ItemStack item = new ItemStack(Material.LEATHER_BOOTS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&fCarbon Fiber Helmet"));
+        itemMeta.displayName(Chat.formatC("&fReinforced Leather Boots"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
+        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int)this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
         itemMeta.lore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
 
     @Override
     public void registerRecipe() {
-        ItemStack leather = ItemManager.ITEM_HASH_MAP.get("CarbonFiber").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , leather);
+        ItemStack leather = new ItemStack(Material.IRON_INGOT);
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "   ", "A A", "A A" , leather);
         finchRecipe.addRecipe();
-        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "carbonhelmet0", "   ", "AAA", "A A" , leather);
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "ironboots0", "A A", "A A", "   " , leather);
         finchRecipe0.addRecipe();
     }
 }

@@ -26,7 +26,7 @@ public class TotemOfStrength extends FinchTrinkets implements FinchCraftableItem
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&cDamage: &f+" + this.damage)));
         itemMeta.lore(lore);
-        itemMeta.setCustomModelData(400);
+        itemMeta.setCustomModelData(403);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

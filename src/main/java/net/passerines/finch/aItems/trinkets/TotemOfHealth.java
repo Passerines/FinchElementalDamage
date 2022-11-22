@@ -26,7 +26,7 @@ public class TotemOfHealth extends FinchTrinkets implements FinchCraftableItem {
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&4Health: &f+" + this.health)));
         itemMeta.lore(lore);
-        itemMeta.setCustomModelData(402);
+        itemMeta.setCustomModelData(400);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

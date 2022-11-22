@@ -39,5 +39,7 @@ public class CarbonFiberBoots extends FinchArmor implements FinchCraftableItem {
         ItemStack leather = ItemManager.ITEM_HASH_MAP.get("CarbonFiber").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "   ", "A A", "A A" , leather);
         finchRecipe.addRecipe();
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "carbonboots0", "   ", "AAA", "A A" , leather);
+        finchRecipe0.addRecipe();
     }
 }

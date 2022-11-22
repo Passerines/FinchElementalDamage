@@ -108,6 +108,16 @@ public class ElementalDamageEvent extends Event implements Cancellable {
             Bukkit.getPluginManager().callEvent(this);
         }
     }
+    public void applyTrue() {
+        if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable")) &&
+                !victim.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) {
+            if(victim instanceof Player player) {
+                PlayerData playerData = PLAYERS.get(player);
+                playerData.setHealth(playerData.getHealth() - damage);
+            }
+            Bukkit.getPluginManager().callEvent(this);
+        }
+    }
 
     public double getDamage() {
         return damage;

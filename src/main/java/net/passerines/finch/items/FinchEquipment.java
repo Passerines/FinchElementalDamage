@@ -46,6 +46,21 @@ public abstract class FinchEquipment extends FinchItem {
         this.light = 0;
         this.dark = 0;
     }
+    public FinchEquipment(String id, String id1, String id2, String id3, int rarity) {
+        super(id, rarity);
+        this.health = 0;
+        this.defense = 0;
+        this.damage = 0;
+        this.bowDamage = 0;
+        this.mana = 0;
+        this.fire = 0;
+        this.water = 0;
+        this.earth = 0;
+        this.wind = 0;
+        this.electro = 0;
+        this.light = 0;
+        this.dark = 0;
+    }
 
     public double getHealth() {
         return health;
@@ -89,13 +104,13 @@ public abstract class FinchEquipment extends FinchItem {
         ItemPrefix prefix = Util.getItemPrefix(item);
         itemMeta.displayName(prefix!=null?prefix.getDisplayName().append(Chat.formatC(" ")).append(displayName):displayName);
         for(Component line : lore){
-            String damageString = damage+(prefix!=null && prefix.getDamage()!=0?" &b" + (prefix.getDamage()>0?"+":"-") + "["+Math.abs(prefix.getDamage())+"]&r":"");
+            String damageString = damage+(prefix!=null && prefix.getDamage()!=0?" [" + "&b" + (prefix.getDamage()>0?"+":"-") + Math.abs(prefix.getDamage())+"]&r":"");
             line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DAMAGE).replacement(Chat.formatC(damageString)).build());
-            String manaString = mana+(prefix!=null && prefix.getMana()!=0?" &b" + (prefix.getMana()>0?"+":"-") + "["+Math.abs(prefix.getMana())+"]&r":"");
+            String manaString = mana+(prefix!=null && prefix.getMana()!=0?" [" + "&b" + (prefix.getMana()>0?"+":"-") + Math.abs(prefix.getMana())+"]&r":"");
             line = line.replaceText(TextReplacementConfig.builder().matchLiteral(MANA).replacement(Chat.formatC(manaString)).build());
-            String defenseString = defense+(prefix!=null && prefix.getDefense()!=0?" &b" + (prefix.getDefense()>0?"+":"-") + "["+Math.abs(prefix.getDefense())+"]&r":"");
+            String defenseString = defense+(prefix!=null && prefix.getDefense()!=0?" [" + "&b" + (prefix.getDefense()>0?"+":"-") + Math.abs(prefix.getDefense())+"]&r":"");
             line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DEFENSE).replacement(Chat.formatC(defenseString)).build());
-            String healthString = health+(prefix!=null && prefix.getHealth()!=0?" &b" + (prefix.getHealth()>0?"+":"-") + "["+Math.abs(prefix.getHealth())+"]&r":"");
+            String healthString = health+(prefix!=null && prefix.getHealth()!=0?" [" + "&b" + (prefix.getHealth()>0?"+":"-") + Math.abs(prefix.getHealth())+"]&r":"");
             line = line.replaceText(TextReplacementConfig.builder().matchLiteral(HEALTH).replacement(Chat.formatC(healthString)).build());
             line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+"").build());
             //line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+(prefix!=null?"+"+prefix.getDamage():"")).build());

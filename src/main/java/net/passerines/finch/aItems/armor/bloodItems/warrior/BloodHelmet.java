@@ -41,5 +41,7 @@ public class BloodHelmet extends FinchArmor implements FinchCraftableItem {
         ItemStack iron = ItemManager.ITEM_HASH_MAP.get("BloodIron").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , iron);
         finchRecipe.addRecipe();
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "bloodhelmet0", "   ", "AAA", "A A" , iron);
+        finchRecipe0.addRecipe();
     }
 }

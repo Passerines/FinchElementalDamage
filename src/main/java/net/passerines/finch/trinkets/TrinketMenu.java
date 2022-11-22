@@ -18,12 +18,16 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 public class TrinketMenu implements Listener{
     private static final ItemStack placeholder = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
     static {
+        ItemMeta meta = placeholder.getItemMeta();
+        meta.displayName(Chat.formatC(" "));
         placeholder.getItemMeta().getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
+        placeholder.setItemMeta(meta);
     }
 
     private final FinchElementalDamage plugin = FinchElementalDamage.inst();
