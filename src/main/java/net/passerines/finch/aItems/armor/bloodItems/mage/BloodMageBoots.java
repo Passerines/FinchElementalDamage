@@ -28,9 +28,11 @@ public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&cBloodMage Boots"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f-5")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+15")));
-        lore.add(Component.text(Chat.format("&bMana: &f+40")));
+        lore.add(Component.text(Chat.format("<STATS>")));
+        lore.add(Component.text(Chat.format("")));
+        lore.add(Component.text(Chat.format("Description: This is a cool armor piece")));
+        lore.add(Component.text(Chat.format("")));
+        lore.add(Component.text(Chat.format("<ENCHANTS>")));
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);

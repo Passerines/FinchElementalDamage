@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 public abstract class FinchEquipment extends FinchItem {
 
+    public static final String STATS = "<STATS>";
+    public static final String ENCHANTS = "<ENCHANTS>";
+
     public static final String DAMAGE = "<DAMAGE>";
     public static final String MANA = "<MANA>";
     public static final String DEFENSE = "<DEFENSE>";
