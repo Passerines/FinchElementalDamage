@@ -35,5 +35,7 @@ public class DiamondHelmet extends FinchArmor implements FinchCraftableItem {
         ItemStack leather = new ItemStack(Material.DIAMOND);
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , leather);
         finchRecipe.addRecipe();
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "diamondhelmet0", "   ", "AAA", "A A" , leather);
+        finchRecipe0.addRecipe();
     }
 }

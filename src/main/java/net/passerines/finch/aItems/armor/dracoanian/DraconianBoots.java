@@ -46,5 +46,7 @@ public class DraconianBoots extends FinchArmor implements FinchCraftableItem {
         ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
         FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), id, "   ", "B B", "A A" , item, item0);
         finchRecipe0.addRecipe();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), "dracoboots0", "B B", "A A", "   " , item, item0);
+        finchRecipe.addRecipe();
     }
 }
