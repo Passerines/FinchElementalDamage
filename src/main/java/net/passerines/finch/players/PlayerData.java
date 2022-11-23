@@ -46,6 +46,7 @@ public class PlayerData {
     public PlayerData(Player player){
         this.player = player;
         playerConfig = new PlayerConfig(this);
+        player.setHealthScaled(true);
         defense = 10;
         reset();
         /*ItemStack helmet = player.getInventory().getHelmet();
@@ -214,7 +215,6 @@ public class PlayerData {
         //21 vanilla health = 150 finch health
         //double increment = 0.02; // 1/50
         halfHearts += (int)(healthMax-100)/50;
-        player.setHealthScaled(true);
         player.setHealthScale(Math.min(halfHearts, 40));
         HealthDisplay.updateActionBar(player);
     }
