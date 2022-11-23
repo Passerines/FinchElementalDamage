@@ -103,7 +103,60 @@ public class PlayerData {
     }
 
     //Calculate individual armor/trinket pieces
-    private void uncalculate(ItemStack item){
+    private void calculate(ItemStack item) {
+        String id = Util.getId(item);
+        String prefix = Util.getPrefix(item);
+        if (PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)) {
+            ItemPrefix itemPrefix = PrefixManager.PREFIX_HASH_MAP.get(prefix);
+            setDefense(defense + itemPrefix.getDefense());
+            setHealthMax(healthMax + itemPrefix.getHealth());
+            setDamage(damage + itemPrefix.getDamage());
+            setManaMax(manaMax + itemPrefix.getMana());
+        }
+        if (ItemManager.ITEM_HASH_MAP.containsKey(id)) {
+            FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
+            if (finchItem instanceof FinchArmor finchArmor) {
+                setDefense(defense + finchArmor.getDefense());
+                setHealthMax(healthMax + finchArmor.getHealth());
+                setDamage(damage + finchArmor.getDamage());
+                setBowDamage(bowDamage + finchArmor.getBowDamage());
+                setManaMax(manaMax + finchArmor.getMana());
+                setElectroProf(electroProf + finchArmor.getElectro());
+                setFireProf(fireProf + finchArmor.getFire());
+                setWaterProf(waterProf + finchArmor.getWater());
+                setEarthProf(earthProf + finchArmor.getEarth());
+                setDarknessProf(darknessProf + finchArmor.getDark());
+                setLightProf(lightProf + finchArmor.getLight());
+                setWindProf(windProf + finchArmor.getWind());
+            } else if (finchItem instanceof FinchWeapon finchWeapon) {
+                setDefense(defense + finchWeapon.getDefense());
+                setHealthMax(healthMax + finchWeapon.getHealth());
+                setDamage(damage + finchWeapon.getDamage());
+                setManaMax(manaMax + finchWeapon.getMana());
+                setElectroProf(electroProf + finchWeapon.getElectro());
+                setFireProf(fireProf + finchWeapon.getFire());
+                setWaterProf(waterProf + finchWeapon.getWater());
+                setEarthProf(earthProf + finchWeapon.getEarth());
+                setDarknessProf(darknessProf + finchWeapon.getDark());
+                setLightProf(lightProf + finchWeapon.getLight());
+                setWindProf(windProf + finchWeapon.getWind());
+            } else if (finchItem instanceof FinchTrinkets finchTrinkets) {
+                setDefense(defense + finchTrinkets.getDefense());
+                setHealthMax(healthMax + finchTrinkets.getHealth());
+                setDamage(damage + finchTrinkets.getDamage());
+                setBowDamage(bowDamage + finchTrinkets.getBowDamage());
+                setManaMax(manaMax + finchTrinkets.getMana());
+                setElectroProf(electroProf + finchTrinkets.getElectro());
+                setFireProf(fireProf + finchTrinkets.getFire());
+                setWaterProf(waterProf + finchTrinkets.getWater());
+                setEarthProf(earthProf + finchTrinkets.getEarth());
+                setDarknessProf(darknessProf + finchTrinkets.getDark());
+                setLightProf(lightProf + finchTrinkets.getLight());
+                setWindProf(windProf + finchTrinkets.getWind());
+            }
+        }
+    }
+    private void uncalculate(ItemStack item) {
         String id = Util.getId(item);
         String prefix = Util.getPrefix(item);
         if(PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)){
@@ -129,11 +182,18 @@ public class PlayerData {
                 setLightProf(lightProf - finchArmor.getLight());
                 setWindProf(windProf - finchArmor.getWind());
             }
-            else if(finchItem instanceof FinchWeapon finchWeapon) {
+            else if (finchItem instanceof FinchWeapon finchWeapon) {
                 setDefense(defense - finchWeapon.getDefense());
                 setHealthMax(healthMax - finchWeapon.getHealth());
                 setDamage(damage - finchWeapon.getDamage());
                 setManaMax(manaMax - finchWeapon.getMana());
+                setElectroProf(electroProf - finchWeapon.getElectro());
+                setFireProf(fireProf - finchWeapon.getFire());
+                setWaterProf(waterProf - finchWeapon.getWater());
+                setEarthProf(earthProf - finchWeapon.getEarth());
+                setDarknessProf(darknessProf - finchWeapon.getDark());
+                setLightProf(lightProf - finchWeapon.getLight());
+                setWindProf(windProf - finchWeapon.getWind());
             }
             else if(finchItem instanceof FinchTrinkets finchTrinkets){
                 setDefense(defense - finchTrinkets.getDefense());
@@ -147,62 +207,7 @@ public class PlayerData {
                 setEarthProf(earthProf - finchTrinkets.getEarth());
                 setDarknessProf(darknessProf - finchTrinkets.getDark());
                 setLightProf(lightProf - finchTrinkets.getLight());
-                setWindProf(windProf - finchTrinkets.getWind());
-            }
-        }
-    }
-    private void calculate(ItemStack item) {
-        String id = Util.getId(item);
-        String prefix = Util.getPrefix(item);
-        if(PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)){
-            ItemPrefix itemPrefix = PrefixManager.PREFIX_HASH_MAP.get(prefix);
-            setDefense(defense + itemPrefix.getDefense());
-            setHealthMax(healthMax + itemPrefix.getHealth());
-            setDamage(damage + itemPrefix.getDamage());
-            setManaMax(manaMax + itemPrefix.getMana());
-        }
-        if(ItemManager.ITEM_HASH_MAP.containsKey(id)) {
-            FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
-            if(finchItem instanceof FinchArmor finchArmor) {
-                setDefense(defense + finchArmor.getDefense());
-                setHealthMax(healthMax + finchArmor.getHealth());
-                setDamage(damage + finchArmor.getDamage());
-                setBowDamage(bowDamage + finchArmor.getBowDamage());
-                setManaMax(manaMax + finchArmor.getMana());
-                setElectroProf(electroProf + finchArmor.getElectro());
-                setFireProf(fireProf + finchArmor.getFire());
-                setWaterProf(waterProf + finchArmor.getWater());
-                setEarthProf(earthProf + finchArmor.getEarth());
-                setDarknessProf(darknessProf + finchArmor.getDark());
-                setLightProf(lightProf + finchArmor.getLight());
-                setWindProf(windProf + finchArmor.getWind());
-            }
-            else if (finchItem instanceof FinchWeapon finchWeapon) {
-                setDefense(defense + finchWeapon.getDefense());
-                setHealthMax(healthMax + finchWeapon.getHealth());
-                setDamage(damage + finchWeapon.getDamage());
-                setManaMax(manaMax + finchWeapon.getMana());
-                setElectroProf(electroProf + finchWeapon.getElectro());
-                setFireProf(fireProf + finchWeapon.getFire());
-                setWaterProf(waterProf + finchWeapon.getWater());
-                setEarthProf(earthProf + finchWeapon.getEarth());
-                setDarknessProf(darknessProf + finchWeapon.getDark());
-                setLightProf(lightProf + finchWeapon.getLight());
-                setWindProf(windProf + finchWeapon.getWind());
-            }
-            else if(finchItem instanceof FinchTrinkets finchTrinkets){
-                setDefense(defense + finchTrinkets.getDefense());
-                setHealthMax(healthMax + finchTrinkets.getHealth());
-                setDamage(damage + finchTrinkets.getDamage());
-                setBowDamage(bowDamage + finchTrinkets.getBowDamage());
-                setManaMax(manaMax + finchTrinkets.getMana());
-                setElectroProf(electroProf + finchTrinkets.getElectro());
-                setFireProf(fireProf + finchTrinkets.getFire());
-                setWaterProf(waterProf + finchTrinkets.getWater());
-                setEarthProf(earthProf + finchTrinkets.getEarth());
-                setDarknessProf(darknessProf + finchTrinkets.getDark());
-                setLightProf(lightProf + finchTrinkets.getLight());
-                setWindProf(windProf + finchTrinkets.getWind());
+                setWindProf(windProf- finchTrinkets.getWind());
             }
         }
         int halfHearts = 20;
