@@ -37,8 +37,8 @@ public class HealthDisplay implements Listener {
             double maxHealth = vPlayerData.getHealthMax();
             double currentHealth = vPlayerData.getHealth();
             double percentHealth = currentHealth/maxHealth;
-            double vanillaHealth = percentHealth*player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-            player.setHealthScale(Math.min(vanillaHealth, 40));
+            int vanillaHealth = (int)Math.ceil(percentHealth*player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+            if(player.getHealth()!=vanillaHealth)player.setHealth(vanillaHealth);
             int maxMana = vPlayerData.getManaMax();
             int currentMana = vPlayerData.getMana();
             String bar = Chat.format("&cHealth: " + currentHealth + "/" + maxHealth + "    &aDefense: " + defense + "    &bMana: " + currentMana + "/" + maxMana);

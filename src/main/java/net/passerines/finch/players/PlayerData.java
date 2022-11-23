@@ -210,7 +210,7 @@ public class PlayerData {
         //double increment = 0.02; // 1/50
         double finchHealth = healthMax;
         double extraHealth = (finchHealth-100)/50;
-        player.setHealthScale(halfHearts + extraHealth);
+        player.setHealthScale(Math.min(halfHearts + extraHealth, 40));
         HealthDisplay.updateActionBar(player);
     }
 
