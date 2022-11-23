@@ -30,8 +30,6 @@ public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("<STATS>")));
         lore.add(Component.text(Chat.format("")));
-        lore.add(Component.text(Chat.format("Description: This is a cool armor piece")));
-        lore.add(Component.text(Chat.format("")));
         lore.add(Component.text(Chat.format("<ENCHANTS>")));
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -42,7 +40,7 @@ public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
         ItemStack iron = ItemManager.ITEM_HASH_MAP.get("MagicBloodIron").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "   ", "A A", "A A" , iron);
         finchRecipe.addRecipe();
-        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "bloodmage0", "   ", "A A", "A A" , iron);
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "bloodmage0", "A A", "A A", "   " , iron);
         finchRecipe0.addRecipe();
     }
 }

@@ -42,5 +42,7 @@ public class DraconianMarksmanHood extends FinchArmor implements FinchCraftableI
         ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , item);
         finchRecipe.addRecipe();
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "dragonhood0", "   ", "AAA", "A A" , item);
+        finchRecipe0.addRecipe();
     }
 }

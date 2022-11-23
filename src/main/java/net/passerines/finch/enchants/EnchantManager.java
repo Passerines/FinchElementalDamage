@@ -19,9 +19,10 @@ public class EnchantManager {
         ArrayList<ItemEnchants> prefixList = new ArrayList<>(EnchantManager.ENCHANTS_HASH_MAP.values());
         ArrayList<ItemEnchants> itemEnchantList = new ArrayList<>();
         for(int i = 0; i < prefixList.size(); i++){
-            if(itemEnchantList.get(i).getType() == type && itemEnchantList.get(i).getTier() == tier){
-                itemEnchantList.add(prefixList.get(i));
-            }
+            //ToDo:
+            //if(itemEnchantList.get(i).getType() == type && itemEnchantList.get(i).getTier() == tier){
+            //  itemEnchantList.add(prefixList.get(i));
+            //}
         }
         return itemEnchantList;
     }

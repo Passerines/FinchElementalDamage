@@ -39,5 +39,7 @@ public class ReinforcedLeatherBoots extends FinchArmor implements FinchCraftable
         ItemStack leather = ItemManager.ITEM_HASH_MAP.get("ReinforcedLeather").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "   ", "A A", "A A" , leather);
         finchRecipe.addRecipe();
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "reinforcedleatherboots0", "A A", "A A", "   " , leather);
+        finchRecipe0.addRecipe();
     }
 }

@@ -43,5 +43,7 @@ public class DraconianHeadgear extends FinchArmor implements FinchCraftableItem 
         ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "B B", "   " , item, item0);
         finchRecipe.addRecipe();
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "dracoheadgear0", "   ", "AAA", "B B" , item, item0);
+        finchRecipe0.addRecipe();
     }
 }
