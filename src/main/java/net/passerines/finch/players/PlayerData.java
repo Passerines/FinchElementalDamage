@@ -89,7 +89,7 @@ public class PlayerData {
         if (ItemManager.ITEM_HASH_MAP.get(Util.getId(newItem)) instanceof FinchWeapon){
             calculate(newItem);
         }
-        oldItem = newItem.clone();
+        oldItem = newItem!=null ? newItem.clone() : null;
     }
     public void calculateAccessory(ItemStack newItem, int index){
         if(oldTrinkets[index] != null && ItemManager.ITEM_HASH_MAP.get(Util.getId(oldTrinkets[index])) instanceof FinchTrinkets) {
@@ -208,9 +208,9 @@ public class PlayerData {
         int halfHearts = 20;
         //21 vanilla health = 150 finch health
         //double increment = 0.02; // 1/50
-        double finchHealth = healthMax;
-        double extraHealth = (finchHealth-100)/50;
-        player.setHealthScale(Math.min(halfHearts + extraHealth, 40));
+        halfHearts += (int)(healthMax-100)/50;
+        player.setHealthScaled(true);
+        player.setHealthScale(Math.min(halfHearts, 40));
         HealthDisplay.updateActionBar(player);
     }
 
