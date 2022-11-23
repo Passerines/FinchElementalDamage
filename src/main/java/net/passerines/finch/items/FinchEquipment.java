@@ -2,6 +2,7 @@ package net.passerines.finch.items;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
+import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -107,21 +108,39 @@ public abstract class FinchEquipment extends FinchItem {
         ItemPrefix prefix = Util.getItemPrefix(item);
         itemMeta.displayName(prefix!=null?prefix.getDisplayName().append(Chat.formatC(" ")).append(displayName):displayName);
         for(Component line : lore){
-            String damageString = damage+(prefix!=null && prefix.getDamage()!=0?" [" + "&b" + (prefix.getDamage()>0?"+":"-") + Math.abs(prefix.getDamage())+"]&r":"");
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DAMAGE).replacement(Chat.formatC(damageString)).build());
-            String manaString = mana+(prefix!=null && prefix.getMana()!=0?" [" + "&b" + (prefix.getMana()>0?"+":"-") + Math.abs(prefix.getMana())+"]&r":"");
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(MANA).replacement(Chat.formatC(manaString)).build());
-            String defenseString = defense+(prefix!=null && prefix.getDefense()!=0?" [" + "&b" + (prefix.getDefense()>0?"+":"-") + Math.abs(prefix.getDefense())+"]&r":"");
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DEFENSE).replacement(Chat.formatC(defenseString)).build());
-            String healthString = health+(prefix!=null && prefix.getHealth()!=0?" [" + "&b" + (prefix.getHealth()>0?"+":"-") + Math.abs(prefix.getHealth())+"]&r":"");
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(HEALTH).replacement(Chat.formatC(healthString)).build());
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+"").build());
-            //line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+(prefix!=null?"+"+prefix.getDamage():"")).build());
+            if(Chat.asPlainText(line).contains(STATS)) {
+                parseStat(newLore, "&bHealth: &7", health, prefix==null?0:prefix.getHealth());
+                parseStat(newLore, "&bDefense: &7", defense, prefix==null?0:prefix.getDefense());
+                parseStat(newLore, "&bDamage: &7", damage, prefix==null?0:prefix.getDamage());
+                parseStat(newLore, "&bBow Damage: &7", bowDamage, 0);
+                parseStat(newLore, "&bMana: &7", mana, prefix==null?0:prefix.getMana());
+                if(fire!=0 || water!=0 || earth!=0 || wind!=0 || electro!=0 || light!=0 || dark!=0) {
+                    newLore.add(Chat.formatC("&bElemental Proficiencies:"));
+                    parseStat(newLore, "  " + ElementalDamageEvent.Element.FIRE.getColor() + "Fire: &7", fire, 0);
+                    parseStat(newLore, "  " + ElementalDamageEvent.Element.WATER.getColor() + "Water: &7", water, 0);
+                    parseStat(newLore, "  " + ElementalDamageEvent.Element.EARTH.getColor() + "Earth: &7", earth, 0);
+                    parseStat(newLore, "  " + ElementalDamageEvent.Element.WIND.getColor() + "Wind: &7", wind, 0);
+                    parseStat(newLore, "  " + ElementalDamageEvent.Element.ELECTRO.getColor() + "Electro: &7", electro, 0);
+                    parseStat(newLore, "  " + ElementalDamageEvent.Element.DARK.getColor() + "Dark: &7", dark, 0);
+                }
+            } else {
+                newLore.add(line);
+            }
             newLore.add(line);
         }
         itemMeta.lore(newLore);
 
         item.setItemMeta(itemMeta);
         return item;
+    }
+
+    public void parseStat(ArrayList<Component> lore, String line, double baseAmount, double prefixAmount) {
+        if(baseAmount!=0 || prefixAmount!=0) {
+            Component component = Chat.formatC(line).append(Chat.formatC((baseAmount>0?"&a":"&c") + (int)baseAmount));
+            if(prefixAmount!=0) {
+                component = component.append(Chat.formatC(" " + (prefixAmount>0?"&a":"&c") + "(" + (int)prefixAmount + ")"));
+            }
+            lore.add(component);
+        }
     }
 }

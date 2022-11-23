@@ -214,7 +214,7 @@ public class PlayerData {
         int halfHearts = 20;
         //21 vanilla health = 150 finch health
         //double increment = 0.02; // 1/50
-        halfHearts += (int)(healthMax-100)/50;
+        halfHearts += (int)((healthMax-100)/50);
         player.setHealthScale(Math.min(halfHearts, 40));
         HealthDisplay.updateActionBar(player);
     }
