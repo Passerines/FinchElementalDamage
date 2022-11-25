@@ -51,9 +51,9 @@ public class Shriex extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 3, damage,100,30, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SOUL_FIRE_FLAME, 3, damage,100,30, null);
             slash.drawSlash();
-            Slash slash1 = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 3, damage,100,-30, null);
+            Slash slash1 = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SOUL_FIRE_FLAME, 3, damage,100,-30, null);
             slash1.drawSlash();
             cd.add(player);
         }

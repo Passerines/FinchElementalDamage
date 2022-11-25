@@ -40,7 +40,8 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         LIGHT(Chat.format("&eLight"), "&e",1f),
         NEUTRAL(Chat.format("&7Neutral"), "&7",1f),
         UNDEAD(Chat.format("&4Undead"), "&4",1f),
-        DARK(Chat.format("&8Dark"), "&8",1f);
+        DARK(Chat.format("&8Dark"), "&8",1f),
+        TRUE(Chat.format("&fTrue"), "&f",1f);
         private final String displayName;
         private final String color;
         private final float elementalMultiplier;
@@ -67,36 +68,36 @@ public class ElementalDamageEvent extends Event implements Cancellable {
 
     public void calculate() {
         double attackDamage = damage;
+        if(element != Element.TRUE) {
+            if (attacker instanceof Player) {
+                if (Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null) {
+                    attackDamage = (attackDamage + (PLAYERS.get(attacker).getDamage() * ((Player) attacker).getPlayer().getAttackCooldown()));
+                } else {
+                    attackDamage = 5;
+                }
+            } else if (attacker instanceof Arrow arrow) {
+                if (arrow.getShooter() instanceof Player player) {
+                    attackDamage = attackDamage + (PlayerMap.PLAYERS.get(player).getBowDamage());
+                }
+            } else if (attacker instanceof LivingEntity entity) {
+                attackDamage = attackDamage + EntityMap.get(entity).getDamage();
+            }
+            if (victim instanceof Player) {
+                PlayerData vPlayerData = PlayerMap.PLAYERS.get(victim);
+                attackDamage = (int) ((attackDamage - (attackDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * element.getElementalMultiplier()));
+            } else if (victim instanceof LivingEntity) {
+                if (EntityMap.has(victim)) {
+                    EntityData vEntityData = EntityMap.get(victim);
+                    attackDamage = (int) (attackDamage - attackDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
+                } else {
+                    Util.log(Chat.format("&cELEMENTAL DAMAGE EVENT: &7Entity not found"));
+                }
+            } else {
+                attackDamage = damage;
+            }
+        }
         if(attackDamage < 0){
             attackDamage = 1;
-        }
-        if (attacker instanceof Player) {
-            if(Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null){
-                attackDamage = (attackDamage + (PLAYERS.get(attacker).getDamage()*((Player) attacker).getPlayer().getAttackCooldown()));
-            }
-            else{attackDamage = 5;}
-        }
-        else if (attacker instanceof Arrow arrow) {
-            if (arrow.getShooter() instanceof Player player) {
-                attackDamage = attackDamage + (PlayerMap.PLAYERS.get(player).getBowDamage());
-            }
-        }
-        else if (attacker instanceof LivingEntity entity) {
-            attackDamage = attackDamage + EntityMap.get(entity).getDamage();
-        }
-        if(victim instanceof Player){
-            PlayerData vPlayerData = PlayerMap.PLAYERS.get(victim);
-            attackDamage = (int) ((attackDamage - (attackDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * element.getElementalMultiplier()));
-        }
-        else if(victim instanceof LivingEntity){
-            if(EntityMap.has(victim)) {
-                EntityData vEntityData = EntityMap.get(victim);
-                attackDamage = (int) (attackDamage - attackDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
-            } else {
-                Util.log(Chat.format("&cELEMENTAL DAMAGE EVENT: &7Entity not found"));
-            }
-        } else {
-            attackDamage = damage;
         }
         this.finalDamage = attackDamage;
     }
@@ -105,16 +106,6 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable")) &&
                 !victim.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) {
             calculate();
-            Bukkit.getPluginManager().callEvent(this);
-        }
-    }
-    public void applyTrue() {
-        if(!victim.getPersistentDataContainer().has(Util.getNamespacedKey("invulnerable")) &&
-                !victim.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) {
-            if(victim instanceof Player player) {
-                PlayerData playerData = PLAYERS.get(player);
-                playerData.setHealth(playerData.getHealth() - damage);
-            }
             Bukkit.getPluginManager().callEvent(this);
         }
     }

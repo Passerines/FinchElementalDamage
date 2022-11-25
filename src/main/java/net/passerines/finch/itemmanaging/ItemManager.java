@@ -10,6 +10,7 @@ import net.passerines.finch.aItems.armor.vanillareplacements.DiamondBoots;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondChestplate;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
+import net.passerines.finch.aItems.tools.MidasPick;
 import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
@@ -165,8 +166,9 @@ public class ItemManager {
         new DraconianMarksmanVest();
         new DraconianMarksmanLeggings();
         new DraconianMarksmanHood();
-        new BowOfTheElements();
         new DragonSkin();
+        new MidasPick();
+        new GoldEssence();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
