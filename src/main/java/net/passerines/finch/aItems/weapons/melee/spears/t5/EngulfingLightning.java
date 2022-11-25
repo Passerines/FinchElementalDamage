@@ -44,10 +44,9 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         // Set the displayname and lore
         displayName = Chat.formatC("&dEngulfing Lightning");
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("&bDamage: &7<DAMAGE>");
-        lore.add("&bMana: &7<MANA>");
-        lore.add("&bDefense: &7<DEFENSE>");
-        lore.add("&bHealth: &7<HEALTH>");
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
         lore.add(" ");
         lore.add("&6Ability: &dDivine Punishment");
         lore.add("&7Summon a bolt of &dlightning in the direction");
