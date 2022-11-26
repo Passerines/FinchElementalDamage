@@ -16,7 +16,7 @@ commands:
     description: reforges item in sender's hand
     permission: finch.admin
 
-  enchant:
+  ench:
     description: enchants item in sender's hand
     permissions: finch.admin
 
