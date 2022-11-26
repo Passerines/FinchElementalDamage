@@ -26,7 +26,7 @@ public class TrinketMenu implements Listener{
     static {
         ItemMeta meta = placeholder.getItemMeta();
         meta.displayName(Chat.formatC(" "));
-        placeholder.getItemMeta().getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
         placeholder.setItemMeta(meta);
     }
 
