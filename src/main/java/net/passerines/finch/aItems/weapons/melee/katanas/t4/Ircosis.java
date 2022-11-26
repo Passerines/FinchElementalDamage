@@ -32,7 +32,7 @@ public class Ircosis extends FinchWeapon implements Listener {
 
     public Ircosis() {
         super("Ircosis", 4);
-        this.damage = 55;
+        this.attack = 55;
         this.element = ElementalDamageEvent.Element.WATER;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -52,20 +52,20 @@ public class Ircosis extends FinchWeapon implements Listener {
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(94, 59, 255), 1.0F);
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,30, dust);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, attack,100,30, dust);
             slash.drawSlash();
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,60, dust);
+                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, attack,100,60, dust);
                 slash0.drawSlash();
             }, 4);
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,120, dust);
+                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, attack,100,120, dust);
                 slash0.drawSlash();
             }, 8);
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, damage,100,150, dust);
+                Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, attack,100,150, dust);
                 slash0.drawSlash();
             }, 12);
             cd.add(player);
@@ -79,7 +79,7 @@ public class Ircosis extends FinchWeapon implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&3Ircosis"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
+        //lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
         lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&6Ability: &3Snowflake")));
         lore.add(Component.text(Chat.format("&7Create 3 extra slashes making a shape of a snowflake")));

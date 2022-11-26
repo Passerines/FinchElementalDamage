@@ -19,7 +19,7 @@ public class BloodHelmet extends FinchArmor implements FinchCraftableItem {
         super("BloodHelmet");
         this.defense = 15;
         this.health = -5;
-        this.damage = 6;
+        this.strength = 6;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class GatlingGun extends FinchWeapon implements Listener {
 
     public GatlingGun() {
         super("GatlingGun");
-        this.damage = 15;
+        this.bowDamage = 15;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
@@ -34,7 +34,7 @@ public class GatlingGun extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isRightClick() || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && cd.isOffCooldown(player))) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 4, Util.rand(0, 35), this.damage);
+                FinchArrow finchArrow = new FinchArrow(player, 4, Util.rand(0, 35), this.bowDamage);
                 finchArrow.shootNeutralArrow();
                 finchArrow.shootNeutralArrow();
                 finchArrow.shootNeutralArrow();

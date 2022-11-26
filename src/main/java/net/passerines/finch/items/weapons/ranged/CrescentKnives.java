@@ -24,7 +24,7 @@ public class CrescentKnives extends FinchWeapon implements Listener {
 
     public CrescentKnives() {
         super("CrescentKnives");
-        this.damage = 5;
+        this.attack = 5;
         this.dark = 2;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -36,7 +36,7 @@ public class CrescentKnives extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(player);
         ItemStack item = player.getInventory().getItemInMainHand();
         if((id.equals(Util.getId(item)) && event.getAction().isRightClick() && cd.isOffCooldown(player))){
-            ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 1, vPlayer.getDamage());
+            ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.CRIT_MAGIC, DARK, 1, vPlayer.getAttack());
             throwBlade.throwItem();
             cd.add(player, 20);
             Util.log("Thrown Crescent Knives");

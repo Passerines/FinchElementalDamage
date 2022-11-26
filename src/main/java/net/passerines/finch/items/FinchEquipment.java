@@ -16,15 +16,14 @@ public abstract class FinchEquipment extends FinchItem {
     public static final String STATS = "<STATS>";
     public static final String ENCHANTS = "<ENCHANTS>";
 
-    public static final String DAMAGE = "<DAMAGE>";
-    public static final String MANA = "<MANA>";
-    public static final String DEFENSE = "<DEFENSE>";
-    public static final String HEALTH = "<HEALTH>";
-    public static final String BOW_DAMAGE = "<BOW_DAMAGE>";
-
     protected double health;
     protected int defense;
-    protected int damage;
+    protected int attack;
+    protected int strength;
+    protected int critChance;
+    protected int healthRegen;
+    protected int manaRegen;
+    protected int dexterity;
     protected int bowDamage;
     protected int mana;
     protected double fire;
@@ -39,22 +38,12 @@ public abstract class FinchEquipment extends FinchItem {
         super(id, rarity);
         this.health = 0;
         this.defense = 0;
-        this.damage = 0;
-        this.bowDamage = 0;
-        this.mana = 0;
-        this.fire = 0;
-        this.water = 0;
-        this.earth = 0;
-        this.wind = 0;
-        this.electro = 0;
-        this.light = 0;
-        this.dark = 0;
-    }
-    public FinchEquipment(String id, String id1, String id2, String id3, int rarity) {
-        super(id, rarity);
-        this.health = 0;
-        this.defense = 0;
-        this.damage = 0;
+        this.attack = 0;
+        this.strength = 0;
+        this.critChance = 0;
+        this.healthRegen = 0;
+        this.manaRegen = 0;
+        this.dexterity = 0;
         this.bowDamage = 0;
         this.mana = 0;
         this.fire = 0;
@@ -72,8 +61,27 @@ public abstract class FinchEquipment extends FinchItem {
     public int getDefense() {
         return defense;
     }
-    public int getDamage(){
-        return damage;
+    public int getAttack(){
+        return attack;
+    }
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getCritChance() {
+        return critChance;
+    }
+
+    public int getHealthRegen() {
+        return healthRegen;
+    }
+
+    public int getManaRegen() {
+        return manaRegen;
+    }
+
+    public int getDexterity() {
+        return dexterity;
     }
     public int getBowDamage(){return bowDamage;}
     public int getMana(){
@@ -101,6 +109,8 @@ public abstract class FinchEquipment extends FinchItem {
         return dark;
     }
 
+
+
     @Override
     public ItemStack format(ItemStack item) {
         ItemMeta itemMeta = item.getItemMeta();
@@ -111,7 +121,7 @@ public abstract class FinchEquipment extends FinchItem {
             if(Chat.asPlainText(line).contains(STATS)) {
                 parseStat(newLore, "&bHealth: &7", health, prefix==null?0:prefix.getHealth());
                 parseStat(newLore, "&bDefense: &7", defense, prefix==null?0:prefix.getDefense());
-                parseStat(newLore, "&bDamage: &7", damage, prefix==null?0:prefix.getDamage());
+                parseStat(newLore, "&bDamage: &7", attack, prefix==null?0:prefix.getAttack());
                 parseStat(newLore, "&bBow Damage: &7", bowDamage, 0);
                 parseStat(newLore, "&bMana: &7", mana, prefix==null?0:prefix.getMana());
                 if(fire!=0 || water!=0 || earth!=0 || wind!=0 || electro!=0 || light!=0 || dark!=0) {

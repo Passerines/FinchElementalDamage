@@ -19,7 +19,7 @@ public class BloodLeggings extends FinchArmor implements FinchCraftableItem {
         super("BloodLeggings");
         this.defense = 20;
         this.health = -10;
-        this.damage = 7;
+        this.strength = 7;
     }
 
     @Override

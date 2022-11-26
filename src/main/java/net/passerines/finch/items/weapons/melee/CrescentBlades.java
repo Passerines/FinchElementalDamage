@@ -27,7 +27,7 @@ public class CrescentBlades extends FinchWeapon implements Listener {
     Cooldown cd0 = new Cooldown<>(3);
     public CrescentBlades() {
         super("CresentBlades");
-        this.damage = 45;
+        this.attack = 45;
         this.defense = 45;
         this.element = ElementalDamageEvent.Element.DARK;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
@@ -44,12 +44,12 @@ public class CrescentBlades extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd0.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ASH, Particle.CRIT, 7, damage,85,0, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ASH, Particle.CRIT, 7, attack,85,0, null);
             slash.drawSlash();
             cd0.add(player);
         }
         if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.ASH, ElementalDamageEvent.Element.DARK, 1, damage);
+            ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.ASH, ElementalDamageEvent.Element.DARK, 1, attack);
             throwBlade.throwItem();
             cd.add(player);
         }

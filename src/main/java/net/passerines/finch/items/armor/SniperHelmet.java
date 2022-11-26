@@ -11,7 +11,7 @@ public class SniperHelmet extends FinchArmor {
         super("SniperHelmet");
         this.defense = 5;
         this.health = 115;
-        this.damage = 30;
+        this.attack = 30;
     }
 
     @Override

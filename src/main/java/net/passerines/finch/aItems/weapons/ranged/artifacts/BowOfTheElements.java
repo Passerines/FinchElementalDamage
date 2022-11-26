@@ -231,7 +231,6 @@ public class BowOfTheElements extends FinchBow implements Listener {
         itemMeta.displayName(Chat.formatC("&fBow of the &4E&6l&ae&bm&9e&dn&5t&8s"));
         item.getItemMeta().getPersistentDataContainer().set(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0);
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
         lore.add(Component.text(Chat.format(" ")));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);

@@ -32,7 +32,7 @@ public class Shriex extends FinchWeapon implements Listener {
 
     public Shriex() {
         super("Shriex", 5);
-        this.damage = 55;
+        this.attack = 55;
         this.element = ElementalDamageEvent.Element.WIND;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -51,9 +51,9 @@ public class Shriex extends FinchWeapon implements Listener {
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SOUL_FIRE_FLAME, 3, damage,100,30, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SOUL_FIRE_FLAME, 3, attack,100,30, null);
             slash.drawSlash();
-            Slash slash1 = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SOUL_FIRE_FLAME, 3, damage,100,-30, null);
+            Slash slash1 = new Slash(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SOUL_FIRE_FLAME, 3, attack,100,-30, null);
             slash1.drawSlash();
             cd.add(player);
         }
@@ -66,7 +66,7 @@ public class Shriex extends FinchWeapon implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&bShr&3iex"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
+        //lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
         lore.add(Component.text(Chat.format(" ")));
         lore.add(Component.text(Chat.format("&6Ability: &bSonic Delay")));
         lore.add(Component.text(Chat.format("&7Two Slashes are created at once dealing twice as much damage")));

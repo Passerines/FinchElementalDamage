@@ -21,7 +21,7 @@ public class DraconianBoots extends FinchArmor implements FinchCraftableItem {
         super("DraconianBoots");
         this.defense = 155;
         this.health = 80;
-        this.damage = 35;
+        this.strength = 35;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class DraconianBoots extends FinchArmor implements FinchCraftableItem {
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&cHealth: &f+"+ (int) this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
-        lore.add(Component.text(Chat.format("&4Damage: &f+"+this.damage)));
+        //lore.add(Component.text(Chat.format("&4Damage: &f+"+this.damage)));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

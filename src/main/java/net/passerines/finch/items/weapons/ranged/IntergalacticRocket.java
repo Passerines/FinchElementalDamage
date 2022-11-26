@@ -32,7 +32,7 @@ public class IntergalacticRocket extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(id.equals(Util.getId(item)) && event.getAction().isRightClick() && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.EXPLOSION_HUGE, Particle.EXPLOSION_HUGE, 90, vPlayer.getDamage() * 1000, 7).draw();
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.EXPLOSION_HUGE, Particle.EXPLOSION_HUGE, 90, vPlayer.getAttack() * 1000, 7).draw();
             cd.add(player, 40);
         }
     }

@@ -31,7 +31,7 @@ public class SoulKnightsSpear extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(4);
     public SoulKnightsSpear() {
         super("SoulKnightsSpear");
-        this.damage = 30;
+        this.attack = 30;
         this.element = ElementalDamageEvent.Element.DARK;
         displayName = Chat.formatC("&3ESoul Knight's Spear");
         ArrayList<String> lore = new ArrayList<>();
@@ -56,7 +56,7 @@ public class SoulKnightsSpear extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 5, damage + vPlayer.getDamage()*0.5, 2).draw();
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 5, attack + vPlayer.getAttack()*0.5, 2).draw();
             cd.add(player);
         }
     }

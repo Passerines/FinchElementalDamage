@@ -35,7 +35,7 @@ public class Evelon extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(4);
     public Evelon() {
         super("Evelon");
-        this.damage = 65;
+        this.attack = 65;
         this.element = ElementalDamageEvent.Element.LIGHT;
         displayName = Chat.formatC("&6Evelon");
         ArrayList<String> lore = new ArrayList<>();
@@ -66,7 +66,7 @@ public class Evelon extends FinchWeapon implements Listener {
             Location loc = player.getEyeLocation();
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 loc.add(loc.getDirection().multiply(i.get()));
-                Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, damage,35,0, null);
+                Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,35,0, null);
                 slash.drawSlash();
             }, 2, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);

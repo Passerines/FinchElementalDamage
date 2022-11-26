@@ -31,6 +31,7 @@ public class VortexSplash extends FinchBow implements Listener {
     public VortexSplash() {
         super("VortexSplash");
         this.bowDamage = 150;
+        this.dexterity = 60;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     private final Cooldown cd = new Cooldown(10);

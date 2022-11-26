@@ -14,7 +14,7 @@ public class SharpStabber extends FinchWeapon {
 
     public SharpStabber() {
         super("SharpStabber");
-        this.damage = 25;
+        this.attack = 25;
     }
 
     @Override

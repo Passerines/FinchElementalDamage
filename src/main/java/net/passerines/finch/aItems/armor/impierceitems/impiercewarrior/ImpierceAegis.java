@@ -16,7 +16,7 @@ public class ImpierceAegis extends FinchArmor {
         super("ImpierceAegis");
         this.defense = 650;
         this.health = 110;
-        this.damage = 15;
+        this.strength = 15;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ImpierceAegis extends FinchArmor {
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
         lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
-        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage)));
+        //lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage)));
         itemMeta.setUnbreakable(true);
         itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

@@ -20,7 +20,7 @@ public class DraconianMarksmanLeggings extends FinchArmor implements FinchCrafta
         super("DraconianMarksmanLeggings");
         this.defense = 205;
         this.health = 130;
-        this.bowDamage = 45;
+        this.dexterity = 45;
     }
 
     @Override

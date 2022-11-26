@@ -27,7 +27,7 @@ public class Vescwrith extends FinchWeapon implements Listener {
     public Vescwrith() {
         super("Vescwrith");
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-        this.damage = 10;
+        this.attack = 10;
         this.health = -10;
         this.defense = -10;
     }
@@ -48,7 +48,7 @@ public class Vescwrith extends FinchWeapon implements Listener {
             if(id.equals(Util.getId(item))){
                 for(int i = 0; i < 50; i+=10){
                     Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () ->{
-                        new ElementalDamageEvent(player, event.getEntity(), DARK, vPlayerData.getDamage()-3).apply();
+                        new ElementalDamageEvent(player, event.getEntity(), DARK, vPlayerData.getAttack()-3).apply();
                     }, i);
                 }
             }

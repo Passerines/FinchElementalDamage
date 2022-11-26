@@ -16,8 +16,17 @@ public class ItemPrefix {
     private Type type;
     private int tier;
     private int health;
-    private int damage;
+    private int attack;
+    private int strength;
+    private int critChance;
+    private int healthRegen;
+    private int manaRegen;
+    private int dexterity;
+    private int bowDamage;
     private int defense;
+
+
+
     private int mana;
 
     public enum Type{
@@ -27,19 +36,32 @@ public class ItemPrefix {
         NONE
     }
 
-    public ItemPrefix(String id, String displayName, Type type, int tier, int health, int damage, int defense, int mana){
-        this(id, Chat.formatC(displayName), type, tier, health, damage, defense, mana);
+    public ItemPrefix(String id, String displayName, Type type, int tier, int health, int attack, int strength, int defense, int mana){
+        this(id, Chat.formatC(displayName), type, tier, health, attack, strength, defense, mana);
     }
 
-    public ItemPrefix(String id, Component displayName, Type type, int tier, int health, int damage, int defense, int mana){
+    public ItemPrefix(String id, Component displayName, Type type, int tier, int health, int attack, int strength, int defense, int mana){
         this.id = id;
         this.displayName = displayName;
         this.type = type;
         this.tier = tier;
         this.health = health;
-        this.damage = damage;
+        this.attack = attack;
+        this.strength = strength;
         this.defense = defense;
         this.mana = mana;
+        PrefixManager.PREFIX_HASH_MAP.put(id, this);
+    }
+    public ItemPrefix(String id, Component displayName, Type type){
+        this.id = id;
+        this.displayName = displayName;
+        this.type = type;
+        this.tier = 0;
+        this.health = 0;
+        this.attack = 0;
+        this.strength = 0;
+        this.defense = 0;
+        this.mana = 0;
         PrefixManager.PREFIX_HASH_MAP.put(id, this);
     }
 
@@ -72,8 +94,31 @@ public class ItemPrefix {
     public int getDefense() {
         return defense;
     }
-    public int getDamage(){
-        return damage;
+    public int getAttack(){
+        return attack;
+    }
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getCritChance() {
+        return critChance;
+    }
+
+    public int getHealthRegen() {
+        return healthRegen;
+    }
+
+    public int getManaRegen() {
+        return manaRegen;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public int getBowDamage() {
+        return bowDamage;
     }
     public int getMana(){
         return mana;

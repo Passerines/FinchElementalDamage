@@ -23,8 +23,10 @@ public class GetPlayersCmd implements CommandExecutor {
         PlayerData player = PLAYERS.get(sender);
         sender.sendMessage("Health: " + player.getHealth());
         sender.sendMessage("Defense: " + player.getDefense());
-        sender.sendMessage("Damage (Melee): " + player.getDamage());
+        sender.sendMessage("Damage (Melee): " + player.getAttack());
+        sender.sendMessage("Modifier (Melee): " + player.getStrength());
         sender.sendMessage("Damage (Ranged): " + player.getBowDamage());
+        sender.sendMessage("Modifier (Ranged): " + player.getDexterity());
         return false;
     }
 }

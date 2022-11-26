@@ -43,7 +43,7 @@ public class DevourScythe extends FinchWeapon implements Listener {
             Player player = (Player) event.getDamager();
             ItemStack item = player.getInventory().getItemInMainHand();
             if(id.equals(Util.getId(item))){
-                vPlayerData.setHealth(vPlayerData.getHealth() + vPlayerData.getDamage() * 0.05);
+                vPlayerData.setHealth(vPlayerData.getHealth() + vPlayerData.getAttack() * 0.05);
             }
         }
     }

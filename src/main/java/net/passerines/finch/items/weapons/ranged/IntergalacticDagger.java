@@ -24,7 +24,7 @@ public class IntergalacticDagger extends FinchWeapon implements Listener {
 
     public IntergalacticDagger() {
         super("IntergalacticDagger");
-        this.damage = 15;
+        this.attack = 15;
         this.electro = 2;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -36,7 +36,7 @@ public class IntergalacticDagger extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(player);
         ItemStack item = player.getInventory().getItemInMainHand();
         if((id.equals(Util.getId(item)) && event.getAction().isRightClick() && cd.isOffCooldown(player))){
-            ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.SONIC_BOOM, ELECTRO, 5, vPlayer.getDamage()*500);
+            ThrowBlade throwBlade = new ThrowBlade(id, player, Particle.SONIC_BOOM, ELECTRO, 5, vPlayer.getAttack()*500);
             throwBlade.throwItem();
             cd.add(player, 20);
         }

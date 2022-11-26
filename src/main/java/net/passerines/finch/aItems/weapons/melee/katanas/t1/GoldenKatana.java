@@ -31,7 +31,7 @@ public class GoldenKatana extends FinchWeapon implements Listener {
     Cooldown<Player> cd = new Cooldown<>(3);
     public GoldenKatana() {
         super("GoldenKatana", 1);
-        this.damage = 15;
+        this.attack = 15;
         this.element = ElementalDamageEvent.Element.NEUTRAL;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -48,7 +48,7 @@ public class GoldenKatana extends FinchWeapon implements Listener {
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 215, 84), 1.0F);
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.CRIT, 4, damage,85,0, dust);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.CRIT, 4, attack,85,0, dust);
             slash.drawSlash();
             cd.add(player);
         }
@@ -61,7 +61,7 @@ public class GoldenKatana extends FinchWeapon implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&fGolden Katana"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
+        //lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(5);

@@ -19,7 +19,7 @@ public class DraconianMarksmanVest extends FinchArmor implements FinchCraftableI
         super("DraconianMarksmanVest");
         this.defense = 430;
         this.health = 110;
-        this.bowDamage = 45;
+        this.dexterity = 45;
     }
 
     @Override

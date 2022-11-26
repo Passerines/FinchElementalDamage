@@ -37,7 +37,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd1 = new Cooldown<>(50);
     public EngulfingLightning() {
         super("EngulfingLightning");
-        this.damage = 115;
+        this.attack = 115;
         this.mana = 500;
         this.element = ElementalDamageEvent.Element.ELECTRO;
 
@@ -100,7 +100,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         Player player = click.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 5, damage,2,0, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 5, attack,2,0, null);
             slash.drawSlash();
             cd.add(player);
         }

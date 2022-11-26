@@ -69,15 +69,15 @@ public class ElementalDamageEvent extends Event implements Cancellable {
     public void calculate() {
         double attackDamage = damage;
         if(element != Element.TRUE) {
-            if (attacker instanceof Player) {
-                if (Util.getId(((Player) attacker).getPlayer().getInventory().getItemInMainHand()) != null) {
-                    attackDamage = (attackDamage + (PLAYERS.get(attacker).getDamage() * ((Player) attacker).getPlayer().getAttackCooldown()));
+            if (attacker instanceof Player player) {
+                if (Util.getId(player.getInventory().getItemInMainHand()) != null) {
+                    attackDamage = attackDamage * (1 + PlayerMap.PLAYERS.get(player).getStrength()/150.0);
                 } else {
                     attackDamage = 5;
                 }
             } else if (attacker instanceof Arrow arrow) {
                 if (arrow.getShooter() instanceof Player player) {
-                    attackDamage = attackDamage + (PlayerMap.PLAYERS.get(player).getBowDamage());
+                    attackDamage = attackDamage * (1 + PlayerMap.PLAYERS.get(player).getDexterity()/150.0);
                 }
             } else if (attacker instanceof LivingEntity entity) {
                 attackDamage = attackDamage + EntityMap.get(entity).getDamage();

@@ -32,7 +32,7 @@ public class Valkyre extends FinchWeapon implements Listener {
 
     public Valkyre() {
         super("Valkyre");
-        this.damage = 50;
+        this.attack = 50;
         this.mana = 500;
         this.light = 2;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());

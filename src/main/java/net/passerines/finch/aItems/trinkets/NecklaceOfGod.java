@@ -13,7 +13,7 @@ public class NecklaceOfGod extends FinchTrinkets {
     public NecklaceOfGod() {
         super("NecklaceOfGod");
         this.mana = 500;
-        this.damage = 15;
+        this.strength = 15;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class NecklaceOfGod extends FinchTrinkets {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.displayName(Chat.formatC("&bNecklace Of God"));
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cDamage: &f+" + this.damage )));
+        lore.add(Component.text(Chat.format("&cDamage: &f+" + this.strength )));
         lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana )));
         itemMeta.lore(lore);
         item.setItemMeta(itemMeta);

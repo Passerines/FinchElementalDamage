@@ -31,8 +31,8 @@ public abstract class FinchTrinkets extends FinchEquipment {
     public int getDefense() {
         return defense;
     }
-    public int getDamage(){
-        return damage;
+    public int getAttack(){
+        return attack;
     }
     public int getBowDamage(){
         return bowDamage;
@@ -67,26 +67,4 @@ public abstract class FinchTrinkets extends FinchEquipment {
     }
     public int getRarity(){return rarity;}
     public int getType(){return type;}
-
-    @Override
-    public ItemStack format(ItemStack item) {
-        ItemMeta itemMeta = item.getItemMeta();
-
-        ArrayList<Component> newLore = new ArrayList<>();
-        ItemPrefix prefix = Util.getItemPrefix(item);
-        itemMeta.displayName(prefix!=null?prefix.getDisplayName().append(Chat.formatC(" ")).append(displayName):displayName);
-        for(Component line : lore){
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DAMAGE).replacement(damage+(prefix!=null?"+"+prefix.getDamage():"")).build());
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(MANA).replacement(mana+(prefix!=null?"+"+prefix.getMana():"")).build());
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(DEFENSE).replacement(defense+(prefix!=null?"+"+prefix.getDefense():"")).build());
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(HEALTH).replacement(health+(prefix!=null?"+"+prefix.getHealth():"")).build());
-            line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+"").build());
-            //line = line.replaceText(TextReplacementConfig.builder().matchLiteral(BOW_DAMAGE).replacement(damage+(prefix!=null?"+"+prefix.getDamage():"")).build());
-            newLore.add(line);
-        }
-        itemMeta.lore(newLore);
-
-        item.setItemMeta(itemMeta);
-        return item;
-    }
 }

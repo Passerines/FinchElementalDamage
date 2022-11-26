@@ -29,7 +29,7 @@ public class RitualBlade extends FinchWeapon implements Listener {
 
     public RitualBlade() {
         super("Ritualblade");
-        this.damage = 30;
+        this.attack = 30;
         this.health = -10;
         this.defense = -10;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
@@ -44,12 +44,10 @@ public class RitualBlade extends FinchWeapon implements Listener {
             if (vPlayerData.getMana() >= 50 && vPlayerData.getHealth() >= 51) {
                 vPlayerData.setMana(vPlayerData.getMana() - 50);
                 vPlayerData.setHealth(vPlayerData.getHealth() - 50);
-                vPlayerData.setDamage(vPlayerData.getDamage() + 20);
                 String bar = Chat.format("&c-50 &bMana and Health");
                 Chat.sendActionBar(player, bar);
 
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
-                    vPlayerData.setDamage(vPlayerData.getDamage() - 20);
                 }, 100);
             }
         }

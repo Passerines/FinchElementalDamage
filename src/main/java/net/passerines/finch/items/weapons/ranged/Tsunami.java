@@ -23,7 +23,7 @@ public class Tsunami extends FinchWeapon implements Listener {
 
     public Tsunami() {
         super("Tsunami");
-        this.damage = 150;
+        this.attack = 150;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
@@ -34,7 +34,7 @@ public class Tsunami extends FinchWeapon implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if((event.getAction().isLeftClick() || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.damage);
+                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.attack);
                 finchArrow.shootWaterArrow();
                 cd.add(player, 15);
             }
