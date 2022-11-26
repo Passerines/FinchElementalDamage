@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.HashMap;
+
 public class ItemEnchants {
     private String id;
     private Component displayName;
@@ -53,18 +55,22 @@ public class ItemEnchants {
 // check to make sure the enchant isin't already on there
 // put it back into the string, adding the new enchantment/level
 
-    public void applyEnchant(ItemStack item, String enchantments){
+    public void applyEnchant(ItemStack item, int level){
+        HashMap<String, Integer> enchantList = Util.getEnchants(item);
+        enchantList.put(id, level);
+        String itemString = Util.getEnchantString(enchantList);
         ItemMeta meta = item.getItemMeta();
-        meta.getPersistentDataContainer().set(Util.getNamespacedKey("enchant"), PersistentDataType.STRING, id);
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("enchant"), PersistentDataType.STRING, itemString);
         item.setItemMeta(meta);
         Util.getFinchItem(item).format(item);
     }
 
     public void removeEnchant(ItemStack item){
-        String id = Util.getId(item);
-        ItemStack origItem = ItemManager.ITEM_HASH_MAP.get(id).getItem();
-        ItemMeta meta = origItem.getItemMeta();
-        meta.getPersistentDataContainer().remove(Util.getNamespacedKey("enchant"));
+        HashMap<String, Integer> enchantList = Util.getEnchants(item);
+        enchantList.remove(id);
+        String itemString = Util.getEnchantString(enchantList);
+        ItemMeta meta = item.getItemMeta();
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("enchant"), PersistentDataType.STRING, itemString);
         item.setItemMeta(meta);
         Util.getFinchItem(item).format(item);
     }

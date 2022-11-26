@@ -53,8 +53,7 @@ public class ItemPrefix {
 
     public void removePrefix(ItemStack item){
         String id = Util.getId(item);
-        ItemStack origItem = ItemManager.ITEM_HASH_MAP.get(id).getItem();
-        ItemMeta meta = origItem.getItemMeta();
+        ItemMeta meta = item.getItemMeta();
         meta.getPersistentDataContainer().remove(Util.getNamespacedKey("prefix"));
         item.setItemMeta(meta);
         Util.getFinchItem(item).format(item);

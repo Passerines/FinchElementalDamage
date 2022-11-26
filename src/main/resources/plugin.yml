@@ -16,6 +16,10 @@ commands:
     description: reforges item in sender's hand
     permission: finch.admin
 
+  enchant:
+    description: enchants item in sender's hand
+    permissions: finch.admin
+
   getplayers:
     description: gets players list
     permission: finch.admin
@@ -27,9 +31,11 @@ commands:
   finchattributes:
     description: sets max health
     permission: finch.admin
+
   itemgive:
     description: gives and item
     permission: finch.admin
+
   trinketmenu:
     description: opens the trinkets menu
     permission: finch.user

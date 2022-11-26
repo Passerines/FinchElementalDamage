@@ -44,6 +44,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new PlayerMap();
         new GetPlayersCmd();
         new ReforgeCommand();
+        new EnchantCommand();
         new GetEffectiveHealthCmd();
         new NaturalHealthRegen();
         new HealthDisplay();

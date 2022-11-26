@@ -132,7 +132,7 @@ public class Util {
         }
     }
 
-    public HashMap<String, Integer> getEnchants(ItemStack item) {
+    public static HashMap<String, Integer> getEnchants(ItemStack item) {
         HashMap<String, Integer> enchantList = new HashMap<>();
         String list = item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("prefix"), PersistentDataType.STRING);
         String[] arrayEnchants = list.split(",");
@@ -143,7 +143,7 @@ public class Util {
         return enchantList;
     }
 
-    public String getEnchantString(HashMap<String, Integer> map){
+    public static String getEnchantString(HashMap<String, Integer> map){
         String enchantString = "";
         for(String enchants : map.keySet()){
             enchantString += enchants + ":" + map.get(enchants) + ",";
