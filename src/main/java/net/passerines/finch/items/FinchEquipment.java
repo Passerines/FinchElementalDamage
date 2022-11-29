@@ -1,6 +1,8 @@
 package net.passerines.finch.items;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.enchants.EnchantManager;
+import net.passerines.finch.enchants.ItemEnchants;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.util.Chat;
@@ -136,7 +138,8 @@ public abstract class FinchEquipment extends FinchItem {
             } else if(Chat.asPlainText(line).contains(ENCHANTS)) {
                 HashMap<String, Integer> enchants = Util.getEnchants(item);
                 for(String enchant : enchants.keySet()) {
-                    newLore.add(Chat.formatC("&b" + enchant + " &7" + enchants.get(enchant)));
+                    ItemEnchants ench = EnchantManager.ENCHANTS_HASH_MAP.get(enchant);
+                    newLore.add(ench.getDisplayName().append(Chat.formatC( " &7" + enchants.get(enchant))));
                 }
                 if(enchants.size()>0) newLore.add(Chat.formatC(""));
             } else {
