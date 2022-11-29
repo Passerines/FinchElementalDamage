@@ -47,7 +47,6 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
-        lore.add(" ");
         lore.add("&6Ability: &dDivine Punishment");
         lore.add("&7Summon a bolt of &dlightning in the direction");
         lore.add("&7you are facing dealing damage based on your &bMana");
