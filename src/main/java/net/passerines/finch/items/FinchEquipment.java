@@ -137,12 +137,11 @@ public abstract class FinchEquipment extends FinchItem {
             } else if(Chat.asPlainText(line).contains(STATS)) {
                 HashMap<String, Integer> enchants = Util.getEnchants(item);
                 for(String enchant : enchants.keySet()) {
-                    lore.add(Chat.formatC("&b" + enchant + " &7" + enchants.get(enchant)));
+                    newLore.add(Chat.formatC("&b" + enchant + " &7" + enchants.get(enchant)));
                 }
             } else {
                 newLore.add(line);
             }
-            newLore.add(line);
         }
         itemMeta.lore(newLore);
 

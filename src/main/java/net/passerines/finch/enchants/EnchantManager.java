@@ -14,7 +14,7 @@ public class EnchantManager {
     }
 
     public void registerEnchants(){
-        ItemEnchants FinchSharpness = new ItemEnchants("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchants.EnchantmentType.WEAPON, 0, 10, 0, 0);
+        new ItemEnchants("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchants.EnchantmentType.WEAPON, 0, 10, 0, 0);
     }
 
     public static ArrayList<ItemEnchants> getEnchants(ItemEnchants.EnchantmentType type, int tier){
