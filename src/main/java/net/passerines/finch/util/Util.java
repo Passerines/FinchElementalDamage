@@ -134,15 +134,21 @@ public class Util {
 
     public static HashMap<String, Integer> getEnchants(ItemStack item) {
         HashMap<String, Integer> enchantList = new HashMap<>();
-        String list = item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("prefix"), PersistentDataType.STRING);
-        String[] arrayEnchants = list.split(",");
-        for(String enchant : arrayEnchants){
-            String[] level = enchant.split(":");
-            enchantList.put(level[0], Integer.parseInt(level[1]));
+        if(item != null){
+            if(item.getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("enchant"))){
+                String list = item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("enchant"), PersistentDataType.STRING);
+                String[] arrayEnchants = list.split(",");
+                for(String enchant : arrayEnchants){
+                    String[] level = enchant.split(":");
+                    enchantList.put(level[0], Integer.parseInt(level[1]));
+                }
+            }
         }
         return enchantList;
     }
 
+    //Returns a string that represents a hashmap of enchantments and their respective levels
+    //This is for the persistent data container
     public static String getEnchantString(HashMap<String, Integer> map){
         String enchantString = "";
         for(String enchants : map.keySet()){

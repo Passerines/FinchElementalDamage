@@ -51,15 +51,15 @@ public class EntityMap implements Listener {
     @EventHandler
     public void onSpawn(MythicMobSpawnEvent event){
         ActiveMob eventEntity = event.getMob();
-        Util.log("Entity added to map");
+        //Util.log("Entity added to map");
         ENTITIES.put(event.getEntity(), new EntityData(eventEntity, event.getMobType()));
-        Util.log("Registered Mob: " + event.getMobType());
+        //Util.log("Registered Mob: " + event.getMobType());
     }
 
     @EventHandler
     public void onVanillaSpawn(EntitySpawnEvent event){
         if(event.getEntity() instanceof LivingEntity livingEntity) {
-            Util.log("Entity added to map");
+            //Util.log("Entity added to map");
             if (event.getEntity().getPersistentDataContainer().has(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE))
                 return;
             if(ModelEngineAPI.isModeledEntity(livingEntity.getUniqueId())) {
@@ -69,7 +69,7 @@ public class EntityMap implements Listener {
                 }
             }
             ENTITIES.put(event.getEntity(), new EntityData(livingEntity));
-            Util.log("Registered Mob: " + event.getEntityType());
+            //Util.log("Registered Mob: " + event.getEntityType());
         }
     }
     @EventHandler
@@ -78,9 +78,9 @@ public class EntityMap implements Listener {
         Object[] entities = entitylist.toArray();
         for(Object entity : entities) {
             if(entity instanceof LivingEntity livingEntity && !ENTITIES.containsKey(entity)){
-                Util.log("Entity added to map");
+                //Util.log("Entity added to map");
                 ENTITIES.put(livingEntity, new EntityData(livingEntity));
-                Util.log("Registered Mob: " + (livingEntity).getType());
+                //Util.log("Registered Mob: " + (livingEntity).getType());
             }
         }
     }
@@ -88,7 +88,7 @@ public class EntityMap implements Listener {
     @EventHandler
     public void onDeath(CustomEntityDeathEvent event){
         ENTITIES.remove(event.getDeadVictim());
-        Util.log("Registered Mob Died: " + event.getDeadVictim());
+        //Util.log("Registered Mob Died: " + event.getDeadVictim());
     }
 }
 

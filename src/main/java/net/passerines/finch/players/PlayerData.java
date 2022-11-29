@@ -299,7 +299,8 @@ public class PlayerData {
     }
 
     public void setHealthMax(double healthMax) {
-        this.healthMax = healthMax;
+        //this.healthmax to the greater value between healthmax and 1
+        this.healthMax = Math.max(healthMax, 1);
         this.health = Math.min(healthMax, health);
     }
 

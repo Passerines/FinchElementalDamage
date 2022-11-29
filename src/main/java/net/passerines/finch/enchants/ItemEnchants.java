@@ -1,6 +1,7 @@
 package net.passerines.finch.enchants;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -73,6 +74,10 @@ public class ItemEnchants {
         meta.getPersistentDataContainer().set(Util.getNamespacedKey("enchant"), PersistentDataType.STRING, itemString);
         item.setItemMeta(meta);
         Util.getFinchItem(item).format(item);
+    }
+    //This is just where we apply the effect
+    public void onElementalDamage(ElementalDamageEvent event, int level){
+
     }
 
     public Component getDisplayName() {
