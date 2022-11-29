@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class FinchEquipment extends FinchItem {
 
@@ -132,6 +133,11 @@ public abstract class FinchEquipment extends FinchItem {
                     parseStat(newLore, "  " + ElementalDamageEvent.Element.WIND.getColor() + "Wind: &7", wind, 0);
                     parseStat(newLore, "  " + ElementalDamageEvent.Element.ELECTRO.getColor() + "Electro: &7", electro, 0);
                     parseStat(newLore, "  " + ElementalDamageEvent.Element.DARK.getColor() + "Dark: &7", dark, 0);
+                }
+            } else if(Chat.asPlainText(line).contains(STATS)) {
+                HashMap<String, Integer> enchants = Util.getEnchants(item);
+                for(String enchant : enchants.keySet()) {
+                    lore.add(Chat.formatC("&b" + enchant + " &7" + enchants.get(enchant)));
                 }
             } else {
                 newLore.add(line);
