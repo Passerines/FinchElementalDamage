@@ -86,7 +86,9 @@ public class DamageHandler implements Listener {
             if(event.getDamager() instanceof Projectile projectile && projectile.getShooter() instanceof Entity entity){
                 elementalDamage = new ElementalDamageEvent(entity, event.getEntity(), ElementalDamageEvent.Element.NEUTRAL, (int) event.getDamage());
             }
-            else{
+            else if(event.getDamager() instanceof Player attacker){
+                elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), EntityDamageEvent.DamageCause.ENTITY_ATTACK, ElementalDamageEvent.Element.NEUTRAL, (int) event.getDamage(), attacker.getInventory().getItemInMainHand());
+            } else {
                 elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.NEUTRAL, (int) event.getDamage());
             }
             elementalDamage.apply();

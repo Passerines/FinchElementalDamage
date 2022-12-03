@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -50,7 +51,7 @@ public class Valkyre extends FinchWeapon implements Listener {
             player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1f, 0.5f);
             List<Entity> entityList = player.getNearbyEntities(4, 4, 4);
             for(Entity entity : entityList){
-                new ElementalDamageEvent(player, entity, ELECTRO, ((1 + vPlayer.getManaMax() / 90 + 0.0)*5)).apply();
+                new ElementalDamageEvent(player, entity, EntityDamageEvent.DamageCause.ENTITY_ATTACK, ELECTRO, ((1 + vPlayer.getManaMax() / 90 + 0.0)*5), player.getInventory().getItemInMainHand()).apply();
             }
             vPlayer.setMana(vPlayer.getMana() - 250);
             String bar = Chat.format("&c-250 &bMana");
