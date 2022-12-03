@@ -42,9 +42,8 @@ public class DraconianLeggings extends FinchArmor implements FinchCraftableItem 
     }
     @Override
     public void registerRecipe() {
-        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
-        ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "BBB", "A A", "A A" , item, item0);
+        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "A A" , item);
         finchRecipe.addRecipe();
     }
 }

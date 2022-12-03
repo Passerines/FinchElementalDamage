@@ -9,6 +9,7 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -43,50 +44,50 @@ public class ArrowHandler implements Listener {
                         default -> {
                             loc.getWorld().spawnParticle(Particle.CRIT, loc, 6);
                             Bukkit.getScheduler().cancelTask(taskId);
-                            elementalDamageEvent = new ElementalDamageEvent((Entity) arrow, entity, ElementalDamageEvent.Element.NEUTRAL, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.NEUTRAL, damage);
                         }
                         case "fire" -> {
                             entity.setFireTicks(20);
                             loc.getWorld().spawnParticle(Particle.DRIP_LAVA, loc, 6);
                             Bukkit.getScheduler().cancelTask(taskId);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.FIRE, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.FIRE, damage);
                         }
                         case "water" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20, 0, false, false, true));
                             loc.getWorld().spawnParticle(Particle.WATER_SPLASH, loc, 6);
                             Bukkit.getScheduler().cancelTask(taskId);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.WATER, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.WATER, damage);
                         }
                         case "earth" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20, 1, false, false, true));
                             loc.getWorld().spawnParticle(Particle.LEGACY_BLOCK_DUST, loc, 20);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.EARTH, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.EARTH, damage);
                         }
                         case "wind" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20, 1, false, false, true));
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20, 1, false, false, true));
                             loc.getWorld().spawnParticle(Particle.SNOWBALL, loc, 6);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.WIND, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.WIND, damage);
                         }
                         case "electro" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 3, 10, false, false, true));
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 3, -1, false, false, true));
                             loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, loc, 6);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.ELECTRO, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.ELECTRO, damage);
                         }
                         case "light" -> {
                             loc.getWorld().spawnParticle(Particle.FLASH, loc, 10);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.LIGHT, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.LIGHT, damage);
                         }
                         case "undead" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20, 1, false, false, true));
                             loc.getWorld().spawnParticle(Particle.SOUL, loc, 6);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.UNDEAD, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.UNDEAD, damage);
                         }
                         case "dark" -> {
                             ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 4, 0, false, false, true));
                             loc.getWorld().spawnParticle(Particle.SOUL, loc, 6);
-                            elementalDamageEvent = new ElementalDamageEvent( arrow, entity, ElementalDamageEvent.Element.DARK, damage);
+                            elementalDamageEvent = new ElementalDamageEvent((Player) arrow.getShooter(), entity, ElementalDamageEvent.Element.DARK, damage);
                         }
                     }
                     elementalDamageEvent.apply();

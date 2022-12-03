@@ -3,6 +3,9 @@ package net.passerines.finch.events;
 import com.ticxo.modelengine.api.ModelEngineAPI;
 import net.passerines.finch.entity.EntityData;
 import net.passerines.finch.entity.EntityMap;
+import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.items.FinchBow;
+import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
@@ -15,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,9 +29,12 @@ public class ElementalDamageEvent extends Event implements Cancellable {
 
     private double damage;
     private double finalDamage;
+    private int critAmount;
     private Entity attacker;
     private Entity victim;
+    private EntityDamageEvent.DamageCause damageCause;
     private Element element;
+    private ItemStack weapon;
 
     private boolean cancelled;
     private static final HandlerList HANDLER_LIST = new HandlerList();
@@ -59,27 +67,43 @@ public class ElementalDamageEvent extends Event implements Cancellable {
         }
     }
 
+    public ElementalDamageEvent(Entity attacker, Entity victim, EntityDamageEvent.DamageCause damageCause, Element element, double damage) {
+        this(attacker, victim, damageCause, element, damage, null);
+    }
     public ElementalDamageEvent(Entity attacker, Entity victim, Element element, double damage) {
+        this(attacker, victim, EntityDamageEvent.DamageCause.CUSTOM, element, damage, null);
+    }
+    public ElementalDamageEvent(Entity attacker, Entity victim,  EntityDamageEvent.DamageCause damageCause, Element element, double damage, ItemStack weapon) {
         this.attacker = attacker;
         this.victim = victim;
         this.element = element;
         this.damage = damage;
+        this.damageCause = damageCause;
+        this.weapon = weapon;
     }
 
     public void calculate() {
         double attackDamage = damage;
         if(element != Element.TRUE) {
             if (attacker instanceof Player player) {
-                if (Util.getId(player.getInventory().getItemInMainHand()) != null) {
-                    attackDamage = attackDamage * (1 + PlayerMap.PLAYERS.get(player).getStrength()/150.0);
-                } else {
-                    attackDamage = 5;
+                PlayerData playerData = PlayerMap.PLAYERS.get(player);
+                float critMultiplier;
+                int baseCrit = playerData.getCritChance()/100;
+                int calcCrit = playerData.getCritChance()%100;
+                if(Util.getFinchItem(weapon) instanceof FinchBow){
+                    attackDamage = attackDamage * (1 + playerData.getDexterity()/150.0);
                 }
-            } else if (attacker instanceof Arrow arrow) {
-                if (arrow.getShooter() instanceof Player player) {
-                    attackDamage = attackDamage * (1 + PlayerMap.PLAYERS.get(player).getDexterity()/150.0);
+                else if (Util.getFinchItem(weapon) instanceof FinchWeapon) {
+                    //Every 150 strength double damage
+                    attackDamage = attackDamage * (1 + playerData.getStrength()/150.0);
                 }
-            } else if (attacker instanceof LivingEntity entity) {
+                critMultiplier = baseCrit * 1.5f;
+                if(Util.randomBoolean(calcCrit/100f)){
+                    critMultiplier += 1.5;
+                }
+                attackDamage = Math.max(attackDamage * critMultiplier, attackDamage);
+            }
+            else if (attacker instanceof LivingEntity entity) {
                 attackDamage = attackDamage + EntityMap.get(entity).getDamage();
             }
             if (victim instanceof Player) {
@@ -132,6 +156,17 @@ public class ElementalDamageEvent extends Event implements Cancellable {
 
     public void setElement(Element element) {
         this.element = element;
+    }
+    public int getCritAmount() {
+        return critAmount;
+    }
+
+    public EntityDamageEvent.DamageCause getDamageCause() {
+        return damageCause;
+    }
+
+    public ItemStack getWeapon() {
+        return weapon;
     }
 
     @Override

@@ -22,6 +22,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -59,19 +60,19 @@ public class DamageHandler implements Listener {
         if (!(event.getEntity() instanceof Item)) {
             switch (event.getCause()) {
                 case VOID, DRAGON_BREATH, WITHER -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.TRUE, (int) event.getDamage() * 20).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.TRUE, (int) event.getDamage() * 20).apply();
                     event.setDamage(0);
                 }
                 case FALL, FALLING_BLOCK, POISON, STARVATION, SUFFOCATION, THORNS, CRAMMING, FLY_INTO_WALL -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.EARTH, (int) event.getDamage() * 10).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.EARTH, (int) event.getDamage() * 10).apply();
                     event.setDamage(0);
                 }
                 case FIRE, LAVA, HOT_FLOOR, FIRE_TICK -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.FIRE, (int) event.getDamage() * 20).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.FIRE, (int) event.getDamage() * 20).apply();
                     event.setDamage(0);
                 }
                 case DROWNING, FREEZE, LIGHTNING -> {
-                    new ElementalDamageEvent(null, event.getEntity(), ElementalDamageEvent.Element.TRUE, (int) event.getDamage() * 30).apply();
+                    new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.TRUE, (int) event.getDamage() * 30).apply();
                     event.setDamage(0);
                 }
             }
@@ -81,7 +82,13 @@ public class DamageHandler implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         //Converts entity damage by entity to elemental damage
         if(!event.isCancelled()) {
-            ElementalDamageEvent elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.UNDEAD, (int) event.getDamage());
+            ElementalDamageEvent elementalDamage;
+            if(event.getDamager() instanceof Projectile projectile && projectile.getShooter() instanceof Entity entity){
+                elementalDamage = new ElementalDamageEvent(entity, event.getEntity(), ElementalDamageEvent.Element.NEUTRAL, (int) event.getDamage());
+            }
+            else{
+                elementalDamage = new ElementalDamageEvent(event.getDamager(), event.getEntity(), ElementalDamageEvent.Element.NEUTRAL, (int) event.getDamage());
+            }
             elementalDamage.apply();
             event.setDamage(0);
         }

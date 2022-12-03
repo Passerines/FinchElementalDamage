@@ -169,6 +169,7 @@ public class ItemManager {
         new DragonSkin();
         new MidasPick();
         new GoldEssence();
+        new MahiMahiScale();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

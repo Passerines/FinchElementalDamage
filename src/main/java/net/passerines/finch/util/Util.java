@@ -1,5 +1,6 @@
 package net.passerines.finch.util;
 
+import jdk.jfr.Percentage;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
@@ -104,6 +105,7 @@ public class Util {
     public static FinchItem getFinchItem(ItemStack item) {
         return ItemManager.ITEM_HASH_MAP.getOrDefault(getId(item), null);
     }
+
 
     //Gets the item prefix enum type
     public static ItemPrefix.Type getItemPrefixType(ItemStack item){
