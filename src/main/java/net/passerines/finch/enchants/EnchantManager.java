@@ -2,6 +2,7 @@ package net.passerines.finch.enchants;
 
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.enchants.weaponenchants.FireAspectEnchant;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -24,6 +25,7 @@ public class EnchantManager implements Listener {
 
     public void registerEnchants(){
         new ItemEnchants("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchants.EnchantmentType.WEAPON, 0, 10, 0, 0);
+        new FireAspectEnchant();
     }
 
     //A hashmap cannot contain 2 of the same keys, but 2 keys can have the same value

@@ -18,9 +18,16 @@ public class ItemEnchants {
     private Component displayName;
     private EnchantmentType type;
     private int health;
-    private int damage;
     private int defense;
     private int mana;
+    private int attack;
+    private int strength;
+    private int critChance;
+    private int healthRegen;
+    private int manaRegen;
+    private int dexterity;
+    private int bowDamage;
+
 
     public enum EnchantmentType{
         WEAPON,
@@ -40,12 +47,12 @@ public class ItemEnchants {
         this(id, Chat.formatC(displayName), type, health, damage, defense, mana);
     }
 
-    public ItemEnchants(String id, Component displayName, EnchantmentType type, int health, int damage, int defense, int mana){
+    public ItemEnchants(String id, Component displayName, EnchantmentType type, int health, int attack, int defense, int mana){
         this.id = id;
         this.displayName = displayName;
         this.type = type;
         this.health = health;
-        this.damage = damage;
+        this.attack = attack;
         this.defense = defense;
         this.mana = mana;
         EnchantManager.ENCHANTS_HASH_MAP.put(id, this);
@@ -93,8 +100,8 @@ public class ItemEnchants {
     public int getDefense() {
         return defense;
     }
-    public int getDamage(){
-        return damage;
+    public int getAttack(){
+        return attack;
     }
     public int getMana(){
         return mana;
