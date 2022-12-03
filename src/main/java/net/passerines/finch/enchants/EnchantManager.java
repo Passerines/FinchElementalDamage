@@ -30,13 +30,12 @@ public class EnchantManager implements Listener {
 
     //A hashmap cannot contain 2 of the same keys, but 2 keys can have the same value
     //This means that 2 enchants can have the same level
-    //ToDo:
     @EventHandler
     public void onDamageEntity(ElementalDamageEvent event){
         if(event.getAttacker() instanceof Player){
             HashMap<String, Integer> enchantMap = Util.getEnchants(((Player) event.getAttacker()).getInventory().getItemInMainHand());
             for(String enchant : enchantMap.keySet()){
-
+                ENCHANTS_HASH_MAP.get(enchant).onElementalDamage(event, enchantMap.get(enchant));
             }
         }
     }
