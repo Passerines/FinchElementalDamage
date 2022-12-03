@@ -275,7 +275,13 @@ public class PlayerData {
         setHealthMax(100);
         setDefense(10);
         setManaMax(100);
-        setAttack(3);
+        setAttack(10);
+        setStrength(10);
+        setCritChance(0);
+        setBowDamage(10);
+        setDexterity(10);
+        setManaRegen(0);
+        setHealthRegen(0);
         setFireProf(0);
         setWaterProf(0);
         setEarthProf(0);
