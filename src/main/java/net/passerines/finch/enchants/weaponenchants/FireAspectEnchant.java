@@ -12,6 +12,6 @@ public class FireAspectEnchant extends ItemEnchants {
     @Override
     public void onElementalDamage(ElementalDamageEvent event, int level) {
         //Burn mob
-
+        event.getVictim().setFireTicks(level*50);
     }
 }

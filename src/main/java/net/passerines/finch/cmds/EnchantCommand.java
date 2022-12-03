@@ -5,6 +5,7 @@ import net.passerines.finch.FinchElementalDamage;
 
 import net.passerines.finch.enchants.EnchantManager;
 import net.passerines.finch.enchants.ItemEnchants;
+import net.passerines.finch.enchants.weaponenchants.FireAspectEnchant;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchTrinkets;
@@ -23,6 +24,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,9 +40,30 @@ public class EnchantCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player) {
+        if(sender instanceof Player){
             ItemStack item = ((Player) sender).getInventory().getItemInMainHand();
-            ENCHANTS_HASH_MAP.get("SwordSharpness").applyEnchant(item, 1);
+            if(ItemManager.ITEM_HASH_MAP.containsKey(Util.getId(item))){
+                if(args.length == 2){
+                    if(ENCHANTS_HASH_MAP.get(args[0]) != null){
+                        try{
+                            ENCHANTS_HASH_MAP.get(args[0]).applyEnchant(item, Integer.parseInt(args[1]));
+                            sender.sendMessage(Chat.format("&cSucessfully enchanted your " + Chat.asLegacy(item.displayName()) +  " with " + args[0] + "."));
+                            PlayerMap.PLAYERS.get(sender).calculateHand(item);
+                        }
+                        catch(NumberFormatException commandException){
+                            sender.sendMessage("&cUsuage: /ench <id> <level>");
+                        }
+                    }
+                    else{
+                        sender.sendMessage("&cThe id you typed does not exist.");
+                    }
+                }else{
+                    sender.sendMessage("&cUsuage: /ench <id> <level>");
+                }
+            }
+            else{
+                sender.sendMessage(Chat.format("&cPlease hold an item in your main hand."));
+            }
         }
         return true;
     }
