@@ -31,8 +31,13 @@ public class GoldenKatana extends FinchWeapon implements Listener {
     Cooldown<Player> cd = new Cooldown<>(3);
     public GoldenKatana() {
         super("GoldenKatana", 1);
-        this.attack = 15;
+        this.attack = 10;
         this.element = ElementalDamageEvent.Element.NEUTRAL;
+        displayName = Chat.formatC("&fGolden Katana");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler
@@ -59,15 +64,13 @@ public class GoldenKatana extends FinchWeapon implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&fGolden Katana"));
-        ArrayList<Component> lore = new ArrayList<>();
-        //lore.add(Component.text(Chat.format("&4Damage: &f+" + this.damage )));
-        itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         itemMeta.setCustomModelData(5);
-        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+        itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        // Format the item instead of setting displayname and lore
+        format(item);
         return writeId(item);
     }
 }

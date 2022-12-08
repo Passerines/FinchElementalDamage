@@ -32,7 +32,7 @@ public class Ircosis extends FinchWeapon implements Listener {
 
     public Ircosis() {
         super("Ircosis", 4);
-        this.attack = 55;
+        this.attack = 35;
         this.element = ElementalDamageEvent.Element.WATER;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
