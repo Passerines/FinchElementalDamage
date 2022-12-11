@@ -1,17 +1,15 @@
-package net.passerines.finch.aItems.weapons.melee.spears.t5;
+package net.passerines.finch.aItems.weapons.melee.katanas.t2;
 
+import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchElementalDamage;
-import net.passerines.finch.attacks.DrawLine;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
-import net.passerines.finch.players.PlayerData;
-import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
@@ -25,25 +23,22 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class Evelon extends FinchWeapon implements Listener {
-    Cooldown cd = new Cooldown<>(4);
-    public Evelon() {
-        super("Evelon");
-        this.attack = 65;
-        this.element = ElementalDamageEvent.Element.LIGHT;
-        displayName = Chat.formatC("&6Evelon");
+public class FortunateKatana extends FinchWeapon implements Listener {
+    Cooldown<Player> cd = new Cooldown<>(3);
+    public FortunateKatana() {
+        super("FortunateKatana", 2);
+        this.attack = 20;
+        this.critChance = 75;
+        this.element = ElementalDamageEvent.Element.NEUTRAL;
+        displayName = Chat.formatC("&fFortune Katana");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
-        lore.add("&6Ability: &6Gale Slice");
-        lore.add("&7Instead of a regular attack launch a speedy gale of light");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -57,32 +52,26 @@ public class Evelon extends FinchWeapon implements Listener {
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
-        PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            AtomicInteger i = new AtomicInteger(2);
-            Location loc = player.getEyeLocation();
-            int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
-                loc.add(loc.getDirection().multiply(i.get()));
-                Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,35,0, null);
-                slash.drawSlash();
-            }, 0, 1);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);
-            cd.add(player);
+            Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 215, 84), 1.0F);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.DRIPPING_HONEY, 2, attack,80,30, dust);
+            slash.drawSlash();
         }
     }
+
+
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(2);
+        itemMeta.setCustomModelData(5);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         // Format the item instead of setting displayname and lore
         format(item);
-        //
         return writeId(item);
     }
 }

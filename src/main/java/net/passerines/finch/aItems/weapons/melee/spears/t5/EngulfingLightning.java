@@ -78,7 +78,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
                 PlayerData playerData = PlayerMap.PLAYERS.get(player);
                 if(playerData.getManaMax() >= playerData.getMana()){
                     if(playerData.getManaMax() * 0.02 + playerData.getMana() < playerData.getManaMax()){
-                        playerData.setMana((int) (playerData.getManaMax() * 0.02));
+                        playerData.setMana(playerData.getMana() + (int) (playerData.getManaMax() * 0.02));
                         String bar = Chat.format("&bRestored " + (playerData.getManaMax() * 0.02) + " &bMana");
                         Chat.sendActionBar(player, bar);
                     }

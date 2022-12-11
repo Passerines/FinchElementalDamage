@@ -13,7 +13,11 @@ import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
 import net.passerines.finch.aItems.tools.MidasPick;
 import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
+import net.passerines.finch.aItems.weapons.melee.katanas.t2.FortunateKatana;
+import net.passerines.finch.aItems.weapons.melee.katanas.t3.DestinyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
+import net.passerines.finch.aItems.weapons.melee.katanas.t4.ProsperityKatana;
+import net.passerines.finch.aItems.weapons.melee.katanas.t5.KatanaOfFate;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
 import net.passerines.finch.aItems.weapons.ranged.t3.GatlingGun;
@@ -172,6 +176,10 @@ public class ItemManager {
         new GoldEssence();
         new MahiMahiScale();
         new LuckyKatana();
+        new FortunateKatana();
+        new DestinyKatana();
+        new ProsperityKatana();
+        new KatanaOfFate();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

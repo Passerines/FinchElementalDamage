@@ -13,6 +13,7 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -81,7 +82,7 @@ public class Slash {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if(finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
-                            ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, finchWeapon.getElement(), damage);
+                            ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.ENTITY_ATTACK , finchWeapon.getElement(), damage, player.getInventory().getItemInMainHand());
                             elementalDamageEvent.apply();
                             hitEntities.add((Entity) entity);
                         }
