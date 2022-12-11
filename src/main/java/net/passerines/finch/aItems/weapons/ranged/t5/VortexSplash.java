@@ -4,6 +4,7 @@ import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.FinchArrow;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.events.handler.ArrowHandler;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchBow;
 import net.passerines.finch.items.FinchItem;
@@ -19,6 +20,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -42,7 +44,7 @@ public class VortexSplash extends FinchBow implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isLeftClick() && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.bowDamage);
+                FinchArrow finchArrow = new FinchArrow(player, player.getInventory().getItemInMainHand(), 2,  0, this.bowDamage);
                 finchArrow.shootWaterArrow().getPersistentDataContainer().set(Util.getNamespacedKey("VortexSplash"), PersistentDataType.STRING, "VortexSplash");
                 cd.add(player);
             }
@@ -59,7 +61,9 @@ public class VortexSplash extends FinchBow implements Listener {
                     for (Object entity : entities) {
                         if (entity instanceof Damageable) {
                             if (!(entity.equals(arrow.getShooter())) && !(entity.equals(ArmorStand.class))) {
-                                ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(arrow, (Entity) entity, ElementalDamageEvent.Element.WATER, this.bowDamage/2);
+                                ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(arrow, (Entity) entity,
+                                        EntityDamageEvent.DamageCause.PROJECTILE, ElementalDamageEvent.Element.WATER,
+                                        this.bowDamage/2, FinchArrow.getShootingWeapon(arrow));
                                 elementalDamageEvent.apply();
                             }
                         }

@@ -8,22 +8,51 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.*;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.HashMap;
 
 public class FinchArrow implements Listener {
 
+    private static final HashMap<Arrow, FinchArrow> ARROW_MAP = new HashMap<>();
+
     private String id;
     private Player player;
+    private ItemStack weapon;
     private float fireVelocity;
     private float spread;
     private int damage;
 
-    public FinchArrow(Player player, float fireVelocity, float spread, int damage){
+    public FinchArrow(Player player, ItemStack weapon, float fireVelocity, float spread, int damage){
         this.player = player;
+        this.weapon = weapon;
         this.fireVelocity = fireVelocity;
         this.damage = damage;
         this.spread = spread;
     }
+
+    //Get the FinchArrow that an arrow was shot from
+    public static FinchArrow getFinchArrow(Arrow arrow) {
+        return ARROW_MAP.get(arrow);
+    }
+    //Get the weapon used to shoot the arrow
+    public static ItemStack getShootingWeapon(Arrow arrow) {
+        return ARROW_MAP.get(arrow).getWeapon();
+    }
+    public static void remove(Arrow arrow) {
+        ARROW_MAP.remove(arrow);
+    }
+    //May be needed to clear arrows that despawn or became invalid through other reasons
+    //Perhaps a task that clears invalid arrows at fixed intervals
+    public static void clearInvalidArrows() {
+        for(Arrow arrow : ARROW_MAP.keySet()) {
+            if(!arrow.isValid()) {
+                ARROW_MAP.remove(arrow);
+            }
+        }
+    }
+
     public Arrow shootFireArrow(){
         Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(195, 58, 0), 1.0F);
         Location loc = player.getEyeLocation();
@@ -35,6 +64,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootWaterArrow(){
@@ -48,6 +78,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootEarthArrow(){
@@ -61,6 +92,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootWindArrow(){
@@ -74,6 +106,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootElectroArrow(){
@@ -87,6 +120,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootLightArrow(){
@@ -100,6 +134,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootNeutralArrow(){
@@ -112,6 +147,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootUndeadArrow(){
@@ -125,6 +161,7 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
     }
     public Arrow shootDarkArrow(){
@@ -138,6 +175,11 @@ public class FinchArrow implements Listener {
         }, 1,1);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("taskid"), PersistentDataType.INTEGER, task);
         arrow.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.INTEGER, damage);
+        ARROW_MAP.put(arrow, this);
         return arrow;
+    }
+
+    public ItemStack getWeapon() {
+        return weapon;
     }
 }
