@@ -180,6 +180,9 @@ public class ItemManager {
         new DestinyKatana();
         new ProsperityKatana();
         new KatanaOfFate();
+        new KatanaHandle();
+        new LuckEssence();
+        new Fate();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

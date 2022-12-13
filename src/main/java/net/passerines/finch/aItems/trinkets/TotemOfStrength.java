@@ -16,16 +16,16 @@ public class TotemOfStrength extends FinchTrinkets implements FinchCraftableItem
     public TotemOfStrength() {
         super("TotemOfStrength");
         this.strength = 5;
+        displayName = Chat.formatC("&aTotem of Strength");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cTotem of Strength"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cDamage: &f+" + this.strength)));
-        itemMeta.lore(lore);
         itemMeta.setCustomModelData(403);
         item.setItemMeta(itemMeta);
         return writeId(item);

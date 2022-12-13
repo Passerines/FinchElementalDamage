@@ -91,14 +91,14 @@ public class ElementalDamageEvent extends Event implements Cancellable {
                 int baseCrit = playerData.getCritChance()/100;
                 int calcCrit = playerData.getCritChance()%100;
                 if(Util.getFinchItem(weapon) instanceof FinchBow){
-                    attackDamage = attackDamage * (1 + playerData.getDexterity()/150.0);
+                    attackDamage = attackDamage * (1 + playerData.getDexterity()/100.0);
                 }
                 else if (Util.getFinchItem(weapon) instanceof FinchWeapon) {
                     //Every 150 strength double damage
-                    attackDamage = attackDamage * (1 + playerData.getStrength()/150.0);
+                    attackDamage = attackDamage * (1 + playerData.getStrength()/100.0);
                 }
                 else{
-                    attackDamage = 5 * (1 + playerData.getStrength()/150.0);
+                    attackDamage = 5 * (1 + playerData.getStrength()/100.0);
                 }
                 critMultiplier = baseCrit * 1.5f;
                 if(Util.randomBoolean(calcCrit/100f)){

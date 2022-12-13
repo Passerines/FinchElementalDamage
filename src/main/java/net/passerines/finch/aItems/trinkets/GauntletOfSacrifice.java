@@ -18,18 +18,18 @@ public class GauntletOfSacrifice extends FinchTrinkets implements FinchCraftable
         super("GauntletOfSacrifice");
         this.health = -150;
         this.strength = 30;
+        displayName = Chat.formatC("&4Gauntlet of Sacrifice");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4Gauntlet Of Sacrifice"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cDamage: &f+" + this.strength )));
-        lore.add(Component.text(Chat.format("&4Health: &f" + this.health )));
-        itemMeta.lore(lore);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

@@ -123,8 +123,11 @@ public abstract class FinchEquipment extends FinchItem {
             if(Chat.asPlainText(line).contains(STATS)) {
                 parseStat(newLore, "&bHealth: &7", health, prefix==null?0:prefix.getHealth());
                 parseStat(newLore, "&bDefense: &7", defense, prefix==null?0:prefix.getDefense());
-                parseStat(newLore, "&bDamage: &7", attack, prefix==null?0:prefix.getAttack());
-                parseStat(newLore, "&bBow Damage: &7", bowDamage, 0);
+                parseStat(newLore, "&eCrit Chance: &7%", critChance, prefix==null?0:prefix.getCritChance());
+                parseStat(newLore, "&bAttack: &7", attack, prefix==null?0:prefix.getAttack());
+                parseStat(newLore, "&6Range Damage: &7", bowDamage, prefix==null?0:prefix.getBowDamage());
+                parseStat(newLore, "&bStrength: &7", strength, prefix==null?0:prefix.getStrength());
+                parseStat(newLore, "&bDexterity: &7", dexterity, prefix==null?0:prefix.getDexterity());
                 parseStat(newLore, "&bMana: &7", mana, prefix==null?0:prefix.getMana());
                 if(fire!=0 || water!=0 || earth!=0 || wind!=0 || electro!=0 || light!=0 || dark!=0) {
                     newLore.add(Chat.formatC("&bElemental Proficiencies:"));

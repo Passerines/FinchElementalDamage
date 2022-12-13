@@ -1,11 +1,13 @@
 package net.passerines.finch.aItems.weapons.melee.katanas.t5;
 
-import de.slikey.effectlib.effect.FountainEffect;
+import de.slikey.effectlib.effect.*;
+import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.FinchEffectManager;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
@@ -36,7 +38,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.UUID;
 
-public class KatanaOfFate extends FinchWeapon implements Listener {
+public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftableItem {
     Cooldown<Player> cd = new Cooldown<>(3);
     Cooldown<Player> cd1 = new Cooldown<>(70);
     public KatanaOfFate() {
@@ -50,8 +52,8 @@ public class KatanaOfFate extends FinchWeapon implements Listener {
         lore.add(" ");
         lore.add(ENCHANTS);
         lore.add("&6Ability: &6Seal Fate");
-        lore.add("&7Create a talon which damages players for 3 seconds");
-        lore.add("&7dealing 35 damage (scales with strength)");
+        lore.add("&7Create a Column of Embers which damages players for 3 seconds");
+        lore.add("&7dealing 35 damage (scales with strength) and applying slowness 5 for 3 seconds");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -83,10 +85,14 @@ public class KatanaOfFate extends FinchWeapon implements Listener {
             Location loc = block.getLocation();
             FountainEffect fountainEffect = new FountainEffect(FinchEffectManager.getEffectManager());
             fountainEffect.setLocation(loc);
+            CylinderEffect donutEffect = new CylinderEffect(FinchEffectManager.getEffectManager());
+            loc.setY(loc.getY() + 6);
+            donutEffect.setLocation(loc);
+            donutEffect.particle = Particle.LAVA;
             fountainEffect.particle = Particle.LAVA;
-            fountainEffect.start();
+            donutEffect.start();
             Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
-                Collection<Entity> entitylist = fountainEffect.getLocation().getNearbyEntities(2, 1, 2);
+                Collection<Entity> entitylist = fountainEffect.getLocation().getNearbyEntities(3, 3, 3);
                 Object[] entities = entitylist.toArray();
                 for(Object entity : entities) {
                     if (entity instanceof Damageable) {
@@ -103,6 +109,7 @@ public class KatanaOfFate extends FinchWeapon implements Listener {
             }, 0, 4);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                 FinchEffectManager.getEffectManager().done(fountainEffect);
+                FinchEffectManager.getEffectManager().done(donutEffect);
             }, 60);
             cd1.add(player);
         }
@@ -114,12 +121,20 @@ public class KatanaOfFate extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(5);
+        itemMeta.setCustomModelData(7);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         // Format the item instead of setting displayname and lore
         format(item);
         return writeId(item);
+    }
+    @Override
+    public void registerRecipe() {
+        ItemStack gold = ItemManager.ITEM_HASH_MAP.get("RitualEssence").getItem();
+        ItemStack handle = ItemManager.ITEM_HASH_MAP.get("ProsperityKatana").getItem();
+        ItemStack luck = ItemManager.ITEM_HASH_MAP.get("AngelicEssence").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "CAC", "CBC", "CAC" , gold, handle, luck);
+        finchRecipe.addRecipe();
     }
 }

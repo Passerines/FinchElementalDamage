@@ -1,10 +1,13 @@
 package net.passerines.finch.aItems.weapons.melee.katanas.t2;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.itemmanaging.FinchRecipe;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -27,7 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class FortunateKatana extends FinchWeapon implements Listener {
+public class FortunateKatana extends FinchWeapon implements Listener, FinchCraftableItem {
     Cooldown<Player> cd = new Cooldown<>(3);
     public FortunateKatana() {
         super("FortunateKatana", 2);
@@ -55,7 +58,7 @@ public class FortunateKatana extends FinchWeapon implements Listener {
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 215, 84), 1.0F);
-            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.DRIPPING_HONEY, 2, attack,80,30, dust);
+            Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.FLAME, 2, attack,80,30, dust);
             slash.drawSlash();
         }
     }
@@ -73,5 +76,12 @@ public class FortunateKatana extends FinchWeapon implements Listener {
         // Format the item instead of setting displayname and lore
         format(item);
         return writeId(item);
+    }
+    @Override
+    public void registerRecipe() {
+        ItemStack handle = ItemManager.ITEM_HASH_MAP.get("GoldenKatana").getItem();
+        ItemStack essence = ItemManager.ITEM_HASH_MAP.get("GoldEssence").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "ABA", "ACA" , essence, handle, new ItemStack(Material.BLAZE_POWDER));
+        finchRecipe.addRecipe();
     }
 }

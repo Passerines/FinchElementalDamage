@@ -1,10 +1,13 @@
 package net.passerines.finch.aItems.weapons.melee.katanas.t1;
 
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.itemmanaging.FinchRecipe;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -27,7 +30,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class GoldenKatana extends FinchWeapon implements Listener {
+public class GoldenKatana extends FinchWeapon implements Listener, FinchCraftableItem {
     Cooldown<Player> cd = new Cooldown<>(3);
     public GoldenKatana() {
         super("GoldenKatana", 1);
@@ -38,6 +41,7 @@ public class GoldenKatana extends FinchWeapon implements Listener {
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler
@@ -72,5 +76,13 @@ public class GoldenKatana extends FinchWeapon implements Listener {
         // Format the item instead of setting displayname and lore
         format(item);
         return writeId(item);
+    }
+
+    @Override
+    public void registerRecipe() {
+        ItemStack gold = new ItemStack(Material.GOLD_INGOT);
+        ItemStack handle = ItemManager.ITEM_HASH_MAP.get("KatanaHandle").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, " A ", " A ", " B " , gold, handle);
+        finchRecipe.addRecipe();
     }
 }
