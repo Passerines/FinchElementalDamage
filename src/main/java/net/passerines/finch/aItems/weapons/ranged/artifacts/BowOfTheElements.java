@@ -45,7 +45,7 @@ public class BowOfTheElements extends FinchBow implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isLeftClick() && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
-                FinchArrow finchArrow = new FinchArrow(player, 2, 0, this.bowDamage);
+                FinchArrow finchArrow = new FinchArrow(player, item, 2, 0, this.bowDamage);
                 cd.add(player);
                 ItemMeta itemMeta = item.getItemMeta();
                 if(itemMeta.getPersistentDataContainer().getOrDefault(Util.getNamespacedKey("BOTE"), PersistentDataType.INTEGER, 0) == (0)){

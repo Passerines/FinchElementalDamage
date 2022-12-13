@@ -37,7 +37,7 @@ public class HellfireCrossbow extends FinchWeapon implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
-            FinchArrow arrow = new FinchArrow(event.getPlayer(),2,0,this.attack);
+            FinchArrow arrow = new FinchArrow(event.getPlayer(), item,2,0,this.attack);
             arrow.shootFireArrow();
             arrow.shootFireArrow();
             arrow.shootFireArrow();
