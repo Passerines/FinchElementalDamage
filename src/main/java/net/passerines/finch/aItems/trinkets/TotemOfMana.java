@@ -16,16 +16,16 @@ public class TotemOfMana extends FinchTrinkets implements FinchCraftableItem {
     public TotemOfMana() {
         super("TotemOfMana");
         this.mana = 100;
+        displayName = Chat.formatC("&aTotem of Mana");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&bTotem of Mana"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana )));
-        itemMeta.lore(lore);
         itemMeta.setCustomModelData(402);
         item.setItemMeta(itemMeta);
         return writeId(item);

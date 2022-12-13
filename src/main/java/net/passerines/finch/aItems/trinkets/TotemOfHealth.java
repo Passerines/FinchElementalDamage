@@ -16,16 +16,16 @@ public class TotemOfHealth extends FinchTrinkets implements FinchCraftableItem {
     public TotemOfHealth() {
         super("TotemOfHealth");
         this.health = 50;
+        displayName = Chat.formatC("&aTotem of Health");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4Totem Of Health"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&4Health: &f+" + this.health)));
-        itemMeta.lore(lore);
         itemMeta.setCustomModelData(400);
         item.setItemMeta(itemMeta);
         return writeId(item);
