@@ -16,6 +16,8 @@ public class ItemPrefix {
     private Type type;
     private int tier;
     private int health;
+    private int defense;
+    private int mana;
     private int attack;
     private int strength;
     private int critChance;
@@ -23,11 +25,14 @@ public class ItemPrefix {
     private int manaRegen;
     private int dexterity;
     private int bowDamage;
-    private int defense;
+    private double fireProf;
+    private double waterProf;
+    private double earthProf;
+    private double windProf;
+    private double electroProf;
+    private double lightProf;
+    private double darknessProf;
 
-
-
-    private int mana;
 
     public enum Type{
         WEAPON,
@@ -52,7 +57,7 @@ public class ItemPrefix {
         this.mana = mana;
         PrefixManager.PREFIX_HASH_MAP.put(id, this);
     }
-    public ItemPrefix(String id, Component displayName, Type type){
+    public ItemPrefix(String id, Component displayName, Type type, int tier){
         this.id = id;
         this.displayName = displayName;
         this.type = type;
@@ -88,40 +93,124 @@ public class ItemPrefix {
     public Type getType(){
         return type;
     }
-    public double getHealth() {
+    public int getHealth() {
         return health;
+    }
+    public ItemPrefix setHealth(int health){
+        this.health = health;
+        return this;
     }
     public int getDefense() {
         return defense;
     }
+    public ItemPrefix setDefense(int defense){
+        this.defense = defense;
+        return this;
+    }
     public int getAttack(){
         return attack;
+    }
+    public ItemPrefix setAttack(int attack){
+        this.attack = attack;
+        return this;
     }
     public int getStrength() {
         return strength;
     }
-
+    public ItemPrefix setStrength(int strength){
+        this.strength = strength;
+        return this;
+    }
     public int getCritChance() {
         return critChance;
     }
-
+    public ItemPrefix setCritChance(int critChance){
+        this.critChance = critChance;
+        return this;
+    }
     public int getHealthRegen() {
         return healthRegen;
     }
-
+    public ItemPrefix setHealthRegen(int healthRegen){
+        this.healthRegen = healthRegen;
+        return this;
+    }
     public int getManaRegen() {
         return manaRegen;
     }
-
+    public ItemPrefix setManaRegen(int manaRegen){
+        this.manaRegen = manaRegen;
+        return this;
+    }
     public int getDexterity() {
         return dexterity;
     }
-
+    public ItemPrefix setDexterity(int dexterity){
+        this.dexterity = dexterity;
+        return this;
+    }
     public int getBowDamage() {
         return bowDamage;
     }
+    public ItemPrefix setBowDamage(int bowDamage){
+        this.bowDamage = bowDamage;
+        return this;
+    }
     public int getMana(){
         return mana;
+    }
+    public ItemPrefix setMana(int mana){
+        this.mana = mana;
+        return this;
+    }
+    public double getFireProf() {
+        return fireProf;
+    }
+    public ItemPrefix setFireProf(double fireProf){
+        this.fireProf = fireProf;
+        return this;
+    }
+    public double getWaterProf() {
+        return waterProf;
+    }
+    public ItemPrefix setWaterProf(double waterProf){
+        this.waterProf = waterProf;
+        return this;
+    }
+    public double getEarthProf() {
+        return earthProf;
+    }
+    public ItemPrefix setEarthProf(double earthProf){
+        this.earthProf = earthProf;
+        return this;
+    }
+    public double getWindProf() {
+        return windProf;
+    }
+    public ItemPrefix setWindProf(double windProf){
+        this.windProf = windProf;
+        return this;
+    }
+    public double getElectroProf() {
+        return electroProf;
+    }
+    public ItemPrefix setElectroProf(double electroProf){
+        this.electroProf = electroProf;
+        return this;
+    }
+    public double getLightProf() {
+        return lightProf;
+    }
+    public ItemPrefix setLightProf(double lightProf){
+        this.lightProf = lightProf;
+        return this;
+    }
+    public double getDarknessProf() {
+        return darknessProf;
+    }
+    public ItemPrefix setDarknessProf(double darknessProf){
+        this.darknessProf = darknessProf;
+        return this;
     }
     public int getTier(){
         return tier;

@@ -5,6 +5,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.util.HSVLike;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
+import net.passerines.finch.util.Chat;
 import org.bukkit.entity.Item;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class PrefixManager {
 
     public void registerPrefix(){
         // new ItemPrefix("test", "test", test ,0, 0, 0, 0, 0);
-        new ItemPrefix("armorbrittle", "&7Brittle", ItemPrefix.Type.ARMOR,1, 0,0, 0, -35, 0);
+        //new ItemPrefix("armorbrittle", "&7Brittle", ItemPrefix.Type.ARMOR,1, 0,0, 0, -35, 0);
+        new ItemPrefix("armortough", Chat.formatC("&8Tough"), ItemPrefix.Type.ARMOR, 1).setDefense(5);
         new ItemPrefix("armorhard", "&8Hard", ItemPrefix.Type.ARMOR, 1, 0,0, 0, 50, 0);
         new ItemPrefix("armorreinforced", "&8Reinforced", ItemPrefix.Type.ARMOR ,2, 0,0, 0, 150, 0);
         new ItemPrefix("armorunyielding", "&dUnyielding", ItemPrefix.Type.ARMOR ,3, 200,0, 0, 175, 0);
