@@ -84,10 +84,12 @@ public class ProsperityKatana extends FinchWeapon implements Listener, FinchCraf
             }, 12);
             cd.add(player);
         }
-        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)){
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, false, false, true));
-            cd1.add(player);
-            player.sendMessage("You used ability");
+        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
+            if(cd1.isOffCooldown(player)) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, false, false, true));
+                cd1.add(player);
+                player.sendMessage("You used ability" + cd1.getTicksLeft(player));
+            }
         }
     }
 

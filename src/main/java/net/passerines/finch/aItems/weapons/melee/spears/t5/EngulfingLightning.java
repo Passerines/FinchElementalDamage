@@ -36,6 +36,7 @@ import java.util.UUID;
 public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
     Cooldown cd1 = new Cooldown<>(50);
+    Cooldown cd2 = new Cooldown<>(10);
     public EngulfingLightning() {
         super("EngulfingLightning");
         this.attack = 115;
@@ -67,7 +68,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     @EventHandler
     public void onEntityDamage(ElementalDamageEvent event) {
         if(event.getAttacker() instanceof Player player){
-            if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)) {
+            if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd2.isOffCooldown(player)) {
                 /*
                 Location loc = event.getVictim().getLocation()l;
                 LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
@@ -86,6 +87,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
                         playerData.setManaMax(playerData.getManaMax());
                     }
                 }
+                cd2.add(player);
             }
         } else if(event.getAttacker() instanceof LightningStrike lightningStrike){
             if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("ELightning"))){
