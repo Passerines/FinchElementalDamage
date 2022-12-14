@@ -83,17 +83,17 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
             transparent.add(Material.AIR);
             Block block = player.getTargetBlock(transparent, 120);
             Location loc = block.getLocation();
-            CylinderEffect donutEffect = new CylinderEffect(FinchEffectManager.getEffectManager());
+            CylinderEffect cylinderEffect = new CylinderEffect(FinchEffectManager.getEffectManager());
             ExplodeEffect explodeEffect = new ExplodeEffect(FinchEffectManager.getEffectManager());
             explodeEffect.setLocation(loc);
             explodeEffect.particle1 = Particle.LAVA;
             explodeEffect.particle2 = Particle.FLAME;
             loc.setY(loc.getY() + 6);
-            donutEffect.setLocation(loc);
-            donutEffect.particle = Particle.LAVA;
-            donutEffect.start();
+            cylinderEffect.setLocation(loc);
+            cylinderEffect.particle = Particle.LAVA;
+            cylinderEffect.start();
             int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
-                Collection<Entity> entitylist = donutEffect.getLocation().getNearbyEntities(2, 3, 2);
+                Collection<Entity> entitylist = cylinderEffect.getLocation().getNearbyEntities(2, 5, 2);
                 Object[] entities = entitylist.toArray();
                 for(Object entity : entities) {
                     if (entity instanceof Damageable) {
@@ -109,9 +109,9 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
                 }
             }, 0, 4);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                FinchEffectManager.getEffectManager().done(donutEffect);
+                FinchEffectManager.getEffectManager().done(cylinderEffect);
                 Bukkit.getScheduler().cancelTask(task);
-
+                FinchEffectManager.getEffectManager().start(explodeEffect);
             }, 48);
             cd1.add(player);
         }

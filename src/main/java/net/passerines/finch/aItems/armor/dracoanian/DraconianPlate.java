@@ -20,22 +20,23 @@ public class DraconianPlate extends FinchArmor implements FinchCraftableItem {
         super("DraconianPlate");
         this.defense = 450;
         this.health = 180;
+        displayName = Chat.formatC("&4Draconian Plate");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_CHESTPLATE);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4Draconian Aegis"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+"+(int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
-        //lore.add(Component.text(Chat.format("&4Damage: &f+"+this.damage)));
         itemMeta.setUnbreakable(true);
         itemMeta.removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     public void registerRecipe() {

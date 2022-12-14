@@ -20,19 +20,20 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem{
         this.defense = 15;
         this.health = -5;
         this.mana = 45;
+        displayName = Chat.formatC("&cBloodMage Helmet");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_HELMET);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cBloodMage Helmet"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f-5")));
-        lore.add(Component.text(Chat.format("&aDefense: &f+15")));
-        lore.add(Component.text(Chat.format("&bMana: &f+45")));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemMeta.lore(lore);
+        format(item);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }

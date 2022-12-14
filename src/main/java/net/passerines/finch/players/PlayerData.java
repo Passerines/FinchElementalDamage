@@ -271,6 +271,8 @@ public class PlayerData {
         setAttack(10);
         setStrength(10);
         setCritChance(0);
+        setManaRegen(100);
+        setHealthRegen(100);
         setBowDamage(10);
         setDexterity(10);
         setManaRegen(0);

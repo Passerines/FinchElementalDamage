@@ -20,20 +20,21 @@ public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
         this.defense = 15;
         this.health = -5;
         this.mana = 40;
+        displayName = Chat.formatC("&cBloodMage Boots");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_BOOTS);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&cBloodMage Boots"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format(STATS)));
-        lore.add(Component.text(Chat.format("")));
-        lore.add(Component.text(Chat.format(ENCHANTS)));
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     public void registerRecipe() {

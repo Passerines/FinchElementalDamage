@@ -20,20 +20,21 @@ public class DraconianHeadgear extends FinchArmor implements FinchCraftableItem 
         this.defense = 140;
         this.health = 90;
         this.strength = 40;
+        displayName = Chat.formatC("&4Draconian Headgear");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.GOLDEN_HELMET);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4Draconian Headgear"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+"+(int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
-        //lore.add(Component.text(Chat.format("&4Damage: &f+"+this.damage)));
         itemMeta.setUnbreakable(true);
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        format(item);
         item.setItemMeta(itemMeta);
         return writeId(item);
     }
