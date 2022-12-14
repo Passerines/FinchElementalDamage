@@ -39,7 +39,7 @@ import java.util.HashSet;
 import java.util.UUID;
 
 public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftableItem {
-    Cooldown<Player> cd = new Cooldown<>(3);
+    Cooldown<Player> cd = new Cooldown<>(9);
     Cooldown<Player> cd1 = new Cooldown<>(70);
     public KatanaOfFate() {
         super("KatanaOfFate", 4);
@@ -83,16 +83,17 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
             transparent.add(Material.AIR);
             Block block = player.getTargetBlock(transparent, 120);
             Location loc = block.getLocation();
-            FountainEffect fountainEffect = new FountainEffect(FinchEffectManager.getEffectManager());
-            fountainEffect.setLocation(loc);
             CylinderEffect donutEffect = new CylinderEffect(FinchEffectManager.getEffectManager());
+            ExplodeEffect explodeEffect = new ExplodeEffect(FinchEffectManager.getEffectManager());
+            explodeEffect.setLocation(loc);
+            explodeEffect.particle1 = Particle.LAVA;
+            explodeEffect.particle2 = Particle.FLAME;
             loc.setY(loc.getY() + 6);
             donutEffect.setLocation(loc);
             donutEffect.particle = Particle.LAVA;
-            fountainEffect.particle = Particle.LAVA;
             donutEffect.start();
-            Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
-                Collection<Entity> entitylist = fountainEffect.getLocation().getNearbyEntities(3, 3, 3);
+            int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
+                Collection<Entity> entitylist = donutEffect.getLocation().getNearbyEntities(2, 3, 2);
                 Object[] entities = entitylist.toArray();
                 for(Object entity : entities) {
                     if (entity instanceof Damageable) {
@@ -108,9 +109,10 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
                 }
             }, 0, 4);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                FinchEffectManager.getEffectManager().done(fountainEffect);
                 FinchEffectManager.getEffectManager().done(donutEffect);
-            }, 60);
+                Bukkit.getScheduler().cancelTask(task);
+
+            }, 48);
             cd1.add(player);
         }
     }

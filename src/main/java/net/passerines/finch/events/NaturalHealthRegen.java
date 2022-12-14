@@ -13,11 +13,30 @@ public class NaturalHealthRegen {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
             for(Player player : Bukkit.getOnlinePlayers()) {
                 PlayerData playerData = PLAYERS.get(player);
-                int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * 0.01);
-                int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * 0.02);
-                playerData.setMana(newMana);
-                playerData.setHealth(newHealth);
+                if(player.getFoodLevel() == 20) {
+                    if(player.getSaturation() > 0) {
+                        int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
+                        int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.000225 * playerData.getManaRegen()));
+                        playerData.setMana(newMana);
+                        playerData.setHealth(newHealth);
+                        player.setSaturation(player.getSaturation() - 1);
+                    }
+                    else if(player.getSaturation() == 0){
+                        int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
+                        int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.000225 * playerData.getManaRegen()));
+                        playerData.setMana(newMana);
+                        playerData.setHealth(newHealth);
+                        player.setFoodLevel(player.getFoodLevel() - 1);
+                    }
+                }
+                else {
+                    int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.0001 * playerData.getHealthRegen()));
+                    int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.00015 * playerData.getManaRegen()));
+                    playerData.setMana(newMana);
+                    playerData.setHealth(newHealth);
+                    player.setSaturation(player.getSaturation() - 1);
+                }
             }
-        }, 0, 15);
+        }, 0, 20);
     }
 }

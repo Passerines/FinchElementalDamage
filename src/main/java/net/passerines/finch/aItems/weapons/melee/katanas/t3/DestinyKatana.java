@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class DestinyKatana extends FinchWeapon implements Listener, FinchCraftableItem {
-    Cooldown<Player> cd = new Cooldown<>(3);
+    Cooldown<Player> cd = new Cooldown<>(10);
     public DestinyKatana() {
         super("DestinyKatana", 3);
         this.attack = 25;

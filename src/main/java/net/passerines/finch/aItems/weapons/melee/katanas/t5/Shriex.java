@@ -32,7 +32,7 @@ public class Shriex extends FinchWeapon implements Listener {
 
     public Shriex() {
         super("Shriex", 5);
-        this.attack = 45;
+        this.attack = 55;
         this.element = ElementalDamageEvent.Element.WIND;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }

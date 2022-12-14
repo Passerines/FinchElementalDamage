@@ -39,7 +39,7 @@ import java.util.HashSet;
 import java.util.UUID;
 
 public class ProsperityKatana extends FinchWeapon implements Listener, FinchCraftableItem {
-    Cooldown<Player> cd = new Cooldown<>(3);
+    Cooldown<Player> cd = new Cooldown<>(15);
     Cooldown<Player> cd1 = new Cooldown<>(300);
     public ProsperityKatana() {
         super("ProsperityKatana", 4);
@@ -86,6 +86,8 @@ public class ProsperityKatana extends FinchWeapon implements Listener, FinchCraf
         }
         if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player)){
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, false, false, true));
+            cd1.add(player);
+            player.sendMessage("You used ability");
         }
     }
 
