@@ -39,8 +39,8 @@ public class DraconianAegis extends FinchArmor implements FinchCraftableItem {
         itemMeta.setUnbreakable(true);
         itemMeta.removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        format(item);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     public void registerRecipe() {

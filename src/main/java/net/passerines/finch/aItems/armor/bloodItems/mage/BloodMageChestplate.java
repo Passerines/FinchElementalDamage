@@ -34,6 +34,7 @@ public class BloodMageChestplate extends FinchArmor implements FinchCraftableIte
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     public void registerRecipe() {

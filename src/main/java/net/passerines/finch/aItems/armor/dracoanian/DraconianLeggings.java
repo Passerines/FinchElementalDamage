@@ -37,8 +37,8 @@ public class DraconianLeggings extends FinchArmor implements FinchCraftableItem 
         itemMeta.setColor(Color.MAROON);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        format(item);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     @Override

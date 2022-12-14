@@ -34,8 +34,8 @@ public class DraconianHeadgear extends FinchArmor implements FinchCraftableItem 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        format(item);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     @Override

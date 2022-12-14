@@ -33,8 +33,8 @@ public class BloodMageLeggings extends FinchArmor implements FinchCraftableItem 
         ItemStack item = new ItemStack(Material.IRON_LEGGINGS);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        format(item);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     public void registerRecipe() {
