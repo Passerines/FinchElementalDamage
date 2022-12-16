@@ -275,8 +275,6 @@ public class PlayerData {
         setHealthRegen(100);
         setBowDamage(10);
         setDexterity(10);
-        setManaRegen(0);
-        setHealthRegen(0);
         setFireProf(0);
         setWaterProf(0);
         setEarthProf(0);
