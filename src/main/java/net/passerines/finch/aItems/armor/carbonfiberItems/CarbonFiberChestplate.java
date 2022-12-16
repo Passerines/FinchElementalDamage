@@ -18,19 +18,21 @@ public class CarbonFiberChestplate extends FinchArmor implements FinchCraftableI
         super("CarbonFiberChestplate");
         this.defense = 160;
         this.health = 15;
+        displayName = Chat.formatC("&fCarbon Fiber Chestplate");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_CHESTPLATE);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&fCarbon Fiber Chestplate"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

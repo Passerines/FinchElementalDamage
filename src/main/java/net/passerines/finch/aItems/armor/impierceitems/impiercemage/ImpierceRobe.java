@@ -17,21 +17,23 @@ public class ImpierceRobe extends FinchArmor {
         this.defense = 250;
         this.health = 90;
         this.mana = 1115;
+        displayName = Chat.formatC("&6Impierce Robe");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
+
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_CHESTPLATE);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&6Impierce &fRobe"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.health)));
-        lore.add(Component.text(Chat.format("&bMana: &f+" + this.mana)));
         itemMeta.setUnbreakable(true);
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 }
