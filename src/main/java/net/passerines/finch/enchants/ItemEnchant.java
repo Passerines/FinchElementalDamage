@@ -40,6 +40,10 @@ public class ItemEnchant {
     }
 
     public ItemEnchant(String id, Component displayName, EnchantmentType type){
+        this.id = id;
+        this.displayName = displayName;
+        this.type = type;
+        maxLevel = 10;
         EnchantManager.ENCHANTS_HASH_MAP.put(id, this);
     }
 
