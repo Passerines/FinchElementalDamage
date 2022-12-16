@@ -3,6 +3,7 @@ package net.passerines.finch.enchants;
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.command.CommandExecutor;
@@ -27,7 +28,14 @@ public class ItemEnchants {
     private int manaRegen;
     private int dexterity;
     private int bowDamage;
-
+    private double fireProf;
+    private double waterProf;
+    private double earthProf;
+    private double windProf;
+    private double electroProf;
+    private double lightProf;
+    private double darknessProf;
+    private int maxLevel;
 
     public enum EnchantmentType{
         WEAPON,
@@ -36,26 +44,11 @@ public class ItemEnchants {
     }
 
     public ItemEnchants(String id, Component displayName, EnchantmentType type){
-        this(id, displayName, type, 0,0,0,0);
+        EnchantManager.ENCHANTS_HASH_MAP.put(id, this);
     }
 
     public ItemEnchants(String id, String displayName, EnchantmentType type){
-        this(id, Chat.formatC(displayName), type, 0, 0, 0, 0);
-    }
-
-    public ItemEnchants(String id, String displayName, EnchantmentType type, int health, int damage, int defense, int mana){
-        this(id, Chat.formatC(displayName), type, health, damage, defense, mana);
-    }
-
-    public ItemEnchants(String id, Component displayName, EnchantmentType type, int health, int attack, int defense, int mana){
-        this.id = id;
-        this.displayName = displayName;
-        this.type = type;
-        this.health = health;
-        this.attack = attack;
-        this.defense = defense;
-        this.mana = mana;
-        EnchantManager.ENCHANTS_HASH_MAP.put(id, this);
+        this(id, Chat.formatC(displayName), type);
     }
 
 //get string of enchantment
@@ -94,17 +87,133 @@ public class ItemEnchants {
     public EnchantmentType getType(){
         return type;
     }
-    public double getHealth() {
-        return health;
+
+    public int getHealth(int level) {
+        return (int) (health * (1+(level-1)*0.2));
     }
-    public int getDefense() {
-        return defense;
+
+    public ItemEnchants setHealth(int health){
+        this.health = health;
+        return this;
     }
-    public int getAttack(){
-        return attack;
+    public int getDefense(int level) {
+        return (int) (defense * (1+(level-1)*0.2));
     }
-    public int getMana(){
-        return mana;
+    public ItemEnchants setDefense(int defense){
+        this.defense = defense;
+        return this;
+    }
+    public int getAttack(int level){
+        return (int) (attack * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setAttack(int attack){
+        this.attack = attack;
+        return this;
+    }
+    public int getStrength(int level) {
+        return (int) (strength * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setStrength(int strength){
+        this.strength = strength;
+        return this;
+    }
+    public int getCritChance(int level) {
+        return (int) (critChance * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setCritChance(int critChance){
+        this.critChance = critChance;
+        return this;
+    }
+    public int getHealthRegen(int level) {
+        return (int) (healthRegen * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setHealthRegen(int healthRegen){
+        this.healthRegen = healthRegen;
+        return this;
+    }
+    public int getManaRegen(int level) {
+        return (int) (manaRegen * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setManaRegen(int manaRegen){
+        this.manaRegen = manaRegen;
+        return this;
+    }
+    public int getDexterity(int level) {
+        return (int) (dexterity * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setDexterity(int dexterity){
+        this.dexterity = dexterity;
+        return this;
+    }
+    public int getBowDamage(int level) {
+        return (int) (bowDamage * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setBowDamage(int bowDamage){
+        this.bowDamage = bowDamage;
+        return this;
+    }
+    public int getMana(int level){
+        return (int) (mana * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setMana(int mana){
+        this.mana = mana;
+        return this;
+    }
+    public double getFireProf(int level) {
+        return (int) (fireProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setFireProf(double fireProf){
+        this.fireProf = fireProf;
+        return this;
+    }
+    public double getWaterProf(int level) {
+        return (int) (waterProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setWaterProf(double waterProf){
+        this.waterProf = waterProf;
+        return this;
+    }
+    public double getEarthProf(int level) {
+        return (int) (earthProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setEarthProf(double earthProf){
+        this.earthProf = earthProf;
+        return this;
+    }
+    public double getWindProf(int level) {
+        return (int) (windProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setWindProf(double windProf){
+        this.windProf = windProf;
+        return this;
+    }
+    public double getElectroProf(int level) {
+        return (int) (electroProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setElectroProf(double electroProf){
+        this.electroProf = electroProf;
+        return this;
+    }
+    public double getLightProf(int level) {
+        return (int) (lightProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setLightProf(double lightProf){
+        this.lightProf = lightProf;
+        return this;
+    }
+    public double getDarknessProf(int level) {
+        return (int) (darknessProf * (1+(level-1)*0.2));
+    }
+    public ItemEnchants setDarknessProf(double darknessProf){
+        this.darknessProf = darknessProf;
+        return this;
+    }
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+    public ItemEnchants setMaxLevel(int maxLevel){
+        this.maxLevel = maxLevel;
+        return this;
     }
     /*
     6 tiers  5 ints
