@@ -20,21 +20,22 @@ public class DraconianMarksmanVest extends FinchArmor implements FinchCraftableI
         this.defense = 430;
         this.health = 110;
         this.dexterity = 45;
+        displayName = Chat.formatC("&4Draconian Marksman Vest");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.LEATHER_CHESTPLATE);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&4Draconian Marksman Vest"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+"+ (int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
-        lore.add(Component.text(Chat.format("&4Ranged Damage: &f+"+this.bowDamage)));
         itemMeta.setUnbreakable(true);
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     @Override

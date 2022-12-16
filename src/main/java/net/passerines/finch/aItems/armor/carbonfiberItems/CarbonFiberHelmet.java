@@ -18,6 +18,12 @@ public class CarbonFiberHelmet extends FinchArmor implements FinchCraftableItem 
         super("CarbonFiberHelmet");
         this.defense = 100;
         this.health = 10;
+        displayName = Chat.formatC("&fCarbon Fiber Helmet");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override

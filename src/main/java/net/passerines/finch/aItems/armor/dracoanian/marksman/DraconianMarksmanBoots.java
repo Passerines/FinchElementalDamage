@@ -21,6 +21,12 @@ public class DraconianMarksmanBoots extends FinchArmor implements FinchCraftable
         this.defense = 140;
         this.health = 70;
         this.dexterity = 40;
+        displayName = Chat.formatC("&4Draconian Marksman Boots");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override
@@ -28,15 +34,10 @@ public class DraconianMarksmanBoots extends FinchArmor implements FinchCraftable
         ItemStack item = new ItemStack(Material.LEATHER_BOOTS);
         LeatherArmorMeta itemMeta = (LeatherArmorMeta) item.getItemMeta();
         itemMeta.setColor(Color.MAROON);
-        itemMeta.displayName(Chat.formatC("&4Draconian Marksman Boots"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+"+ (int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+"+this.defense)));
-        lore.add(Component.text(Chat.format("&4Ranged Damage: &f+"+this.bowDamage)));
         itemMeta.setUnbreakable(true);
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
     @Override
