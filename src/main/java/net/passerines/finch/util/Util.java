@@ -2,6 +2,8 @@ package net.passerines.finch.util;
 
 import jdk.jfr.Percentage;
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.enchants.EnchantManager;
+import net.passerines.finch.enchants.ItemEnchants;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.items.FinchItem;
@@ -143,6 +145,21 @@ public class Util {
                 for(String enchant : arrayEnchants){
                     String[] level = enchant.split(":");
                     enchantList.put(level[0], Integer.parseInt(level[1]));
+                }
+            }
+        }
+        return enchantList;
+    }
+    public static HashMap<ItemEnchants, Integer> getItemEnchants(ItemStack item) {
+        HashMap<ItemEnchants, Integer> enchantList = new HashMap<>();
+        if(item != null){
+            if(item.getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("enchant"))){
+                String list = item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("enchant"), PersistentDataType.STRING);
+                String[] arrayEnchants = list.split(",");
+                for(String enchant : arrayEnchants){
+                    String[] level = enchant.split(":");
+                    ItemEnchants itemEnchant = EnchantManager.ENCHANTS_HASH_MAP.get(level[0]);
+                    if(itemEnchant!=null) enchantList.put(itemEnchant, Integer.parseInt(level[1]));
                 }
             }
         }
