@@ -26,7 +26,7 @@ public class EnchantManager implements Listener {
     }
 
     public void registerEnchants(){
-        new ItemEnchants("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchants.EnchantmentType.WEAPON, 0, 10, 0, 0);
+        new ItemEnchants("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchants.EnchantmentType.WEAPON).setAttack(10).setStrength(5);
         new FireAspectEnchant();
         new ItemEnchants("SwordHarmony", Component.text("Harmony").color(TextColor.color(52, 76, 235)), ItemEnchants.EnchantmentType.WEAPON).setDarknessProf(1).setEarthProf(1).setElectroProf(1).setWindProf(1).setFireProf(1).setLightProf(1);
     }

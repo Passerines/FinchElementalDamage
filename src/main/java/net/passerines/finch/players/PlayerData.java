@@ -124,6 +124,13 @@ public class PlayerData {
             setBowDamage(bowDamage + itemPrefix.getBowDamage());
             setDexterity(dexterity + itemPrefix.getDexterity());
             setManaMax(manaMax + itemPrefix.getMana());
+            setDarknessProf(darknessProf + itemPrefix.getDarknessProf());
+            setEarthProf(earthProf + itemPrefix.getEarthProf());
+            setElectroProf(electroProf + itemPrefix.getElectroProf());
+            setFireProf(fireProf + itemPrefix.getFireProf());
+            setWaterProf(waterProf + itemPrefix.getWaterProf());
+            setLightProf(lightProf + itemPrefix.getLightProf());
+            setWindProf(windProf + itemPrefix.getWindProf());
         }
         if (ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);
@@ -198,6 +205,13 @@ public class PlayerData {
             setBowDamage(bowDamage - itemPrefix.getBowDamage());
             setDexterity(dexterity - itemPrefix.getDexterity());
             setManaMax(manaMax - itemPrefix.getMana());
+            setDarknessProf(darknessProf - itemPrefix.getDarknessProf());
+            setEarthProf(earthProf - itemPrefix.getEarthProf());
+            setElectroProf(electroProf - itemPrefix.getElectroProf());
+            setFireProf(fireProf - itemPrefix.getFireProf());
+            setWaterProf(waterProf - itemPrefix.getWaterProf());
+            setLightProf(lightProf - itemPrefix.getLightProf());
+            setWindProf(windProf - itemPrefix.getWindProf());
         }
         if (ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(id);

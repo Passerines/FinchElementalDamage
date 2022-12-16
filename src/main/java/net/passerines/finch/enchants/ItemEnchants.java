@@ -35,6 +35,7 @@ public class ItemEnchants {
     private double electroProf;
     private double lightProf;
     private double darknessProf;
+    private int maxLevel;
 
     public enum EnchantmentType{
         WEAPON,
@@ -43,26 +44,11 @@ public class ItemEnchants {
     }
 
     public ItemEnchants(String id, Component displayName, EnchantmentType type){
-        this(id, displayName, type, 0,0,0,0);
+        EnchantManager.ENCHANTS_HASH_MAP.put(id, this);
     }
 
     public ItemEnchants(String id, String displayName, EnchantmentType type){
-        this(id, Chat.formatC(displayName), type, 0, 0, 0, 0);
-    }
-
-    public ItemEnchants(String id, String displayName, EnchantmentType type, int health, int damage, int defense, int mana){
-        this(id, Chat.formatC(displayName), type, health, damage, defense, mana);
-    }
-
-    public ItemEnchants(String id, Component displayName, EnchantmentType type, int health, int attack, int defense, int mana){
-        this.id = id;
-        this.displayName = displayName;
-        this.type = type;
-        this.health = health;
-        this.attack = attack;
-        this.defense = defense;
-        this.mana = mana;
-        EnchantManager.ENCHANTS_HASH_MAP.put(id, this);
+        this(id, Chat.formatC(displayName), type);
     }
 
 //get string of enchantment
@@ -220,6 +206,13 @@ public class ItemEnchants {
     }
     public ItemEnchants setDarknessProf(double darknessProf){
         this.darknessProf = darknessProf;
+        return this;
+    }
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+    public ItemEnchants setMaxLevel(int maxLevel){
+        this.maxLevel = maxLevel;
         return this;
     }
     /*
