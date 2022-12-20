@@ -161,9 +161,9 @@ public abstract class FinchEquipment extends FinchItem {
                 double bonusElectro = prefix==null?0:prefix.getElectroProf();
                 for(ItemEnchant enchant : enchants.keySet()) bonusElectro += enchant.getElectroProf(enchants.get(enchant));
                 double bonusDark = prefix==null?0:prefix.getDarknessProf();
-                    for(ItemEnchant enchant : enchants.keySet()) bonusDark += enchant.getDarknessProf(enchants.get(enchant));
+                for(ItemEnchant enchant : enchants.keySet()) bonusDark += enchant.getDarknessProf(enchants.get(enchant));
                 double bonusLight = prefix==null?0:prefix.getLightProf();
-                    for(ItemEnchant enchant : enchants.keySet()) bonusLight += enchant.getLightProf(enchants.get(enchant));
+                for(ItemEnchant enchant : enchants.keySet()) bonusLight += enchant.getLightProf(enchants.get(enchant));
                 if(fire!=0 || water!=0 || earth!=0 || wind!=0 || electro!=0 || light!=0 || dark!=0
                         || bonusFire!=0 || bonusWater!=0 || bonusEarth!=0 || bonusWind!=0 || bonusElectro!=0 || bonusLight!=0 || bonusDark!=0) {
                     newLore.add(Chat.formatC("&bElemental Proficiencies:"));
@@ -195,7 +195,7 @@ public abstract class FinchEquipment extends FinchItem {
     }
     public void parseStat(ArrayList<Component> lore, String line, double baseAmount, double bonusAmount, boolean percentage) {
         if(baseAmount!=0 || bonusAmount!=0) {
-            Component component = Chat.formatC(line).append(Chat.formatC((baseAmount>0?"&a":"&c") + (int)baseAmount + (percentage?"%":"")));
+            Component component = Chat.formatC(line).append(Chat.formatC((baseAmount>0?"&a":baseAmount<0?"&c":"&7") + (int)baseAmount + (percentage?"%":"")));
             if(bonusAmount!=0) {
                 component = component.append(Chat.formatC(" " + (bonusAmount>0?"&a":"&c") + "(" + "+" + (int)bonusAmount + (percentage?"%":"") + ")"));
             }
