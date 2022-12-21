@@ -1,12 +1,11 @@
 package net.passerines.finch.enchants.weaponenchants;
 
-import net.kyori.adventure.text.Component;
-import net.passerines.finch.enchants.ItemEnchants;
+import net.passerines.finch.enchants.ItemEnchant;
 import net.passerines.finch.events.ElementalDamageEvent;
 
-public class FireAspectEnchant extends ItemEnchants {
+public class FireAspectEnchant extends ItemEnchant {
     public FireAspectEnchant() {
-        super("FireAspectSword", "&9Fire Aspect", EnchantmentType.WEAPON, 0, 15, 0, 0);
+        super("FireAspectSword", "&9Fire Aspect", EnchantmentType.WEAPON);
     }
 
     @Override
