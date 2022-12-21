@@ -28,6 +28,7 @@ public class TotemOfHealth extends FinchTrinkets implements FinchCraftableItem {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(400);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

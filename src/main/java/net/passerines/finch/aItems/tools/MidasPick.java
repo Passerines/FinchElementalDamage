@@ -2,24 +2,30 @@ package net.passerines.finch.aItems.tools;
 
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class MidasPick extends FinchItem implements FinchCraftableItem {
+public class MidasPick extends FinchItem implements Listener, FinchCraftableItem {
     public MidasPick() {
         super("MidasPick");
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
+    @EventHandler
     public void breakStone(BlockBreakEvent event){
         if(event.getBlock().getBlockData().getMaterial().equals(Material.STONE)){
             if(id.equals(Util.getId(event.getPlayer().getInventory().getItemInMainHand()))){
@@ -38,7 +44,6 @@ public class MidasPick extends FinchItem implements FinchCraftableItem {
         lore.add(Component.text(Chat.format("")));
         lore.add(Component.text(Chat.format("&6Ability: Goldstone")));
         lore.add(Component.text(Chat.format("Whenever you break stone you get 1 gold nugget")));
-        lore.add(Component.text(Chat.format("to drop a gold ingot")));
         itemMeta.lore(lore);
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);

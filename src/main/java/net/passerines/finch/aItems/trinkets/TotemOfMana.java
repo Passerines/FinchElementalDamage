@@ -28,6 +28,7 @@ public class TotemOfMana extends FinchTrinkets implements FinchCraftableItem {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(402);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

@@ -9,6 +9,7 @@ import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchWeapon;
+import net.passerines.finch.recipebook.RecipeBookDefault;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;

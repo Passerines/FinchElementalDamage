@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class TotemOfStrength extends FinchTrinkets implements FinchCraftableItem {
     public TotemOfStrength() {
         super("TotemOfStrength");
-        this.strength = 5;
+        this.strength = 10;
         displayName = Chat.formatC("&aTotem of Strength");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
@@ -28,6 +28,7 @@ public class TotemOfStrength extends FinchTrinkets implements FinchCraftableItem
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(403);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

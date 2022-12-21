@@ -28,6 +28,7 @@ public class TotemOfDefence extends FinchTrinkets implements FinchCraftableItem 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(401);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

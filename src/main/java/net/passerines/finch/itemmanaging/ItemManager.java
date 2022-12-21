@@ -12,6 +12,7 @@ import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
 import net.passerines.finch.aItems.tools.MidasPick;
 import net.passerines.finch.aItems.trinkets.*;
+import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.FortunateKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t3.DestinyKatana;
@@ -183,6 +184,7 @@ public class ItemManager {
         new KatanaHandle();
         new LuckEssence();
         new Fate();
+        new FinchBookOfRecipes();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){
