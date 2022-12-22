@@ -13,6 +13,7 @@ import net.passerines.finch.events.handler.DamageHandler;
 import net.passerines.finch.events.handler.EquipmentChangeHandler;
 import net.passerines.finch.integrations.MythicMobsBridge;
 import net.passerines.finch.itemmanaging.ItemManager;
+import net.passerines.finch.recipebook.RecipeBookDefault;
 import net.passerines.finch.reforge.OpenReforgeMenu;
 import net.passerines.finch.reforge.PrefixManager;
 import net.passerines.finch.trinkets.OpenTrinketMenu;
@@ -61,6 +62,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new OpenReforgeMenu();
         new DebugMessages();
         new ArrowHandler();
+        new RecipeBookDefault();
     }
 
     public static FinchElementalDamage inst() {

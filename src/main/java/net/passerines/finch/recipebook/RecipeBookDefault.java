@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -48,7 +49,27 @@ public class RecipeBookDefault implements Listener {
     }
     @EventHandler
     public void clickEvent(InventoryClickEvent click) {
-        if(click.getClickedInventory() != null && click.getClickedInventory().equals(gui)) {
+        if(click.getClickedInventory() != null) {
+            Inventory inv = click.getClickedInventory();
+            Player player = (Player) click.getWhoClicked();
+            if (inv.equals(gui) || weaponGui.contains(inv) || armorGui.contains(inv) || trinketGui.contains(inv) || utilGui.contains(inv) || miscGui.contains(inv)) {
+                click.setCancelled(true);
+                if(inv.equals(gui)){
+                    switch (click.getSlot()) {
+                        case 0 -> player.openInventory(weaponGui.get(0));
+                        case 2 -> player.openInventory(armorGui.get(0));
+                        case 4 -> player.openInventory(trinketGui.get(0));
+                        case 6 -> player.openInventory(utilGui.get(0));
+                        case 8 -> player.openInventory(miscGui.get(0));
+                    }
+                }
+            }
+        }
+    }
+    @EventHandler
+    public void dragEvent(InventoryDragEvent click) {
+        Inventory inv = click.getInventory();
+        if (inv.equals(gui) || weaponGui.contains(inv) || armorGui.contains(inv) || trinketGui.contains(inv) || utilGui.contains(inv) || miscGui.contains(inv)) {
             click.setCancelled(true);
         }
     }
