@@ -135,7 +135,7 @@ public abstract class FinchEquipment extends FinchItem {
                     s.append("Weapon");
                 }
                 else if(this instanceof FinchArmor){
-                    s.append("Weapon");
+                    s.append("Armor");
                 }
                 else if (this instanceof FinchTrinkets){
                     s.append("Trinket");

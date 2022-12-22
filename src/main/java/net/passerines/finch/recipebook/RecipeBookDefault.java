@@ -89,16 +89,14 @@ public class RecipeBookDefault implements Listener {
     }
     public static void addTo(ShapedRecipe recipe, ArrayList<ShapedRecipe> recipes, ArrayList<Inventory> inventory, String s){
         ItemStack item = recipe.getResult();
-        if(Util.getFinchItem(item) instanceof FinchWeapon){
-            int itemIndex = recipes.size();
-            int page = itemIndex/45;
-            int slot = itemIndex%45;
-            recipes.add(recipe);
-            if(page >= inventory.size()){
-                inventory.add(Bukkit.createInventory(null, 54, Component.text(s + " [" + (page + 1) + "]" )));
-            }
-            inventory.get(page).setItem(slot, item);
+        int itemIndex = recipes.size();
+        int page = itemIndex/45;
+        int slot = itemIndex%45;
+        recipes.add(recipe);
+        if(page >= inventory.size()){
+            inventory.add(Bukkit.createInventory(null, 54, Component.text(s + " [" + (page + 1) + "]" )));
         }
+        inventory.get(page).setItem(slot, item);
     }
     public static void openDefault(Player player){
         player.openInventory(gui);
