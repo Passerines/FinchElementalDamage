@@ -3,6 +3,7 @@ package net.passerines.finch.items;
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.enchants.ItemEnchant;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -120,6 +121,27 @@ public abstract class FinchEquipment extends FinchItem {
         itemMeta.displayName(prefix!=null?prefix.getDisplayName().append(Chat.formatC(" ")).append(displayName):displayName);
         for(Component line : lore){
             if(Chat.asPlainText(line).contains(STATS)) {
+                StringBuilder s;
+                switch (rarity){
+                    default -> s = new StringBuilder("&7Teir " + rarity + " ");
+                    case 2 -> s = new StringBuilder("&2Teir 2 ");
+                    case 3 -> s = new StringBuilder("&9Teir 3 ");
+                    case 4 -> s = new StringBuilder("&5Teir 4 ");
+                    case 5 -> s = new StringBuilder("&6Teir 5 ");
+                    case 6 -> s = new StringBuilder("&dTeir 6 ");
+                    case 7 -> s = new StringBuilder("&4Teir 7 ");
+                }
+                if(this instanceof FinchWeapon){
+                    s.append("Weapon");
+                }
+                else if(this instanceof FinchArmor){
+                    s.append("Weapon");
+                }
+                else if (this instanceof FinchTrinkets){
+                    s.append("Trinket");
+                }
+                newLore.add(Chat.formatC(s.toString()));
+                newLore.add(Chat.formatC(" "));
                 int bonusHealth = prefix==null?0:prefix.getHealth();
                 for(ItemEnchant enchant : enchants.keySet()) bonusHealth += enchant.getHealth(enchants.get(enchant));
                 parseStat(newLore, "&cHealth: &7", health, bonusHealth);

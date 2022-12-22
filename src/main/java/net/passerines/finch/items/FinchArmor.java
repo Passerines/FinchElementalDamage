@@ -7,6 +7,6 @@ public abstract class FinchArmor extends FinchEquipment {
         super(id, rarity);
     }
     public FinchArmor(String id) {
-        this(id, 0);
+        this(id, 1);
     }
 }

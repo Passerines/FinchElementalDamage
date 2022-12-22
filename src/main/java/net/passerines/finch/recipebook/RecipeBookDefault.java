@@ -2,6 +2,8 @@ package net.passerines.finch.recipebook;
 
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.items.FinchArmor;
+import net.passerines.finch.items.FinchTrinkets;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -59,8 +61,8 @@ public class RecipeBookDefault implements Listener {
                         case 0 -> player.openInventory(weaponGui.get(0));
                         case 2 -> player.openInventory(armorGui.get(0));
                         case 4 -> player.openInventory(trinketGui.get(0));
-                        case 6 -> player.openInventory(utilGui.get(0));
-                        case 8 -> player.openInventory(miscGui.get(0));
+                        //case 6 -> player.openInventory(utilGui.get(0));
+                        //case 8 -> player.openInventory(miscGui.get(0));
                     }
                 }
             }
@@ -76,14 +78,26 @@ public class RecipeBookDefault implements Listener {
     public static void registerRecipe(ShapedRecipe recipe){
         ItemStack item = recipe.getResult();
         if(Util.getFinchItem(item) instanceof FinchWeapon){
-            int itemIndex = weaponRecipes.size();
+            addTo(recipe, weaponRecipes, weaponGui, "Weapon Recipes");
+        }
+        else if(Util.getFinchItem(item) instanceof FinchArmor){
+            addTo(recipe, armorRecipes, armorGui, "Armor Recipes");
+        }
+        else if(Util.getFinchItem(item) instanceof FinchTrinkets){
+            addTo(recipe, trinketRecipes, trinketGui, "Trinket Recipes");
+        }
+    }
+    public static void addTo(ShapedRecipe recipe, ArrayList<ShapedRecipe> recipes, ArrayList<Inventory> inventory, String s){
+        ItemStack item = recipe.getResult();
+        if(Util.getFinchItem(item) instanceof FinchWeapon){
+            int itemIndex = recipes.size();
             int page = itemIndex/45;
             int slot = itemIndex%45;
-            weaponRecipes.add(recipe);
-            if(page >= weaponGui.size()){
-                weaponGui.add(Bukkit.createInventory(null, 54, Component.text("Weapon Recipes [" + (page + 1) + "]" )));
+            recipes.add(recipe);
+            if(page >= inventory.size()){
+                inventory.add(Bukkit.createInventory(null, 54, Component.text(s + " [" + (page + 1) + "]" )));
             }
-            weaponGui.get(page).setItem(slot, item);
+            inventory.get(page).setItem(slot, item);
         }
     }
     public static void openDefault(Player player){
