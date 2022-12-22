@@ -197,7 +197,7 @@ public abstract class FinchEquipment extends FinchItem {
         if(baseAmount!=0 || bonusAmount!=0) {
             Component component = Chat.formatC(line).append(Chat.formatC((baseAmount>0?"&a":baseAmount<0?"&c":"&7") + (int)baseAmount + (percentage?"%":"")));
             if(bonusAmount!=0) {
-                component = component.append(Chat.formatC(" " + (bonusAmount>0?"&a":"&c") + "(" + "+" + (int)bonusAmount + (percentage?"%":"") + ")"));
+                component = component.append(Chat.formatC(" " + (bonusAmount>0?"&a":"&c") + "(" + (bonusAmount>0?"+":"") + (int)bonusAmount + (percentage?"%":"") + ")"));
             }
             lore.add(component);
         }
