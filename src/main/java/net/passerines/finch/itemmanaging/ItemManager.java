@@ -83,6 +83,7 @@ public class ItemManager {
     }
 
     private static void registerAll() {
+        new KatanaHandle();
         new BigBrainHat();
         new BloodHelmet();
         new BloodChestplate();
@@ -181,7 +182,6 @@ public class ItemManager {
         new DestinyKatana();
         new ProsperityKatana();
         new KatanaOfFate();
-        new KatanaHandle();
         new LuckEssence();
         new Fate();
         new FinchBookOfRecipes();

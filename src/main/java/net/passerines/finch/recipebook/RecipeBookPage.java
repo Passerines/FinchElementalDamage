@@ -1,11 +1,20 @@
 package net.passerines.finch.recipebook;
 
+import io.r2dbc.spi.Parameter;
 import net.kyori.adventure.text.Component;
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
@@ -13,7 +22,10 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-public class RecipeBookPage {
+import java.util.HashMap;
+import java.util.Map;
+
+public class RecipeBookPage implements Listener {
     private static final ItemStack placeholder = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
     static {
         ItemMeta meta = placeholder.getItemMeta();
@@ -23,27 +35,52 @@ public class RecipeBookPage {
     }
     private ShapedRecipe recipe;
     private Inventory gui;
-    public RecipeBookPage(ShapedRecipe recipe){
+    private Inventory previousGui;
+    public RecipeBookPage(ShapedRecipe recipe, Inventory inventory){
         this.recipe = recipe;
         gui = Bukkit.createInventory(null, 54, Component.text("Recipe for: " + recipe.getResult().displayName()));
         addItemsRecipe();
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
+        previousGui = inventory;
     }
     public void addItemsRecipe(){
         for(int i = 0; i < gui.getSize(); i++){
             gui.setItem(i, placeholder);
         }
         String[] strings = recipe.getShape();
-        gui.setItem(10, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[0].charAt(0))).getItemStack());
-        gui.setItem(11, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[0].charAt(1))).getItemStack());
-        gui.setItem(12, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[0].charAt(2))).getItemStack());
-        gui.setItem(19, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[1].charAt(0))).getItemStack());
-        gui.setItem(20, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[1].charAt(1))).getItemStack());
-        gui.setItem(21, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[1].charAt(2))).getItemStack());
-        gui.setItem(28, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[2].charAt(0))).getItemStack());
-        gui.setItem(29, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[2].charAt(1))).getItemStack());
-        gui.setItem(30, ((RecipeChoice.ExactChoice) recipe.getChoiceMap().get(strings[2].charAt(2))).getItemStack());
+        Map<Character, RecipeChoice> choiceMap = recipe.getChoiceMap();
+        gui.setItem(10, choiceMap.containsKey(strings[0].charAt(0))?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(0))).getItemStack():null);
+        gui.setItem(11, choiceMap.containsKey(strings[0].charAt(1))?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(1))).getItemStack():null);
+        gui.setItem(12, choiceMap.containsKey(strings[0].charAt(2))?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(2))).getItemStack():null);
+        gui.setItem(19, choiceMap.containsKey(strings[1].charAt(0))?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(0))).getItemStack():null);
+        gui.setItem(20, choiceMap.containsKey(strings[1].charAt(1))?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(1))).getItemStack():null);
+        gui.setItem(21, choiceMap.containsKey(strings[1].charAt(2))?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(2))).getItemStack():null);
+        gui.setItem(28, choiceMap.containsKey(strings[2].charAt(0))?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(0))).getItemStack():null);
+        gui.setItem(29, choiceMap.containsKey(strings[2].charAt(1))?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(1))).getItemStack():null);
+        gui.setItem(30, choiceMap.containsKey(strings[2].charAt(2))?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(2))).getItemStack():null);
+        gui.setItem(24, recipe.getResult());
+
     }
     public void openRecipe(Player player){
         player.openInventory(gui);
     }
+    @EventHandler
+    public void stopMove(InventoryClickEvent event){
+        if(event.getInventory().equals(gui) && event.getSlot() == 48){
+            event.getWhoClicked().openInventory(previousGui);
+        }
+    }
+    @EventHandler
+    public void stopMove(InventoryInteractEvent event){
+        if(event.getInventory().equals(gui)){
+            event.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void closeGui(InventoryCloseEvent event){
+        if(event.getInventory().equals(gui)){
+            HandlerList.unregisterAll(this);
+        }
+    }
+
 }

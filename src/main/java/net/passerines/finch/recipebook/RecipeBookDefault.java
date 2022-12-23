@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -94,20 +95,20 @@ public class RecipeBookDefault implements Listener {
                     if(weaponGui.contains(inv)){
                         int page = weaponGui.indexOf(inv);
                         int slot = (page * 45) + click.getSlot();
-                        RecipeBookPage recipeBookPage = new RecipeBookPage(weaponRecipes.get(slot));
+                        RecipeBookPage recipeBookPage = new RecipeBookPage(weaponRecipes.get(slot), weaponGui.get(page));
                         recipeBookPage.openRecipe(player);
                     }
                     else if(armorGui.contains(inv)){
                         int page = armorGui.indexOf(inv);
                         int slot = (page * 45) + click.getSlot();
-                        RecipeBookPage recipeBookPage = new RecipeBookPage(armorRecipes.get(slot));
+                        RecipeBookPage recipeBookPage = new RecipeBookPage(armorRecipes.get(slot), armorGui.get(page));
                         recipeBookPage.openRecipe(player);
 
                     }
                     else if(trinketGui.contains(inv)){
                         int page = trinketGui.indexOf(inv);
                         int slot = (page * 45) + click.getSlot();
-                        RecipeBookPage recipeBookPage = new RecipeBookPage(trinketRecipes.get(slot));
+                        RecipeBookPage recipeBookPage = new RecipeBookPage(trinketRecipes.get(slot), trinketGui.get(page));
                         recipeBookPage.openRecipe(player);
 
                     }
@@ -116,7 +117,7 @@ public class RecipeBookDefault implements Listener {
         }
     }
     @EventHandler
-    public void dragEvent(InventoryDragEvent click) {
+    public void dragEvent(InventoryInteractEvent click) {
         Inventory inv = click.getInventory();
         if (inv.equals(gui) || weaponGui.contains(inv) || armorGui.contains(inv) || trinketGui.contains(inv) || utilGui.contains(inv) || miscGui.contains(inv)) {
             click.setCancelled(true);
