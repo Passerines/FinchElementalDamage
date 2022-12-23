@@ -49,15 +49,15 @@ public class RecipeBookPage implements Listener {
         }
         String[] strings = recipe.getShape();
         Map<Character, RecipeChoice> choiceMap = recipe.getChoiceMap();
-        gui.setItem(10, choiceMap.containsKey(strings[0].charAt(0))?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(0))).getItemStack():null);
-        gui.setItem(11, choiceMap.containsKey(strings[0].charAt(1))?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(1))).getItemStack():null);
-        gui.setItem(12, choiceMap.containsKey(strings[0].charAt(2))?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(2))).getItemStack():null);
-        gui.setItem(19, choiceMap.containsKey(strings[1].charAt(0))?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(0))).getItemStack():null);
-        gui.setItem(20, choiceMap.containsKey(strings[1].charAt(1))?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(1))).getItemStack():null);
-        gui.setItem(21, choiceMap.containsKey(strings[1].charAt(2))?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(2))).getItemStack():null);
-        gui.setItem(28, choiceMap.containsKey(strings[2].charAt(0))?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(0))).getItemStack():null);
-        gui.setItem(29, choiceMap.containsKey(strings[2].charAt(1))?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(1))).getItemStack():null);
-        gui.setItem(30, choiceMap.containsKey(strings[2].charAt(2))?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(2))).getItemStack():null);
+        gui.setItem(10, choiceMap.get(strings[0].charAt(0))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(0))).getItemStack():null);
+        gui.setItem(11, choiceMap.get(strings[0].charAt(1))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(1))).getItemStack():null);
+        gui.setItem(12, choiceMap.get(strings[0].charAt(2))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[0].charAt(2))).getItemStack():null);
+        gui.setItem(19, choiceMap.get(strings[1].charAt(0))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(0))).getItemStack():null);
+        gui.setItem(20, choiceMap.get(strings[1].charAt(1))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(1))).getItemStack():null);
+        gui.setItem(21, choiceMap.get(strings[1].charAt(2))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[1].charAt(2))).getItemStack():null);
+        gui.setItem(28, choiceMap.get(strings[2].charAt(0))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(0))).getItemStack():null);
+        gui.setItem(29, choiceMap.get(strings[2].charAt(1))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(1))).getItemStack():null);
+        gui.setItem(30, choiceMap.get(strings[2].charAt(2))!=null?((RecipeChoice.ExactChoice) choiceMap.get(strings[2].charAt(2))).getItemStack():null);
         gui.setItem(24, recipe.getResult());
 
     }
