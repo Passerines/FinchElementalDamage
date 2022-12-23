@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -33,6 +34,30 @@ public class RecipeBookDefault implements Listener {
     private final FinchElementalDamage plugin = FinchElementalDamage.inst();
 
     private static final Inventory gui = Bukkit.createInventory(null, 9, Component.text("RecipeBook"));
+    static{
+        ItemStack weaponIcon = new ItemStack(Material.IRON_SWORD);
+        ItemMeta weaponIconItemMeta = weaponIcon.getItemMeta();
+        weaponIconItemMeta.displayName(Chat.formatC("Weapon Recipes"));
+        weaponIcon.setItemMeta(weaponIconItemMeta);
+        ItemStack armorIcon = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        ItemMeta itemMeta = armorIcon.getItemMeta();
+        itemMeta.displayName(Chat.formatC("Armor Recipes"));
+        armorIcon.setItemMeta(itemMeta);
+        ItemStack trinketIcon = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
+        ItemMeta itemMeta1 = armorIcon.getItemMeta();
+        itemMeta1.displayName(Chat.formatC("Trinket Recipes"));
+        itemMeta1.setCustomModelData(202);
+        armorIcon.setItemMeta(itemMeta1);
+        gui.setItem(0, weaponIcon);
+        gui.setItem(1, placeholder);
+        gui.setItem(2, armorIcon);
+        gui.setItem(3, placeholder);
+        gui.setItem(4, trinketIcon);
+        gui.setItem(5, placeholder);
+        gui.setItem(6, placeholder);
+        gui.setItem(7, placeholder);
+        gui.setItem(8, placeholder);
+    }
     private static final ArrayList<Inventory> weaponGui = new ArrayList<>();
     private static final ArrayList<Inventory> armorGui = new ArrayList<>();
     private static final ArrayList<Inventory> trinketGui = new ArrayList<>();
@@ -63,6 +88,28 @@ public class RecipeBookDefault implements Listener {
                         case 4 -> player.openInventory(trinketGui.get(0));
                         //case 6 -> player.openInventory(utilGui.get(0));
                         //case 8 -> player.openInventory(miscGui.get(0));
+                    }
+                }
+                else{
+                    if(weaponGui.contains(inv)){
+                        int page = weaponGui.indexOf(inv);
+                        int slot = (page * 45) + click.getSlot();
+                        RecipeBookPage recipeBookPage = new RecipeBookPage(weaponRecipes.get(slot));
+                        recipeBookPage.openRecipe(player);
+                    }
+                    else if(armorGui.contains(inv)){
+                        int page = armorGui.indexOf(inv);
+                        int slot = (page * 45) + click.getSlot();
+                        RecipeBookPage recipeBookPage = new RecipeBookPage(armorRecipes.get(slot));
+                        recipeBookPage.openRecipe(player);
+
+                    }
+                    else if(trinketGui.contains(inv)){
+                        int page = trinketGui.indexOf(inv);
+                        int slot = (page * 45) + click.getSlot();
+                        RecipeBookPage recipeBookPage = new RecipeBookPage(trinketRecipes.get(slot));
+                        recipeBookPage.openRecipe(player);
+
                     }
                 }
             }
