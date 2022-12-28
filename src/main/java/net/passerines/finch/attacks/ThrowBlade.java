@@ -8,6 +8,7 @@ import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.*;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.Plugin;
 
@@ -51,7 +52,7 @@ public class ThrowBlade {
             for(Object entity : entities) {
                 if (entity instanceof Damageable) {
                     if (!(entity.equals(player) || entity.equals(armorStand)) && !hitEntities.contains(entity)) {
-                        new ElementalDamageEvent(player, (Entity) entity, element, damage).apply();
+                        new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.CUSTOM, element, damage, player.getInventory().getItemInMainHand()).apply();
                         hitEntities.add((Entity) entity);
                         ((Entity) entity).playEffect(EntityEffect.HURT);
                     }

@@ -33,6 +33,13 @@ public class RecipeBookPage implements Listener {
         meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
         placeholder.setItemMeta(meta);
     }
+    private static final ItemStack placeholder1 = new ItemStack(Material.RED_BED);
+    static {
+        ItemMeta meta = placeholder.getItemMeta();
+        meta.displayName(Chat.formatC(" "));
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
+        placeholder.setItemMeta(meta);
+    }
     private ShapedRecipe recipe;
     private Inventory gui;
     private Inventory previousGui;
@@ -40,8 +47,10 @@ public class RecipeBookPage implements Listener {
         this.recipe = recipe;
         gui = Bukkit.createInventory(null, 54, Component.text("Recipe for: " + recipe.getResult().displayName()));
         addItemsRecipe();
+        gui.setItem(48, placeholder1);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
         previousGui = inventory;
+
     }
     public void addItemsRecipe(){
         for(int i = 0; i < gui.getSize(); i++){

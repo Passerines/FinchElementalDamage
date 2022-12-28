@@ -125,13 +125,13 @@ public class RecipeBookDefault implements Listener {
     }
     public static void registerRecipe(ShapedRecipe recipe){
         ItemStack item = recipe.getResult();
-        if(Util.getFinchItem(item) instanceof FinchWeapon){
+        if(Util.getFinchItem(item) instanceof FinchWeapon && (weaponRecipes.size() == 0 || item.equals(weaponRecipes.get(weaponRecipes.size() - 1).getResult()))){
             addTo(recipe, weaponRecipes, weaponGui, "Weapon Recipes");
         }
-        else if(Util.getFinchItem(item) instanceof FinchArmor){
+        else if(Util.getFinchItem(item) instanceof FinchArmor && (armorRecipes.size() == 0 || item.equals(armorRecipes.get(armorRecipes.size() - 1).getResult()))){
             addTo(recipe, armorRecipes, armorGui, "Armor Recipes");
         }
-        else if(Util.getFinchItem(item) instanceof FinchTrinkets){
+        else if(Util.getFinchItem(item) instanceof FinchTrinkets && (trinketRecipes.size() == 0 || item.equals(trinketRecipes.get(trinketRecipes.size() - 1).getResult()))){
             addTo(recipe, trinketRecipes, trinketGui, "Trinket Recipes");
         }
     }

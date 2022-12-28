@@ -16,13 +16,12 @@ import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.FortunateKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t3.DestinyKatana;
-import net.passerines.finch.aItems.weapons.melee.katanas.t4.Ircosis;
+import net.passerines.finch.aItems.weapons.melee.katanas.t3.GlacialKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.ProsperityKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.KatanaOfFate;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
 import net.passerines.finch.aItems.weapons.ranged.t3.GatlingGun;
-import net.passerines.finch.aItems.weapons.ranged.artifacts.BowOfTheElements;
 import net.passerines.finch.aItems.weapons.ranged.t5.VortexSplash;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
@@ -83,108 +82,44 @@ public class ItemManager {
     }
 
     private static void registerAll() {
+        //No Recipe Items
+        new Shriex();
+        //Essence
+        new RitualEssence();
+        new GoldEssence();
+        new LuckEssence();
+        new AngelicEssence();
+        //Condensed
+        new CondensedEnergy();
+        new CondensedDiamond();
+        //Craftable Ingredients (Regular)
         new KatanaHandle();
-        new BigBrainHat();
-        new BloodHelmet();
-        new BloodChestplate();
-        new BloodLeggings();
-        new BloodBoots();
-        new BloodMageBoots();
-        new BloodMageChestplate();
-        new BloodMageLeggings();
-        new BloodMageHelmet();
-        new CarbonFiberBoots();
-        new CarbonFiberChestplate();
-        new CarbonFiberHelmet();
-        new CarbonFiberLeggings();
-        new Comet();
-        new DevourScythe();
-        new CrescentKnives();
-        new FireBallWand();
-        new Terminator();
-        new GatlingGun();
-        new SharpStabber();
-        new HellfireCrossbow();
-        new PooLauncher();
-        new Tsunami();
-        new StronkBoots();
-        new Teleporter();
-        new StronkLeggings();
-        new IntergalacticDagger();
-        new IntergalacticSniper();
-        new IntergalacticRocket();
-        new SniperHelmet();
-        new LifeStone();
-        new Valkyre();
-        new Vescwrith();
-        new RitualBlade();
-        new ManaKatana();
-        new ImpierceCrown();
-        new ImpierceAegis();
-        new ImpierceGaloshes();
-        new ImpierceKneeplates();
-        new ImpierceLeggings();
-        new ImpierceRobe();
-        new ImpierceShoes();
-        new ImpierceWisdom();
-        new ImpierceShoes();
-        new CrescentBlades();
-        new Comet();
         new BloodIron();
         new MagicBloodIron();
         new ReinforcedLeather();
-        new ReinforcedLeatherBoots();
-        new ReinforcedLeatherCap();
-        new ReinforcedLeatherLeggings();
-        new ReinforcedLeatherTunic();
-        new SteelKatana();
-        new GoldenKatana();
-        new DiamondKatana();
-        new SoulKnightsSpear();
-        new EngulfingLightning();
-        new DraconianAegis();
-        new DraconianBoots();
-        new DraconianCuirass();
-        new DraconianHeadgear();
-        new DraconianLeggings();
-        new ElectroVision();
-        new CarbonFiber();
-        new Ircosis();
-        new NecklaceOfGod();
-        new GauntletOfSacrifice();
-        new TotemOfStrength();
-        new TotemOfDefence();
-        new TotemOfMana();
-        new DragonScale();
-        new AngelicEssence();
-        new Shriex();
-        new DiamondLeggings();
-        new DiamondChestplate();
-        new DiamondBoots();
-        new DiamondHelmet();
-        new CondensedDiamond();
-        new CondensedEnergy();
-        new NecklaceOfGod();
-        new GauntletOfSacrifice();
-        new RitualEssence();
-        new Evelon();
-        new VortexSplash();
-        new DraconianMarksmanBoots();
-        new DraconianMarksmanVest();
-        new DraconianMarksmanLeggings();
-        new DraconianMarksmanHood();
-        new DragonSkin();
-        new MidasPick();
-        new GoldEssence();
+        new GlacialGem();
+        //Mob Drops
         new MahiMahiScale();
+        new DragonSkin();
+        new DragonScale();
+        new Fate();
+        //Katanas
+        new GoldEssence();
         new LuckyKatana();
         new FortunateKatana();
         new DestinyKatana();
         new ProsperityKatana();
         new KatanaOfFate();
-        new LuckEssence();
-        new Fate();
-        new FinchBookOfRecipes();
+        new DiamondKatana() ;
+        new GlacialKatana();
+        //Spears
+
+        //Armor
+        new CarbonFiberHelmet();
+        new CarbonFiberChestplate();
+        new CarbonFiberLeggings();
+        new CarbonFiberBoots();
+
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

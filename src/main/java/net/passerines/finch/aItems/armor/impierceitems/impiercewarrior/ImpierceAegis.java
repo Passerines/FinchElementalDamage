@@ -31,8 +31,8 @@ public class ImpierceAegis extends FinchArmor {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        format(item);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 }
