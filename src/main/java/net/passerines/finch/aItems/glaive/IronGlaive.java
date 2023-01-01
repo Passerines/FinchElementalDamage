@@ -30,11 +30,7 @@ public class IronGlaive extends FinchGlaives {
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
-    }
-
-    @Override
-    public void ifInsect(PlayerInteractEvent event) {
-        super.ifInsect(event);
+        this.lore = Chat.formatC(lore);
     }
 
     @Override

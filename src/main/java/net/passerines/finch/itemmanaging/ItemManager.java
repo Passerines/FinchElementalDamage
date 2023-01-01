@@ -11,6 +11,7 @@ import net.passerines.finch.aItems.armor.vanillareplacements.DiamondChestplate;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
 import net.passerines.finch.aItems.glaive.IronGlaive;
+import net.passerines.finch.aItems.insects.Monarch;
 import net.passerines.finch.aItems.tools.MidasPick;
 import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
@@ -127,6 +128,8 @@ public class ItemManager {
         new CarbonFiberBoots();
         //Trinkets
         new FinchBookOfRecipes();
+        //Insects
+        new Monarch();
 
     }
     public static void registerRecipe(){

@@ -35,42 +35,9 @@ public abstract class FinchGlaives extends FinchEquipment implements Listener {
     @EventHandler
     public void ifInsect(PlayerInteractEvent event){
         Player player = event.getPlayer();
-        if(id.equals(Util.getId(player.getInventory().getItemInMainHand()))){
-            if(event.getAction().isRightClick() && Util.getFinchItem(player.getInventory().getItemInOffHand()) instanceof FinchInsect){
-                Plugin plugin = FinchElementalDamage.inst();
-                ArrayList<Entity> hitEntities = new ArrayList<>();
-                Location loc = player.getLocation();
-                ArmorStand armorStand = loc.getWorld().spawn(loc, ArmorStand.class, false, (ArmorStand armorStand1) -> {
-                    armorStand1.setInvisible(true);
-                    armorStand1.setInvulnerable(true);
-                    armorStand1.addEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.REMOVING_OR_CHANGING);
-                    armorStand1.getEquipment().setItemInOffHand(player.getEquipment().getItemInMainHand());
-                });
-                int sSRT = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-                    Location asLoc = armorStand.getLocation();
-                    if(hitEntities.size() == 0) {
-                        armorStand.teleport(asLoc);
-                        armorStand.setVelocity(loc.getDirection().normalize().multiply(2));
-                    }
-                    Collection<Entity> entitylist = asLoc.getNearbyEntities(1, 1, 1);
-                    Object[] entities = entitylist.toArray();
-                    for(Object entity : entities) {
-                        if (entity instanceof Damageable) {
-                            if (!(entity.equals(player) || entity.equals(armorStand)) && !hitEntities.contains(entity)) {
-                                if(hitEntities.size() == 0) {
-                                    new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.CUSTOM, element, this.attack, player.getInventory().getItemInMainHand()).apply();
-                                    hitEntities.add((Entity) entity);
-                                    ((Entity) entity).playEffect(EntityEffect.HURT);
-                                }
-                            }
-                        }
-                    }
-                }, 0, 2);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    armorStand.remove();
-                    Bukkit.getScheduler().cancelTask(sSRT);
-                }, 25);
-            }
+        if(id.equals(Util.getId(player.getInventory().getItemInMainHand())) && Util.getFinchItem(player.getInventory().getItemInOffHand()) instanceof FinchInsect finchInsect) {
+            FinchThrownInsect finchThrownInsect = new FinchThrownInsect(player, finchInsect.getItem(), player.getInventory().getItemInMainHand());
+            finchThrownInsect.throwInsect();
         }
     }
     public ElementalDamageEvent.Element getElement() {
