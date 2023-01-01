@@ -30,13 +30,9 @@ public class CarbonFiberHelmet extends FinchArmor implements FinchCraftableItem 
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_HELMET);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&fCarbon Fiber Helmet"));
-        ArrayList<Component> lore = new ArrayList<>();
-        lore.add(Component.text(Chat.format("&cHealth: &f+" + (int) this.health)));
-        lore.add(Component.text(Chat.format("&aDefense: &f+" + this.defense)));
-        itemMeta.lore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 

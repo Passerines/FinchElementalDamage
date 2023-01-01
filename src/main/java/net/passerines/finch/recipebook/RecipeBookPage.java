@@ -35,19 +35,27 @@ public class RecipeBookPage implements Listener {
     }
     private static final ItemStack placeholder1 = new ItemStack(Material.RED_BED);
     static {
-        ItemMeta meta = placeholder.getItemMeta();
-        meta.displayName(Chat.formatC(" "));
+        ItemMeta meta = placeholder1.getItemMeta();
+        meta.displayName(Chat.formatC("Back"));
         meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
-        placeholder.setItemMeta(meta);
+        placeholder1.setItemMeta(meta);
+    }
+    private static final ItemStack placeholder2 = new ItemStack(Material.BARRIER);
+    static {
+        ItemMeta meta = placeholder2.getItemMeta();
+        meta.displayName(Chat.formatC("Close"));
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
+        placeholder2.setItemMeta(meta);
     }
     private ShapedRecipe recipe;
     private Inventory gui;
     private Inventory previousGui;
     public RecipeBookPage(ShapedRecipe recipe, Inventory inventory){
         this.recipe = recipe;
-        gui = Bukkit.createInventory(null, 54, Component.text("Recipe for: " + recipe.getResult().displayName()));
+        gui = Bukkit.createInventory(null, 54, Chat.formatC("Recipe for: " + Chat.asLegacy(recipe.getResult().displayName())));
         addItemsRecipe();
         gui.setItem(48, placeholder1);
+        gui.setItem(49, placeholder2);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
         previousGui = inventory;
 
@@ -74,13 +82,22 @@ public class RecipeBookPage implements Listener {
         player.openInventory(gui);
     }
     @EventHandler
-    public void stopMove(InventoryClickEvent event){
+    public void back(InventoryClickEvent event){
         if(event.getInventory().equals(gui) && event.getSlot() == 48){
             event.getWhoClicked().openInventory(previousGui);
         }
+        else if(event.getSlot() == 49){
+            event.getWhoClicked().closeInventory();
+        }
     }
     @EventHandler
-    public void stopMove(InventoryInteractEvent event){
+    public void cancelClick(InventoryClickEvent event){
+        Player player = (Player) event.getWhoClicked();
+        if(event.getClickedInventory() != null && player.getOpenInventory().getTopInventory().equals(gui)){
+            event.setCancelled(true);
+        }
+    }@EventHandler
+    public void cancelDrag(InventoryDragEvent event){
         if(event.getInventory().equals(gui)){
             event.setCancelled(true);
         }

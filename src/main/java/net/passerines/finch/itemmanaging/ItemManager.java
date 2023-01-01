@@ -10,6 +10,7 @@ import net.passerines.finch.aItems.armor.vanillareplacements.DiamondBoots;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondChestplate;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
 import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
+import net.passerines.finch.aItems.glaive.IronGlaive;
 import net.passerines.finch.aItems.tools.MidasPick;
 import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
@@ -65,9 +66,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ItemManager {
-    public static final HashMap<String, FinchItem> ITEM_HASH_MAP = new HashMap<>();
+    public static final LinkedHashMap<String, FinchItem> ITEM_HASH_MAP = new LinkedHashMap<>();
 
     public static void reload() {
         //If the item handles events, unregister them before we add them again
@@ -97,6 +99,7 @@ public class ItemManager {
         new BloodIron();
         new MagicBloodIron();
         new ReinforcedLeather();
+        new CarbonFiber();
         new GlacialGem();
         //Mob Drops
         new MahiMahiScale();
@@ -104,7 +107,7 @@ public class ItemManager {
         new DragonScale();
         new Fate();
         //Katanas
-        new GoldEssence();
+        new GoldenKatana();
         new LuckyKatana();
         new FortunateKatana();
         new DestinyKatana();
@@ -114,11 +117,16 @@ public class ItemManager {
         new GlacialKatana();
         //Spears
 
+        //Glaives
+        new IronGlaive();
+
         //Armor
         new CarbonFiberHelmet();
         new CarbonFiberChestplate();
         new CarbonFiberLeggings();
         new CarbonFiberBoots();
+        //Trinkets
+        new FinchBookOfRecipes();
 
     }
     public static void registerRecipe(){

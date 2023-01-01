@@ -112,7 +112,7 @@ public class GlacialKatana extends FinchWeapon implements Listener, FinchCraftab
     public void registerRecipe() {
         ItemStack handle = ItemManager.ITEM_HASH_MAP.get("DiamondKatana").getItem();
         ItemStack gem = ItemManager.ITEM_HASH_MAP.get("GlacialGem").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, " A ", " B ", " A " , gem, handle, new ItemStack(Material.BLAZE_POWDER));
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, " A ", " B ", " A " , gem, handle);
         finchRecipe.addRecipe();
     }
 }

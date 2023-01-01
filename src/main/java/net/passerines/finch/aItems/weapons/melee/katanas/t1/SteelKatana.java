@@ -31,7 +31,8 @@ public class SteelKatana extends FinchWeapon implements Listener {
     Cooldown<Player> cd = new Cooldown<>(3);
     public SteelKatana() {
         super("SteelKatana", 1);
-        this.attack = 20;
+        this.attack = 15;
+        this.strength = 5;
         this.element = ElementalDamageEvent.Element.NEUTRAL;
         displayName = Chat.formatC("&fSteel Katana");
         ArrayList<String> lore = new ArrayList<>();

@@ -15,10 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -32,6 +29,20 @@ public class RecipeBookDefault implements Listener {
         meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
         placeholder.setItemMeta(meta);
     }
+    private static final ItemStack placeholder1 = new ItemStack(Material.RED_BED);
+    static {
+        ItemMeta meta = placeholder1.getItemMeta();
+        meta.displayName(Chat.formatC("Back"));
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
+        placeholder1.setItemMeta(meta);
+    }
+    private static final ItemStack placeholder2 = new ItemStack(Material.BARRIER);
+    static {
+        ItemMeta meta = placeholder2.getItemMeta();
+        meta.displayName(Chat.formatC("Close"));
+        meta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte) 1);
+        placeholder2.setItemMeta(meta);
+    }
     private final FinchElementalDamage plugin = FinchElementalDamage.inst();
 
     private static final Inventory gui = Bukkit.createInventory(null, 9, Component.text("RecipeBook"));
@@ -39,16 +50,20 @@ public class RecipeBookDefault implements Listener {
         ItemStack weaponIcon = new ItemStack(Material.IRON_SWORD);
         ItemMeta weaponIconItemMeta = weaponIcon.getItemMeta();
         weaponIconItemMeta.displayName(Chat.formatC("Weapon Recipes"));
+        weaponIconItemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         weaponIcon.setItemMeta(weaponIconItemMeta);
+        //
         ItemStack armorIcon = new ItemStack(Material.DIAMOND_CHESTPLATE);
-        ItemMeta itemMeta = armorIcon.getItemMeta();
-        itemMeta.displayName(Chat.formatC("Armor Recipes"));
-        armorIcon.setItemMeta(itemMeta);
+        ItemMeta armorIconItemMetaItemMeta = armorIcon.getItemMeta();
+        armorIconItemMetaItemMeta.displayName(Chat.formatC("Armor Recipes"));
+        armorIconItemMetaItemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        armorIcon.setItemMeta(armorIconItemMetaItemMeta);
+        //
         ItemStack trinketIcon = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
-        ItemMeta itemMeta1 = armorIcon.getItemMeta();
-        itemMeta1.displayName(Chat.formatC("Trinket Recipes"));
-        itemMeta1.setCustomModelData(202);
-        armorIcon.setItemMeta(itemMeta1);
+        ItemMeta trinketItemMeta = armorIcon.getItemMeta();
+        trinketItemMeta.displayName(Chat.formatC("Trinket Recipes"));
+        trinketItemMeta.setCustomModelData(202);
+        trinketIcon.setItemMeta(trinketItemMeta);
         gui.setItem(0, weaponIcon);
         gui.setItem(1, placeholder);
         gui.setItem(2, armorIcon);
@@ -78,8 +93,8 @@ public class RecipeBookDefault implements Listener {
     @EventHandler
     public void clickEvent(InventoryClickEvent click) {
         if(click.getClickedInventory() != null) {
-            Inventory inv = click.getClickedInventory();
             Player player = (Player) click.getWhoClicked();
+            Inventory inv = player.getOpenInventory().getTopInventory();
             if (inv.equals(gui) || weaponGui.contains(inv) || armorGui.contains(inv) || trinketGui.contains(inv) || utilGui.contains(inv) || miscGui.contains(inv)) {
                 click.setCancelled(true);
                 if(inv.equals(gui)){
@@ -95,22 +110,44 @@ public class RecipeBookDefault implements Listener {
                     if(weaponGui.contains(inv)){
                         int page = weaponGui.indexOf(inv);
                         int slot = (page * 45) + click.getSlot();
-                        RecipeBookPage recipeBookPage = new RecipeBookPage(weaponRecipes.get(slot), weaponGui.get(page));
-                        recipeBookPage.openRecipe(player);
+                        if(click.getSlot() < 45 && slot < weaponRecipes.size()) {
+                            RecipeBookPage recipeBookPage = new RecipeBookPage(weaponRecipes.get(slot), weaponGui.get(page));
+                            recipeBookPage.openRecipe(player);
+                        }
+                        else if(click.getSlot() == 48){
+                            player.openInventory(gui);
+                        }
+                        else if(click.getSlot() == 49){
+                            player.closeInventory();
+                        }
                     }
                     else if(armorGui.contains(inv)){
                         int page = armorGui.indexOf(inv);
                         int slot = (page * 45) + click.getSlot();
-                        RecipeBookPage recipeBookPage = new RecipeBookPage(armorRecipes.get(slot), armorGui.get(page));
-                        recipeBookPage.openRecipe(player);
-
+                        if(click.getSlot() <= 45 && slot <= armorRecipes.size()) {
+                            RecipeBookPage recipeBookPage = new RecipeBookPage(armorRecipes.get(slot), armorGui.get(page));
+                            recipeBookPage.openRecipe(player);
+                        }
+                        else if(click.getSlot() == 48){
+                            player.openInventory(gui);
+                        }
+                        else if(click.getSlot() == 49){
+                            player.closeInventory();
+                        }
                     }
                     else if(trinketGui.contains(inv)){
                         int page = trinketGui.indexOf(inv);
                         int slot = (page * 45) + click.getSlot();
-                        RecipeBookPage recipeBookPage = new RecipeBookPage(trinketRecipes.get(slot), trinketGui.get(page));
-                        recipeBookPage.openRecipe(player);
-
+                        if(click.getSlot() <= 45 && slot <= trinketRecipes.size()) {
+                            RecipeBookPage recipeBookPage = new RecipeBookPage(trinketRecipes.get(slot), trinketGui.get(page));
+                            recipeBookPage.openRecipe(player);
+                        }
+                        else if(click.getSlot() == 48){
+                            player.openInventory(gui);
+                        }
+                        else if(click.getSlot() == 49){
+                            player.closeInventory();
+                        }
                     }
                 }
             }
@@ -125,13 +162,13 @@ public class RecipeBookDefault implements Listener {
     }
     public static void registerRecipe(ShapedRecipe recipe){
         ItemStack item = recipe.getResult();
-        if(Util.getFinchItem(item) instanceof FinchWeapon && (weaponRecipes.size() == 0 || item.equals(weaponRecipes.get(weaponRecipes.size() - 1).getResult()))){
+        if(Util.getFinchItem(item) instanceof FinchWeapon && (weaponRecipes.size() == 0 || !item.equals(weaponRecipes.get(weaponRecipes.size() - 1).getResult()))){
             addTo(recipe, weaponRecipes, weaponGui, "Weapon Recipes");
         }
-        else if(Util.getFinchItem(item) instanceof FinchArmor && (armorRecipes.size() == 0 || item.equals(armorRecipes.get(armorRecipes.size() - 1).getResult()))){
+        else if(Util.getFinchItem(item) instanceof FinchArmor && (armorRecipes.size() == 0 || !item.equals(armorRecipes.get(armorRecipes.size() - 1).getResult()))){
             addTo(recipe, armorRecipes, armorGui, "Armor Recipes");
         }
-        else if(Util.getFinchItem(item) instanceof FinchTrinkets && (trinketRecipes.size() == 0 || item.equals(trinketRecipes.get(trinketRecipes.size() - 1).getResult()))){
+        else if(Util.getFinchItem(item) instanceof FinchTrinkets && (trinketRecipes.size() == 0 || !item.equals(trinketRecipes.get(trinketRecipes.size() - 1).getResult()))){
             addTo(recipe, trinketRecipes, trinketGui, "Trinket Recipes");
         }
     }
@@ -142,7 +179,17 @@ public class RecipeBookDefault implements Listener {
         int slot = itemIndex%45;
         recipes.add(recipe);
         if(page >= inventory.size()){
-            inventory.add(Bukkit.createInventory(null, 54, Component.text(s + " [" + (page + 1) + "]" )));
+            Inventory inv = Bukkit.createInventory(null, 54, Component.text(s + " [" + (page + 1) + "]" ));
+            inv.setItem(45, placeholder);
+            inv.setItem(46, placeholder);
+            inv.setItem(47, placeholder);
+            inv.setItem(48, placeholder1);
+            inv.setItem(49, placeholder2);
+            inv.setItem(51, placeholder);
+            inv.setItem(52, placeholder);
+            inv.setItem(53, placeholder);
+            inventory.add(inv);
+
         }
         inventory.get(page).setItem(slot, item);
     }
