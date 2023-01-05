@@ -176,6 +176,21 @@ public class Util {
         }
         return enchantString;
     }
+
+    public static String romanNumberConverter(int level){
+        String converted = "";
+        ArrayList<String> numerals = new ArrayList<>(List.of("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"));
+        ArrayList<String> numeralsInTen = new ArrayList<>(List.of("", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"));
+        ArrayList<String> numeralsInThousand = new ArrayList<>(List.of("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"));
+        if(level < 1000){
+            converted = numeralsInThousand.get(level/100) + numeralsInTen.get(level/10%10) + numerals.get(level%10);
+        }
+        else{
+            converted = String.valueOf(level);
+        }
+        return converted;
+    }
+
     //Gets the ItemPrefix that is currently on the item
     public static ItemPrefix getItemPrefix(ItemStack item) {
         String prefix = getPrefix(item);

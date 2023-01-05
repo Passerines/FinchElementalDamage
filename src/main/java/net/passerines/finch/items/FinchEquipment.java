@@ -199,7 +199,7 @@ public abstract class FinchEquipment extends FinchItem {
                 }
             } else if(Chat.asPlainText(line).contains(ENCHANTS)) {
                 for(ItemEnchant enchant : enchants.keySet()) {
-                    newLore.add(enchant.getDisplayName().append(Chat.formatC( " &7" + enchants.get(enchant))));
+                    newLore.add(enchant.getDisplayName().append(Chat.formatC( " &7" + enchants.get(enchant) + Util.romanNumberConverter(enchants.get(enchant)))));
                 }
                 if(enchants.size()>0) newLore.add(Chat.formatC(""));
             } else {
