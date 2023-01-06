@@ -37,9 +37,11 @@ public class EnchantManager implements Listener {
     @EventHandler
     public void onDamageEntity(ElementalDamageEvent event){
         if(event.getAttacker() instanceof Player){
-            HashMap<ItemEnchant, Integer> enchantMap = Util.getItemEnchants(((Player) event.getAttacker()).getInventory().getItemInMainHand());
-            for(ItemEnchant enchant : enchantMap.keySet()){
-                enchant.onElementalDamage(event, enchantMap.get(enchant));
+            if(event.getWeapon()!=null) {
+                HashMap<ItemEnchant, Integer> enchantMap = Util.getItemEnchants(event.getWeapon());
+                for (ItemEnchant enchant : enchantMap.keySet()) {
+                    enchant.onElementalDamage(event, enchantMap.get(enchant));
+                }
             }
         }
     }
