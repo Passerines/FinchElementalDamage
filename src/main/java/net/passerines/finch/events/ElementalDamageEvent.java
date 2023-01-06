@@ -97,7 +97,7 @@ public class ElementalDamageEvent extends Event implements Cancellable {
                     //Every 150 strength double damage
                     attackDamage = attackDamage * (1 + playerData.getStrength()/100.0);
                 }
-                else{
+                else if(weapon.getType().isAir()){
                     attackDamage = 5 * (1 + playerData.getStrength()/100.0);
                 }
                 critMultiplier = baseCrit * 1.5f;

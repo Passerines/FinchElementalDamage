@@ -2,10 +2,12 @@ package net.passerines.finch.items;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -14,15 +16,21 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class FinchThrownInsect {
+    public static HashMap<Player, FinchThrownInsect> thrownInsectMap = new HashMap<>();
+    private Entity hitEntity = null;
+    private ArmorStand armorStand = null;
     private final FinchInsect finchInsect;
-    private final FinchGlaives finchGlaives;
     private final Player player;
-    public FinchThrownInsect(Player player, ItemStack insect, ItemStack glaive){
+    private boolean retracting;
+    private int taskThrow;
+    public FinchThrownInsect(Player player, ItemStack insect){
         this.player = player;
         if(Util.getFinchItem(insect) instanceof FinchInsect finchInsect){
             this.finchInsect = finchInsect;
@@ -31,49 +39,72 @@ public class FinchThrownInsect {
             finchInsect = null;
             Util.log("A error regarding FinchInsects have occured");
         }
-        if(Util.getFinchItem(glaive) instanceof FinchGlaives finchGlaives){
-            this.finchGlaives = finchGlaives;
-        }
-        else {
-            finchGlaives = null;
-            Util.log("A error regarding FinchGlaives have occured");
-        }
     }
     public void throwInsect(){
-        Util.log("Launched Insect");
         Plugin plugin = FinchElementalDamage.inst();
-        ArrayList<Entity> hitEntities = new ArrayList<>();
         Location loc = player.getLocation();
-        ArmorStand armorStand = loc.getWorld().spawn(loc, ArmorStand.class, false, (ArmorStand armorStand1) -> {
-            armorStand1.setGravity(false);
+        armorStand = loc.getWorld().spawn(loc, ArmorStand.class, false, (ArmorStand armorStand1) -> {
             armorStand1.setInvisible(true);
             armorStand1.setInvulnerable(true);
-            armorStand1.addEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.REMOVING_OR_CHANGING);
-            armorStand1.getEquipment().setItemInOffHand(player.getEquipment().getItemInMainHand());
+            armorStand1.setSmall(true);
+            armorStand1.addEquipmentLock(EquipmentSlot.HEAD, ArmorStand.LockType.REMOVING_OR_CHANGING);
+            armorStand1.getEquipment().setHelmet(player.getEquipment().getItemInOffHand());
         });
-        int sSRT = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+        player.getEquipment().setItemInOffHand(new ItemStack(Material.AIR));
+        taskThrow = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             Location asLoc = armorStand.getLocation();
-            if(hitEntities.size() == 0) {
+            if(hitEntity == null) {
                 armorStand.teleport(asLoc);
                 armorStand.setVelocity(loc.getDirection().normalize().multiply(2));
-            }
-            Collection<Entity> entitylist = asLoc.getNearbyEntities(1, 1, 1);
-            Object[] entities = entitylist.toArray();
-            for(Object entity : entities) {
-                if (entity instanceof Damageable) {
-                    if (!(entity.equals(player) || entity.equals(armorStand))) {
-                        if(hitEntities.size() == 0) {
-                            new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.CUSTOM, finchInsect.getElement(), finchGlaives.getAttack()/10, player.getInventory().getItemInMainHand()).apply();
-                            hitEntities.add((Entity) entity);
-                            ((Entity) entity).playEffect(EntityEffect.HURT);
+                Collection<Entity> entitylist = asLoc.getNearbyEntities(4, 4, 4);
+                Object[] entities = entitylist.toArray();
+                for(Object entity : entities) {
+                    if (entity instanceof Damageable) {
+                        if (!entity.equals(player) && !(entity instanceof ArmorStand)) {
+                            if (hitEntity == null) {
+                                hitEntity = (Entity) entity;
+                                player.sendMessage(Chat.formatC("You hit for: " + finchInsect.getBugDamage()));
+                                new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.CUSTOM, finchInsect.getElement(), finchInsect.getBugDamage(), armorStand.getItem(EquipmentSlot.HEAD)).apply();
+                                hitEntity.playEffect(EntityEffect.HURT);
+                            }
                         }
                     }
                 }
             }
-        }, 0, 2);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            armorStand.remove();
-            Bukkit.getScheduler().cancelTask(sSRT);
-        }, 25);
+            else{
+                armorStand.setGravity(false);
+            }
+        }, 0, 1);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::retractInsect, 60);
+    }
+    public void retractInsect() {
+        if (!retracting) {
+            retracting = true;
+            Bukkit.getScheduler().cancelTask(taskThrow);
+            taskThrow = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), () -> {
+                Location asLoc = armorStand.getLocation();
+                Location loc = player.getLocation();
+                if (asLoc.distanceSquared(loc) < 5) {
+                    ItemStack itemStack = armorStand.getEquipment().getHelmet();
+                    if (player.getEquipment().getItemInOffHand().getType().isAir()) {
+                        player.getEquipment().setItemInOffHand(itemStack);
+                    }
+                    else if (player.getInventory().firstEmpty() > -1) {
+                        player.getInventory().addItem(itemStack);
+                    }
+                    else {
+                        loc.getWorld().dropItem(loc, itemStack);
+                    }
+                    Bukkit.getScheduler().cancelTask(taskThrow);
+                    armorStand.remove();
+                } else {
+                    Vector vector = (loc.subtract(asLoc).toVector().normalize()).add(asLoc.toVector());
+                    armorStand.teleport(vector.toLocation(loc.getWorld()));
+                }
+            }, 0, 1);
+        }
+    }
+    public void onSuccesfulRetract(){
+
     }
 }

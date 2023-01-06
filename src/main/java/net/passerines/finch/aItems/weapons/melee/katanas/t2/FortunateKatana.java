@@ -70,7 +70,7 @@ public class FortunateKatana extends FinchWeapon implements Listener, FinchCraft
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(5);
+        itemMeta.setCustomModelData(101);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
@@ -80,7 +80,7 @@ public class FortunateKatana extends FinchWeapon implements Listener, FinchCraft
     }
     @Override
     public void registerRecipe() {
-        ItemStack handle = ItemManager.ITEM_HASH_MAP.get("GoldenKatana").getItem();
+        ItemStack handle = ItemManager.ITEM_HASH_MAP.get("LuckyKatana").getItem();
         ItemStack essence = ItemManager.ITEM_HASH_MAP.get("GoldEssence").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "ABA", "ACA" , essence, handle, new ItemStack(Material.BLAZE_POWDER));
         finchRecipe.addRecipe();

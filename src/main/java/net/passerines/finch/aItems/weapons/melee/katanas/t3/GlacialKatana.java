@@ -41,7 +41,7 @@ public class GlacialKatana extends FinchWeapon implements Listener, FinchCraftab
     Cooldown<Player> cdMode = new Cooldown<>(15);
 
     public GlacialKatana() {
-        super("DiamondKatana", 2);
+        super("GlacialKatana", 2);
         this.attack = 30;
         this.element = ElementalDamageEvent.Element.WATER;
         displayName = Chat.formatC("&9Glacial Katana");
@@ -69,18 +69,16 @@ public class GlacialKatana extends FinchWeapon implements Listener, FinchCraftab
             if(comboMap.getOrDefault(player, 1) == 1){
                 Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 4, attack,85,135, dust);
                 slash.drawSlash();
+                if(cdMode.isOnCooldown(player)) {
+                    comboMap.put(player, 2);
+                }
             }
             else if(comboMap.getOrDefault(player, 2) == 2) {
                 Slash slash = new Slash(player, player.getEyeLocation(), getItem(), Particle.REDSTONE, Particle.SNOWFLAKE, 4, attack, 85, 45, dust);
                 slash.drawSlash();
-            }
-            cd.add(player);
-            if(comboMap.getOrDefault(player, 1) == 1){
-                comboMap.put(player, 2);
-            }
-            else if(comboMap.getOrDefault(player, 2) == 2) {
                 comboMap.put(player, 1);
             }
+            cd.add(player);
             cdMode.add(player);
         }
     }
@@ -99,7 +97,7 @@ public class GlacialKatana extends FinchWeapon implements Listener, FinchCraftab
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(6);
+        itemMeta.setCustomModelData(105);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);

@@ -39,6 +39,7 @@ public class SteelKatana extends FinchWeapon implements Listener {
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
+        this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler

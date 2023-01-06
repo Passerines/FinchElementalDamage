@@ -1,19 +1,7 @@
 package net.passerines.finch.itemmanaging;
 
 import net.passerines.finch.FinchCraftableItem;
-import net.passerines.finch.aItems.armor.dracoanian.*;
-import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanBoots;
-import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanHood;
-import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanLeggings;
-import net.passerines.finch.aItems.armor.dracoanian.marksman.DraconianMarksmanVest;
-import net.passerines.finch.aItems.armor.vanillareplacements.DiamondBoots;
-import net.passerines.finch.aItems.armor.vanillareplacements.DiamondChestplate;
-import net.passerines.finch.aItems.armor.vanillareplacements.DiamondHelmet;
-import net.passerines.finch.aItems.armor.vanillareplacements.DiamondLeggings;
-import net.passerines.finch.aItems.glaive.IronGlaive;
 import net.passerines.finch.aItems.insects.Monarch;
-import net.passerines.finch.aItems.tools.MidasPick;
-import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.FortunateKatana;
@@ -22,51 +10,19 @@ import net.passerines.finch.aItems.weapons.melee.katanas.t3.GlacialKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.ProsperityKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.KatanaOfFate;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
-import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
-import net.passerines.finch.aItems.weapons.ranged.t3.GatlingGun;
-import net.passerines.finch.aItems.weapons.ranged.t5.VortexSplash;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
-import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageBoots;
-import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageChestplate;
-import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageHelmet;
-import net.passerines.finch.aItems.armor.bloodItems.mage.BloodMageLeggings;
-import net.passerines.finch.aItems.armor.bloodItems.warrior.BloodBoots;
-import net.passerines.finch.aItems.armor.bloodItems.warrior.BloodChestplate;
-import net.passerines.finch.aItems.armor.bloodItems.warrior.BloodHelmet;
-import net.passerines.finch.aItems.armor.bloodItems.warrior.BloodLeggings;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberBoots;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberChestplate;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberHelmet;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberLeggings;
-import net.passerines.finch.aItems.armor.impierceitems.impiercemage.ImpierceLeggings;
-import net.passerines.finch.aItems.armor.impierceitems.impiercemage.ImpierceRobe;
-import net.passerines.finch.aItems.armor.impierceitems.impiercemage.ImpierceShoes;
-import net.passerines.finch.aItems.armor.impierceitems.impiercemage.ImpierceWisdom;
-import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceAegis;
-import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceCrown;
-import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceGaloshes;
-import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceKneeplates;
-import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherBoots;
-import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherCap;
-import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherLeggings;
-import net.passerines.finch.aItems.armor.vanillareplacements.reinforcedleather.ReinforcedLeatherTunic;
-import net.passerines.finch.items.armor.*;
-import net.passerines.finch.items.weapons.mana.*;
-import net.passerines.finch.items.weapons.melee.*;
-import net.passerines.finch.items.weapons.mana.ManaKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.DiamondKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.GoldenKatana;
-import net.passerines.finch.aItems.weapons.melee.katanas.t1.SteelKatana;
-import net.passerines.finch.aItems.weapons.melee.spears.t5.EngulfingLightning;
-import net.passerines.finch.aItems.weapons.melee.spears.t4.SoulKnightsSpear;
-import net.passerines.finch.items.weapons.ranged.*;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class ItemManager {
@@ -117,9 +73,6 @@ public class ItemManager {
         new DiamondKatana() ;
         new GlacialKatana();
         //Spears
-
-        //Glaives
-        new IronGlaive();
 
         //Armor
         new CarbonFiberHelmet();
