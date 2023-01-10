@@ -1,5 +1,6 @@
 package net.passerines.finch.players;
 
+import net.passerines.finch.enchants.ItemEnchant;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.*;
 import net.passerines.finch.itemmanaging.ItemManager;
@@ -16,6 +17,7 @@ import org.checkerframework.checker.units.qual.Prefix;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PlayerData {
 
@@ -112,6 +114,28 @@ public class PlayerData {
     private void calculate(ItemStack item) {
         String id = Util.getId(item);
         String prefix = Util.getPrefix(item);
+        if(!Util.getItemEnchants(item).isEmpty()){
+            HashMap<ItemEnchant, Integer> enchantHashMap = Util.getItemEnchants(item);
+            for(ItemEnchant enchant : enchantHashMap.keySet()){
+                setDefense((defense + enchant.getDefense(enchantHashMap.get(enchant))));
+                setHealthMax(healthMax + enchant.getHealth(enchantHashMap.get(enchant)));
+                setAttack((attack + enchant.getAttack(enchantHashMap.get(enchant))));
+                setStrength((strength + enchant.getStrength(enchantHashMap.get(enchant))));
+                setCritChance((critChance + enchant.getCritChance(enchantHashMap.get(enchant))));
+                setHealthRegen((healthRegen + enchant.getHealthRegen(enchantHashMap.get(enchant))));
+                setManaRegen((manaRegen + enchant.getManaRegen(enchantHashMap.get(enchant))));
+                setBowDamage((bowDamage + enchant.getBowDamage(enchantHashMap.get(enchant))));
+                setDexterity((dexterity + enchant.getDexterity(enchantHashMap.get(enchant))));
+                setManaMax((manaMax + enchant.getMana(enchantHashMap.get(enchant))));
+                setDarknessProf(darknessProf + enchant.getDarknessProf(enchantHashMap.get(enchant)));
+                setEarthProf(earthProf + enchant.getEarthProf(enchantHashMap.get(enchant)));
+                setElectroProf(electroProf + enchant.getElectroProf(enchantHashMap.get(enchant)));
+                setFireProf(fireProf + enchant.getFireProf(enchantHashMap.get(enchant)));
+                setWaterProf(waterProf + enchant.getWaterProf(enchantHashMap.get(enchant)));
+                setLightProf(lightProf + enchant.getLightProf(enchantHashMap.get(enchant)));
+                setWindProf(windProf + enchant.getWindProf(enchantHashMap.get(enchant)));
+            }
+        }
         if (PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)) {
             ItemPrefix itemPrefix = PrefixManager.PREFIX_HASH_MAP.get(prefix);
             setDefense(defense + itemPrefix.getDefense());
@@ -193,6 +217,28 @@ public class PlayerData {
     private void uncalculate(ItemStack item) {
         String id = Util.getId(item);
         String prefix = Util.getPrefix(item);
+        if(!Util.getItemEnchants(item).isEmpty()){
+            HashMap<ItemEnchant, Integer> enchantHashMap = Util.getItemEnchants(item);
+            for(ItemEnchant enchant : enchantHashMap.keySet()){
+                setDefense((defense - enchant.getDefense(enchantHashMap.get(enchant))));
+                setHealthMax(healthMax - enchant.getHealth(enchantHashMap.get(enchant)));
+                setAttack((attack - enchant.getAttack(enchantHashMap.get(enchant))));
+                setStrength((strength - enchant.getStrength(enchantHashMap.get(enchant))));
+                setCritChance((critChance - enchant.getCritChance(enchantHashMap.get(enchant))));
+                setHealthRegen((healthRegen - enchant.getHealthRegen(enchantHashMap.get(enchant))));
+                setManaRegen((manaRegen - enchant.getManaRegen(enchantHashMap.get(enchant))));
+                setBowDamage((bowDamage - enchant.getBowDamage(enchantHashMap.get(enchant))));
+                setDexterity((dexterity - enchant.getDexterity(enchantHashMap.get(enchant))));
+                setManaMax((manaMax - enchant.getMana(enchantHashMap.get(enchant))));
+                setDarknessProf(darknessProf - enchant.getDarknessProf(enchantHashMap.get(enchant)));
+                setEarthProf(earthProf - enchant.getEarthProf(enchantHashMap.get(enchant)));
+                setElectroProf(electroProf - enchant.getElectroProf(enchantHashMap.get(enchant)));
+                setFireProf(fireProf - enchant.getFireProf(enchantHashMap.get(enchant)));
+                setWaterProf(waterProf - enchant.getWaterProf(enchantHashMap.get(enchant)));
+                setLightProf(lightProf - enchant.getLightProf(enchantHashMap.get(enchant)));
+                setWindProf(windProf - enchant.getWindProf(enchantHashMap.get(enchant)));
+            }
+        }
         if (PrefixManager.PREFIX_HASH_MAP.containsKey(prefix)) {
             ItemPrefix itemPrefix = PrefixManager.PREFIX_HASH_MAP.get(prefix);
             setDefense(defense - itemPrefix.getDefense());

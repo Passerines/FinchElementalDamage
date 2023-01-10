@@ -160,49 +160,49 @@ public class ItemEnchant {
         return this;
     }
     public double getFireProf(int level) {
-        return (int) (fireProf * (1+(level-1)*0.2));
+        return (fireProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setFireProf(double fireProf){
         this.fireProf = fireProf;
         return this;
     }
     public double getWaterProf(int level) {
-        return (int) (waterProf * (1+(level-1)*0.2));
+        return (waterProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setWaterProf(double waterProf){
         this.waterProf = waterProf;
         return this;
     }
     public double getEarthProf(int level) {
-        return (int) (earthProf * (1+(level-1)*0.2));
+        return (earthProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setEarthProf(double earthProf){
         this.earthProf = earthProf;
         return this;
     }
     public double getWindProf(int level) {
-        return (int) (windProf * (1+(level-1)*0.2));
+        return (windProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setWindProf(double windProf){
         this.windProf = windProf;
         return this;
     }
     public double getElectroProf(int level) {
-        return (int) (electroProf * (1+(level-1)*0.2));
+        return (electroProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setElectroProf(double electroProf){
         this.electroProf = electroProf;
         return this;
     }
     public double getLightProf(int level) {
-        return (int) (lightProf * (1+(level-1)*0.2));
+        return (lightProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setLightProf(double lightProf){
         this.lightProf = lightProf;
         return this;
     }
     public double getDarknessProf(int level) {
-        return (int) (darknessProf * (1+(level-1)*0.2));
+        return (darknessProf * (1+(level-1)*0.2));
     }
     public ItemEnchant setDarknessProf(double darknessProf){
         this.darknessProf = darknessProf;
