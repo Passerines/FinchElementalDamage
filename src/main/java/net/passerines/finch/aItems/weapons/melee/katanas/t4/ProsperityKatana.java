@@ -62,7 +62,7 @@ public class ProsperityKatana extends FinchWeapon implements Listener, FinchCraf
             }
         }
     }
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){

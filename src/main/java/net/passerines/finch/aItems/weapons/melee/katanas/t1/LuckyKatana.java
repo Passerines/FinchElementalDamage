@@ -50,7 +50,7 @@ public class LuckyKatana extends FinchWeapon implements Listener {
             }
         }
     }
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){

@@ -1,13 +1,13 @@
 package net.passerines.finch.items;
 
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
-import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -88,9 +88,11 @@ public class FinchThrownInsect {
                     ItemStack itemStack = armorStand.getEquipment().getHelmet();
                     if (player.getEquipment().getItemInOffHand().getType().isAir()) {
                         player.getEquipment().setItemInOffHand(itemStack);
+                        onSuccesfulRetract();
                     }
                     else if (player.getInventory().firstEmpty() > -1) {
                         player.getInventory().addItem(itemStack);
+                        onSuccesfulRetract();
                     }
                     else {
                         loc.getWorld().dropItem(loc, itemStack);
@@ -105,6 +107,14 @@ public class FinchThrownInsect {
         }
     }
     public void onSuccesfulRetract(){
-
+        if(hitEntity != null){
+            PlayerData playerData = PlayerMap.PLAYERS.get(player);
+            playerData.calculate(finchInsect.getItem());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
+                if(!PlayerData.isPlayerBuffed.getOrDefault(player, false)) {
+                    playerData.uncalculate(finchInsect.getItem());
+                }
+            }, 300);
+        }
     }
 }

@@ -2,6 +2,7 @@ package net.passerines.finch.items;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -31,8 +32,9 @@ public abstract class FinchInsect extends FinchEquipment implements Listener {
     }
     public abstract void onContact(Location loc);
     @EventHandler
-    public void ifInsect(PlayerInteractEvent event){
+    public void onClick(PlayerInteractEvent event){
         Player player = event.getPlayer();
+        player.sendMessage(Chat.formatC("Insect Interact"));
         if(event.getAction().isRightClick() && event.getPlayer().isSneaking() && Util.getFinchItem(player.getInventory().getItemInOffHand()) instanceof FinchInsect finchInsect) {
             FinchThrownInsect finchThrownInsect = new FinchThrownInsect(player, finchInsect.getItem());
             finchThrownInsect.throwInsect();

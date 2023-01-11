@@ -2,6 +2,7 @@ package net.passerines.finch.attacks;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.events.handler.FinchKnockBackEvent;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.itemmanaging.ItemManager;
@@ -82,8 +83,10 @@ public class Slash {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if(finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
+                            FinchKnockBackEvent finchKnockBackEvent = new FinchKnockBackEvent((Entity) entity, player, 2);
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.ENTITY_ATTACK , finchWeapon.getElement(), damage, itemStack);
                             elementalDamageEvent.apply();
+                            finchKnockBackEvent.apply();
                             hitEntities.add((Entity) entity);
                         }
                     }

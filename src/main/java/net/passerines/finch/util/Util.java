@@ -150,7 +150,7 @@ public class Util {
     }
     public static HashMap<ItemEnchant, Integer> getItemEnchants(ItemStack item) {
         HashMap<ItemEnchant, Integer> enchantList = new HashMap<>();
-        if(item != null){
+        if(item != null && item.getItemMeta() != null){
             if(item.getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("enchant"))){
                 String list = item.getItemMeta().getPersistentDataContainer().get(Util.getNamespacedKey("enchant"), PersistentDataType.STRING);
                 String[] arrayEnchants = list.split(",");

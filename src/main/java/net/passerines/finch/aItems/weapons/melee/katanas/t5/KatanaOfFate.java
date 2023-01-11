@@ -65,7 +65,7 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
             }
         }
     }
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
