@@ -7,10 +7,7 @@ import net.passerines.finch.enchants.EnchantManager;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
-import net.passerines.finch.events.handler.ArrowHandler;
-import net.passerines.finch.events.handler.DamageDisplayer;
-import net.passerines.finch.events.handler.DamageHandler;
-import net.passerines.finch.events.handler.EquipmentChangeHandler;
+import net.passerines.finch.events.handler.*;
 import net.passerines.finch.integrations.MythicMobsBridge;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.InteractDetector;
@@ -65,6 +62,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new ArrowHandler();
         new RecipeBookDefault();
         new InteractDetector();
+        new DashHandler();
     }
 
     public static FinchElementalDamage inst() {

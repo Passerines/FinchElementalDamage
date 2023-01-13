@@ -34,7 +34,6 @@ public abstract class FinchInsect extends FinchEquipment implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event){
         Player player = event.getPlayer();
-        player.sendMessage(Chat.formatC("Insect Interact"));
         if(event.getAction().isRightClick() && event.getPlayer().isSneaking() && Util.getFinchItem(player.getInventory().getItemInOffHand()) instanceof FinchInsect finchInsect) {
             FinchThrownInsect finchThrownInsect = new FinchThrownInsect(player, finchInsect.getItem());
             finchThrownInsect.throwInsect();

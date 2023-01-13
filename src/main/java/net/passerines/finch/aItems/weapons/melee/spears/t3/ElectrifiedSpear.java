@@ -16,10 +16,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -29,6 +26,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,7 +49,7 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
         lore.add(" ");
         lore.add(ENCHANTS);
         lore.add("&6Ability: &5Stun");
-        lore.add("&7Scatter electricity around yourself dealing 25 true damage and stunning opponent");
+        lore.add("&7Scatter electricity around yourself dealing 15 true damage and stunning opponent");
         this.lore = Chat.formatC(lore);
         //
 
@@ -78,14 +77,16 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                 Location loc = player.getLocation();
                 loc.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, loc, 90,1,2,1);
-                Collection<Entity> entitylist = loc.getNearbyEntities(1,2,1);
+                Collection<Entity> entitylist = loc.getNearbyEntities(2,2,2);
                 Object[] entities = entitylist.toArray();
                 for (Object entity : entities) {
                     if (entity instanceof Damageable) {
                         if (!(entity.equals(player)) && !(entity.equals(ArmorStand.class))) {
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity,
-                                    EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.ELECTRO,
+                                    EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.TRUE,
                                     15, player.getInventory().getItemInMainHand());
+                            ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 2, false, false, true));
+
                             elementalDamageEvent.apply();
                         }
                     }
@@ -99,7 +100,7 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(1);
+        itemMeta.setCustomModelData(4);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
