@@ -17,6 +17,7 @@ public class LifeDrainCurse extends ItemEnchant {
         if(event.getAttacker() instanceof Player && !event.getVictim().equals(event.getAttacker())){
             PlayerData vPlayerData = new PlayerData((Player) event.getAttacker());
             new ElementalDamageEvent(event.getAttacker(), event.getAttacker(), ElementalDamageEvent.Element.DARK, vPlayerData.getHealth() * (level*0.025)).apply();
+            event.getAttacker().sendMessage("ATTACK DONE. LIFE DRAIN DAMAGE DEALT TO YOU:" + vPlayerData.getHealth() * (level*0.025));
         }
     }
 }

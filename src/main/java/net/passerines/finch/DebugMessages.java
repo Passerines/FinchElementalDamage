@@ -19,7 +19,7 @@ public class DebugMessages implements Listener{
     public void onHit(ElementalDamageEvent event){
         if(event.getAttacker() instanceof Player player && event.getVictim() instanceof LivingEntity victim){
             if(ModelEngineAPI.isModeledEntity(victim.getUniqueId())) {
-                player.sendMessage(Chat.formatC("You hit: A model engine mob " + victim.getName() + " " + victim.getUniqueId()) + " " + victim.getType());
+                //player.sendMessage(Chat.formatC("You hit: A model engine mob " + victim.getName() + " " + victim.getUniqueId()) + " " + victim.getType());
             }
         }
 

@@ -17,6 +17,7 @@ public class LifestealEnchant extends ItemEnchant {
         if(event.getAttacker() instanceof Player && !event.getVictim().equals(event.getAttacker())){
             PlayerData vPlayerData = new PlayerData((Player) event.getAttacker());
             new ElementalDamageEvent(event.getAttacker(), event.getAttacker(), ElementalDamageEvent.Element.DARK, (-1 * (event.getDamage()*0.01))).apply();
+            event.getAttacker().sendMessage("ATTACK DONE. LIFESTEAL");
         }
     }
 }
