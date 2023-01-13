@@ -5,7 +5,7 @@ import net.passerines.finch.events.ElementalDamageEvent;
 
 public class FireAspectEnchant extends ItemEnchant {
     public FireAspectEnchant() {
-        super("FireAspectSword", "&9Fire Aspect", EnchantmentType.WEAPON);
+        super("SwordFireAspect", "&9Fire Aspect", EnchantmentType.WEAPON);
     }
 
     @Override
