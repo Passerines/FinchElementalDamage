@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.util.Vector;
 
 public class DashHandler implements Listener {
     private final Cooldown<Player> cd = new Cooldown<>(18);
@@ -18,7 +19,8 @@ public class DashHandler implements Listener {
     public void onDash(PlayerDropItemEvent itemEvent){
         Player player = itemEvent.getPlayer();
         if(cd.isOffCooldown(player)){
-            player.setVelocity(player.getVelocity().multiply(3));
+            Vector vector = player.getLocation().getDirection();
+            player.setVelocity(vector.multiply(2).setY(0));
             cd.add(player);
         }
         itemEvent.setCancelled(true);
