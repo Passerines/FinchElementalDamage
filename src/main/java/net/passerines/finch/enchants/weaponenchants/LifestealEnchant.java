@@ -6,17 +6,17 @@ import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.players.PlayerData;
 import org.bukkit.entity.Player;
 
-public class LifeDrainCurse extends ItemEnchant {
-    public LifeDrainCurse() {
-        super("LifeDrainCurse", "&1Life Drain", EnchantmentType.WEAPON);
+public class LifestealEnchant extends ItemEnchant {
+    public LifestealEnchant() {
+        super("SwordLifesteal", "&1Lifesteal", EnchantmentType.WEAPON);
     }
 
     @Override
     public void onElementalDamage(ElementalDamageEvent event, int level) {
-        //Makes the player take 2.5% of their hp per hit
+        //Makes the player heal 1% of their hp per hit
         if(event.getAttacker() instanceof Player && !event.getVictim().equals(event.getAttacker())){
             PlayerData vPlayerData = new PlayerData((Player) event.getAttacker());
-            new ElementalDamageEvent(event.getAttacker(), event.getAttacker(), ElementalDamageEvent.Element.DARK, vPlayerData.getHealth() * (level*0.025)).apply();
+            new ElementalDamageEvent(event.getAttacker(), event.getAttacker(), ElementalDamageEvent.Element.DARK, (-1 * (event.getDamage()*0.01))).apply();
         }
     }
 }

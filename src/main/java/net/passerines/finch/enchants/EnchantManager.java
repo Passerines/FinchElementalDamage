@@ -7,6 +7,8 @@ import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.enchants.weaponenchants.BloodLustEnchant;
 import net.passerines.finch.enchants.weaponenchants.FireAspectEnchant;
 import net.passerines.finch.enchants.weaponenchants.LifeDrainCurse;
+import net.passerines.finch.enchants.weaponenchants.LifestealEnchant;
+import net.passerines.finch.events.CustomEntityDeathEvent;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
@@ -35,6 +37,7 @@ public class EnchantManager implements Listener {
         new ItemEnchant("ArmorProtection", Chat.formatC("Protection"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setDefense(50);
         new ItemEnchant("SwordHarmony", Component.text("Harmony").color(TextColor.color(52, 76, 235)), ItemEnchant.EnchantmentType.WEAPON)
                 .setMaxLevel(5).setDarknessProf(1).setEarthProf(1).setElectroProf(1).setWindProf(1).setFireProf(1).setLightProf(1);
+        new LifestealEnchant().setMaxLevel(7);
     }
 
     //A hashmap cannot contain 2 of the same keys, but 2 keys can have the same value
@@ -50,6 +53,7 @@ public class EnchantManager implements Listener {
             }
         }
     }
+
 
     public static ArrayList<ItemEnchant> getEnchants(ItemEnchant.EnchantmentType type, int tier){
         ArrayList<ItemEnchant> prefixList = new ArrayList<>(EnchantManager.ENCHANTS_HASH_MAP.values());
