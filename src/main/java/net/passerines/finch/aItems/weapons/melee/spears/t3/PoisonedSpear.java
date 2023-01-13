@@ -63,12 +63,12 @@ public class PoisonedSpear extends FinchWeapon implements Listener {
         }
     }
 
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.DRAGON_BREATH, 5, attack,2,0, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.VILLAGER_HAPPY, Particle.VILLAGER_HAPPY, 5, attack,2,0, null);
             slash.drawSlash();
             cd.add(player);
         }
@@ -78,7 +78,7 @@ public class PoisonedSpear extends FinchWeapon implements Listener {
         if(event.getAttacker() instanceof Player player){
             if(id.equals(Util.getId(event.getWeapon()))){
                 if(event.getVictim() instanceof LivingEntity livingEntity){
-                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 30, 2, false, false, true));
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 80, 2, false, false, true));
                     PlayerData playerData = PlayerMap.PLAYERS.get(player);
                     if(60 + playerData.getHealth() < playerData.getHealthMax()){
                         playerData.setHealth(playerData.getHealth() + 60);

@@ -70,10 +70,10 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255, 215, 84), 1.0F);
-            Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.FALLING_HONEY, 3, attack,90,60, dust);
+            Slash slash0 = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 3, attack,2,0, dust);
             slash0.drawSlash();
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.FALLING_HONEY, 3, attack,90,1, dust);
+                Slash slash = new Slash(player, player.getEyeLocation(), getItem() , Particle.REDSTONE, Particle.SNOWFLAKE, 8, attack,90,1, dust);
                 slash.drawSlash();
             }, 4);
             cd.add(player);

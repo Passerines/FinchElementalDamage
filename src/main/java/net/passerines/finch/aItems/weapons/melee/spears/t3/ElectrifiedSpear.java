@@ -65,7 +65,7 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
         }
     }
 
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
@@ -84,7 +84,7 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
                     if (entity instanceof Damageable) {
                         if (!(entity.equals(player)) && !(entity.equals(ArmorStand.class))) {
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity,
-                                    EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.WATER,
+                                    EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.ELECTRO,
                                     15, player.getInventory().getItemInMainHand());
                             elementalDamageEvent.apply();
                         }

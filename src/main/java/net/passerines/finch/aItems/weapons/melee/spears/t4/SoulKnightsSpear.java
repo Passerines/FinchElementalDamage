@@ -51,7 +51,7 @@ public class SoulKnightsSpear extends FinchWeapon implements Listener {
             }
         }
     }
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();

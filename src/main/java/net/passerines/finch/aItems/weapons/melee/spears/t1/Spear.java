@@ -41,7 +41,8 @@ public class Spear extends FinchWeapon implements Listener {
         lore.add(" ");
         lore.add(ENCHANTS);
         lore.add("&6Ability: &fDefensive Stance");
-        lore.add("&7While sneaking your attacks have +1 range");
+        lore.add("&7While sneaking your attacks have +1 range and hit a second time");
+        lore.add("&7for 30% the damage");
         this.lore = Chat.formatC(lore);
         //
 
@@ -56,16 +57,16 @@ public class Spear extends FinchWeapon implements Listener {
         }
     }
 
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.DRAGON_BREATH, 5, attack,2,0, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.CRIT, 5, attack,2,0, null);
             slash.drawSlash();
             cd.add(player);
         }
         if(click.getAction().isLeftClick() && player.isSneaking()){
-            Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.DRAGON_BREATH, 6, attack,2,0, null);
+            Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.CRIT, 6, attack/3.0,2,0, null);
             slash.drawSlash();
             cd.add(player);
         }

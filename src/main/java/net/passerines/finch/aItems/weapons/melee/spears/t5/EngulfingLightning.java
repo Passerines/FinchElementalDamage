@@ -103,7 +103,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             }
         }
     }
-    @EventHandler
+    @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);

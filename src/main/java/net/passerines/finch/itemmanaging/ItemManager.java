@@ -10,6 +10,11 @@ import net.passerines.finch.aItems.weapons.melee.katanas.t3.GlacialKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t4.ProsperityKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.KatanaOfFate;
 import net.passerines.finch.aItems.weapons.melee.katanas.t5.Shriex;
+import net.passerines.finch.aItems.weapons.melee.spears.t1.Spear;
+import net.passerines.finch.aItems.weapons.melee.spears.t2.AmythestSpear;
+import net.passerines.finch.aItems.weapons.melee.spears.t2.EmeraldSpear;
+import net.passerines.finch.aItems.weapons.melee.spears.t3.ElectrifiedSpear;
+import net.passerines.finch.aItems.weapons.melee.spears.t3.PoisonedSpear;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberBoots;
@@ -73,7 +78,11 @@ public class ItemManager {
         new DiamondKatana() ;
         new GlacialKatana();
         //Spears
-
+        new Spear();
+        new AmythestSpear();
+        new EmeraldSpear();
+        new ElectrifiedSpear();
+        new PoisonedSpear();
         //Armor
         new CarbonFiberHelmet();
         new CarbonFiberChestplate();
