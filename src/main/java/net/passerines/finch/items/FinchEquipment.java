@@ -153,7 +153,7 @@ public abstract class FinchEquipment extends FinchItem {
                 parseStat(newLore, "&bMana: &7", mana, bonusMana);
                 int bonusManaRegen = prefix==null?0:prefix.getManaRegen();
                 for(ItemEnchant enchant : enchants.keySet()) bonusManaRegen += enchant.getManaRegen(enchants.get(enchant));
-                parseStat(newLore, "&cHealth Regen: &7", healthRegen, bonusManaRegen);
+                parseStat(newLore, "&bMana Regen: &7", healthRegen, bonusManaRegen);
                 int bonusDefense = prefix==null?0:prefix.getDefense();
                 for(ItemEnchant enchant : enchants.keySet()) bonusDefense += enchant.getDefense(enchants.get(enchant));
                 parseStat(newLore, "&aDefense: &7", defense, bonusDefense);
