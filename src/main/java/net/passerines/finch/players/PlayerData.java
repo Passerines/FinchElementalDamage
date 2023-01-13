@@ -159,7 +159,7 @@ public class PlayerData {
         }
         if (ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             if (ItemManager.ITEM_HASH_MAP.get(id) instanceof FinchEquipment finchEquipment) {
-                player.sendMessage(Chat.formatC("Uncalculated"));
+                //player.sendMessage(Chat.formatC("Uncalculated"));
                 setDefense(defense + finchEquipment.getDefense());
                 setHealthMax(healthMax + finchEquipment.getHealth());
                 setAttack(attack + finchEquipment.getAttack());
@@ -227,7 +227,7 @@ public class PlayerData {
         }
         if (ItemManager.ITEM_HASH_MAP.containsKey(id)) {
             if (ItemManager.ITEM_HASH_MAP.get(id) instanceof FinchEquipment finchEquipment) {
-                player.sendMessage(Chat.formatC("Uncalculated"));
+                //player.sendMessage(Chat.formatC("Uncalculated"));
                 setDefense(defense - finchEquipment.getDefense());
                 setHealthMax(healthMax - finchEquipment.getHealth());
                 setAttack(attack - finchEquipment.getAttack());
