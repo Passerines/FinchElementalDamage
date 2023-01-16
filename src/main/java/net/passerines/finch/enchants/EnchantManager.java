@@ -34,6 +34,7 @@ public class EnchantManager implements Listener {
         new FireAspectEnchant().setMaxLevel(10);
         new BloodLustEnchant().setMaxLevel(7);
         new LifeDrainCurse().setMaxLevel(3);
+        new ItemEnchant("TrinketBlessed", Chat.formatC("Blessed"), ItemEnchant.EnchantmentType.TRINKET).setMaxLevel(3).setLightProf(3).setHealth(100);
         new ItemEnchant("ArmorProtection", Chat.formatC("Protection"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setDefense(50);
         new ItemEnchant("ArmorHealthy", Chat.formatC("Healthy"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setHealth(75);
         new ItemEnchant("SwordHarmony", Component.text("Harmony").color(TextColor.color(52, 76, 235)), ItemEnchant.EnchantmentType.WEAPON)
