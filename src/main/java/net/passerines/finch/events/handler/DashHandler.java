@@ -20,7 +20,7 @@ public class DashHandler implements Listener {
     @EventHandler
     public void onDash(PlayerDropItemEvent itemEvent){
         Player player = itemEvent.getPlayer();
-        if(cd.isOffCooldown(player) && player.getOpenInventory() instanceof PlayerInventory){
+        if(cd.isOffCooldown(player) && !(player.getOpenInventory() instanceof PlayerInventory)){
             Vector vector = player.getLocation().getDirection().normalize();
             player.setVelocity(vector.multiply(2).setY(0));
             cd.add(player);
