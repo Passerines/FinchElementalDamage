@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 
 public class DashHandler implements Listener {
@@ -19,8 +20,8 @@ public class DashHandler implements Listener {
     @EventHandler
     public void onDash(PlayerDropItemEvent itemEvent){
         Player player = itemEvent.getPlayer();
-        if(cd.isOffCooldown(player) && player.getOpenInventory().getType() == InventoryType.CRAFTING){
-            Vector vector = player.getVelocity();
+        if(cd.isOffCooldown(player) && player.getOpenInventory() instanceof PlayerInventory){
+            Vector vector = player.getLocation().getDirection().normalize();
             player.setVelocity(vector.multiply(2).setY(0));
             cd.add(player);
         }

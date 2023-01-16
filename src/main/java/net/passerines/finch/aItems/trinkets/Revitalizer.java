@@ -27,12 +27,13 @@ public class Revitalizer extends FinchTrinkets implements FinchCraftableItem {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(401);
         item.setItemMeta(itemMeta);
+        format(item);
         return writeId(item);
     }
 
     @Override
     public void registerRecipe() {
-        ItemStack oakLog = new ItemStack(Material.GOLDEN_APPLE);
+        ItemStack oakLog = new ItemStack(Material.TOTEM_OF_UNDYING);
         ItemStack ritualEssence = ItemManager.ITEM_HASH_MAP.get("RitualEssence").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "ABA", "AAA" , oakLog, ritualEssence);
         finchRecipe.addRecipe();
