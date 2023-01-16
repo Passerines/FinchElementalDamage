@@ -35,7 +35,7 @@ public class FateCrossbow extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(1);
     public FateCrossbow() {
         super("FateCrossbow");
-        this.attack = 15;
+        this.attack = 100;
         this.element = ElementalDamageEvent.Element.DARK;
         displayName = Chat.formatC("&0Fate" + " &fCrossbow");
         ArrayList<String> lore = new ArrayList<>();
@@ -64,7 +64,7 @@ public class FateCrossbow extends FinchWeapon implements Listener {
             Location loc = player.getEyeLocation();
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 loc.add(loc.getDirection().multiply(i.get()));
-                Slash slash = new Slash(player, loc, getItem() , Particle.ASH, Particle.TOTEM, 5, attack,2,0, null);
+                Slash slash = new Slash(player, loc, getItem() , Particle.TOTEM, Particle.TOTEM, 5, attack,2,0, null);
                 slash.drawSlash();
             }, 0, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);
@@ -76,7 +76,7 @@ public class FateCrossbow extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(9);
+        itemMeta.setCustomModelData(2003);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
