@@ -40,6 +40,7 @@ import net.passerines.finch.aItems.weapons.melee.spears.t3.PoisonedSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t4.SoulKnightsSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.EngulfingLightning;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
+import net.passerines.finch.aItems.weapons.ranged.artifacts.FateCrossbow;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberBoots;
@@ -74,6 +75,7 @@ public class ItemManager {
     private static void registerAll() {
         //No Recipe Items
         new Shriex();
+        new FateCrossbow();
         //Essence
         new RitualEssence();
         new GoldEssence();
