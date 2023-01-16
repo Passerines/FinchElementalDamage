@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class DraconianPlate extends FinchArmor implements FinchCraftableItem {
 
     public DraconianPlate() {
-        super("DraconianPlate");
+        super("DraconianPlate", 4);
         this.defense = 450;
         this.health = 180;
         displayName = Chat.formatC("&4Draconian Plate");

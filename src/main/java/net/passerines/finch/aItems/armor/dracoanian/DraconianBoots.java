@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DraconianBoots extends FinchArmor implements FinchCraftableItem {
 
     public DraconianBoots() {
-        super("DraconianBoots");
+        super("DraconianBoots", 4);
         this.defense = 155;
         this.health = 80;
         this.strength = 35;

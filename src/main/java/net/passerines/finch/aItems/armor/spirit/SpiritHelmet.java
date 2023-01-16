@@ -22,7 +22,7 @@ public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, List
     public SpiritHelmet() {
         super("SpiritHelmet");
         this.health = 200;
-        this.dexterity = 45;
+        this.mana = 1400;
         this.healthRegen = 30;
         displayName = Chat.formatC("&");
         ArrayList<String> lore = new ArrayList<>();
@@ -34,7 +34,7 @@ public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, List
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+        ItemStack item = new ItemStack(Material.CHAINMAIL_HELMET);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -42,14 +42,7 @@ public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, List
         format(item);
         return writeId(item);
     }
-    @EventHandler
-    public void onHit(ElementalDamageEvent event){
-        if(event.getVictim() instanceof Player player){
-            if(id.equals(Util.getId(player.getEquipment().getHelmet()))){
 
-            }
-        }
-    }
     public void registerRecipe() {
         ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
         ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();

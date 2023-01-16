@@ -1,28 +1,26 @@
-package net.passerines.finch.aItems.armor.dracoanian;
+package net.passerines.finch.aItems.armor.spirit;
 
-import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
 import net.passerines.finch.util.Chat;
-import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.ArrayList;
 
-public class DraconianLeggings extends FinchArmor implements FinchCraftableItem {
+public class SpiritRobes extends FinchArmor implements FinchCraftableItem, Listener {
 
-    public DraconianLeggings() {
-        super("DraconianLeggings", 4);
-        this.defense = 220;
-        this.health = 145;
-        this.strength = 25;
-        displayName = Chat.formatC("&4Draconian Leggings");
+    public SpiritRobes() {
+        super("SpiritHelmet");
+        this.health = 400;
+        this.mana = 800;
+        this.healthRegen = 40;
+        displayName = Chat.formatC("&");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         lore.add(" ");
@@ -32,19 +30,19 @@ public class DraconianLeggings extends FinchArmor implements FinchCraftableItem 
 
     @Override
     public ItemStack getItem() {
-        ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS);
-        LeatherArmorMeta itemMeta = (LeatherArmorMeta) item.getItemMeta();
-        itemMeta.setColor(Color.MAROON);
+        ItemStack item = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+        ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
         format(item);
         return writeId(item);
     }
-    @Override
+
     public void registerRecipe() {
-        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "A A" , item);
+        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
+        ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "A A", "ABA", "AAA" , item, item0);
         finchRecipe.addRecipe();
     }
 }

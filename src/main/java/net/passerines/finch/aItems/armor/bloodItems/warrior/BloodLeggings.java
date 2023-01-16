@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class BloodLeggings extends FinchArmor implements FinchCraftableItem {
 
     public BloodLeggings() {
-        super("BloodLeggings");
+        super("BloodLeggings", 1);
         this.defense = 20;
         this.health = -10;
         this.strength = 7;

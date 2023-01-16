@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class DraconianAegis extends FinchArmor implements FinchCraftableItem {
 
     public DraconianAegis() {
-        super("DraconianAegis");
+        super("DraconianAegis", 4);
         this.defense = 400;
         this.health = 210;
         this.strength = 10;

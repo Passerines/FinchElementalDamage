@@ -41,7 +41,7 @@ public class GlacialKatana extends FinchWeapon implements Listener, FinchCraftab
     Cooldown<Player> cdMode = new Cooldown<>(15);
 
     public GlacialKatana() {
-        super("GlacialKatana", 2);
+        super("GlacialKatana", 3);
         this.attack = 30;
         this.element = ElementalDamageEvent.Element.WATER;
         displayName = Chat.formatC("&9Glacial Katana");

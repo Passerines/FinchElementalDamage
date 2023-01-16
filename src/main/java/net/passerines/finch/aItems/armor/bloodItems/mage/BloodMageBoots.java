@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
 
     public BloodMageBoots() {
-        super("BloodMageBoots");
+        super("BloodMageBoots", 1);
         this.defense = 15;
         this.health = -5;
         this.mana = 40;

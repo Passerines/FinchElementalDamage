@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class CarbonFiberLeggings extends FinchArmor implements FinchCraftableItem {
     public CarbonFiberLeggings() {
-        super("CarbonFiberLeggings");
+        super("CarbonFiberLeggings", 1);
         this.defense = 140;
         this.health = 15;
         displayName = Chat.formatC("&fCarbon Fiber Leggings");

@@ -42,7 +42,7 @@ public class KatanaOfFate extends FinchWeapon implements Listener, FinchCraftabl
     Cooldown<Player> cd = new Cooldown<>(9);
     Cooldown<Player> cd1 = new Cooldown<>(70);
     public KatanaOfFate() {
-        super("KatanaOfFate", 4);
+        super("KatanaOfFate", 5);
         this.attack = 35;
         this.critChance = 210;
         this.element = ElementalDamageEvent.Element.NEUTRAL;

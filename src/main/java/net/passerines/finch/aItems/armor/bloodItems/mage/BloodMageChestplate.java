@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class BloodMageChestplate extends FinchArmor implements FinchCraftableItem {
 
     public BloodMageChestplate() {
-        super("BloodMageChestplate");
+        super("BloodMageChestplate", 1);
         this.defense = 25;
         this.health = -10;
         this.mana = 75;

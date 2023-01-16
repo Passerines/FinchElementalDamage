@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ImpierceGaloshes extends FinchArmor {
 
     public ImpierceGaloshes() {
-        super("ImpierceGaloshes");
+        super("ImpierceGaloshes", 5);
         this.defense = 315;
         this.health = 55;
         this.strength = 10;

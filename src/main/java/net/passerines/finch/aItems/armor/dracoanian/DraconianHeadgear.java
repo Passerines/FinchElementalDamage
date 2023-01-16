@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class DraconianHeadgear extends FinchArmor implements FinchCraftableItem {
 
     public DraconianHeadgear() {
-        super("DraconianHeadgear");
+        super("DraconianHeadgear", 4);
         this.defense = 140;
         this.health = 90;
         this.strength = 40;
