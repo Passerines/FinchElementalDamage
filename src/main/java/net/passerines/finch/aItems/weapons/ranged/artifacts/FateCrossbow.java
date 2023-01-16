@@ -35,7 +35,7 @@ public class FateCrossbow extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(1);
     public FateCrossbow() {
         super("FateCrossbow");
-        this.bowDamage = 250;
+        this.attack = 15;
         this.element = ElementalDamageEvent.Element.DARK;
         displayName = Chat.formatC("&0Fate" + " &fCrossbow");
         ArrayList<String> lore = new ArrayList<>();
@@ -43,7 +43,7 @@ public class FateCrossbow extends FinchWeapon implements Listener {
         lore.add(" ");
         lore.add(ENCHANTS);
         lore.add("&6Right Click: &6Future Eraser");
-        lore.add("&7Shoots a Ray of Devastation That Consumes Time");
+        lore.add("&8Shoots a Ray of Devastation That Consumes Time");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
