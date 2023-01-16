@@ -61,19 +61,23 @@ public class DamageHandler implements Listener {
             switch (event.getCause()) {
                 case VOID, DRAGON_BREATH, WITHER -> {
                     new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.TRUE, (int) event.getDamage() * 20).apply();
-                    event.setDamage(0);
+                    event.setCancelled(true);
+                    event.getEntity().playEffect(EntityEffect.HURT);
                 }
                 case FALL, FALLING_BLOCK, POISON, STARVATION, SUFFOCATION, THORNS, CRAMMING, FLY_INTO_WALL -> {
                     new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.EARTH, (int) event.getDamage() * 10).apply();
-                    event.setDamage(0);
+                    event.setCancelled(true);
+                    event.getEntity().playEffect(EntityEffect.HURT);
                 }
                 case FIRE, LAVA, HOT_FLOOR, FIRE_TICK -> {
                     new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.FIRE, (int) event.getDamage() * 20).apply();
-                    event.setDamage(0);
+                    event.setCancelled(true);
+                    event.getEntity().playEffect(EntityEffect.HURT);
                 }
                 case DROWNING, FREEZE, LIGHTNING -> {
                     new ElementalDamageEvent(null, event.getEntity(), event.getCause() ,ElementalDamageEvent.Element.TRUE, (int) event.getDamage() * 30).apply();
-                    event.setDamage(0);
+                    event.setCancelled(true);
+                    event.getEntity().playEffect(EntityEffect.HURT);
                 }
             }
         }

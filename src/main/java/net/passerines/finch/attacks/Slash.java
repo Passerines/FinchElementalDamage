@@ -83,7 +83,7 @@ public class Slash {
                         String weaponId = Util.getId(itemStack);
                         FinchItem finchItem = ItemManager.ITEM_HASH_MAP.get(weaponId);
                         if(finchItem instanceof FinchWeapon finchWeapon && !hitEntities.contains(entity)) {
-                            FinchKnockBackEvent finchKnockBackEvent = new FinchKnockBackEvent((Entity) entity, player, 2);
+                            FinchKnockBackEvent finchKnockBackEvent = new FinchKnockBackEvent((Entity) entity, player, 1);
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity, EntityDamageEvent.DamageCause.ENTITY_ATTACK , finchWeapon.getElement(), damage, itemStack);
                             elementalDamageEvent.apply();
                             finchKnockBackEvent.apply();

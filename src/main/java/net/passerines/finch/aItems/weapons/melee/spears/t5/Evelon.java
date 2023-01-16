@@ -32,7 +32,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Evelon extends FinchWeapon implements Listener {
-    Cooldown cd = new Cooldown<>(4);
+    Cooldown<Player> cd = new Cooldown<>(8);
     public Evelon() {
         super("Evelon");
         this.attack = 65;
@@ -60,13 +60,13 @@ public class Evelon extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            AtomicInteger i = new AtomicInteger(2);
+            AtomicInteger i = new AtomicInteger(3);
             Location loc = player.getEyeLocation();
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 loc.add(loc.getDirection().multiply(i.get()));
                 Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,35,0, null);
                 slash.drawSlash();
-            }, 0, 1);
+            }, 0, 2);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);
             cd.add(player);
         }

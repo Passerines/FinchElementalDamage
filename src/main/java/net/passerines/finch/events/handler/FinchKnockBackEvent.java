@@ -12,17 +12,17 @@ import static io.papermc.paper.event.server.ServerResourcesReloadedEvent.HANDLER
 public class FinchKnockBackEvent extends Event {
     private Entity victim;
     private Entity attacker;
-    private int velocity;
+    private double velocity;
     private boolean setUpVelocity;
     private int upVelocity;
-    public FinchKnockBackEvent(Entity victim, Entity attacker, int velocity, int upVelocity){
+    public FinchKnockBackEvent(Entity victim, Entity attacker, double velocity, int upVelocity){
         this.victim = victim;
         this.attacker = attacker;
         this.velocity = velocity;
         this.upVelocity = upVelocity;
         setUpVelocity = true;
     }
-    public FinchKnockBackEvent(Entity victim, Entity attacker, int velocity){
+    public FinchKnockBackEvent(Entity victim, Entity attacker, double velocity){
         this(victim, attacker, velocity, 0);
         setUpVelocity = false;
     }

@@ -54,10 +54,6 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         lore.add("&7Summon a bolt of &dlightning in the direction");
         lore.add("&7you are facing dealing damage based on your &bMana");
         lore.add("&62.5 second Cooldown");
-        lore.add("&6Ability: &dDivine Smite (All Mana)");
-        lore.add("&7Summon 5 bolts of &dlightning in the direction");
-        lore.add("&7you are facing dealing by shift right clicking, deals damage based on your &bMana");
-        lore.add("&660 second Cooldown");
         this.lore = Chat.formatC(lore);
         //
 
@@ -97,9 +93,8 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             }
         } else if(event.getAttacker() instanceof LightningStrike lightningStrike){
             if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("ELightning"))){
-                double damage = lightningStrike.getPersistentDataContainer().get(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE);
-                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getVictim(), EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.ELECTRO, damage).apply();
                 event.setCancelled(true);
+                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getVictim(), EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.TRUE, 100.0 + (PlayerMap.PLAYERS.get((Player) lightningStrike.getCausingEntity()).getManaMax() / 100f + 0.0)*10).apply();
             }
         }
     }
@@ -121,19 +116,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
             lightningStrike.setCausingPlayer(player);
             lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING, id);
-            lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("damage"), PersistentDataType.DOUBLE, 100.0 + (PlayerMap.PLAYERS.get(player).getManaMax() / 100 + 0.0)*10);
             String bar = Chat.format("&c-100 &bMana");
-            Chat.sendActionBar(player, bar);
-            cd1.add(player);
-        }
-        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player) && PlayerMap.PLAYERS.get(player).getMana() >= 100){
-            HashSet<Material> transparent = new HashSet<>();
-            transparent.add(Material.AIR);
-            Block block = player.getTargetBlock(transparent, 120);
-            Location loc = block.getLocation();
-            String bar = Chat.format("&c-" + playerData.getMana() + " &bMana");
-            playerData.setMana(0);
-
             Chat.sendActionBar(player, bar);
             cd1.add(player);
         }
