@@ -36,6 +36,7 @@ public class ItemEnchant {
     public enum EnchantmentType{
         WEAPON,
         ARMOR,
+        TRINKET,
         NONE
     }
 
