@@ -17,6 +17,7 @@ public class ImpierceCrown extends FinchArmor {
         this.defense = 180;
         this.health = 30;
         this.strength = 45;
+        critChance = 15;
         displayName = Chat.formatC("&6Impierce Crown");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);

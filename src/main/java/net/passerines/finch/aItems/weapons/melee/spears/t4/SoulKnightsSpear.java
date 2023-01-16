@@ -28,18 +28,14 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class SoulKnightsSpear extends FinchWeapon implements Listener {
-    Cooldown cd = new Cooldown<>(4);
+    Cooldown<Player> cd = new Cooldown<>(4);
     public SoulKnightsSpear() {
         super("SoulKnightsSpear");
         this.attack = 30;
         this.element = ElementalDamageEvent.Element.DARK;
         displayName = Chat.formatC("&3ESoul Knight's Spear");
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("&bDamage: &7<DAMAGE>");
-        lore.add("&bMana: &7<MANA>");
-        lore.add("&bDefense: &7<DEFENSE>");
-        lore.add("&bHealth: &7<HEALTH>");
-        lore.add(" ");
+        lore.add(STATS);
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -56,7 +52,7 @@ public class SoulKnightsSpear extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 5, attack + vPlayer.getAttack()*0.5, 2).draw();
+            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 10, attack , 2).draw();
             cd.add(player);
         }
     }

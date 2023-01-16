@@ -17,6 +17,7 @@ public class ImpierceGaloshes extends FinchArmor {
         this.defense = 315;
         this.health = 55;
         this.strength = 10;
+        this.critChance = 15;
         displayName = Chat.formatC("&6Impierce Galoshes");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);

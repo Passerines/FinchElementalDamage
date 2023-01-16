@@ -2,31 +2,30 @@ package net.passerines.finch.aItems.insects;
 
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchInsect;
-import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.util.Chat;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
 
-public class Monarch extends FinchInsect {
-    public Monarch() {
-        super("MonarchFly", 5);
-        this.strength = 80;
+public class MarkXXCombatDrone extends FinchInsect {
+    public MarkXXCombatDrone() {
+        super("MarkXXCombatDrone", 5);
         this.defense = 50;
-        this.bugDamage = 100;
-        this.element = ElementalDamageEvent.Element.EARTH;
-        displayName = Chat.formatC("&6Monarch Butterfly");
+        this.bugDamage = 210;
+        this.element = ElementalDamageEvent.Element.FIRE;
+        displayName = Chat.formatC("&6Mark XX Damage Drone");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         this.lore = Chat.formatC(lore);
     }
     @Override
     public void onContact(Location loc){
-
+        loc.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, loc, 15);
     }
 
     @Override

@@ -17,6 +17,7 @@ public class ImpierceKneeplates extends FinchArmor {
         this.defense = 550;
         this.health = 95;
         this.strength = 15;
+        this.critChance = 15;
         displayName = Chat.formatC("&6Impierce Leggings");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);

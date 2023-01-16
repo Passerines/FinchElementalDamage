@@ -17,6 +17,7 @@ public class ImpierceAegis extends FinchArmor {
         this.defense = 650;
         this.health = 110;
         this.strength = 15;
+        this.critChance = 15;
         displayName = Chat.formatC("&6Impierce Aegis");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
