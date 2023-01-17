@@ -2,6 +2,7 @@ package net.passerines.finch.aItems.weapons.ranged.artifacts;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.DrawLine;
+import net.passerines.finch.attacks.FinchArrow;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
@@ -32,18 +33,18 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FateCrossbow extends FinchWeapon implements Listener {
-    Cooldown cd = new Cooldown<>(1);
+    Cooldown cd = new Cooldown<>(5);
     public FateCrossbow() {
         super("FateCrossbow");
-        this.attack = 100;
+        this.bowDamage = 85;
         this.element = ElementalDamageEvent.Element.DARK;
-        displayName = Chat.formatC("&0Fate" + " &fCrossbow");
+        displayName = Chat.formatC("&0Fate's" + " &fCrossbow");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
-        lore.add("&6Right Click: &6Future Eraser");
-        lore.add("&8Shoots a Ray of Devastation That Consumes Time");
+        lore.add("&5Right Click: &fFuture Eraser");
+        lore.add("&5Shoots a Ray of Devastation That Consumes Time");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -60,14 +61,31 @@ public class FateCrossbow extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            AtomicInteger i = new AtomicInteger(2);
-            Location loc = player.getEyeLocation();
+            Location aboveLoc = player.getEyeLocation().add(0,2,0);
+            aboveLoc.setPitch(player.getLocation().getPitch()+4);
+            //RightLoc
+            Location rightLoc = player.getEyeLocation();
+            rightLoc.setYaw(rightLoc.getYaw()+90);
+            rightLoc.setPitch(0);
+            rightLoc.add(rightLoc.getDirection().multiply(2));
+            rightLoc.setPitch(player.getLocation().getPitch());
+            rightLoc.setYaw(player.getLocation().getYaw()-4);
+            //Leftloc
+            Location leftLoc = player.getEyeLocation();
+            leftLoc.setYaw(leftLoc.getYaw()-90);
+            leftLoc.setPitch(0);
+            leftLoc.add(leftLoc.getDirection().multiply(2));
+            leftLoc.setPitch(player.getLocation().getPitch());
+            leftLoc.setYaw(player.getLocation().getYaw()+4);
+            //end
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
-                loc.add(loc.getDirection().multiply(i.get()));
-                Slash slash = new Slash(player, loc, getItem() , Particle.TOTEM, Particle.TOTEM, 5, attack,2,0, null);
-                slash.drawSlash();
+                FinchArrow arrow = new FinchArrow(player, aboveLoc,player.getInventory().getItemInMainHand(), 5, 0, this.bowDamage);
+                FinchArrow arrow1 = new FinchArrow(player, rightLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));
+                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));arrow.shootNeutralArrow();
+                arrow1.shootLightArrow();
+                arrow2.shootDarkArrow();
             }, 0, 1);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 2);
             cd.add(player);
         }
     }
@@ -76,7 +94,6 @@ public class FateCrossbow extends FinchWeapon implements Listener {
         ItemStack item = new ItemStack(Material.GOLDEN_HORSE_ARMOR);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setCustomModelData(2003);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.attackSpeed", -2.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
