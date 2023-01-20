@@ -1,4 +1,4 @@
-package net.passerines.finch.aItems.weapons.ranged.artifacts;
+package net.passerines.finch.aItems.weapons.ranged.t5;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.DrawLine;
