@@ -17,6 +17,7 @@ public class BloodMageChestplate extends FinchArmor implements FinchCraftableIte
 
     public BloodMageChestplate() {
         super("BloodMageChestplate", 1);
+        this.armorSetName = "BloodMage";
         this.defense = 25;
         this.health = -10;
         this.mana = 75;

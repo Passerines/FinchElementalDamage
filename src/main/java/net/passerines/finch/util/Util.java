@@ -33,6 +33,22 @@ public class Util {
         }
         return names;
     }
+    public static int getArmorSet(Player player, String armorSet){
+        int i = 0;
+        if(armorSet.equals(Util.getId(player.getEquipment().getHelmet()))){
+            i++;
+        }
+        if(armorSet.equals(Util.getId(player.getEquipment().getChestplate()))){
+            i++;
+        }
+        if(armorSet.equals(Util.getId(player.getEquipment().getLeggings()))){
+            i++;
+        }
+        if(armorSet.equals(Util.getId(player.getEquipment().getBoots()))){
+            i++;
+        }
+        return i;
+    }
 
     public static void shootArrow(Player player, Sound sound, int rotation, int damage){
         Arrow arrow = player.launchProjectile(Arrow.class);

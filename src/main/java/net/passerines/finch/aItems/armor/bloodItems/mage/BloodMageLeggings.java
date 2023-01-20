@@ -17,6 +17,7 @@ public class BloodMageLeggings extends FinchArmor implements FinchCraftableItem 
 
     public BloodMageLeggings() {
         super("BloodMageLeggings", 1);
+        this.armorSetName = "BloodMage";
         this.defense = 20;
         this.health = -10;
         this.mana = 55;

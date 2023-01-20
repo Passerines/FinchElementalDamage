@@ -6,6 +6,7 @@ import net.passerines.finch.attacks.FinchArrow;
 import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
+import net.passerines.finch.items.FinchBow;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class FateCrossbow extends FinchWeapon implements Listener {
+public class FateCrossbow extends FinchBow implements Listener {
     Cooldown cd = new Cooldown<>(5);
     public FateCrossbow() {
         super("FateCrossbow");
@@ -58,7 +59,6 @@ public class FateCrossbow extends FinchWeapon implements Listener {
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
-        PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Location aboveLoc = player.getEyeLocation().add(0,2,0);
