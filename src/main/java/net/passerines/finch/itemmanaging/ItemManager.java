@@ -40,7 +40,7 @@ import net.passerines.finch.aItems.weapons.melee.spears.t3.PoisonedSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t4.SoulKnightsSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.EngulfingLightning;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
-import net.passerines.finch.aItems.weapons.ranged.artifacts.FateCrossbow;
+import net.passerines.finch.aItems.weapons.ranged.t5.FateCrossbow;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.aItems.armor.carbonfiberItems.CarbonFiberBoots;
@@ -53,7 +53,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.yaml.snakeyaml.error.Mark;
 
 import java.util.LinkedHashMap;
 

@@ -1,4 +1,4 @@
-package net.passerines.finch.aItems.weapons.ranged.artifacts;
+package net.passerines.finch.aItems.weapons.ranged.t5;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.DrawLine;
@@ -81,7 +81,8 @@ public class FateCrossbow extends FinchBow implements Listener {
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 FinchArrow arrow = new FinchArrow(player, aboveLoc,player.getInventory().getItemInMainHand(), 5, 0, this.bowDamage);
                 FinchArrow arrow1 = new FinchArrow(player, rightLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));
-                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));arrow.shootNeutralArrow();
+                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));
+                arrow.shootNeutralArrow();
                 arrow1.shootLightArrow();
                 arrow2.shootDarkArrow();
             }, 0, 1);

@@ -29,10 +29,10 @@ public class DashHandler implements Listener {
             cd.add(player);
         }
         itemEvent.setCancelled(true); */
-        if(event.isFlying()){
+        if(event.isFlying() && event.getPlayer().getGameMode() != GameMode.CREATIVE){
             event.setCancelled(true);
             Player player = event.getPlayer();
-            if(cd.isOffCooldown(player) && player.getGameMode() != GameMode.CREATIVE && player.getGameMode() != GameMode.SPECTATOR){
+            if(cd.isOffCooldown(player)){
                 Vector vector = player.getLocation().getDirection().normalize();
                 player.setVelocity(vector.multiply(1.5).setY(0));
                 player.setAllowFlight(false);

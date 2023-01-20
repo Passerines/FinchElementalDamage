@@ -3,6 +3,7 @@ package net.passerines.finch.aItems.armor.bloodItems.mage;
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import net.kyori.adventure.text.Component;
 import net.passerines.finch.FinchCraftableItem;
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
@@ -11,6 +12,7 @@ import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,7 +37,7 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
         lore.add(" ");
         lore.add(ENCHANTS);
         this.lore = Chat.formatC(lore);
-
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
     @EventHandler
     public void checkSet(PlayerArmorChangeEvent event){
