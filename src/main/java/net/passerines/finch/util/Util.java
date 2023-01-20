@@ -35,16 +35,16 @@ public class Util {
     }
     public static int getArmorSet(Player player, String armorSet){
         int i = 0;
-        if(armorSet.equals(Util.getId(player.getEquipment().getHelmet()))){
+        if(Util.getFinchItem(player.getEquipment().getHelmet()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
             i++;
         }
-        if(armorSet.equals(Util.getId(player.getEquipment().getChestplate()))){
+        if(Util.getFinchItem(player.getEquipment().getChestplate()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
             i++;
         }
-        if(armorSet.equals(Util.getId(player.getEquipment().getLeggings()))){
+        if(Util.getFinchItem(player.getEquipment().getLeggings()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
             i++;
         }
-        if(armorSet.equals(Util.getId(player.getEquipment().getBoots()))){
+        if(Util.getFinchItem(player.getEquipment().getBoots()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
             i++;
         }
         return i;

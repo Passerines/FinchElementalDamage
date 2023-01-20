@@ -2,6 +2,7 @@ package net.passerines.finch.aItems.weapons.melee.spears.t4;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.DrawLine;
+import net.passerines.finch.attacks.Slash;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.items.FinchWeapon;
@@ -52,7 +53,7 @@ public class SoulKnightsSpear extends FinchWeapon implements Listener {
         PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
-            new DrawLine(player, player.getEyeLocation(), getItem() , Particle.SOUL, Particle.SONIC_BOOM, 10, attack , 2).draw();
+            new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.SOUL, Particle.SONIC_BOOM, 8, attack,2,0, null).drawSlash();
             cd.add(player);
         }
     }

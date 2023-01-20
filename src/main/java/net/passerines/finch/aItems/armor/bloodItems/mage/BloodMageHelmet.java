@@ -46,7 +46,7 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
 
         int oldSetItems = Util.getArmorSet(player, armorSetName);
         if(Util.getFinchItem(event.getOldItem()) instanceof FinchArmor finchArmor){
-            if(finchArmor.getArmorSetName().equals(armorSetName) && !((FinchArmor) Util.getFinchItem(event.getNewItem())).getArmorSetName().equals(armorSetName)){
+            if(finchArmor.getArmorSetName() != null && finchArmor.getArmorSetName().equals(armorSetName) && !((FinchArmor) Util.getFinchItem(event.getNewItem())).getArmorSetName().equals(armorSetName)){
                 oldSetItems++;
             }
         }
