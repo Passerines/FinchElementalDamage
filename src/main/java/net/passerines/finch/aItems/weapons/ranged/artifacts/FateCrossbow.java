@@ -34,18 +34,18 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FateCrossbow extends FinchBow implements Listener {
-    Cooldown cd = new Cooldown<>(5);
+    Cooldown cd = new Cooldown<>(1);
     public FateCrossbow() {
         super("FateCrossbow");
-        this.bowDamage = 85;
+        this.bowDamage = 125;
         this.element = ElementalDamageEvent.Element.DARK;
         displayName = Chat.formatC("&0Fate's" + " &fCrossbow");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         lore.add(" ");
         lore.add(ENCHANTS);
-        lore.add("&5Right Click: &fFuture Eraser");
-        lore.add("&5Shoots a Ray of Devastation That Consumes Time");
+        lore.add("&5Right Click: &fReality Consumer");
+        lore.add("&5Shoots 3 arrows around you");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -79,9 +79,9 @@ public class FateCrossbow extends FinchBow implements Listener {
             leftLoc.setYaw(player.getLocation().getYaw()+4);
             //end
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
-                FinchArrow arrow = new FinchArrow(player, aboveLoc,player.getInventory().getItemInMainHand(), 5, 0, this.bowDamage);
-                FinchArrow arrow1 = new FinchArrow(player, rightLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));
-                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 5, 0, (int)(this.bowDamage*0.80));arrow.shootNeutralArrow();
+                FinchArrow arrow = new FinchArrow(player, aboveLoc,player.getInventory().getItemInMainHand(), 8, 0, this.bowDamage);
+                FinchArrow arrow1 = new FinchArrow(player, rightLoc,player.getInventory().getItemInMainHand(), 8, 0, (int)(this.bowDamage*0.80));
+                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 8, 0, (int)(this.bowDamage*0.80));arrow.shootNeutralArrow();
                 arrow1.shootLightArrow();
                 arrow2.shootDarkArrow();
             }, 0, 1);
