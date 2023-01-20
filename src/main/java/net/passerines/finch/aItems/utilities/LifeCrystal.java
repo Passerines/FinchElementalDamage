@@ -2,6 +2,7 @@ package net.passerines.finch.aItems.utilities;
 
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchEquipment;
@@ -24,6 +25,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class LifeCrystal extends FinchEquipment implements Listener, FinchCraftableItem {
+    Cooldown cd = new Cooldown<>(10);
     public LifeCrystal() {
         super("LifeCrystal", 2);
         displayName = Chat.formatC("&8Life Crystal");
@@ -38,11 +40,12 @@ public class LifeCrystal extends FinchEquipment implements Listener, FinchCrafta
         PlayerData vPlayer = PlayerMap.PLAYERS.get(event.getPlayer());
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if(vPlayer.getMana() >= 50 && event.getAction().isRightClick() && id.equals(Util.getId(item))){
+        if(vPlayer.getMana() >= 50 && event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
             vPlayer.setMana(vPlayer.getMana() - 50);
             vPlayer.setHealth(vPlayer.getHealthMax() + (vPlayer.getHealthMax()*0.1));
             String bar = Chat.format("&c-50 &bMana");
             Chat.sendActionBar(player, bar);
+            cd.add(player);
         }
     }
 
