@@ -88,6 +88,9 @@ public class ItemEnchant {
     public EnchantmentType getType(){
         return type;
     }
+    public String getId(){
+        return id;
+    }
 
     public int getHealth(int level) {
         return (int) (health * (1+(level-1)*0.2));

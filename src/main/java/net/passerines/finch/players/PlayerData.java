@@ -307,7 +307,7 @@ public class PlayerData {
     }
 
     public void setMana(int mana) {
-        this.mana = mana;
+        this.mana = Math.min(manaMax, Math.max(0, mana));
     }
 
     public int getManaMax() {
