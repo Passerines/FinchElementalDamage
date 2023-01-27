@@ -64,7 +64,6 @@ public class EmeraldSpear extends FinchWeapon implements Listener {
     @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        PlayerData playerData = PlayerMap.PLAYERS.get(player);
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.VILLAGER_HAPPY, 5, attack,2,0, null);
             slash.drawSlash();

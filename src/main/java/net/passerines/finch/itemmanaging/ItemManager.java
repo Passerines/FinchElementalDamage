@@ -29,6 +29,7 @@ import net.passerines.finch.aItems.insects.Monarch;
 import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
 import net.passerines.finch.aItems.utilities.LifeCrystal;
+import net.passerines.finch.aItems.utilities.ManaShield;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.GoldenKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.DiamondKatana;
@@ -155,6 +156,7 @@ public class ItemManager {
         new MarkXXCombatDrone();
         //Equipment
         new LifeCrystal();
+        new ManaShield();
     }
     public static void registerRecipe(){
         for(FinchItem finchItem : ITEM_HASH_MAP.values()){

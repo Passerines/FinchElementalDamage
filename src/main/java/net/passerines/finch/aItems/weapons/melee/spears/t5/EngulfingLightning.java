@@ -94,7 +94,7 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         } else if(event.getAttacker() instanceof LightningStrike lightningStrike){
             if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("ELightning"))){
                 event.setCancelled(true);
-                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getVictim(), EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.TRUE, 100.0 + (PlayerMap.PLAYERS.get((Player) lightningStrike.getCausingEntity()).getManaMax() / 100f + 0.0)*10).apply();
+                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getVictim(), EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.ELECTRO, 100.0 + (PlayerMap.PLAYERS.get((Player) lightningStrike.getCausingEntity()).getManaMax() / 100f + 0.0)*8).apply();
             }
         }
     }
