@@ -51,17 +51,32 @@ public class FinchAttributesCmd implements CommandExecutor, TabCompleter {
                     sender.sendMessage("set" + targetPlayer + " mana to : " + args[1]);
                 }
 
+                case "setAttack" -> {
+                    targetPlayerData.setAttack(Integer.parseInt(args[2]));
+                    sender.sendMessage("set" + targetPlayer + " attack to : " + args[1]);
+                }
+
+                case "setStrength" -> {
+                    targetPlayerData.setStrength(Integer.parseInt(args[2]));
+                    sender.sendMessage("set" + targetPlayer + " strength to : " + args[1]);
+                }
+
+                case "setDexterity" -> {
+                    targetPlayerData.setDexterity(Integer.parseInt(args[2]));
+                    sender.sendMessage("set" + targetPlayer + " dexterity to : " + args[1]);
+                }
+
                 case "heal" -> {
                     targetPlayerData.setHealth(targetPlayerData.getHealthMax());
                     sender.sendMessage("You have been healed!");
                 }
 
                 default -> {
-                    sender.sendMessage("Unknown Argument. For help, type /finchattributes");
+                    sender.sendMessage("Unknown Argument.");
                 }
             }
         }else{
-            sender.sendMessage("Commands: setMaxHealth (player) (int), setDefense (player) (int), setMaxMana (player) (int), heal (player) (player)");
+            sender.sendMessage("Refer to tabComplete for commands.");
         }
         return true;
     }
@@ -71,7 +86,7 @@ public class FinchAttributesCmd implements CommandExecutor, TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         ArrayList<String> results = new ArrayList<>();
         if(args.length == 1){
-            Util.copyPartialContains(args[0], Arrays.asList("setMaxHealth", "setDefense", "setMaxMana", "heal"), results);
+            Util.copyPartialContains(args[0], Arrays.asList("setMaxHealth", "setDefense", "setMaxMana", "heal", "setAttack", "setStrength", "setDexterity"), results);
         }
         if(args.length == 2){
 

@@ -4,12 +4,9 @@ import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.data.Cooldown;
 import net.passerines.finch.itemmanaging.FinchRecipe;
-import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchEquipment;
-import net.passerines.finch.items.FinchTrinkets;
 import net.passerines.finch.players.PlayerData;
 import net.passerines.finch.players.PlayerMap;
-import net.passerines.finch.recipebook.RecipeBookDefault;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
@@ -19,13 +16,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
 public class LifeCrystal extends FinchEquipment implements Listener, FinchCraftableItem {
-    Cooldown cd = new Cooldown<>(10);
+    Cooldown<Player> cd = new Cooldown<Player>(100);
     public LifeCrystal() {
         super("LifeCrystal", 2);
         displayName = Chat.formatC("&8Life Crystal");
