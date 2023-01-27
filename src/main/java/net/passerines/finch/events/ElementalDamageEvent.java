@@ -142,7 +142,9 @@ public class ElementalDamageEvent extends Event implements Cancellable {
     }
 
     public void setDamage(double damage) {
-        this.damage = damage;
+        if(element != Element.TRUE) {
+            this.damage = damage;
+        }
         calculate();
     }
 

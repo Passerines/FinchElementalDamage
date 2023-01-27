@@ -44,39 +44,12 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
         Player player = event.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
         int setItems = Util.getArmorSet(player, armorSetName);
+        if(armorSetName.equals(((FinchArmor) Util.getFinchItem(event.getOldItem())).getArmorSetName())){
+            playerData.setManaMax(playerData.getManaMax() - 500);
+        }
         if(setItems == 4){
             playerData.setManaMax(playerData.getManaMax() + 500);
         }
-        else if(Util.getFinchItem(event.getOldItem()) instanceof FinchArmor finchArmor){
-            if(finchArmor.getArmorSetName().equals(armorSetName) && setItems == 3){
-                playerData.setManaMax(playerData.getManaMax() - 500);
-            }
-        }
-
-
-
-        /*int oldSetItems = Util.getArmorSet(player, armorSetName);
-        if(Util.getFinchItem(event.getOldItem()) instanceof FinchArmor finchArmor){
-            if(finchArmor.getArmorSetName() != null && finchArmor.getArmorSetName().equals(armorSetName) && !((FinchArmor) Util.getFinchItem(event.getNewItem())).getArmorSetName().equals(armorSetName)){
-                oldSetItems++;
-            }
-        }
-
-        int deduct = 0;
-        switch (oldSetItems) {
-            case 3 -> deduct = 20;
-            case 4 -> deduct = 40;
-        }
-        playerData.setManaMax(playerData.getManaMax() - deduct);
-        int buff = 0;
-        switch (Util.getArmorSet(player, armorSetName)) {
-            case 2 -> buff = 20;
-            case 3 -> buff = 40;
-            case 4 -> buff = 80;
-        }
-        playerData.setManaMax(playerData.getManaMax() + buff);
-        player.sendMessage(Chat.formatC("You are wearing " + Util.getArmorSet(player, armorSetName) + " Pieces of " + armorSetName));
-        */
     }
 
     @Override
