@@ -28,20 +28,22 @@ public class DamageDisplayer implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDamage(ElementalDamageEvent event){
-        Entity victim = event.getVictim();
-        int damage = (int) event.getFinalDamage();
-        Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(1.0, 2.0), Util.rand(-1.0, 1.0));
-        ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class, (armorStand) -> {
-            armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
-            armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("invulnerable"), PersistentDataType.BYTE, (byte) 1);
-            armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE, (byte) 1);
-            armorStand.setInvisible(true);
-            armorStand.setInvulnerable(true);
-            armorStand.setMarker(true);
-            armorStand.customName(Chat.formatC(event.getElement().getColor() + "☆" + damage + "☆"));
-            armorStand.setCustomNameVisible(true);
-        });
-        Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), damageDisplay::remove, 50);
+        if(!event.isCancelled()) {
+            Entity victim = event.getVictim();
+            int damage = (int) event.getFinalDamage();
+            Location loc = victim.getLocation().add(Util.rand(-1.0, 1.0), Util.rand(1.0, 2.0), Util.rand(-1.0, 1.0));
+            ArmorStand damageDisplay = loc.getWorld().spawn(loc, ArmorStand.class, (armorStand) -> {
+                armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("remove"), PersistentDataType.BYTE, (byte) 1);
+                armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("invulnerable"), PersistentDataType.BYTE, (byte) 1);
+                armorStand.getPersistentDataContainer().set(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE, (byte) 1);
+                armorStand.setInvisible(true);
+                armorStand.setInvulnerable(true);
+                armorStand.setMarker(true);
+                armorStand.customName(Chat.formatC(event.getElement().getColor() + "☆" + damage + "☆"));
+                armorStand.setCustomNameVisible(true);
+            });
+            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), damageDisplay::remove, 50);
+        }
     }
 
     @EventHandler
