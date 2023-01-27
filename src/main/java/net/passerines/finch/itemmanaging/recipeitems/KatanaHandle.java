@@ -43,7 +43,7 @@ public class KatanaHandle extends FinchItem implements FinchCraftableItem, Liste
     @EventHandler
     public void onClick(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (id.equals(Util.getId(player.getInventory().getItemInMainHand()))) {
+        if (id.equals(Util.getId(event.getItemInHand()))) {
             event.setCancelled(true);
         }
     }

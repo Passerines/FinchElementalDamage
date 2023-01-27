@@ -43,7 +43,7 @@ public class Evelon extends FinchWeapon implements Listener {
         lore.add(" ");
         lore.add(ENCHANTS);
         lore.add("&6Ability: &6Gale Slice");
-        lore.add("&7Instead of a regular attack launch a speedy gale of light");
+        lore.add("&7Launch a speedy gale of light");
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
@@ -64,7 +64,7 @@ public class Evelon extends FinchWeapon implements Listener {
             Location loc = player.getEyeLocation();
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 loc.add(loc.getDirection().multiply(i.get()));
-                Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,35,0, null);
+                Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,50,0, null);
                 slash.drawSlash();
             }, 0, 2);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);

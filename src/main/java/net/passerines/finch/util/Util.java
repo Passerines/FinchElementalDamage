@@ -38,13 +38,13 @@ public class Util {
         if(Util.getFinchItem(player.getEquipment().getHelmet()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
             i++;
         }
-        if(Util.getFinchItem(player.getEquipment().getChestplate()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
+        if(Util.getFinchItem(player.getEquipment().getChestplate()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getChestplate())).getArmorSetName())){
             i++;
         }
-        if(Util.getFinchItem(player.getEquipment().getLeggings()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
+        if(Util.getFinchItem(player.getEquipment().getLeggings()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getLeggings())).getArmorSetName())){
             i++;
         }
-        if(Util.getFinchItem(player.getEquipment().getBoots()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getHelmet())).getArmorSetName())){
+        if(Util.getFinchItem(player.getEquipment().getBoots()) != null && armorSet.equals(((FinchArmor) Util.getFinchItem(player.getEquipment().getBoots())).getArmorSetName())){
             i++;
         }
         return i;
