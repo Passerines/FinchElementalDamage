@@ -16,6 +16,7 @@ import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,11 +47,19 @@ public class ManaShield extends FinchEquipment implements Listener, FinchCraftab
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), () -> {
+                player.sendMessage("ManaShield Started");
                 shieldedPlayers.add(player);
+                if(shieldedPlayers.contains(player)){
+                    player.getWorld().spawnParticle(Particle.CRIT_MAGIC, player.getLocation(), 3, 1,1,1);
+                }
             }, 0, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
+                player.sendMessage("ManaShield Ended");
                 Bukkit.getScheduler().cancelTask(taskid);
                 shieldedPlayers.remove(player);
+                if(shieldedPlayers.contains(player)){
+                    player.sendMessage("shieldedPlayers Has not been removed");
+                }
             }, 60);
             cd.add(player);
         }
@@ -61,12 +70,14 @@ public class ManaShield extends FinchEquipment implements Listener, FinchCraftab
         if(event.getVictim() instanceof Player player){
             if(shieldedPlayers.contains(player)){
                 PlayerData vPlayerData = new PlayerData(player);
-                int manaDamageTaken = (int) (event.getDamage());
+                int manaDamageTaken = (int) (event.getDamage()*2);
+                player.sendMessage("Mana before" + vPlayerData.getMana());
                 if(vPlayerData.getMana() >= manaDamageTaken){
                     event.setDamage(event.getDamage() * 0.1);
                     vPlayerData.setMana((vPlayerData.getMana() - manaDamageTaken));
                     String bar = Chat.format("&c-" + manaDamageTaken + " &bMana");
                     Chat.sendActionBar(player, bar);
+                    player.sendMessage("Mana after:" + vPlayerData.getMana());
                 }
             }
         }

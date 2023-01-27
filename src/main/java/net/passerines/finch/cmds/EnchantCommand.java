@@ -74,6 +74,7 @@ public class EnchantCommand implements CommandExecutor, TabCompleter {
         ArrayList<String> results = new ArrayList<>();
         if(args.length == 1){
             if(sender instanceof Player){
+                Util.log("DEBUG:tried to autocomplete");
                 Util.copyPartialContains(args[0], getOkEnchants(((Player) sender).getInventory().getItemInMainHand()), results);
             }
             else{
