@@ -67,7 +67,6 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
     @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        PlayerData playerData = PlayerMap.PLAYERS.get(player);
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.DRAGON_BREATH, 5, attack,2,0, null);
             slash.drawSlash();
@@ -85,7 +84,7 @@ public class ElectrifiedSpear extends FinchWeapon implements Listener {
                             ElementalDamageEvent elementalDamageEvent = new ElementalDamageEvent(player, (Entity) entity,
                                     EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.TRUE,
                                     15, player.getInventory().getItemInMainHand());
-                            ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 2, false, false, true));
+                            ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 2, false, false, true));
 
                             elementalDamageEvent.apply();
                         }

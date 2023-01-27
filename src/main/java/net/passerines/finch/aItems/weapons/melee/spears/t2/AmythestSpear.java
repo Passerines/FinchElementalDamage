@@ -69,7 +69,7 @@ public class AmythestSpear extends FinchWeapon implements Listener {
     @Override
     public void onClick(PlayerInteractEvent click){
         Player player = click.getPlayer();
-        if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
+        if(!player.isSneaking() && click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             Slash slash = new Slash(player, player.getEyeLocation(), player.getInventory().getItemInMainHand(), Particle.CRIT, Particle.CRIT, 5, attack,2,0, null);
             slash.drawSlash();
             cd.add(player);
