@@ -4,11 +4,8 @@ import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.enchants.EnchantManager;
 import net.passerines.finch.enchants.ItemEnchant;
 import net.passerines.finch.itemmanaging.ItemManager;
-import net.passerines.finch.items.FinchArmor;
-import net.passerines.finch.items.FinchItem;
+import net.passerines.finch.items.*;
 
-import net.passerines.finch.items.FinchTrinkets;
-import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.reforge.PrefixManager;
 import org.apache.commons.lang.Validate;
@@ -32,6 +29,14 @@ public class Util {
             names.add(player.getName());
         }
         return names;
+    }
+    public static String getArmorSet(ItemStack item) {
+        FinchItem finchItem = Util.getFinchItem(item);
+        if(finchItem instanceof FinchArmor armor) {
+            return armor.getArmorSetName();
+        } else {
+            return null;
+        }
     }
     public static int getArmorSet(Player player, String armorSet){
         int i = 0;

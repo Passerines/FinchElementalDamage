@@ -44,7 +44,23 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
         Player player = event.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
         int setItems = Util.getArmorSet(player, armorSetName);
-        if(armorSetName.equals(((FinchArmor) Util.getFinchItem(event.getOldItem())).getArmorSetName())){
+        player.sendMessage("&bPlayerArmorChangeEvent called from BloodMageHelmet");
+        if(Util.isSafe(event.getOldItem())) {
+            player.sendMessage(Chat.formatC("&bOld Item ").append(event.getOldItem().getItemMeta().displayName()).append(Chat.formatC(" &bSet &7" + Util.getArmorSet(event.getOldItem()))));
+        } else {
+            player.sendMessage("Old Item Null");
+        }
+        if(Util.isSafe(event.getNewItem())) {
+            player.sendMessage(Chat.formatC("&bNew Item ").append(event.getNewItem().getItemMeta().displayName()).append(Chat.formatC(" &bSet &7" + Util.getArmorSet(event.getNewItem()))));
+        } else {
+            player.sendMessage("New item null");
+        }
+        player.sendMessage(Chat.formatC("&bNew Set " + setItems + " &bPieces &7"
+                + Util.getArmorSet(player.getInventory().getHelmet())
+                + " " + Util.getArmorSet(player.getInventory().getChestplate())
+                + " " + Util.getArmorSet(player.getInventory().getLeggings())
+                + " " + Util.getArmorSet(player.getInventory().getBoots())));
+        if(armorSetName.equals(((FinchArmor) Util.getFinchItem(event.getOldItem())).getArmorSetName()) ){
             playerData.setManaMax(playerData.getManaMax() - 500);
         }
         if(setItems == 4){
