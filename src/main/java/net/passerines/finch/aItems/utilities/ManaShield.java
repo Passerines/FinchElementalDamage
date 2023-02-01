@@ -29,7 +29,7 @@ import org.checkerframework.checker.units.qual.A;
 import java.util.ArrayList;
 
 public class ManaShield extends FinchEquipment implements Listener, FinchCraftableItem {
-    Cooldown cd = new Cooldown<>(100);
+    Cooldown<Player> cd = new Cooldown<>(120);
     ArrayList<Player> shieldedPlayers = new ArrayList<Player>();
     public ManaShield() {
         super("ManaShield", 4);
@@ -46,20 +46,20 @@ public class ManaShield extends FinchEquipment implements Listener, FinchCraftab
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if(event.getAction().isRightClick() && id.equals(Util.getId(item)) && cd.isOffCooldown(player)){
+            shieldedPlayers.add(player);
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), () -> {
-                player.sendMessage("ManaShield Started");
-                shieldedPlayers.add(player);
+                //player.sendMessage("ManaShield Started");
                 if(shieldedPlayers.contains(player)){
                     player.getWorld().spawnParticle(Particle.CRIT_MAGIC, player.getLocation(), 3, 1,1,1);
                 }
             }, 0, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
-                player.sendMessage("ManaShield Ended");
+                //player.sendMessage("ManaShield Ended");
                 Bukkit.getScheduler().cancelTask(taskid);
                 shieldedPlayers.remove(player);
-                if(shieldedPlayers.contains(player)){
-                    player.sendMessage("shieldedPlayers Has not been removed");
-                }
+                //if(shieldedPlayers.contains(player)){
+                //    player.sendMessage("shieldedPlayers Has not been removed");
+                //}
             }, 60);
             cd.add(player);
         }
@@ -69,15 +69,15 @@ public class ManaShield extends FinchEquipment implements Listener, FinchCraftab
     public void hit(ElementalDamageEvent event){
         if(event.getVictim() instanceof Player player){
             if(shieldedPlayers.contains(player)){
-                PlayerData vPlayerData = new PlayerData(player);
+                PlayerData vPlayerData = PlayerMap.PLAYERS.get(player);
                 int manaDamageTaken = (int) (event.getDamage()*2);
-                player.sendMessage("Mana before" + vPlayerData.getMana());
+                //player.sendMessage("Mana before" + vPlayerData.getMana());
                 if(vPlayerData.getMana() >= manaDamageTaken){
                     event.setDamage(event.getDamage() * 0.1);
                     vPlayerData.setMana((vPlayerData.getMana() - manaDamageTaken));
                     String bar = Chat.format("&c-" + manaDamageTaken + " &bMana");
                     Chat.sendActionBar(player, bar);
-                    player.sendMessage("Mana after:" + vPlayerData.getMana());
+                    //player.sendMessage("Mana after:" + vPlayerData.getMana());
                 }
             }
         }
