@@ -17,7 +17,7 @@ public class BloodChestplate extends FinchArmor implements FinchCraftableItem {
 
     public BloodChestplate() {
         super("BloodChestplate", 1);
-        this.defense = 25;
+        this.defense = 35;
         this.health = -10;
         this.strength = 10;
         displayName = Chat.formatC("&cBlood Chestplate");

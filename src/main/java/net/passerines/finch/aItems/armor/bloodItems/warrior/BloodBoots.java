@@ -17,7 +17,7 @@ public class BloodBoots extends FinchArmor implements FinchCraftableItem {
 
     public BloodBoots() {
         super("BloodBoots", 1);
-        this.defense = 15;
+        this.defense = 25;
         this.health = -5;
         this.strength = 5;
         displayName = Chat.formatC("&cBlood Boots");

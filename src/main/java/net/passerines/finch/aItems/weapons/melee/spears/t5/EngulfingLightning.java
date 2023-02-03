@@ -19,6 +19,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -35,13 +36,14 @@ import java.util.UUID;
 
 public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(3);
-    Cooldown cd1 = new Cooldown<>(50);
-    Cooldown cd2 = new Cooldown<>(10);
+    Cooldown cd1 = new Cooldown<>(30);
+    Cooldown cd2 = new Cooldown<>(300);
     Cooldown cd3 = new Cooldown<>(1200);
     public EngulfingLightning() {
         super("EngulfingLightning");
         this.attack = 115;
         this.mana = 500;
+        this.manaRegen = 140;
         this.element = ElementalDamageEvent.Element.ELECTRO;
 
         // Set the displayname and lore
@@ -53,7 +55,11 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         lore.add("&6Ability: &dDivine Punishment (100 Mana)");
         lore.add("&7Summon a bolt of &dlightning in the direction");
         lore.add("&7you are facing dealing damage based on your &bMana");
-        lore.add("&62.5 second Cooldown");
+        lore.add("&1.5 second Cooldown");
+        lore.add("&6Ability: &dDivine Wrath");
+        lore.add("&7Summon 25 bolts of &dlightning in a 25 block");
+        lore.add("&7radius and damage scales with &bMana");
+        lore.add("&15 second Cooldown");
         this.lore = Chat.formatC(lore);
         //
 
@@ -91,10 +97,14 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
                 }
                 cd2.add(player);
             }
-        } else if(event.getAttacker() instanceof LightningStrike lightningStrike){
-            if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("ELightning"))){
+        }
+    }
+    @EventHandler(priority = EventPriority.LOW)
+    public void onLightning(EntityDamageByEntityEvent event){
+        if(event.getDamager() instanceof LightningStrike lightningStrike){
+            if(lightningStrike.getPersistentDataContainer().has(Util.getNamespacedKey("Elightning"))){
                 event.setCancelled(true);
-                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getVictim(), EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.ELECTRO, 100.0 + (PlayerMap.PLAYERS.get((Player) lightningStrike.getCausingEntity()).getManaMax() / 100f + 0.0)*8, ((Player) lightningStrike.getCausingEntity()).getInventory().getItemInMainHand()).apply();
+                new ElementalDamageEvent(lightningStrike.getCausingEntity(), event.getEntity(), EntityDamageEvent.DamageCause.LIGHTNING, ElementalDamageEvent.Element.ELECTRO, 10.0 + (PlayerMap.PLAYERS.get((Player) lightningStrike.getCausingEntity()).getManaMax() / 100f + 0.0)*6, ((Player) lightningStrike.getCausingEntity()).getInventory().getItemInMainHand()).apply();
             }
         }
     }
@@ -107,11 +117,11 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             slash.drawSlash();
             cd.add(player);
         }
-        if(click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player) && PlayerMap.PLAYERS.get(player).getMana() >= 100){
+        if(!player.isSneaking() && click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd1.isOffCooldown(player) && PlayerMap.PLAYERS.get(player).getMana() >= 100){
             playerData.setMana(playerData.getMana()-100);
             HashSet<Material> transparent = new HashSet<>();
             transparent.add(Material.AIR);
-            Block block = player.getTargetBlock(transparent, 120);
+            Block block = player.getTargetBlock(transparent, 80);
             Location loc = block.getLocation();
             LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
             lightningStrike.setCausingPlayer(player);
@@ -119,6 +129,19 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
             String bar = Chat.format("&c-100 &bMana");
             Chat.sendActionBar(player, bar);
             cd1.add(player);
+        }
+        if(player.isSneaking() && click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd2.isOffCooldown(player) && PlayerMap.PLAYERS.get(player).getMana() >= 1000){
+            playerData.setMana(playerData.getMana()-1000);
+            for(int i = 0; i <= 25; i++) {
+                Location loc = player.getLocation();
+                loc = loc.add(Util.rand(3,30),Util.rand(0,1),Util.rand(3,30));
+                LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
+                lightningStrike.setCausingPlayer(player);
+                lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING, id);
+            }
+            String bar = Chat.format("&c-1000 &bMana");
+            Chat.sendActionBar(player, bar);
+            cd2.add(player);
         }
     }
 
