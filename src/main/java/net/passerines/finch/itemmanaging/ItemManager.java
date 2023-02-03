@@ -30,6 +30,7 @@ import net.passerines.finch.aItems.trinkets.*;
 import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
 import net.passerines.finch.aItems.utilities.LifeCrystal;
 import net.passerines.finch.aItems.utilities.ManaShield;
+import net.passerines.finch.aItems.weapons.mana.t1.DruidStaff;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.GoldenKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.DiamondKatana;
@@ -91,6 +92,8 @@ public class ItemManager {
         new ReinforcedLeather();
         new CarbonFiber();
         new GlacialGem();
+        //Mana
+        new DruidStaff();
         //Mob Drops
         new MahiMahiScale();
         new DragonSkin();

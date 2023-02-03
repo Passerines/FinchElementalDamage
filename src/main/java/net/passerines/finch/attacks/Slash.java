@@ -33,8 +33,9 @@ public class Slash {
     private double damage;
     private Object dust;
     private ArrayList<Entity> hitEntities = new ArrayList<>();
-
-
+    public Slash(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, double angle, double rotation) {
+        this(player, location, itemStack, particle, particleEnd, range, damage, angle, rotation, null);
+    }
     public Slash(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, double angle, double rotation, Object dust) {
         this.player = player;
         this.location = location;
@@ -72,7 +73,7 @@ public class Slash {
             if(i + 0.9 >= range){
                 loc.getWorld().spawnParticle(particleEnd, loc, 1, 0, 0, 0, 0);
             }
-            else {
+            else if(dust != null){
                 loc.getWorld().spawnParticle(particle, loc, 1, 0, 0, 0, 0, dust);
             }
             Collection<Entity> entitylist = loc.getNearbyEntities(1, 1, 1);
