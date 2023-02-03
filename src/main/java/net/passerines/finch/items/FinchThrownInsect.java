@@ -110,9 +110,11 @@ public class FinchThrownInsect {
         if(hitEntity != null){
             PlayerData playerData = PlayerMap.PLAYERS.get(player);
             playerData.calculate(finchInsect.getItem());
+            playerData.setPlayerInsectBuffed(true);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                if(!PlayerData.isPlayerBuffed.getOrDefault(player, false)) {
+                if(playerData.isPlayerInsectBuffed()) {
                     playerData.uncalculate(finchInsect.getItem());
+                    playerData.setPlayerInsectBuffed(false);
                 }
             }, 300);
         }

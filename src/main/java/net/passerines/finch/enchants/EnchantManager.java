@@ -35,8 +35,7 @@ public class EnchantManager implements Listener {
     }
 
     public void registerEnchants(){
-        new ItemEnchant("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchant.EnchantmentType.WEAPON)
-                .setMaxLevel(5).setAttack(10).setStrength(5);
+        new ItemEnchant("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(5).setAttack(10).setStrength(5);
         new FireAspectEnchant().setMaxLevel(10);
         new BloodLustEnchant().setMaxLevel(7);
         new LifeDrainCurse().setMaxLevel(3);

@@ -21,7 +21,7 @@ public class NaturalHealthRegen implements Listener {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
             for(Player player : Bukkit.getOnlinePlayers()) {
                 PlayerData playerData = PLAYERS.get(player);
-                if(player.getFoodLevel() == 20) {
+                if(player.getFoodLevel() == 20 && playerData.getHealth() < playerData.getHealthMax()) {
                     if(player.getSaturation() > 0) {
                         if(TIMER.getOrDefault(player, -2000) <= Bukkit.getCurrentTick() - 60){
                             int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
@@ -48,7 +48,6 @@ public class NaturalHealthRegen implements Listener {
                     }
                     int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.00015 * playerData.getManaRegen()));
                     playerData.setMana(newMana);
-                    player.setSaturation(player.getSaturation() - 1);
                 }
             }
         }, 0, 20);

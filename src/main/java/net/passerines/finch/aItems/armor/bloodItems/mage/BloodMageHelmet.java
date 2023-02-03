@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, Listener {
 
@@ -38,6 +39,7 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
         lore.add(ENCHANTS);
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
+
     }
     @EventHandler
     public void checkSet(PlayerArmorChangeEvent event){
@@ -60,11 +62,14 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
                 + " " + Util.getArmorSet(player.getInventory().getChestplate())
                 + " " + Util.getArmorSet(player.getInventory().getLeggings())
                 + " " + Util.getArmorSet(player.getInventory().getBoots())));
-        if(armorSetName.equals(((FinchArmor) Util.getFinchItem(event.getOldItem())).getArmorSetName()) ){
-            playerData.setManaMax(playerData.getManaMax() - 500);
-        }
-        if(setItems == 4){
+
+        if(setItems == 4 && playerData.getArmorBonus().getOrDefault(armorSetName, 0) < 4){
             playerData.setManaMax(playerData.getManaMax() + 500);
+            playerData.setArmorBonus(armorSetName, 4);
+        }
+        if(playerData.getArmorBonus().getOrDefault(armorSetName, 0) == 4 && setItems != 4){
+            playerData.setManaMax(playerData.getManaMax() - 500);
+            playerData.removeArmorBonus(armorSetName);
         }
     }
 

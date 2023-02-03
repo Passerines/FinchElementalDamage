@@ -6,18 +6,11 @@ import net.passerines.finch.items.*;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.reforge.PrefixManager;
-import net.passerines.finch.reforge.ReforgeMenu;
 import net.passerines.finch.trinkets.TrinketMenu;
-import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.units.qual.Prefix;
 
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlayerData {
@@ -25,8 +18,8 @@ public class PlayerData {
     private Player player;
     private PlayerConfig playerConfig;
     private TrinketMenu trinketMenu;
-    public static HashMap<Player, Boolean> isPlayerBuffed = new HashMap<>();
-
+    private boolean isPlayerInsectBuffed;
+    private HashMap<String, Integer> armorBonus = new HashMap<>();
     private double health;
     private double healthMax;
     private int defense;
@@ -439,6 +432,22 @@ public class PlayerData {
     }
 
     public TrinketMenu getTrinketMenu(){return trinketMenu;}
+    public boolean isPlayerInsectBuffed(){
+        return isPlayerInsectBuffed;
+    }
+    public void setPlayerInsectBuffed(boolean b){
+        isPlayerInsectBuffed = b;
+    }
+    public HashMap<String, Integer> getArmorBonus() {
+        return armorBonus;
+    }
+
+    public void setArmorBonus(String armorSetName, int amount) {
+        armorBonus.put(armorSetName,amount);
+    }
+    public void removeArmorBonus(String armorSetName){
+        armorBonus.remove(armorSetName);
+    }
     public PlayerConfig getPlayerConfig() {
         return playerConfig;
     }
