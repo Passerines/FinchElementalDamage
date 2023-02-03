@@ -1,4 +1,4 @@
-package net.passerines.finch.aItems.weapons.ranged.t3;
+package net.passerines.finch.aItems.weapons.mana.t2;
 
 import net.bytebuddy.build.Plugin;
 import net.passerines.finch.FinchElementalDamage;
@@ -39,7 +39,7 @@ import java.util.UUID;
 public class LightningSpell extends FinchWeapon implements Listener {
     Cooldown cd = new Cooldown<>(5);
     public LightningSpell() {
-        super("LightningSpell");
+        super("LightningSpell", 2);
         this.mana = 400;
         this.manaRegen = 100;
         this.element = ElementalDamageEvent.Element.ELECTRO;

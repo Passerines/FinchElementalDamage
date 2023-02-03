@@ -31,6 +31,7 @@ import net.passerines.finch.aItems.utilities.FinchBookOfRecipes;
 import net.passerines.finch.aItems.utilities.LifeCrystal;
 import net.passerines.finch.aItems.utilities.ManaShield;
 import net.passerines.finch.aItems.weapons.mana.t1.DruidStaff;
+import net.passerines.finch.aItems.weapons.mana.t2.LightningSpell;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.GoldenKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t1.LuckyKatana;
 import net.passerines.finch.aItems.weapons.melee.katanas.t2.DiamondKatana;
@@ -46,7 +47,7 @@ import net.passerines.finch.aItems.weapons.melee.spears.t2.EmeraldSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t3.ElectrifiedSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t3.PoisonedSpear;
 import net.passerines.finch.aItems.weapons.melee.spears.t4.SoulKnightsSpear;
-import net.passerines.finch.aItems.weapons.melee.spears.t5.EngulfingLightning;
+import net.passerines.finch.aItems.weapons.mana.t5.EngulfingLightning;
 import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
 import net.passerines.finch.aItems.weapons.ranged.t5.FateCrossbow;
 import net.passerines.finch.itemmanaging.recipeitems.*;
@@ -94,6 +95,8 @@ public class ItemManager {
         new GlacialGem();
         //Mana
         new DruidStaff();
+        new LightningSpell();
+        new EngulfingLightning();
         //Mob Drops
         new MahiMahiScale();
         new DragonSkin();
@@ -115,7 +118,6 @@ public class ItemManager {
         new ElectrifiedSpear();
         new PoisonedSpear();
         new SoulKnightsSpear();
-        new EngulfingLightning();
         new Evelon();
         //Armor
         new CarbonFiberHelmet();

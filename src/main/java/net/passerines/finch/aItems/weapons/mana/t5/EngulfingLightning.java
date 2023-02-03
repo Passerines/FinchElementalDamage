@@ -1,4 +1,4 @@
-package net.passerines.finch.aItems.weapons.melee.spears.t5;
+package net.passerines.finch.aItems.weapons.mana.t5;
 
 import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.attacks.Slash;
