@@ -22,7 +22,10 @@ public class EnchantShop implements Listener {
     public void onInteractEvent(PlayerInteractEvent event){
         if(event.getClickedBlock() != null){
             if(event.getClickedBlock().getType() == Material.ENCHANTING_TABLE){
-                event.getPlayer().openInventory(enchantMenu);
+                if(event.getAction().isRightClick()){
+                    event.setCancelled(true);
+                    event.getPlayer().openInventory(enchantMenu);
+                }
             }
         }
     }
