@@ -4,6 +4,7 @@ import de.slikey.effectlib.Effect;
 import de.slikey.effectlib.EffectManager;
 import net.passerines.finch.cmds.*;
 import net.passerines.finch.enchants.EnchantManager;
+import net.passerines.finch.enchants.EnchantShop;
 import net.passerines.finch.entity.EntityMap;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.events.NaturalHealthRegen;
@@ -46,6 +47,7 @@ public class FinchElementalDamage extends JavaPlugin {
         new ReforgeCommand();
         new EnchantCommand();
         new EnchantManager();
+        new EnchantShop();
         new GetEffectiveHealthCmd();
         new NaturalHealthRegen();
         new HealthDisplay();

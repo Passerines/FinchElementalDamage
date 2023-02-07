@@ -274,7 +274,7 @@ public class PlayerData {
     }
 
     public void setHealth(double health) {
-        this.health = health;
+        this.health = Math.min(healthMax, health);
     }
 
     public double getHealthMax() {
