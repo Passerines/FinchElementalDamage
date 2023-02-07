@@ -3,7 +3,6 @@ package net.passerines.finch.events;
 import com.ticxo.modelengine.api.ModelEngineAPI;
 import net.passerines.finch.entity.EntityData;
 import net.passerines.finch.entity.EntityMap;
-import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchBow;
 import net.passerines.finch.items.FinchWeapon;
 import net.passerines.finch.players.PlayerData;
@@ -11,7 +10,6 @@ import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -20,10 +18,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-
-import static net.passerines.finch.players.PlayerMap.PLAYERS;
 
 public class ElementalDamageEvent extends Event implements Cancellable {
 
@@ -90,15 +85,15 @@ public class ElementalDamageEvent extends Event implements Cancellable {
                 float critMultiplier;
                 int baseCrit = playerData.getCritChance()/100;
                 int calcCrit = playerData.getCritChance()%100;
-                if(Util.getFinchItem(weapon) instanceof FinchBow){
-                    attackDamage = attackDamage * (1 + playerData.getDexterity()/100.0);
-                }
-                else if (Util.getFinchItem(weapon) instanceof FinchWeapon) {
-                    //Every 150 strength double damage
-                    attackDamage = attackDamage * (1 + playerData.getStrength()/100.0);
-                }
-                else if(weapon.getType().isAir()){
-                    attackDamage = 5 * (1 + playerData.getStrength()/100.0);
+                if(weapon!=null) {
+                    if (Util.getFinchItem(weapon) instanceof FinchBow) {
+                        attackDamage = attackDamage * (1 + playerData.getDexterity() / 100.0);
+                    } else if (Util.getFinchItem(weapon) instanceof FinchWeapon) {
+                        //Every 150 strength double damage
+                        attackDamage = attackDamage * (1 + playerData.getStrength() / 100.0);
+                    } else if (weapon.getType().isAir()) {
+                        attackDamage = 5 * (1 + playerData.getStrength() / 100.0);
+                    }
                 }
                 critMultiplier = baseCrit * 1.5f;
                 if(Util.randomBoolean(calcCrit/100f)){
