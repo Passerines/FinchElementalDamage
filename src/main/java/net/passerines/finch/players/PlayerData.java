@@ -1,5 +1,6 @@
 package net.passerines.finch.players;
 
+import net.passerines.finch.FinchElementalDamage;
 import net.passerines.finch.enchants.ItemEnchant;
 import net.passerines.finch.events.HealthDisplay;
 import net.passerines.finch.items.*;
@@ -8,6 +9,8 @@ import net.passerines.finch.reforge.ItemPrefix;
 import net.passerines.finch.reforge.PrefixManager;
 import net.passerines.finch.trinkets.TrinketMenu;
 import net.passerines.finch.util.Util;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,6 +43,7 @@ public class PlayerData {
     private double lightProf;
     private double darknessProf;
     private ItemStack oldItem;
+    int insectBuffTask;
 
     private ItemStack[] oldTrinkets = new ItemStack[3];
 
@@ -452,6 +456,21 @@ public class PlayerData {
         return playerConfig;
     }
 
+    public void applyInsectBuff(FinchInsect finchInsect, Entity e) {
+        if (e != null) {
+            if (isPlayerInsectBuffed) {
+                Bukkit.getScheduler().cancelTask(insectBuffTask);
+            }
+            else {
+                calculate(finchInsect.getItem());
+                setPlayerInsectBuffed(true);
+            }
+            insectBuffTask = Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
+                uncalculate(finchInsect.getItem());
+                setPlayerInsectBuffed(false);
+            }, 300);
+        }
+    }
     //Called before the player is removed from the PLAYERS hash map for quitting
     public void dispose() {
         playerConfig.save();

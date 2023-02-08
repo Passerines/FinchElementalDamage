@@ -84,15 +84,16 @@ public class FinchThrownInsect {
             taskThrow = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), () -> {
                 Location asLoc = armorStand.getLocation();
                 Location loc = player.getLocation();
+                PlayerData playerData = PlayerMap.PLAYERS.get(player);
                 if (asLoc.distanceSquared(loc) < 5) {
                     ItemStack itemStack = armorStand.getEquipment().getHelmet();
                     if (player.getEquipment().getItemInOffHand().getType().isAir()) {
                         player.getEquipment().setItemInOffHand(itemStack);
-                        onSuccesfulRetract();
+                        playerData.applyInsectBuff(finchInsect, hitEntity);
                     }
                     else if (player.getInventory().firstEmpty() > -1) {
                         player.getInventory().addItem(itemStack);
-                        onSuccesfulRetract();
+                        playerData.applyInsectBuff(finchInsect, hitEntity);
                     }
                     else {
                         loc.getWorld().dropItem(loc, itemStack);
@@ -104,32 +105,6 @@ public class FinchThrownInsect {
                     armorStand.teleport(vector.toLocation(loc.getWorld()));
                 }
             }, 0, 1);
-        }
-    }
-    public void onSuccesfulRetract(){
-        PlayerData playerData = PlayerMap.PLAYERS.get(player);
-        if(hitEntity != null){
-            int taskID = Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                if(playerData.isPlayerInsectBuffed()) {
-                    playerData.uncalculate(finchInsect.getItem());
-                    playerData.setPlayerInsectBuffed(false);
-                    player.sendMessage("Removed Buff");
-                }
-            }, 300);
-            if(playerData.isPlayerInsectBuffed()) {
-                playerData.setPlayerInsectBuffed(true);
-                Bukkit.getScheduler().cancelTask(taskID);
-                player.sendMessage("Reset Timer");
-                Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
-                    playerData.uncalculate(finchInsect.getItem());
-                    playerData.setPlayerInsectBuffed(false);
-                    player.sendMessage("Removed Buff from reset   Task ID: " + taskID);
-                }, 300);
-            }
-            else{
-                playerData.calculate(finchInsect.getItem());
-                playerData.setPlayerInsectBuffed(true);
-            }
         }
     }
 }
