@@ -123,7 +123,7 @@ public class FinchThrownInsect {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                     playerData.uncalculate(finchInsect.getItem());
                     playerData.setPlayerInsectBuffed(false);
-                    player.sendMessage("Removed Buff from reset");
+                    player.sendMessage("Removed Buff from reset   Task ID: " + taskID);
                 }, 300);
             }
             else{
