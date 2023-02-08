@@ -128,6 +128,7 @@ public class FinchThrownInsect {
             }
             else{
                 playerData.calculate(finchInsect.getItem());
+                playerData.setPlayerInsectBuffed(true);
             }
         }
     }
