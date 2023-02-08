@@ -107,16 +107,28 @@ public class FinchThrownInsect {
         }
     }
     public void onSuccesfulRetract(){
+        PlayerData playerData = PlayerMap.PLAYERS.get(player);
         if(hitEntity != null){
-            PlayerData playerData = PlayerMap.PLAYERS.get(player);
-            playerData.calculate(finchInsect.getItem());
-            playerData.setPlayerInsectBuffed(true);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
+            int taskID = Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
                 if(playerData.isPlayerInsectBuffed()) {
                     playerData.uncalculate(finchInsect.getItem());
                     playerData.setPlayerInsectBuffed(false);
+                    player.sendMessage("Removed Buff");
                 }
             }, 300);
+            if(playerData.isPlayerInsectBuffed()) {
+                playerData.setPlayerInsectBuffed(true);
+                Bukkit.getScheduler().cancelTask(taskID);
+                player.sendMessage("Reset Timer");
+                Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->{
+                    playerData.uncalculate(finchInsect.getItem());
+                    playerData.setPlayerInsectBuffed(false);
+                    player.sendMessage("Removed Buff from reset");
+                }, 300);
+            }
+            else{
+                playerData.calculate(finchInsect.getItem());
+            }
         }
     }
 }
