@@ -16,6 +16,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -96,18 +97,28 @@ public class Slash {
         }
     }
     public void drawSlash(){
-        for(int i = 0; i <= angle; i+=4){
-            Vector direction = new Vector(1,0,0);
-            Vector y = new Vector(0, 1, 0);
-            Vector z = new Vector(0, 0, 1);
-            Vector x = new Vector(1, 0, 0);
-            Location loc = location.clone();
-            direction = rotateVectorCC(direction, y, Math.toRadians(i-angle/2));
-            direction = rotateVectorCC(direction, x, Math.toRadians(rotation));
-            direction = rotateVectorCC(direction, z, Math.toRadians(-loc.getPitch()));
-            direction = rotateVectorCC(direction, y, Math.toRadians(-loc.getYaw() - 90));
-            loc.setDirection(direction);
-            drawLine(loc);
-        }
+
+        new BukkitRunnable(){
+            int i = 0;
+            @Override
+            public void run() {
+                for(i = i; i <= i + 8; i+=4) {
+                    if(i>=angle){
+                        return;
+                    }
+                    Vector direction = new Vector(1, 0, 0);
+                    Vector y = new Vector(0, 1, 0);
+                    Vector z = new Vector(0, 0, 1);
+                    Vector x = new Vector(1, 0, 0);
+                    Location loc = location.clone();
+                    direction = rotateVectorCC(direction, y, Math.toRadians(i - angle / 2));
+                    direction = rotateVectorCC(direction, x, Math.toRadians(rotation));
+                    direction = rotateVectorCC(direction, z, Math.toRadians(-loc.getPitch()));
+                    direction = rotateVectorCC(direction, y, Math.toRadians(-loc.getYaw() - 90));
+                    loc.setDirection(direction);
+                    drawLine(loc);
+                }
+            }
+        }.runTaskTimer(FinchElementalDamage.inst(), 0, 2);
     }
 }
