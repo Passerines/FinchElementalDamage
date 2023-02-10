@@ -43,7 +43,11 @@ public class PlayerData {
     private double lightProf;
     private double darknessProf;
     private ItemStack oldItem;
-    int insectBuffTask;
+    private int insectBuffTask;
+
+
+
+    private FinchInsect finchInsect;
 
     private ItemStack[] oldTrinkets = new ItemStack[3];
 
@@ -463,10 +467,11 @@ public class PlayerData {
             }
             else {
                 calculate(finchInsect.getItem());
+                this.finchInsect = finchInsect;
                 setPlayerInsectBuffed(true);
             }
             insectBuffTask = Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), () -> {
-                uncalculate(finchInsect.getItem());
+                uncalculate(this.finchInsect.getItem());
                 setPlayerInsectBuffed(false);
             }, 300);
         }

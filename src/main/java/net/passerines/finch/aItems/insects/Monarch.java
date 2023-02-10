@@ -17,6 +17,7 @@ public class Monarch extends FinchInsect {
         super("MonarchFly", 5);
         this.strength = 80;
         this.defense = 50;
+        this.health = 100;
         this.bugDamage = 100;
         this.element = ElementalDamageEvent.Element.EARTH;
         displayName = Chat.formatC("&6Monarch Butterfly");
