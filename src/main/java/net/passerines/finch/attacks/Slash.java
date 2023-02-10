@@ -102,9 +102,9 @@ public class Slash {
             int i = 0;
             @Override
             public void run() {
-                for(i = i; i <= i + 8; i+=4) {
+                for(; i <= i + 6; i+=3) {
                     if(i>=angle){
-                        return;
+                        this.cancel();
                     }
                     Vector direction = new Vector(1, 0, 0);
                     Vector y = new Vector(0, 1, 0);
@@ -119,6 +119,6 @@ public class Slash {
                     drawLine(loc);
                 }
             }
-        }.runTaskTimer(FinchElementalDamage.inst(), 0, 2);
+        }.runTaskTimer(FinchElementalDamage.inst(), 0, 1);
     }
 }
