@@ -34,6 +34,9 @@ public class Slash {
     private double damage;
     private Object dust;
     private ArrayList<Entity> hitEntities = new ArrayList<>();
+
+    private int degreesPerIteration = 3;
+    private int degreesPerTick = 9;
     public Slash(Player player, Location location, ItemStack itemStack, Particle particle, Particle particleEnd, double range, double damage, double angle, double rotation) {
         this(player, location, itemStack, particle, particleEnd, range, damage, angle, rotation, null);
     }
@@ -99,10 +102,12 @@ public class Slash {
     public void drawSlash(){
 
         new BukkitRunnable(){
-            int i = 0;
+            int iteration = 0;
             @Override
             public void run() {
-                for(; i <= i + 6; i+=3) {
+                int iterationEnd = iteration*degreesPerIteration+degreesPerTick;
+                for(int i=iteration*degreesPerIteration; i < iterationEnd; i+=degreesPerIteration) {
+                    iteration++;
                     if(i>=angle){
                         this.cancel();
                     }
@@ -120,5 +125,15 @@ public class Slash {
                 }
             }
         }.runTaskTimer(FinchElementalDamage.inst(), 0, 1);
+    }
+
+    public Slash setDegreesPerIteration(int degreesPerIteration) {
+        this.degreesPerIteration = degreesPerIteration;
+        return this;
+    }
+
+    public Slash setDegreesPerTick(int degreesPerTick) {
+        this.degreesPerTick = degreesPerTick;
+        return this;
     }
 }
