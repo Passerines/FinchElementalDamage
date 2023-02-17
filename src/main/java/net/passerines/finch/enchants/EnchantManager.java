@@ -25,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class EnchantManager implements Listener {
     public static final HashMap<String, ItemEnchant> ENCHANTS_HASH_MAP = new HashMap<>();
@@ -76,6 +77,12 @@ public class EnchantManager implements Listener {
 
     public static ItemEnchant getEnchant(String id){
         return ENCHANTS_HASH_MAP.get(id);
+    }
+
+    public static ItemEnchant randomEnchant(){
+        int randomValue = Util.rand(0, ENCHANTS_HASH_MAP.values().size()-1);
+        ArrayList<ItemEnchant> list = new ArrayList<>(ENCHANTS_HASH_MAP.values());
+        return list.get(randomValue);
     }
 
     public static ArrayList<String> getOkEnchants(ItemStack itemstack){
