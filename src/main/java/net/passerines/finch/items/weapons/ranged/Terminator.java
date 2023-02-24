@@ -38,9 +38,6 @@ public class Terminator extends FinchWeapon implements Listener {
                 FinchArrow finchArrow = new FinchArrow(player, item, 4, -3, this.attack);
                 FinchArrow finchArrow1 = new FinchArrow(player, item, 4, 0, this.attack);
                 FinchArrow finchArrow2 = new FinchArrow(player, item, 4, 3, this.attack);
-                finchArrow.shootElectroArrow();
-                finchArrow1.shootLightArrow();
-                finchArrow2.shootDarkArrow();
                 cd.add(player, 3);
             }
         }
