@@ -24,6 +24,8 @@ import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceA
 import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceCrown;
 import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceGaloshes;
 import net.passerines.finch.aItems.armor.impierceitems.impiercewarrior.ImpierceKneeplates;
+import net.passerines.finch.aItems.armor.spirit.SpiritHelmet;
+import net.passerines.finch.aItems.armor.spirit.SpiritRobes;
 import net.passerines.finch.aItems.insects.MarkXXCombatDrone;
 import net.passerines.finch.aItems.insects.Monarch;
 import net.passerines.finch.aItems.trinkets.*;
@@ -152,6 +154,8 @@ public class ItemManager {
         new DraconianAegis();
         new DraconianPlate();
         new DraconianBoots();
+        new SpiritHelmet();
+        new SpiritRobes();
         //Trinkets
         new FinchBookOfRecipes();
         new TotemOfStrength();
