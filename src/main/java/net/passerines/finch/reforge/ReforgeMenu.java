@@ -31,7 +31,6 @@ public class ReforgeMenu implements Listener {
     }
 
     public void initialize() {
-
         ItemStack placeholder = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta itemMeta = placeholder.getItemMeta();
         itemMeta.displayName(Chat.formatC(" "));

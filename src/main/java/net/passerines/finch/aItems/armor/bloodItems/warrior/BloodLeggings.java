@@ -20,6 +20,7 @@ public class BloodLeggings extends FinchArmor implements FinchCraftableItem {
         this.defense = 30;
         this.health = -10;
         this.strength = 7;
+        this.armorSetName = "BloodMage";
         displayName = Chat.formatC("&cBlood Leggings");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);

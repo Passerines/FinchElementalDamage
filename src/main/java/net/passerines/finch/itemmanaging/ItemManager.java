@@ -52,10 +52,14 @@ import net.passerines.finch.aItems.weapons.melee.spears.t5.Evelon;
 import net.passerines.finch.aItems.weapons.ranged.t5.FateCrossbow;
 import net.passerines.finch.itemmanaging.recipeitems.*;
 import net.passerines.finch.items.FinchItem;
+import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Item;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 
@@ -169,6 +173,7 @@ public class ItemManager {
                 finchCraftableItem.registerRecipe();
             }
         }
+        Util.log(Bukkit.getRecipesFor(new ItemStack(Material.WOODEN_SWORD)).toString());
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_helmet"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_chestplate"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_leggings"));

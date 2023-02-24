@@ -18,7 +18,7 @@ public class BloodMageBoots extends FinchArmor implements FinchCraftableItem {
     public BloodMageBoots() {
         super("BloodMageBoots", 1);
         this.armorSetName = "BloodMage";
-        this.defense = 15;
+        this.defense = 30;
         this.health = -5;
         this.mana = 40;
         displayName = Chat.formatC("&cBloodMage Boots");

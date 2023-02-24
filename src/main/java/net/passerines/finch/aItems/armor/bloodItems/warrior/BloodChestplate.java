@@ -20,6 +20,7 @@ public class BloodChestplate extends FinchArmor implements FinchCraftableItem {
         this.defense = 35;
         this.health = -10;
         this.strength = 10;
+        this.armorSetName = "BloodMage";
         displayName = Chat.formatC("&cBlood Chestplate");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);

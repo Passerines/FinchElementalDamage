@@ -81,9 +81,10 @@ public class FateCrossbow extends FinchBow implements Listener {
             int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
                 FinchArrow arrow = new FinchArrow(player, aboveLoc,player.getInventory().getItemInMainHand(), 8, 0, this.bowDamage);
                 FinchArrow arrow1 = new FinchArrow(player, rightLoc,player.getInventory().getItemInMainHand(), 8, 0, (int)(this.bowDamage*0.80));
-                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 8, 0, (int)(this.bowDamage*0.80));arrow.shootNeutralArrow();
-                arrow1.shootLightArrow();
-                arrow2.shootDarkArrow();
+                FinchArrow arrow2 = new FinchArrow(player, leftLoc,player.getInventory().getItemInMainHand(), 8, 0, (int)(this.bowDamage*0.80));
+                arrow.shootCustomArrow("neutral", Particle.CRIT);
+                arrow1.shootCustomArrow("light", Particle.FALLING_HONEY);
+                arrow2.shootCustomArrow("dark", Particle.SOUL);
             }, 0, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 2);
             cd.add(player);

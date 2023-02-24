@@ -27,11 +27,20 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class VortexSplash extends FinchBow implements Listener {
     public VortexSplash() {
         super("VortexSplash");
+        displayName = Chat.formatC("&9Vortex Splash");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(STATS);
+        lore.add(" ");
+        lore.add(ENCHANTS);
+        lore.add("&6Ability:");
+        lore.add("Summon a current of water where the arrow lands dealing half the");
+        lore.add("damage of the arrow");
         this.bowDamage = 150;
         this.dexterity = 60;
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
@@ -45,7 +54,7 @@ public class VortexSplash extends FinchBow implements Listener {
         if(event.getAction().isLeftClick() && cd.isOffCooldown(player)) {
             if(id.equals(Util.getId(item))) {
                 FinchArrow finchArrow = new FinchArrow(player, player.getInventory().getItemInMainHand(), 2,  0, this.bowDamage);
-                finchArrow.shootWaterArrow().getPersistentDataContainer().set(Util.getNamespacedKey("VortexSplash"), PersistentDataType.STRING, "VortexSplash");
+                finchArrow.shootCustomArrow("water", Particle.WATER_SPLASH).getPersistentDataContainer().set(Util.getNamespacedKey("VortexSplash"), PersistentDataType.STRING, "VortexSplash");
                 cd.add(player);
             }
         }
@@ -78,7 +87,6 @@ public class VortexSplash extends FinchBow implements Listener {
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.BOW);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.displayName(Chat.formatC("&1Vortex Splash"));
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
         return writeId(item);

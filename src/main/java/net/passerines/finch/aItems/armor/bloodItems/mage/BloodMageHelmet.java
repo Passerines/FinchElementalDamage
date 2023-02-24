@@ -29,7 +29,7 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
     public BloodMageHelmet() {
         super("BloodMageHelmet", 1);
         this.armorSetName = "BloodMage";
-        this.defense = 15;
+        this.defense = 30;
         this.health = -5;
         this.mana = 45;
         displayName = Chat.formatC("&cBloodMage Helmet");
@@ -39,40 +39,40 @@ public class BloodMageHelmet extends FinchArmor implements FinchCraftableItem, L
         lore.add(ENCHANTS);
         this.lore = Chat.formatC(lore);
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-
     }
     @EventHandler
     public void checkSet(PlayerArmorChangeEvent event){
         Player player = event.getPlayer();
         PlayerData playerData = PlayerMap.PLAYERS.get(player);
         int setItems = Util.getArmorSet(player, armorSetName);
-        player.sendMessage("&bPlayerArmorChangeEvent called from BloodMageHelmet");
-        if(Util.isSafe(event.getOldItem())) {
-            player.sendMessage(Chat.formatC("&bOld Item ").append(event.getOldItem().getItemMeta().displayName()).append(Chat.formatC(" &bSet &7" + Util.getArmorSet(event.getOldItem()))));
-        } else {
-            player.sendMessage("Old Item Null");
-        }
-        if(Util.isSafe(event.getNewItem())) {
-            player.sendMessage(Chat.formatC("&bNew Item ").append(event.getNewItem().getItemMeta().displayName()).append(Chat.formatC(" &bSet &7" + Util.getArmorSet(event.getNewItem()))));
-        } else {
-            player.sendMessage("New item null");
-        }
-        player.sendMessage(Chat.formatC("&bNew Set " + setItems + " &bPieces &7"
-                + Util.getArmorSet(player.getInventory().getHelmet())
-                + " " + Util.getArmorSet(player.getInventory().getChestplate())
-                + " " + Util.getArmorSet(player.getInventory().getLeggings())
-                + " " + Util.getArmorSet(player.getInventory().getBoots())));
-
         if(setItems == 4 && playerData.getArmorBonus().getOrDefault(armorSetName, 0) < 4){
             playerData.setManaMax(playerData.getManaMax() + 500);
+            playerData.setHealthMax(playerData.getHealthMax() + 100);
             playerData.setArmorBonus(armorSetName, 4);
         }
         if(playerData.getArmorBonus().getOrDefault(armorSetName, 0) == 4 && setItems != 4){
             playerData.setManaMax(playerData.getManaMax() - 500);
+            playerData.setHealthMax(playerData.getHealthMax() - 100);
             playerData.removeArmorBonus(armorSetName);
         }
     }
-
+    /*player.sendMessage("&bPlayerArmorChangeEvent called from " + displayName);
+            if(Util.isSafe(event.getOldItem())) {
+                player.sendMessage(Chat.formatC("&bOld Item ").append(event.getOldItem().getItemMeta().displayName()).append(Chat.formatC(" &bSet &7" + Util.getArmorSet(event.getOldItem()))));
+            } else {
+                player.sendMessage("Old Item Null");
+            }
+            if(Util.isSafe(event.getNewItem())) {
+                player.sendMessage(Chat.formatC("&bNew Item ").append(event.getNewItem().getItemMeta().displayName()).append(Chat.formatC(" &bSet &7" + Util.getArmorSet(event.getNewItem()))));
+            } else {
+                player.sendMessage("New item null");
+            }
+            player.sendMessage(Chat.formatC("&bNew Set " + setItems + " &bPieces &7"
+                    + Util.getArmorSet(player.getInventory().getHelmet())
+                    + " " + Util.getArmorSet(player.getInventory().getChestplate())
+                    + " " + Util.getArmorSet(player.getInventory().getLeggings())
+                    + " " + Util.getArmorSet(player.getInventory().getBoots())));
+             */
     @Override
     public ItemStack getItem() {
         ItemStack item = new ItemStack(Material.IRON_HELMET);

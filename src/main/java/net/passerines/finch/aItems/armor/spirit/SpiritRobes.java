@@ -40,9 +40,8 @@ public class SpiritRobes extends FinchArmor implements FinchCraftableItem, Liste
     }
 
     public void registerRecipe() {
-        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
-        ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "A A", "ABA", "AAA" , item, item0);
+        ItemStack item = ItemManager.ITEM_HASH_MAP.get("Ectoplasm").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "A A", "AAA", "AAA" , item);
         finchRecipe.addRecipe();
     }
 }

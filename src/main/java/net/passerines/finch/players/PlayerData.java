@@ -459,6 +459,9 @@ public class PlayerData {
     public PlayerConfig getPlayerConfig() {
         return playerConfig;
     }
+    public void heal(int i){
+        setHealth(Math.min(health + i, healthMax));
+    }
 
     public void applyInsectBuff(FinchInsect finchInsect, Entity e) {
         if (e != null) {

@@ -18,8 +18,8 @@ public class BloodMageChestplate extends FinchArmor implements FinchCraftableIte
     public BloodMageChestplate() {
         super("BloodMageChestplate", 1);
         this.armorSetName = "BloodMage";
-        this.defense = 25;
-        this.health = -10;
+        this.defense = 50;
+        this.health = -5;
         this.mana = 75;
         displayName = Chat.formatC("&cBloodMage Chestplate");
         ArrayList<String> lore = new ArrayList<>();

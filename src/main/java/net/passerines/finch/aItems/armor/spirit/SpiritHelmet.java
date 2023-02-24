@@ -1,10 +1,13 @@
 package net.passerines.finch.aItems.armor.spirit;
 
+import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import net.passerines.finch.FinchCraftableItem;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.itemmanaging.FinchRecipe;
 import net.passerines.finch.itemmanaging.ItemManager;
 import net.passerines.finch.items.FinchArmor;
+import net.passerines.finch.players.PlayerData;
+import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Material;
@@ -42,11 +45,30 @@ public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, List
         format(item);
         return writeId(item);
     }
+    @EventHandler
+    public void checkSet(PlayerArmorChangeEvent event){
+        Player player = event.getPlayer();
+        PlayerData playerData = PlayerMap.PLAYERS.get(player);
+        int setItems = Util.getArmorSet(player, armorSetName);
+        if(setItems == 2 && playerData.getArmorBonus().getOrDefault(armorSetName, 0) < 2){
+            playerData.setManaRegen(playerData.getManaRegen() + 10);
+            playerData.setManaMax(playerData.getManaMax() + 1000);
+            playerData.setHealthMax(playerData.getHealthMax() + 100);
+            playerData.setArmorBonus(armorSetName, 2);
+        }
+        if(playerData.getArmorBonus().getOrDefault(armorSetName, 0) == 2 && setItems != 2){
+            playerData.setManaRegen(playerData.getManaRegen() - 10);
+            playerData.setManaMax(playerData.getManaMax() - 1000);
+            playerData.setHealthMax(playerData.getHealthMax() - 100);
+            playerData.removeArmorBonus(armorSetName);
+        }
+    }
 
     public void registerRecipe() {
-        ItemStack item = ItemManager.ITEM_HASH_MAP.get("DragonSkin").getItem();
-        ItemStack item0 = ItemManager.ITEM_HASH_MAP.get("DragonScale").getItem();
-        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "A A", "ABA", "AAA" , item, item0);
+        ItemStack item = ItemManager.ITEM_HASH_MAP.get("Ectoplasm").getItem();
+        FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , item);
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), id, "   ", "AAA", "A A" , item);
         finchRecipe.addRecipe();
+        finchRecipe0.addRecipe();
     }
 }
