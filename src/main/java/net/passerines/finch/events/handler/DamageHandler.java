@@ -123,20 +123,28 @@ public class DamageHandler implements Listener {
         //
         //
         //                  v Entities
-        else if (victim instanceof LivingEntity && EntityMap.has(victim)) {
-            EntityData vEntityData = EntityMap.get(victim);
-            vEntityData.setHealth(vEntityData.getHealth() - event.getFinalDamage());
-            double health = Math.max(0, vEntityData.getHealth());
-            ((LivingEntity) victim).setHealth(health);
-            if (ModelEngineAPI.isModeledEntity(victim.getUniqueId())) {
-                ModeledEntity modeledEntity = ModelEngineAPI.getModeledEntity(victim.getUniqueId());
-                modeledEntity.hurt();
+        else if (victim instanceof LivingEntity livingEntity) {
+            if(EntityMap.has(victim)) {
+                EntityData vEntityData = EntityMap.get(victim);
+                vEntityData.setHealth(vEntityData.getHealth() - event.getFinalDamage());
+                double health = Math.max(0, vEntityData.getHealth());
+                livingEntity.setHealth(health);
+                if (ModelEngineAPI.isModeledEntity(victim.getUniqueId())) {
+                    ModeledEntity modeledEntity = ModelEngineAPI.getModeledEntity(victim.getUniqueId());
+                    modeledEntity.hurt();
+                } else {
+                    victim.playEffect(EntityEffect.HURT);
+                }
+                if (vEntityData.getHealth() <= 0) {
+                    CustomEntityDeathEvent deathEvent = new CustomEntityDeathEvent(victim);
+                    deathEvent.apply();
+                }
+               // Util.log("Entity Hit: " + livingEntity.getUniqueId() + " " + livingEntity.getType());
             } else {
-                victim.playEffect(EntityEffect.HURT);
-            }
-            if (vEntityData.getHealth() <= 0) {
-                CustomEntityDeathEvent deathEvent = new CustomEntityDeathEvent(victim);
-                deathEvent.apply();
+                //Util.log("Invalid Entity Hit: " + livingEntity.getUniqueId() + " " + livingEntity.getType());
+                //Util.log("  Hitbox info " + livingEntity.getBoundingBox().getHeight() + " " + livingEntity.getBoundingBox().getWidthX() + livingEntity.getBoundingBox().getWidthX());
+                //Util.log("  Data " + livingEntity.getPersistentDataContainer().getKeys());
+                event.setCancelled(true);
             }
         }
     }

@@ -45,7 +45,7 @@ public class EntityMap implements Listener {
         ENTITIES.remove(entity);
     }
     public static boolean has(Entity entity) {
-        return ENTITIES.containsKey(entity);
+        return get(entity)!=null;
     }
 
     @EventHandler
@@ -53,6 +53,10 @@ public class EntityMap implements Listener {
         ActiveMob eventEntity = event.getMob();
         //Util.log("Entity added to map");
         ENTITIES.put(event.getEntity(), new EntityData(eventEntity, event.getMobType()));
+        //Util.log("Loading Mythic entity " + eventEntity.getUniqueId() + " vanilla " + BukkitAdapter.adapt(eventEntity.getEntity()).getUniqueId());
+        if(ModelEngineAPI.isModeledEntity(BukkitAdapter.adapt(eventEntity.getEntity()).getUniqueId())) {
+            //Util.log("Loading modeled mythic entity " + BukkitAdapter.adapt(eventEntity.getEntity()).getUniqueId());
+        }
         //Util.log("Registered Mob: " + event.getMobType());
     }
 
@@ -62,9 +66,12 @@ public class EntityMap implements Listener {
             //Util.log("Entity added to map");
             if (event.getEntity().getPersistentDataContainer().has(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE))
                 return;
+
+            //Util.log("Loading entity " + livingEntity.getUniqueId());
             if(ModelEngineAPI.isModeledEntity(livingEntity.getUniqueId())) {
+                //Util.log("Loading modeled entity " + livingEntity.getUniqueId());
                 if(!ModelEngineAPI.getModeledEntity(livingEntity.getUniqueId()).getBase().getUniqueId().equals(livingEntity.getUniqueId())) {
-                    Util.log(Chat.format("&cNOT ADDING MODEL ENGINE MOB"));
+                    //Util.log(Chat.format("&cNOT ADDING MODEL ENGINE MOB"));
                     return;
                 }
             }

@@ -108,11 +108,16 @@ public class ElementalDamageEvent extends Event implements Cancellable {
                 PlayerData vPlayerData = PlayerMap.PLAYERS.get(victim);
                 attackDamage = (int) ((attackDamage - (attackDamage * (vPlayerData.getDefense() / (vPlayerData.getDefense() + 500.0))) * element.getElementalMultiplier()));
             } else if (victim instanceof LivingEntity) {
+
+                //Util.log("Hit  mob " + victim.getUniqueId());
+                //if (ModelEngineAPI.isModeledEntity(victim.getUniqueId())) {
+                //    Util.log("Hit model engine mob " + victim.getUniqueId());
+                //}
                 if (EntityMap.has(victim)) {
                     EntityData vEntityData = EntityMap.get(victim);
                     attackDamage = (int) (attackDamage - attackDamage * (vEntityData.getDefense() / (vEntityData.getDefense() + 500.0)));
                 } else {
-                    Util.log(Chat.format("&cELEMENTAL DAMAGE EVENT: &7Entity not found"));
+                    //Util.log(Chat.format("&cELEMENTAL DAMAGE EVENT: &7Entity not found"));
                 }
             } else {
                 attackDamage = damage;
