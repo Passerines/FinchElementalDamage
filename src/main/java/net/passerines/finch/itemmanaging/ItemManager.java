@@ -92,6 +92,7 @@ public class ItemManager {
         //Condensed
         new CondensedEnergy();
         new CondensedDiamond();
+        new Ectoplasm();
         //Craftable Ingredients (Regular)
         new KatanaHandle();
         new BloodIron();
