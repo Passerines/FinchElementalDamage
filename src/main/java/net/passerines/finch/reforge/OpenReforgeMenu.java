@@ -28,7 +28,9 @@ public class OpenReforgeMenu implements Listener {
         if(e.getClickedBlock() != null){
             if (e.getClickedBlock().getType().equals(Material.ANVIL)) {
                 Player player = e.getPlayer();
-                new ReforgeMenu().open(player);
+                ReforgeMenu reforgeMenu = new ReforgeMenu();
+                reforgeMenu.initialize();
+                reforgeMenu.open(player);
             }
         }
     }

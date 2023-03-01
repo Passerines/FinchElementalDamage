@@ -28,7 +28,7 @@ public class ReforgeMenu implements Listener {
 
     private final int cooldownTimeMilliseconds = 6000;
     public ReforgeMenu() {
-        reforgeMenu = Bukkit.createInventory(null, 9, Component.text("reforgeMenu"));
+        reforgeMenu = Bukkit.createInventory(null, 9, Component.text("Reforge Menu"));
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
@@ -71,14 +71,14 @@ public class ReforgeMenu implements Listener {
         ItemMeta itemMeta0 = reforgeButton.getItemMeta();
         itemMeta0.getPersistentDataContainer().set(Util.getNamespacedKey("reforge"), PersistentDataType.BYTE, (byte)1);
         itemMeta0.displayName(Chat.formatC("Reforge Item"));
+        reforgeMenu.setItem(0, placeholder);
         reforgeMenu.setItem(1, placeholder);
         reforgeMenu.setItem(2, placeholder);
-        reforgeMenu.setItem(3, placeholder);
-        reforgeMenu.setItem(4, reforgeButton);
+        reforgeMenu.setItem(3, reforgeButton);
+        reforgeMenu.setItem(5, placeholder);
         reforgeMenu.setItem(6, placeholder);
         reforgeMenu.setItem(7, placeholder);
         reforgeMenu.setItem(8, placeholder);
-        reforgeMenu.setItem(9, placeholder);
 
     }
 }
