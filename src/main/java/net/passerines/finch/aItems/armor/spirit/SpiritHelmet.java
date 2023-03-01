@@ -68,7 +68,7 @@ public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, List
     public void registerRecipe() {
         ItemStack item = ItemManager.ITEM_HASH_MAP.get("Ectoplasm").getItem();
         FinchRecipe finchRecipe = new FinchRecipe(getItem(), id, "AAA", "A A", "   " , item);
-        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "spirithelmet", "   ", "AAA", "A A" , item);
+        FinchRecipe finchRecipe0 = new FinchRecipe(getItem(), "spirithelmet0", "   ", "AAA", "A A" , item);
         finchRecipe.addRecipe();
         finchRecipe0.addRecipe();
     }
