@@ -27,7 +27,8 @@ public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, List
         this.health = 200;
         this.mana = 1400;
         this.healthRegen = 30;
-        displayName = Chat.formatC("&");
+        this.armorSetName = "spiritset";
+        displayName = Chat.formatC("&bSpirit Helmet");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         lore.add(" ");

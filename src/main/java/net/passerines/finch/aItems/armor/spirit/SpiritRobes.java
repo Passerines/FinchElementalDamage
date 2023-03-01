@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class SpiritRobes extends FinchArmor implements FinchCraftableItem, Listener {
 
     public SpiritRobes() {
-        super("SpiritHelmet");
+        super("SpiritRobes");
         this.health = 400;
         this.mana = 800;
         this.healthRegen = 40;
-        displayName = Chat.formatC("&");
+        displayName = Chat.formatC("&bSpirit Robes");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(STATS);
         lore.add(" ");
