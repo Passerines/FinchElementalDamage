@@ -15,6 +15,7 @@ import net.passerines.finch.items.InteractDetector;
 import net.passerines.finch.recipebook.RecipeBookDefault;
 import net.passerines.finch.reforge.OpenReforgeMenu;
 import net.passerines.finch.reforge.PrefixManager;
+import net.passerines.finch.reforge.ReforgeMenu;
 import net.passerines.finch.trinkets.OpenTrinketMenu;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Util;

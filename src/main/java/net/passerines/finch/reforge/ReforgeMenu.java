@@ -29,6 +29,7 @@ public class ReforgeMenu implements Listener {
     private final int cooldownTimeMilliseconds = 6000;
     public ReforgeMenu() {
         reforgeMenu = Bukkit.createInventory(null, 9, Component.text("reforgeMenu"));
+        Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
 
     public void open(Player player){
