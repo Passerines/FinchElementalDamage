@@ -42,23 +42,24 @@ public class ReforgeMenu implements Listener {
                 click.setCancelled(true);
             }
             if(click.getCurrentItem() != null && click.getCurrentItem().hasItemMeta() && click.getCurrentItem().getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("reforge"))) {
-                click.setCancelled(true);
-                if(!click.getClickedInventory().getItem(5).getType().isAir() && Util.getFinchItem(click.getClickedInventory().getItem(5)) instanceof FinchEquipment finchEquipment){
-                    if(Util.getPrefix(finchEquipment.getItem()) == null){
+                click.getWhoClicked().sendMessage("Reforging");
+                if(Util.getFinchItem(click.getClickedInventory().getItem(4)) instanceof FinchEquipment finchEquipment){
+                    click.getWhoClicked().sendMessage("Reforging... " + finchEquipment.getItem().displayName());
+                    if(Util.getPrefix(finchEquipment.getItem()) == null) {
                         double percentage = Math.random();
                         int randomTier = 1;
-                        if(percentage <= 0.05){
+                        if (percentage <= 0.05) {
                             randomTier = 3;
-                        }
-                        else if(percentage >= 0.85){
+                        } else if (percentage >= 0.85) {
                             randomTier = 2;
                         }
                         ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(finchEquipment.getItem()), randomTier);
-                        int random = Util.rand(0, typePrefixList.size()-1);
+                        int random = Util.rand(0, typePrefixList.size() - 1);
                         ItemPrefix prefix = typePrefixList.get(random);
                         prefix.applyPrefix(finchEquipment.getItem());
                     }
                 }
+                click.setCancelled(true);
             }
         }
     }
@@ -67,10 +68,12 @@ public class ReforgeMenu implements Listener {
         ItemMeta itemMeta = placeholder.getItemMeta();
         itemMeta.displayName(Chat.formatC(" "));
         itemMeta.getPersistentDataContainer().set(Util.getNamespacedKey("unmovable"), PersistentDataType.BYTE, (byte)1 );
+        placeholder.setItemMeta(itemMeta);
         ItemStack reforgeButton = new ItemStack(Material.IRON_AXE);
         ItemMeta itemMeta0 = reforgeButton.getItemMeta();
         itemMeta0.getPersistentDataContainer().set(Util.getNamespacedKey("reforge"), PersistentDataType.BYTE, (byte)1);
         itemMeta0.displayName(Chat.formatC("Reforge Item"));
+        reforgeButton.setItemMeta(itemMeta0);
         reforgeMenu.setItem(0, placeholder);
         reforgeMenu.setItem(1, placeholder);
         reforgeMenu.setItem(2, placeholder);
