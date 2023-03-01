@@ -123,7 +123,7 @@ public class DamageHandler implements Listener {
         //
         //
         //                  v Entities
-        else if (victim instanceof LivingEntity livingEntity) {
+        else if (EntityMap.getBaseEntity(victim) instanceof LivingEntity livingEntity) {
             if(EntityMap.has(victim)) {
                 EntityData vEntityData = EntityMap.get(victim);
                 vEntityData.setHealth(vEntityData.getHealth() - event.getFinalDamage());
@@ -139,10 +139,11 @@ public class DamageHandler implements Listener {
                     CustomEntityDeathEvent deathEvent = new CustomEntityDeathEvent(victim);
                     deathEvent.apply();
                 }
-               // Util.log("Entity Hit: " + livingEntity.getUniqueId() + " " + livingEntity.getType());
+                //Util.log("Entity Hit: " + livingEntity.getUniqueId() + " " + livingEntity.getType());
+                //Util.log("  Hitbox info " + livingEntity.getBoundingBox().getHeight() + " " + livingEntity.getBoundingBox().getWidthX() + " " + livingEntity.getBoundingBox().getWidthZ());
             } else {
                 //Util.log("Invalid Entity Hit: " + livingEntity.getUniqueId() + " " + livingEntity.getType());
-                //Util.log("  Hitbox info " + livingEntity.getBoundingBox().getHeight() + " " + livingEntity.getBoundingBox().getWidthX() + livingEntity.getBoundingBox().getWidthX());
+                //Util.log("  Hitbox info " + livingEntity.getBoundingBox().getHeight() + " " + livingEntity.getBoundingBox().getWidthX() + " " + livingEntity.getBoundingBox().getWidthZ());
                 //Util.log("  Data " + livingEntity.getPersistentDataContainer().getKeys());
                 event.setCancelled(true);
             }

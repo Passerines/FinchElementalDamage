@@ -63,4 +63,8 @@ public class EntityData {
     public void setDamage(int damage) {
         this.damage = damage;
     }
+
+    public Entity getEntity() {
+        return entity;
+    }
 }

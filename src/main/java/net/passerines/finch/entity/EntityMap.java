@@ -1,7 +1,9 @@
 package net.passerines.finch.entity;
 
 import com.ticxo.modelengine.api.ModelEngineAPI;
+import com.ticxo.modelengine.api.model.ActiveModel;
 import com.ticxo.modelengine.api.model.ModeledEntity;
+import com.ticxo.modelengine.api.nms.entity.fake.SubHitboxEntity;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
@@ -25,10 +27,11 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.UUID;
 
 public class EntityMap implements Listener {
     private static final HashMap<Entity, EntityData> ENTITIES = new HashMap<>();
-
 
     public EntityMap(){
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
@@ -37,9 +40,17 @@ public class EntityMap implements Listener {
     public static EntityData get(Entity entity) {
         if(ModelEngineAPI.isModeledEntity(entity.getUniqueId())) {
             return ENTITIES.get(Bukkit.getEntity(ModelEngineAPI.getModeledEntity(entity.getUniqueId()).getBase().getUniqueId()));
+        } else if(ModelEngineAPI.getModelTicker().getSubHitboxBone(entity.getUniqueId())!=null) {
+            return ENTITIES.get(Bukkit.getEntity(
+                    ModelEngineAPI.getModelTicker().getSubHitboxBone(entity.getUniqueId()).getActiveModel().getModeledEntity().getBase().getUniqueId()
+            ));
         } else {
             return ENTITIES.get(entity);
         }
+    }
+    public static Entity getBaseEntity(Entity entity) {
+        EntityData entityData = get(entity);
+        return entityData!=null?entityData.getEntity():null;
     }
     public static void remove(Entity entity) {
         ENTITIES.remove(entity);
@@ -51,7 +62,7 @@ public class EntityMap implements Listener {
     @EventHandler
     public void onSpawn(MythicMobSpawnEvent event){
         ActiveMob eventEntity = event.getMob();
-        //Util.log("Entity added to map");
+        //Util.log("MythicMob spawn");
         ENTITIES.put(event.getEntity(), new EntityData(eventEntity, event.getMobType()));
         //Util.log("Loading Mythic entity " + eventEntity.getUniqueId() + " vanilla " + BukkitAdapter.adapt(eventEntity.getEntity()).getUniqueId());
         if(ModelEngineAPI.isModeledEntity(BukkitAdapter.adapt(eventEntity.getEntity()).getUniqueId())) {
@@ -62,11 +73,10 @@ public class EntityMap implements Listener {
 
     @EventHandler
     public void onVanillaSpawn(EntitySpawnEvent event){
-        if(event.getEntity() instanceof LivingEntity livingEntity) {
-            //Util.log("Entity added to map");
+        if(event.getEntity() instanceof LivingEntity livingEntity && MythicMobsBridge.getActiveMob(livingEntity)==null) {
+            //Util.log("Entity spawn");
             if (event.getEntity().getPersistentDataContainer().has(Util.getNamespacedKey("ignore"), PersistentDataType.BYTE))
                 return;
-
             //Util.log("Loading entity " + livingEntity.getUniqueId());
             if(ModelEngineAPI.isModeledEntity(livingEntity.getUniqueId())) {
                 //Util.log("Loading modeled entity " + livingEntity.getUniqueId());
@@ -75,6 +85,7 @@ public class EntityMap implements Listener {
                     return;
                 }
             }
+            if(livingEntity.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) return;
             ENTITIES.put(event.getEntity(), new EntityData(livingEntity));
             //Util.log("Registered Mob: " + event.getEntityType());
         }
@@ -85,7 +96,8 @@ public class EntityMap implements Listener {
         Object[] entities = entitylist.toArray();
         for(Object entity : entities) {
             if(entity instanceof LivingEntity livingEntity && !ENTITIES.containsKey(entity)){
-                //Util.log("Entity added to map");
+                //Util.log("Entity load");
+                if(livingEntity.getPersistentDataContainer().has(Util.getNamespacedKey("ignore"))) return;
                 ENTITIES.put(livingEntity, new EntityData(livingEntity));
                 //Util.log("Registered Mob: " + (livingEntity).getType());
             }
