@@ -2,6 +2,7 @@ package net.passerines.finch;
 
 import de.slikey.effectlib.Effect;
 import de.slikey.effectlib.EffectManager;
+import net.milkbowl.vault.economy.Economy;
 import net.passerines.finch.cmds.*;
 import net.passerines.finch.enchants.EnchantManager;
 import net.passerines.finch.enchants.EnchantShop;
@@ -20,10 +21,15 @@ import net.passerines.finch.trinkets.OpenTrinketMenu;
 import net.passerines.finch.players.PlayerMap;
 import net.passerines.finch.util.Util;
 import org.bukkit.entity.Arrow;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.units.qual.Prefix;
 
+import java.util.logging.Logger;
+
 public class FinchElementalDamage extends JavaPlugin {
+    public static Economy ECON = null;
+
 
     @Override
     public void onLoad() {
@@ -40,6 +46,11 @@ public class FinchElementalDamage extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+        if (!setupEconomy() ) {
+            Util.log(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         new DamageDisplayer();
         new EntityMap();
@@ -66,6 +77,18 @@ public class FinchElementalDamage extends JavaPlugin {
         new RecipeBookDefault();
         new InteractDetector();
         new DashHandler();
+    }
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        ECON = rsp.getProvider();
+        return ECON != null;
     }
 
     public static FinchElementalDamage inst() {

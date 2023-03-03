@@ -36,16 +36,16 @@ public class EnchantManager implements Listener {
     }
 
     public void registerEnchants(){
-        new ItemEnchant("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(5).setAttack(10).setStrength(5);
-        new FireAspectEnchant().setMaxLevel(10);
-        new BloodLustEnchant().setMaxLevel(7);
-        new LifeDrainCurse().setMaxLevel(3);
-        new ItemEnchant("TrinketBlessed", Chat.formatC("Blessed"), ItemEnchant.EnchantmentType.TRINKET).setMaxLevel(3).setLightProf(3).setHealth(100);
-        new ItemEnchant("ArmorProtection", Chat.formatC("Protection"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setDefense(50);
-        new ItemEnchant("ArmorHealthy", Chat.formatC("Healthy"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setHealth(75);
+        new ItemEnchant("SwordSharpness", Chat.formatC("Sharpness"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(5).setAttack(10).setStrength(5).setTier(1);
+        new FireAspectEnchant().setMaxLevel(10).setTier(1);
+        new BloodLustEnchant().setMaxLevel(7).setTier(4);
+        new LifeDrainCurse().setMaxLevel(3).setTier(1);
+        new ItemEnchant("TrinketBlessed", Chat.formatC("Blessed"), ItemEnchant.EnchantmentType.TRINKET).setMaxLevel(3).setLightProf(3).setHealth(100).setTier(3);
+        new ItemEnchant("ArmorProtection", Chat.formatC("Protection"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setDefense(50).setTier(1);
+        new ItemEnchant("ArmorHealthy", Chat.formatC("Healthy"), ItemEnchant.EnchantmentType.WEAPON).setMaxLevel(10).setHealth(75).setTier(1);
         new ItemEnchant("SwordHarmony", Component.text("Harmony").color(TextColor.color(52, 76, 235)), ItemEnchant.EnchantmentType.WEAPON)
                 .setMaxLevel(5).setDarknessProf(1).setEarthProf(1).setElectroProf(1).setWindProf(1).setFireProf(1).setLightProf(1);
-        new LifestealEnchant().setMaxLevel(7);
+        new LifestealEnchant().setMaxLevel(7).setTier(3);
     }
 
     //A hashmap cannot contain 2 of the same keys, but 2 keys can have the same value

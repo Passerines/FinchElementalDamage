@@ -1,10 +1,14 @@
 package net.passerines.finch.enchants;
 
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import net.passerines.finch.FinchElementalDamage;
+import net.passerines.finch.items.FinchItem;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +22,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static net.passerines.finch.FinchElementalDamage.ECON;
 
 public class EnchantShop implements Listener {
     private Inventory enchantMenu = Bukkit.createInventory(null, 27, Chat.formatC("Enchants"));
@@ -51,13 +57,26 @@ public class EnchantShop implements Listener {
         }
     }
 
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
         if(player.getOpenInventory().getTopInventory().equals(enchantMenu)){
             event.setCancelled(true);
             if(shopEnchants.containsKey(event.getSlot())){
-                shopEnchants.get(event.getSlot()).applyEnchant(player.getInventory().getItemInMainHand(), Util.rand(1, shopEnchants.get(event.getSlot()).getMaxLevel()));
+                ItemEnchant shopEnchant = shopEnchants.get(event.getSlot());
+                ItemStack targetedItem = player.getInventory().getItemInMainHand();
+                int enchantlvl = Util.rand(1, shopEnchant.getMaxLevel());
+                if(EnchantManager.getType(Util.getFinchItem(targetedItem)) == shopEnchant.getType()){
+                    if(ECON.withdrawPlayer(player, 100).type == EconomyResponse.ResponseType.SUCCESS){
+                        shopEnchant.applyEnchant(targetedItem, enchantlvl);
+                        player.sendMessage(Chat.formatC("Enchant Applied = " + shopEnchant.getDisplayName() + " lvl " + enchantlvl));
+                        ECON.withdrawPlayer(player, 100);
+                    }
+                    else{
+                        player.sendMessage("haha poor noob");
+                    }
+                }
             }
         }
     }

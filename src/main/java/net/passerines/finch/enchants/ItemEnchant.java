@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.passerines.finch.events.ElementalDamageEvent;
 import net.passerines.finch.util.Chat;
 import net.passerines.finch.util.Util;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -32,6 +33,7 @@ public class ItemEnchant {
     private double lightProf;
     private double darknessProf;
     private int maxLevel;
+    private int tier;
 
     public enum EnchantmentType{
         WEAPON,
@@ -217,6 +219,10 @@ public class ItemEnchant {
     }
     public ItemEnchant setMaxLevel(int maxLevel){
         this.maxLevel = maxLevel;
+        return this;
+    }
+    public ItemEnchant setTier(int tier){
+        this.tier = tier;
         return this;
     }
     /*
