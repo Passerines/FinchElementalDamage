@@ -13,6 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class OpenReforgeMenu implements Listener {
@@ -24,14 +27,11 @@ public class OpenReforgeMenu implements Listener {
 
 
     @EventHandler
-    public void onClick(PlayerInteractEvent e) {
-        if(e.getClickedBlock() != null){
-            if (e.getClickedBlock().getType().equals(Material.ANVIL)) {
-                Player player = e.getPlayer();
-                ReforgeMenu reforgeMenu = new ReforgeMenu();
-                reforgeMenu.initialize();
-                reforgeMenu.open(player);
-            }
+    public void onOpen(InventoryOpenEvent event) {
+        if(event.getInventory().getType() == InventoryType.ANVIL){
+            ReforgeMenu reforgeMenu = new ReforgeMenu();
+            event.getPlayer().closeInventory();
+            reforgeMenu.open((Player) event.getPlayer());
         }
     }
 }

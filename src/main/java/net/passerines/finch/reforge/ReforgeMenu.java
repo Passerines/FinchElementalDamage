@@ -10,8 +10,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.Inventory;
@@ -31,6 +33,15 @@ public class ReforgeMenu implements Listener {
         reforgeMenu = Bukkit.createInventory(null, 9, Component.text("Reforge Menu"));
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
     }
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        if(event.getInventory() == reforgeMenu){
+            if(reforgeMenu.getItem(4) != null && !reforgeMenu.getItem(4).getType().isAir()) {
+                event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), reforgeMenu.getItem(4));
+            }
+            HandlerList.unregisterAll(this);
+        }
+    }
 
     public void open(Player player){
         player.openInventory(reforgeMenu);
@@ -43,9 +54,11 @@ public class ReforgeMenu implements Listener {
             }
             if(click.getCurrentItem() != null && click.getCurrentItem().hasItemMeta() && click.getCurrentItem().getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("reforge"))) {
                 click.getWhoClicked().sendMessage("Reforging");
-                if(Util.getFinchItem(click.getClickedInventory().getItem(4)) instanceof FinchEquipment finchEquipment){
-                    click.getWhoClicked().sendMessage("Reforging... " + finchEquipment.getItem().displayName());
-                    if(Util.getPrefix(finchEquipment.getItem()) == null) {
+                if(Util.getFinchItem(click.getClickedInventory().getItem(4)) instanceof FinchEquipment){
+                    ItemStack item = click.getClickedInventory().getItem(4);
+                    click.getWhoClicked().sendMessage("Reforging... ");
+                    if(Util.getPrefix(item) == null) {
+                        click.getWhoClicked().sendMessage("Reforging...... ");
                         double percentage = Math.random();
                         int randomTier = 1;
                         if (percentage <= 0.05) {
@@ -53,10 +66,11 @@ public class ReforgeMenu implements Listener {
                         } else if (percentage >= 0.85) {
                             randomTier = 2;
                         }
-                        ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(finchEquipment.getItem()), randomTier);
+                        ArrayList<ItemPrefix> typePrefixList = PrefixManager.getPrefixes(Util.getItemPrefixType(item), randomTier);
                         int random = Util.rand(0, typePrefixList.size() - 1);
                         ItemPrefix prefix = typePrefixList.get(random);
-                        prefix.applyPrefix(finchEquipment.getItem());
+                        prefix.applyPrefix(item);
+                        click.getWhoClicked().sendMessage("Done you got the" + Chat.format(Chat.asLegacy(prefix.getDisplayName())) + "reforge");
                     }
                 }
                 click.setCancelled(true);
