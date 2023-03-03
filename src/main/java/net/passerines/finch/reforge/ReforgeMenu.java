@@ -72,6 +72,10 @@ public class ReforgeMenu implements Listener {
                         prefix.applyPrefix(item);
                         click.getWhoClicked().sendMessage("Done you got the" + Chat.format(Chat.asLegacy(prefix.getDisplayName())) + "reforge");
                     }
+                    else{
+                        ItemPrefix prefix = PrefixManager.PREFIX_HASH_MAP.get(Util.getPrefix(item));
+                        prefix.removePrefix(item);
+                    }
                 }
                 click.setCancelled(true);
             }
