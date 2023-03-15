@@ -17,16 +17,18 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReforgeMenu implements Listener {
     private FinchElementalDamage plugin = FinchElementalDamage.inst();
     private Inventory reforgeMenu;
-    Player player;
+
 
     private final int cooldownTimeMilliseconds = 6000;
     public ReforgeMenu() {
@@ -52,13 +54,23 @@ public class ReforgeMenu implements Listener {
             if(click.getCurrentItem() != null && click.getCurrentItem().hasItemMeta() && click.getCurrentItem().getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("unmovable"))) {
                 click.setCancelled(true);
             }
+            if(Util.getFinchItem(click.getClickedInventory().getItem(4)) instanceof FinchEquipment finchEquipment){
+                ItemStack reforgeButton = new ItemStack(Material.IRON_AXE);
+                ItemMeta itemMeta0 = reforgeButton.getItemMeta();
+                itemMeta0.getPersistentDataContainer().set(Util.getNamespacedKey("reforge"), PersistentDataType.BYTE, (byte)1);
+                itemMeta0.displayName(Chat.formatC("Reforge Item"));
+                itemMeta0.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+                List<Component> lore = new ArrayList<>();
+                lore.add(Chat.formatC("&6$" + finchEquipment.getRarity() * finchEquipment.getRarity() * finchEquipment.getRarity() * 50));
+                itemMeta0.lore(lore);
+                reforgeButton.setItemMeta(itemMeta0);
+            }
+
             if(click.getCurrentItem() != null && click.getCurrentItem().hasItemMeta() && click.getCurrentItem().getItemMeta().getPersistentDataContainer().has(Util.getNamespacedKey("reforge"))) {
-                click.getWhoClicked().sendMessage("Reforging");
-                if(Util.getFinchItem(click.getClickedInventory().getItem(4)) instanceof FinchEquipment){
+                if(Util.getFinchItem(click.getClickedInventory().getItem(4)) instanceof FinchEquipment finchEquipment){
+                    int cost = (finchEquipment.getRarity() * finchEquipment.getRarity() * finchEquipment.getRarity() * 50);
                     ItemStack item = click.getClickedInventory().getItem(4);
-                    click.getWhoClicked().sendMessage("Reforging... ");
-                    if(Util.getPrefix(item) == null) {
-                        click.getWhoClicked().sendMessage("Reforging...... ");
+                    if(Util.getPrefix(item) == null && FinchElementalDamage.ECON.getBalance((Player) click.getWhoClicked()) > cost) {
                         double percentage = Math.random();
                         int randomTier = 1;
                         if (percentage <= 0.05) {
@@ -70,12 +82,14 @@ public class ReforgeMenu implements Listener {
                         int random = Util.rand(0, typePrefixList.size() - 1);
                         ItemPrefix prefix = typePrefixList.get(random);
                         prefix.applyPrefix(item);
-                        click.getWhoClicked().sendMessage("Done you got the" + Chat.format(Chat.asLegacy(prefix.getDisplayName())) + "reforge");
+                        click.getWhoClicked().sendMessage("Success! you got the " + Chat.format(Chat.asLegacy(prefix.getDisplayName())) + " &freforge");
                     }
                     else{
                         ItemPrefix prefix = PrefixManager.PREFIX_HASH_MAP.get(Util.getPrefix(item));
                         prefix.removePrefix(item);
+                        click.getWhoClicked().sendMessage("Success! you removed the " + Chat.format(Chat.asLegacy(prefix.getDisplayName())) + " &freforge");
                     }
+                    FinchElementalDamage.ECON.withdrawPlayer((Player) click.getWhoClicked(), cost);
                 }
                 click.setCancelled(true);
             }
@@ -91,6 +105,7 @@ public class ReforgeMenu implements Listener {
         ItemMeta itemMeta0 = reforgeButton.getItemMeta();
         itemMeta0.getPersistentDataContainer().set(Util.getNamespacedKey("reforge"), PersistentDataType.BYTE, (byte)1);
         itemMeta0.displayName(Chat.formatC("Reforge Item"));
+        itemMeta0.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         reforgeButton.setItemMeta(itemMeta0);
         reforgeMenu.setItem(0, placeholder);
         reforgeMenu.setItem(1, placeholder);

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class SpiritRobes extends FinchArmor implements FinchCraftableItem, Listener {
 
     public SpiritRobes() {
-        super("SpiritRobes");
+        super("SpiritRobes", 5);
         this.health = 400;
         this.mana = 800;
         this.healthRegen = 40;

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class SpiritHelmet extends FinchArmor implements FinchCraftableItem, Listener {
 
     public SpiritHelmet() {
-        super("SpiritHelmet");
+        super("SpiritHelmet", 5);
         this.health = 200;
         this.mana = 1400;
         this.healthRegen = 30;

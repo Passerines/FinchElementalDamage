@@ -68,10 +68,10 @@ public class EnchantShop implements Listener {
                 ItemStack targetedItem = player.getInventory().getItemInMainHand();
                 int enchantlvl = Util.rand(1, shopEnchant.getMaxLevel());
                 if(EnchantManager.getType(Util.getFinchItem(targetedItem)) == shopEnchant.getType()){
-                    if(ECON.getBalance(player) >= 100){
+                    if(ECON.getBalance(player) >= 10000){
                         shopEnchant.applyEnchant(targetedItem, enchantlvl);
                         player.sendMessage(Chat.formatC("Enchant Applied = " + shopEnchant.getDisplayName() + " lvl " + enchantlvl));
-                        ECON.withdrawPlayer(player, 100);
+                        ECON.withdrawPlayer(player, 10000);
                     }
                     else{
                         player.sendMessage("haha poor noob");

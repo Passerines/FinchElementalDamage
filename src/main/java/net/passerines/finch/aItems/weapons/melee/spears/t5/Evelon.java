@@ -25,6 +25,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Evelon extends FinchWeapon implements Listener {
     Cooldown<Player> cd = new Cooldown<>(8);
     public Evelon() {
-        super("Evelon");
+        super("Evelon", 6);
         this.attack = 65;
         this.element = ElementalDamageEvent.Element.LIGHT;
         displayName = Chat.formatC("&6Evelon");
@@ -57,17 +58,23 @@ public class Evelon extends FinchWeapon implements Listener {
     }
     @EventHandler
     public void onClick(PlayerInteractEvent click){
-        PlayerData vPlayer = PlayerMap.PLAYERS.get(click.getPlayer());
         Player player = click.getPlayer();
         if(click.getAction().isLeftClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd.isOffCooldown(player)){
             AtomicInteger i = new AtomicInteger(3);
             Location loc = player.getEyeLocation();
-            int taskid = Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst() ,()->{
-                loc.add(loc.getDirection().multiply(i.get()));
-                Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,50,0, null);
-                slash.drawSlash();
-            }, 0, 2);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(FinchElementalDamage.inst(), ()->Bukkit.getScheduler().cancelTask(taskid), 28);
+            BukkitRunnable bukkitRunnable = new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if(loc.getBlock().isSolid() || i.get() >= 9){
+                        this.cancel();
+                    }
+                    loc.add(loc.getDirection().multiply(i.get()));
+                    Slash slash = new Slash(player, loc, getItem() , Particle.ELECTRIC_SPARK, Particle.ELECTRIC_SPARK, 3, attack,50,0, null);
+                    slash.drawSlash();
+                    i.getAndAdd(1);
+                }
+            };
+            bukkitRunnable.runTaskTimer(FinchElementalDamage.inst(), 0, 2);
             cd.add(player);
         }
     }

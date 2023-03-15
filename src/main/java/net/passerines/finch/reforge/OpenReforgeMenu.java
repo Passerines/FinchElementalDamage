@@ -29,9 +29,11 @@ public class OpenReforgeMenu implements Listener {
     @EventHandler
     public void onOpen(InventoryOpenEvent event) {
         if(event.getInventory().getType() == InventoryType.ANVIL){
+            Player player = (Player) event.getPlayer();
             ReforgeMenu reforgeMenu = new ReforgeMenu();
-            event.getPlayer().closeInventory();
-            reforgeMenu.open((Player) event.getPlayer());
+            reforgeMenu.initialize();
+            event.setCancelled(true);
+            reforgeMenu.open(player);
         }
     }
 }

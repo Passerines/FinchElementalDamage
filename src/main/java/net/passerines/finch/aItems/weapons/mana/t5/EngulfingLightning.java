@@ -40,9 +40,9 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
     Cooldown cd2 = new Cooldown<>(300);
     Cooldown cd3 = new Cooldown<>(1200);
     public EngulfingLightning() {
-        super("EngulfingLightning");
-        this.attack = 115;
-        this.mana = 500;
+        super("EngulfingLightning", 6);
+        this.attack = 135;
+        this.mana = 600;
         this.manaRegen = 140;
         this.element = ElementalDamageEvent.Element.ELECTRO;
 
@@ -55,11 +55,11 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         lore.add("&6Ability: &dDivine Punishment (100 Mana)");
         lore.add("&7Summon a bolt of &dlightning in the direction");
         lore.add("&7you are facing dealing damage based on your &bMana");
-        lore.add("&1.5 second Cooldown");
+        lore.add("&11.5 second Cooldown");
         lore.add("&6Ability: &dDivine Wrath");
-        lore.add("&7Summon 25 bolts of &dlightning in a 25 block");
+        lore.add("&7Summon 50 bolts of &dlightning in a 10 block");
         lore.add("&7radius and damage scales with &bMana");
-        lore.add("&15 second Cooldown");
+        lore.add("&115 second Cooldown");
         this.lore = Chat.formatC(lore);
         //
 
@@ -132,9 +132,9 @@ public class EngulfingLightning extends FinchWeapon implements Listener {
         }
         if(player.isSneaking() && click.getAction().isRightClick() && id.equals(Util.getId(player.getInventory().getItemInMainHand())) && cd2.isOffCooldown(player) && PlayerMap.PLAYERS.get(player).getMana() >= 1000){
             playerData.setMana(playerData.getMana()-1000);
-            for(int i = 0; i <= 25; i++) {
+            for(int i = 0; i <= 50; i++) {
                 Location loc = player.getLocation();
-                loc = loc.add(Util.rand(3,30),Util.rand(0,1),Util.rand(3,30));
+                loc = loc.add(Util.rand(-10,10),Util.rand(-1,1),Util.rand(-10,10));
                 LightningStrike lightningStrike = loc.getWorld().strikeLightning(loc);
                 lightningStrike.setCausingPlayer(player);
                 lightningStrike.getPersistentDataContainer().set(Util.getNamespacedKey("ELightning"), PersistentDataType.STRING, id);
