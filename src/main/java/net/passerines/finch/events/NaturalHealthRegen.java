@@ -20,35 +20,39 @@ public class NaturalHealthRegen implements Listener {
     public NaturalHealthRegen(){
         Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
             for(Player player : Bukkit.getOnlinePlayers()) {
+                int newHealth = 0;
+                int newMana = 0;
                 PlayerData playerData = PLAYERS.get(player);
                 if(player.getFoodLevel() == 20 && playerData.getHealth() < playerData.getHealthMax()) {
                     if(player.getSaturation() > 0) {
                         if(TIMER.getOrDefault(player, -2000) <= Bukkit.getCurrentTick() - 60){
-                            int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
+                            newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
                             playerData.setHealth(newHealth);
                         }
-                        int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.000225 * playerData.getManaRegen()));
+                        newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.000225 * playerData.getManaRegen()));
                         playerData.setMana(newMana);
                         player.setSaturation(player.getSaturation() - 1);
                     }
                     else if(player.getSaturation() == 0){
                         if(TIMER.getOrDefault(player, -2000) <= Bukkit.getCurrentTick() - 60){
-                            int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
+                            newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.00015 * playerData.getHealthRegen()));
                             playerData.setHealth(newHealth);
                         }
-                        int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.000225 * playerData.getManaRegen()));
+                        newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.000225 * playerData.getManaRegen()));
                         playerData.setMana(newMana);
                         player.setFoodLevel(player.getFoodLevel() - 1);
                     }
                 }
                 else {
                     if(TIMER.getOrDefault(player, -2000) <= Bukkit.getCurrentTick() - 60) {
-                        int newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.0001 * playerData.getHealthRegen()));
+                        newHealth = (int) Math.min(playerData.getHealthMax(), playerData.getHealth() + playerData.getHealthMax() * (0.0001 * playerData.getHealthRegen()));
                         playerData.setHealth(newHealth);
                     }
-                    int newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.00015 * playerData.getManaRegen()));
+                    newMana = (int) Math.min(playerData.getManaMax(), playerData.getMana() + playerData.getManaMax() * (0.00015 * playerData.getManaRegen()));
                     playerData.setMana(newMana);
                 }
+                player.sendMessage("Your new health: " + newHealth);
+                player.sendMessage("Your new mana: " + newMana);
             }
         }, 0, 20);
     }
