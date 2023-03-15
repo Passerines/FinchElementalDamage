@@ -283,6 +283,7 @@ public class PlayerData {
 
     public void setHealth(double health) {
         this.health = Math.min(healthMax, health);
+        HealthDisplay.updateActionBar(player);
     }
 
     public double getHealthMax() {

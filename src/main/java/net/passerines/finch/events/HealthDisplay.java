@@ -14,11 +14,6 @@ import org.bukkit.event.Listener;
 public class HealthDisplay implements Listener {
     public HealthDisplay(){
         Bukkit.getPluginManager().registerEvents(this, FinchElementalDamage.inst());
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(FinchElementalDamage.inst(), ()->{
-            for(Player player : Bukkit.getOnlinePlayers()) {
-                updateActionBar(player);
-            }
-        }, 0, 30);
     }
 
     @EventHandler
